@@ -27,7 +27,7 @@ public class Main  {
                 public void initStatesList(GameContainer gc) throws SlickException {
                 	
                 //Definition des layers un a un
-                	
+
                 	//Menus
                     this.addState(new MainMenu(1));
                     this.addState(new SetCharacterName(2));

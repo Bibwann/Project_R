@@ -17,7 +17,7 @@ public class MainMenu extends BasicGameState {
     private TrueTypeFont titleFont;
     private TrueTypeFont menuFont;
     private int selectedItemIndex;
-    private String[] menuItems = {"Start Game","Options", "Exit", "c le bon main"};
+    private String[] menuItems = {"Start Game","Options", "Exit"};
 
     public MainMenu(int stateID) {
     }

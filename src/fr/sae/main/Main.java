@@ -15,6 +15,7 @@ import fr.sae.menus.ClassesSelect;
 import fr.sae.menus.MainMenu;
 import fr.sae.menus.OptionMenu;
 import fr.sae.menus.SetCharacterName;
+import fr.sae.warp.Taverne;
 
 public class Main  {
     
@@ -27,7 +28,7 @@ public class Main  {
                 public void initStatesList(GameContainer gc) throws SlickException {
                 	
                 //Definition des layers un a un
-                	
+
                 	//Menus
                     this.addState(new MainMenu(1));
                     this.addState(new SetCharacterName(2));
@@ -41,6 +42,8 @@ public class Main  {
                     //Maps
                     this.addState(new Foret(6));
 
+                  //Sous Maps
+                    this.addState(new Taverne(7));
                 }
             });
             

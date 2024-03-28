@@ -1,4 +1,4 @@
-package fr.sae.game.maps;
+package fr.sae.warp;
 
 import org.newdawn.slick.state.BasicGameState;
 
@@ -15,9 +15,9 @@ import fr.sae.menus.MainMenu;
 import fr.sae.menus.OptionMenu;
 import fr.sae.menus.SetCharacterName;
 
-public class Foret extends BasicGameState{
+public class Taverne extends BasicGameState{
 
-	public Foret(int stateID) {
+	public Taverne(int stateID) {
 	}
 
 	@Override
@@ -37,7 +37,7 @@ public class Foret extends BasicGameState{
 
 	@Override
 	public int getID() {
-		return 6;
+		return 7;
 	}
 
 }

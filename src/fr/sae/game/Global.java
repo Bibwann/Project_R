@@ -53,6 +53,12 @@ public class Global {
 	//Mobs --> Definisez tous les mobes ici 
 	
 	
+	//Collision maps
+	
+	public static Collisions Map1= new Collisions();
+	public static Collisions Map2= new Collisions();
+
+	
 	
 	// Fonctions
 	

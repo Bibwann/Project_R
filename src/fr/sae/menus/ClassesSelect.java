@@ -4,13 +4,18 @@ import java.awt.Font;
 
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.*;
+
 import fr.sae.game.Global;
 
 public class ClassesSelect extends BasicGameState {
 
     private String firstClass="";
     private String secondClass="";
-	
+    private String[] descriptions = {"Un guerrier robuste spécialisé dans le combat au corps à corps.",
+            "Un combattant impitoyable qui excelle dans la force brute et l'attaque à deux mains.",
+            "Un soigneur compétent qui utilise la magie pour restaurer la santé des alliés.",
+            "Un lanceur de sorts puissant capable de manipuler les éléments pour infliger des dégâts magiques."};
+
     private String[] classes = {"Swordman", "Berserker", "Healer", "Mage"};
     private int selectedItemIndex = 0;
     private boolean isFirstClassSelected = false;
@@ -25,7 +30,7 @@ public class ClassesSelect extends BasicGameState {
 
     @Override
     public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
-    	this.game = sbg;
+        this.game = sbg;
         new Font("Verdana", Font.BOLD, 24);
         
     }
@@ -34,10 +39,9 @@ public class ClassesSelect extends BasicGameState {
     public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
         g.setColor(Color.white);
 
-        int menuWidth = 200; // Largeur du menu
-        int menuHeight = classes.length * 50; // Hauteur du menu en fonction du nombre de classes
+        int menuWidth = 200;
+        int menuHeight = classes.length * 50; 
 
-        // Coordonnées du coin supérieur gauche du menu pour le centrer
         int menuX = (Global.width - menuWidth) / 2;
         int menuY = (Global.height - menuHeight) / 2;
 
@@ -48,31 +52,35 @@ public class ClassesSelect extends BasicGameState {
             } else {
                 g.setColor(Color.white);
             }
-            // Coordonnées de rendu de chaque élément du menu
             g.drawString(classes[i], menuX + 50, y);
             y += 50;
         }
 
-        // Affichage de l'indication des classes sélectionnées
         g.setColor(Color.white);
         g.drawString("Première classe : " + firstClass, 50, 50);
         g.drawString("Deuxième classe : " + secondClass, 50, 80);
 
         // Affichage du bouton de confirmation
         if (isConfirmationVisible) {
-            // Highlight the selected option
+        	
             if (isConfirmSelected) {
                 g.setColor(Color.green);
-                g.drawString("Confirmer", 50, Global.height - 50);
+                g.drawString("Confirmer", Global.width - 150, 20); 
                 g.setColor(Color.white);
-                g.drawString("Annuler", 150, Global.height - 50);
+                g.drawString("Annuler", Global.width - 250, 20); 
             } else {
                 g.setColor(Color.white);
-                g.drawString("Confirmer", 50, Global.height - 50);
+                g.drawString("Confirmer", Global.width - 150, 20); 
                 g.setColor(Color.green);
-                g.drawString("Annuler", 150, Global.height - 50);
+                g.drawString("Annuler", Global.width - 250, 20); 
             }
         }
+
+        // Affichage de la description de la classe survolée
+        g.setColor(Color.white);
+        
+        g.drawString("Description :", 100, Global.height - 100);
+        g.drawString(descriptions[selectedItemIndex],120, Global.height - 70); 
     }
 
     @Override
@@ -88,13 +96,13 @@ public class ClassesSelect extends BasicGameState {
                 selectedItemIndex = (selectedItemIndex + 1) % classes.length;
             } else if (key == Input.KEY_ENTER) {
                 if (!isFirstClassSelected) {
-                    // Sélection de la première classe principale
+                   
                     firstClass = classes[selectedItemIndex];
                     isFirstClassSelected = true;
                 } else {
-                    // Vérifie si la classe sélectionnée est différente de la première classe
+                	
                     if (!classes[selectedItemIndex].equals(firstClass)) {
-                        // Sélection de la deuxième classe secondaire
+                        
                         secondClass = classes[selectedItemIndex];
                         isConfirmationVisible = true;
                     }
@@ -118,8 +126,8 @@ public class ClassesSelect extends BasicGameState {
                     isConfirmationVisible = false;
                 }
             } else if (key == Input.KEY_LEFT || key == Input.KEY_RIGHT) {
-                // Toggle the selected option
-                isConfirmSelected = !isConfirmSelected;
+
+            	isConfirmSelected = !isConfirmSelected;
             }
         }
     }

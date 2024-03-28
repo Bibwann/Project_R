@@ -69,7 +69,7 @@ public class OptionMenu extends BasicGameState {
 
     @Override
     public int getID() {
-        return 3; // ID unique pour cet état
+        return 3;
     }
 
     private void moveSelection(int direction) {

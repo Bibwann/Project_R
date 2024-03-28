@@ -27,11 +27,11 @@ public class Collisions {
 
 
 	public void addCollidable(Shape shape) {
-    	this.collidables.remove(shape);
+    	this.collidables.add(shape);
     }
 	
 	public void removeCollidable(Shape shape) {
-    	this.collidables.add(shape);
+    	this.collidables.remove(shape);
     }
 
     public List<Shape> checkCollisions(Shape shape) {

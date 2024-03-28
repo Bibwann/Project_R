@@ -40,6 +40,7 @@ public class MainMenu extends BasicGameState {
     public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
         g.setColor(Color.white);
         g.setFont(titleFont);
+        
         g.drawString("Main Menu", Global.height*4/5, Global.height*1/8);
 
         for (int i = 0; i < menuItems.length; i++) {
@@ -71,8 +72,7 @@ public class MainMenu extends BasicGameState {
                 	game.enterState(2);
                 	
                     break;
-                case 1:
-                	
+                case 1:	
                 	game.enterState(3);
                     // Options
                     break;

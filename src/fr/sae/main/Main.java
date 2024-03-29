@@ -35,7 +35,6 @@ public class Main  {
                     this.addState(new OptionMenu(3));
                     this.addState(new ClassesSelect(4));
                     
-                    
                     //Cinematiques
                     this.addState(new IntroGame(5));
                     

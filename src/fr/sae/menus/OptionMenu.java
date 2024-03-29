@@ -17,10 +17,9 @@ public class OptionMenu extends BasicGameState {
     
     private StateBasedGame game;
 
-
     @Override
     public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
-    	this.game = sbg;
+        this.game = sbg;
 
         Font awtFont = new Font("Verdana", Font.BOLD, 24);
         font = new TrueTypeFont(awtFont, true);
@@ -36,12 +35,25 @@ public class OptionMenu extends BasicGameState {
         g.setFont(font);
         int y = 100;
         for (String option : options) {
-            g.drawString(option, 200, y);
-            y += 50;
+            if (!option.equals("Exit")) {
+                g.drawString(option, 200, y);
+                y += 50;
+            }
         }
 
+        // Draw "Exit" at the bottom right of the window
+        String exitOption = "Exit";
+        int exitOptionWidth = font.getWidth(exitOption);
+        int margin = 50; // Increase this value to move "Exit" further from the edge
+        g.drawString(exitOption, gc.getWidth() - exitOptionWidth - margin, gc.getHeight() - font.getHeight(exitOption) - margin);
+
         g.setColor(Color.red);
-        g.drawRect(180, getSelectedOptionIndex() * 50 + 100, 440, 40);
+        if (!selectedOption.equals("Exit")) {
+            g.drawRect(180, getSelectedOptionIndex() * 50 + 100, 440, 40);
+        } else {
+            // Draw the red rectangle around "Exit"
+            g.drawRect(gc.getWidth() - exitOptionWidth - margin - 10, gc.getHeight() - font.getHeight(exitOption) - margin - 10, exitOptionWidth + 10, font.getHeight(exitOption) + 10);
+        }
     }
 
     @Override
@@ -56,7 +68,7 @@ public class OptionMenu extends BasicGameState {
             moveSelection(1);
         } else if (key == Input.KEY_ENTER) {
             if (selectedOption.equals("Exit")) {
-            	game.enterState(1);
+                game.enterState(1);
             } else {
                 System.out.println("procedure de modification de touche");
             }

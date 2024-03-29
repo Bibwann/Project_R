@@ -12,22 +12,26 @@ public class IntroGame extends BasicGameState {
 	
 	public IntroGame(int stateID) {
 	}
+	
+    private StateBasedGame game;
+
 
 	@Override
-	public void init(GameContainer arg0, StateBasedGame arg1) throws SlickException {
+	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
+        this.game = sbg;				
+	}
+
+	@Override
+	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
 		
 		Global.inCinematique=true;
-		Global.InitializeGame(); //Initialise les variables sur leurs valeur par default
+		Global.InitializeGame();//Initialise les variables sur leurs valeur par default
 		
+		game.enterState(7); //      -->	Pour finir l'intro
 	}
 
 	@Override
-	public void render(GameContainer arg0, StateBasedGame arg1, Graphics arg2) throws SlickException {
-		
-	}
-
-	@Override
-	public void update(GameContainer arg0, StateBasedGame arg1, int arg2) throws SlickException {
+	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
 		
 	}
 

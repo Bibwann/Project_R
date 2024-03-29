@@ -65,8 +65,6 @@ public class SetCharacterName extends BasicGameState {
             game.enterState(4);
             
             
-            System.out.print(Global.Player1Name);
-
         } else if (key == Input.KEY_LEFT) {
             arrowPosition--;
             if (arrowPosition < 0) {

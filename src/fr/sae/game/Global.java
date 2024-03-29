@@ -16,7 +16,9 @@ import java.util.Map;
 
 public class Global {
 	
-
+	public static Player P1 = null;
+	public static Player P2 = null;
+	
 	//Local variable permettant de savoir si oui ou non on est en cinematique ( pour desactiver les controles pendant celle ci )
 	
 	public static boolean inCinematique = false;
@@ -25,6 +27,11 @@ public class Global {
 	
 	public static Integer id=null;
 	
+	//Variables definissant si on doit utiliser les touches de mouvements pour se deplacer dans les dialogbox ou pour deplacer le personnage
+	
+	public static boolean canMoovPlayer =true;
+	public static boolean canMoovDialogbox =false;
+
 	//Variables global d'input
 	
 	public static int up =Input.KEY_UP;
@@ -32,12 +39,13 @@ public class Global {
 	public static int left =Input.KEY_LEFT;
 	public static int right =Input.KEY_RIGHT;
 	
+	public static int pause =Input.KEY_ESCAPE;
 	public static int interract =Input.KEY_SPACE;
 	
-	public static  Map<String, Integer> dictionnaire = new HashMap<String, Integer>() {{put("Up", 200);put("Down", 208);put("Left", 203);put("Right", 205);put("Space", 203);}};
+	public static  Map<String, Integer> dictionnaireInputs = new HashMap<String, Integer>() {{put("UP", 200);put("DOWN", 208);put("LEFT", 203);put("RIGHT", 205);put("SPACE", 203);}};
 
 	// Taille de l'ecran 
-	
+
 	public static int width;
 	public static int height;
 	
@@ -65,13 +73,10 @@ public class Global {
 	public static void InitializeGame() throws SlickException { //Fonction d'initialisation de project complet
 		try {	
 			
-			Player P1;
-			Player P2;
-
 			// Initialisation de P1
 			
 			switch (Player1Classe) {
-			    case "Swordsman":
+			    case "Swordman":
 			        P1 = new Swordsman(Player1Name, 1, null);
 			        break;
 			    case "Berserker":
@@ -89,7 +94,7 @@ public class Global {
 			// Initialisation de P2
 			
 			switch (Player2Classe) {
-			    case "Swordsman":
+			    case "Swordman":
 			        P2 = new Swordsman("Swordsman", 1, null);
 			        break;
 			    case "Berserker":
@@ -101,17 +106,20 @@ public class Global {
 			    case "Mage":
 			        P2 = new Mage("Mage", 1, null);
 			        break;
-
 			}
 			
+			P2.setHitbox(null);
 
 		    
 		} catch(Exception e){
 			e.getMessage(); //Affiche le message d'erreur en cas ou l'initialisation du project mne marche pas correctement ducoup c'est une ligne importante en cas de debug
 		}
-}
+	}	
 	
-
+	public static void switchModeControles() { //Fonction  propre permettant de savoir si on est en dialoge ou en deplacmeent libre
+		canMoovPlayer=!canMoovPlayer;
+		canMoovDialogbox=!canMoovDialogbox;
+	}
 	 
 	 
 	 

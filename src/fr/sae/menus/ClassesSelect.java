@@ -8,6 +8,7 @@ import org.newdawn.slick.state.*;
 import fr.sae.game.Global;
 
 public class ClassesSelect extends BasicGameState {
+    private TrueTypeFont font;
 
     private String firstClass="";
     private String secondClass="";
@@ -31,7 +32,9 @@ public class ClassesSelect extends BasicGameState {
     @Override
     public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
         this.game = sbg;
-        new Font("Verdana", Font.BOLD, 24);
+        
+        Font awtFont = new Font("Verdana", Font.BOLD, 24);
+        font = new TrueTypeFont(awtFont, true);
         
     }
 
@@ -127,7 +130,7 @@ public class ClassesSelect extends BasicGameState {
                 }
             } else if (key == Input.KEY_LEFT || key == Input.KEY_RIGHT) {
 
-            	isConfirmSelected = !isConfirmSelected;
+            		isConfirmSelected = !isConfirmSelected;
             }
         }
     }

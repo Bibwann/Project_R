@@ -6,6 +6,14 @@ public class Swordsman extends Player implements Spell {
 
 	public Swordsman(String name, int level, Image sprite) {
 		super(name, level, sprite);
+		
+		this.hpMax=120;
+		this.manaMax=40;
+		this.dmg=7;
+		
+		this.hpActuel=120;
+		this.manaActuel=40;
+		
 	}
 
 }

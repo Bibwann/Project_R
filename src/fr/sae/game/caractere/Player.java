@@ -11,7 +11,6 @@ public abstract class Player extends Entity { // A mettre en abstract et lui fai
 		super(name, level, sprite);
 
 		this.hitbox=new Rectangle(100, 100, 32, 32);
-		
 	}
 
 	public Rectangle getHitbox() {

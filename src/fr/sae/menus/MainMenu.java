@@ -40,7 +40,7 @@ public class MainMenu extends BasicGameState {
         g.setColor(Color.white);
         g.setFont(titleFont);
         
-        g.drawString("Main Menu", Global.height*4/5, Global.height*1/8);
+        g.drawString("Whiskers Rebellion", Global.height*4/5, Global.height*1/8);
 
         for (int i = 0; i < menuItems.length; i++) {
             if (i == selectedItemIndex) {

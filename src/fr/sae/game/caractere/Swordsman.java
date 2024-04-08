@@ -2,7 +2,7 @@ package fr.sae.game.caractere;
 
 import org.newdawn.slick.Image;
 
-public class Swordsman extends Player implements Spell {
+public class Swordsman extends Player{
 
 	public Swordsman(String name, int level, Image sprite) {
 		super(name, level, sprite);
@@ -14,6 +14,10 @@ public class Swordsman extends Player implements Spell {
 		this.hpActuel=120;
 		this.manaActuel=40;
 		
+	}
+	
+	public void setSprite() {
+		//this.sprite= --> set le sprite ici
 	}
 
 }

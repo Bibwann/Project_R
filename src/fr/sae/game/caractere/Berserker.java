@@ -2,7 +2,7 @@ package fr.sae.game.caractere;
 
 import org.newdawn.slick.Image;
 
-public class Berserker extends Player implements Spell {
+public class Berserker extends Player{
 
 
 	public Berserker(String name, int level, Image sprite) {
@@ -19,6 +19,10 @@ public class Berserker extends Player implements Spell {
 	
 	private int passif() {
 		return 1+(1-(this.hpActuel/this.hpMax));
+	}
+	
+	public void setSprite() {
+		//this.sprite= --> set le sprite ici
 	}
 
 }

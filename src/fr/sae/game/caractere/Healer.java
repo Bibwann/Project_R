@@ -2,7 +2,7 @@ package fr.sae.game.caractere;
 
 import org.newdawn.slick.Image;
 
-public class Healer extends Player implements Spell {
+public class Healer extends Player{
 
 	public Healer(String name, int level, Image sprite) {
 		super(name, level, sprite);
@@ -13,6 +13,9 @@ public class Healer extends Player implements Spell {
 		
 		this.hpActuel=80;
 		this.manaActuel=20;
+	}
+	public void setSprite() {
+		//this.sprite= --> set le sprite ici
 	}
 
 }

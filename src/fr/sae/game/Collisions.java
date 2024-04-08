@@ -25,7 +25,6 @@ public class Collisions {
 		this.collidables = collidables;
 	}
 
-
 	public void addCollidable(Shape shape) {
     	this.collidables.add(shape);
     }

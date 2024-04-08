@@ -22,7 +22,7 @@ public class Main  {
     public static void main(String[] args) {
         try {
 
-            AppGameContainer app = new AppGameContainer(new StateBasedGame("RPG") {
+            AppGameContainer app = new AppGameContainer(new StateBasedGame("Whiskers Rebellion") {
             	
                 @Override
                 public void initStatesList(GameContainer gc) throws SlickException {

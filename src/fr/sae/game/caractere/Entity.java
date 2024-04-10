@@ -3,7 +3,6 @@ package fr.sae.game.caractere;
 import org.newdawn.slick.Image;
 
 public abstract class Entity  {
-	
 	protected int hpActuel;
 	protected int manaActuel;
 	protected int hpMax;

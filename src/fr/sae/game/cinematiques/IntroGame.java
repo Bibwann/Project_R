@@ -24,9 +24,12 @@ public class IntroGame extends BasicGameState {
 	@Override
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
 		
-		Global.inCinematique=true;
+		Global.canMoovPlayer=false;
 		Global.InitializeGame();//Initialise les variables sur leurs valeur par default
 		
+			// Mettre la cinematique ici obligatoirement ( sinon tout casse et faudra faire la meme structure dans les autres cinematiques)
+		
+		Global.canMoovPlayer=true;
 		game.enterState(7); //      -->	Pour finir l'intro
 	}
 

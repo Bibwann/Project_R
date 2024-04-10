@@ -19,10 +19,8 @@ public class Global {
 	
 	public static Player P1 = null;
 	public static Player P2 = null;
-	
-	//Local variable permettant de savoir si oui ou non on est en cinematique ( pour desactiver les controles pendant celle ci )
-	
-	public static boolean inCinematique = false;
+		
+	public static float speed =0.1f;
 	
 	//Local variable permettant de savoir qui a la main
 	
@@ -128,7 +126,7 @@ public class Global {
         put("MINUS", Input.KEY_MINUS);
         put("SPACE", Input.KEY_SPACE);
 
-        // Ajout des caractères spéciaux avec leurs codes ASCII correspondants
+        
         put("EXCLAMATION_MARK", (int) '!');
         put("DOUBLE_QUOTE", (int) '"');
         put("HASH", (int) '#');

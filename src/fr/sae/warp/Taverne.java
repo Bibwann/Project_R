@@ -23,7 +23,7 @@ public class Taverne extends BasicGameState{
 
 	@Override
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
-		
+
 	}
 
 	@Override
@@ -35,7 +35,25 @@ public class Taverne extends BasicGameState{
 
 	@Override
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
-		
+	    Input input = gc.getInput();
+	    
+	    if (Global.P1 != null && Global.canMoovPlayer) {
+	        if (input.isKeyDown(Input.KEY_LEFT)) {
+	            Global.P1.moveLeft(1);
+	        }
+	        
+	        if (input.isKeyDown(Input.KEY_RIGHT)) {
+	            Global.P1.moveRight(1);
+	        }
+	        
+	        if (input.isKeyDown(Input.KEY_UP)) {
+	            Global.P1.moveUp(1);
+	        }
+	        
+	        if (input.isKeyDown(Input.KEY_DOWN)) {
+	            Global.P1.moveDown(1);
+	        }
+	    }
 	}
 
 	@Override

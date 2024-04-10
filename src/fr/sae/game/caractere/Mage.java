@@ -4,8 +4,13 @@ import org.newdawn.slick.Image;
 
 public class Mage extends Player{
 
+	private String classname;
+
 	public Mage(String name, int level, Image sprite) {
 		super(name, level, sprite);
+		
+		this.classname="Mage";
+
 		this.hpMax=80;
 		this.manaMax=100;
 		this.dmg=8;

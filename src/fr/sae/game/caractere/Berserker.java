@@ -5,9 +5,13 @@ import org.newdawn.slick.Image;
 public class Berserker extends Player{
 
 
+	private String classname;
+
 	public Berserker(String name, int level, Image sprite) {
 		super(name, level, sprite);
 		
+		this.classname="Healer";
+
 		this.hpMax=100;
 		this.manaMax=0;
 		this.dmg=5;

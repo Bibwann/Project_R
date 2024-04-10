@@ -4,9 +4,13 @@ import org.newdawn.slick.Image;
 
 public class Swordsman extends Player{
 
+	private String classname;
+
 	public Swordsman(String name, int level, Image sprite) {
 		super(name, level, sprite);
 		
+		this.classname="Healer";
+
 		this.hpMax=120;
 		this.manaMax=40;
 		this.dmg=7;

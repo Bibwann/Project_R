@@ -22,6 +22,7 @@ public class Berserker extends Player{
 	}
 	
 	private int passif() {
+		//Passif du berserker qui dit qu'il tape le % de vie qu'il lui manque ( en gros si il lui manque 99% de sa vie il tape du 1.99 )
 		return 1+(1-(this.hpActuel/this.hpMax));
 	}
 	

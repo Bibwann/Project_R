@@ -34,6 +34,8 @@ public class Collisions {
     }
 
     public List<Shape> checkCollisions(Shape shape) {
+    	// Fonction qui parcoutrt la liste des collisions et check si une collision a lieux en un instant T
+    	
         List<Shape> collisions = new ArrayList<>();
         for (Shape collidable : this.collidables) {
             if (collidable.intersects(shape)) {
@@ -44,6 +46,8 @@ public class Collisions {
     }
     
     public boolean willCollide(Shape shape1, Shape shape2) {
+    	// Fonction qui parcoutrt la liste des collisions et check si une collision a lieux en un instant T + 1 ( va avoir lieux si on continue le mouvement)
+
 
         Shape tempShape1 = createTempShape(shape1);
         Shape tempShape2 = createTempShape(shape2);
@@ -68,11 +72,14 @@ public class Collisions {
         tempShape2.setX(originalX2);
         tempShape2.setY(originalY2);
 
+        //Resultat boolean de la collision en n+1
         return collision;
     }
 
     private Shape createTempShape(Shape originalShape) {
-        if (originalShape instanceof Rectangle) {
+    	//Fonction privee pour creer des shapes a partir de formes geometriques ( utilie pour creer des shapes temporaires a l'interieur de cette classe )
+        
+    	if (originalShape instanceof Rectangle) {
             Rectangle rectangle = (Rectangle) originalShape;
             return new Rectangle(rectangle.getX(), rectangle.getY(), rectangle.getWidth(), rectangle.getHeight());
             
@@ -93,6 +100,7 @@ public class Collisions {
     
     public boolean willCollideWithMap(Shape playerShape) {
     	
+    	// Verifie si le player va collisionner la map ( experimentale )
         for (Shape mapObject : this.collidables) {
             if (willCollide(playerShape, mapObject)) {
                 return true;

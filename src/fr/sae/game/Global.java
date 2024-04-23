@@ -7,6 +7,7 @@ import org.newdawn.slick.SlickException;
 import fr.sae.game.caractere.Berserker;
 import fr.sae.game.caractere.Healer;
 import fr.sae.game.caractere.Mage;
+import fr.sae.game.caractere.Mobs;
 import fr.sae.game.caractere.Player;
 import fr.sae.game.caractere.Swordsman;
 import fr.sae.game.maps.Foret;
@@ -170,6 +171,8 @@ public class Global {
 	
 	//Mobs --> Definisez tous les mobes ici 
 	
+	public static Mobs[] mobs = new Mobs[4];
+
 	
 	//Collision maps
 	
@@ -222,6 +225,7 @@ public class Global {
 
 		    
 		} catch(Exception e){
+			
 			e.getMessage(); //Affiche le message d'erreur en cas ou l'initialisation du project mne marche pas correctement ducoup c'est une ligne importante en cas de debug
 			System.out.println("Erreur dans le global sur la fonction initialize");
 		}

@@ -4,7 +4,8 @@ import org.newdawn.slick.Image;
 
 public class NPC extends Entity {
 	
-	@SuppressWarnings("null")
+	@SuppressWarnings("null") //Les PNG ne peuvent pas avoir de level dcp on met en null leurs levels, l'ide aime pas ça
+	
 	public NPC(String name, int level, Image sprite) {
 		super(name, level, sprite);
 		

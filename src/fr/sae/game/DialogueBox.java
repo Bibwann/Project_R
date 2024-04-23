@@ -23,6 +23,7 @@ public class DialogueBox {
     }
 
     public void render(Graphics g) {
+    	//Affichage de la dialogbox a l'ecran ( experimentale )
         if (visible) {
             g.setColor(Color.black);
             g.fillRect(50, 450, 700, 100);
@@ -39,12 +40,14 @@ public class DialogueBox {
     }
 
     public void update(Input input) {
+    	//Changement de message dans la box
         if (visible && isWaitingForInput && input.isKeyPressed(Input.KEY_SPACE)) {
             nextMessage();
         }
     }
 
     public void nextMessage() {
+    	//Fonction cherchant dans la liste de message la valeur n+1 pour l'afficher ( experimentale )
         if (this.currentIndex < this.messages.length - 1) {
             this.currentIndex++;
             this.isWaitingForInput = true;
@@ -55,17 +58,21 @@ public class DialogueBox {
     }
 
     public void setChoices(List<String> choices) {
+    	//Set les choix possible de la dialogue box ( experimentale )
         this.choices.clear();
         this.choices.addAll(choices);
         this.isWaitingForInput = false;
     }
 
     public void setVisible(boolean visible) {
+    	//Change la visibilite de la box a l'ecran ( experimentale )
         this.visible = visible;
         this.isWaitingForInput = true;
     }
 
     public boolean isVisible() {
+    	//Connais la visibilite de la box a l'ecran ( experimentale )
+
         return this.visible;
     }
 }

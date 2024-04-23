@@ -4,6 +4,8 @@ import org.newdawn.slick.Animation;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
+//Classe a refaire, gere les animation ( provient de ma beta teste )
+
 public class EntityAnimations {
 	
     private Animation leftAnimation;

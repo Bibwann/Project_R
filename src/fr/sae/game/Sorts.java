@@ -15,14 +15,14 @@ class Sort {
 
     // Méthode pour lancer le sort
     
-    public void lancer(int mana, int cible) {	
+    public void lancer(int cible,int mana) {	
     	
-        System.out.println("Le sort " + nom + " est lancé !");
+    	//Fait les interractions
     }
     
     public void lancer(int cible) {
     	int mana=0;
     	
-        System.out.println("Le sort " + nom + " est lancé !");
+    	//Fait les interraction
     }
 }

@@ -30,6 +30,22 @@ public class IntroGame extends BasicGameState {
 			// Mettre la cinematique ici obligatoirement ( sinon tout casse et faudra faire la meme structure dans les autres cinematiques)
 		
 		Global.canMoovPlayer=true;
+		
+		//-----------------------------------------------------------------------------------------------------------------
+		// $  Partie de debug  $
+		// ----------------------------------------------------------------------------------------------------------------
+		//
+		// Ici est une zone ou on peux selectionner de force la map qu'on veux charger en tout premier apres 
+		// initialisation du jeux, pratique pour du debug mais reste une zone seulement de dev
+		
+		
+		//game.enterState(10);
+		
+		
+		
+		// ----------------------------------------------------------------------------------------------------------------
+		// $ Fin de la partie debug $
+		//-----------------------------------------------------------------------------------------------------------------
 		game.enterState(7); //      -->	Pour finir l'intro
 	}
 

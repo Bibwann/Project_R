@@ -1,5 +1,7 @@
 package fr.sae.game;
 
+//A supprimer
+
 public interface Spell {
 	
 	void AttaqueMelee();
@@ -18,6 +20,6 @@ public interface Spell {
 	void CoupDeGriffe();
 	void Miaulement();
 	
-	void Berserk(); // Se met a 5% de ses pv actuel de maniere definitive dans le combat 
+	void Berserk(); 
 	
 }

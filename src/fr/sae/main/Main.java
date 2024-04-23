@@ -5,11 +5,13 @@ import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
+import fr.sae.game.BattleScene;
 import fr.sae.game.DialogueBox;
 import fr.sae.game.EntityAnimations;
 import fr.sae.game.Global;
 import fr.sae.game.Warp;
 import fr.sae.game.cinematiques.IntroGame;
+import fr.sae.game.maps.Chateau;
 import fr.sae.game.maps.Foret;
 import fr.sae.menus.ClassesSelect;
 import fr.sae.menus.MainMenu;
@@ -38,15 +40,23 @@ public class Main  {
                     //Cinematiques
                     this.addState(new IntroGame(5));
                     
+                    
+                    //Partie thomas 
+
                     //Maps
                     this.addState(new Foret(6));
 
                   //Sous Maps
                     this.addState(new Taverne(7));
+                    
+                  //Battle scene
+                  this.addState(new BattleScene(10));
+
                 }
             });
             
-            app.setShowFPS(false); 
+            app.setShowFPS(false); //Affichage des fps en haut a gauche --> ptetre mettre un option pour l'activer serai stylé
+            
             app.setIcons(new String[] {"data/image.png"});
             
             Global.width= app.getScreenWidth();
@@ -58,7 +68,11 @@ public class Main  {
             
         } catch (SlickException e) {
             e.printStackTrace();
+            
+        } catch (Exception e) {
+        	System.out.print(e.getMessage());
         }
+        
     }
 
     

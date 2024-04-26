@@ -16,9 +16,23 @@ import fr.sae.menus.OptionMenu;
 import fr.sae.menus.SetCharacterName;
 
 
-public abstract class Chateau  {
+public abstract class Chateau1 extends BasicGameState {
 	
-	public Chateau(int stateID) {
+	public Chateau1(int stateID) {
+	}
+	
+	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
+
+	}
+
+	@Override
+	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
+		
+	}
+
+	@Override
+	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
+		
 	}
 
 }

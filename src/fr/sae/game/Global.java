@@ -3,6 +3,7 @@ package fr.sae.game;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.state.BasicGameState;
 
 import fr.sae.game.caractere.Berserker;
 import fr.sae.game.caractere.Healer;
@@ -10,7 +11,7 @@ import fr.sae.game.caractere.Mage;
 import fr.sae.game.caractere.Mobs;
 import fr.sae.game.caractere.Player;
 import fr.sae.game.caractere.Swordsman;
-import fr.sae.game.maps.Foret;
+import fr.sae.game.maps.Foret1;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -18,10 +19,11 @@ import java.util.Map;
 
 public class Global {
 	
+
 	public static Player P1 = null;
 	public static Player P2 = null;
 		
-	public static float speed =0.1f;
+	public static float speed =0.3f;
 	
 	//Local variable permettant de savoir qui a la main
 	
@@ -235,7 +237,31 @@ public class Global {
 		canMoovPlayer=!canMoovPlayer;
 		canMoovDialogbox=!canMoovDialogbox;
 	}
-	 		 
+	
+	public static void updatePlayerMovement(Input input) { //Fonction qui gere le deplacement du joueur P1
+        if (P1 != null && canMoovPlayer) {
+            boolean left = input.isKeyDown(Input.KEY_LEFT);
+            boolean right = input.isKeyDown(Input.KEY_RIGHT);
+            boolean up = input.isKeyDown(Input.KEY_UP);
+            boolean down = input.isKeyDown(Input.KEY_DOWN);
+
+            if (left) {
+                P1.moveLeft(1);
+            } else if (right) {
+                P1.moveRight(1);
+            } else if (up) {
+                P1.moveUp(1);
+            } else if (down) {
+                P1.moveDown(1);
+            }
+        }
+    }
+	
+	public static void setCollisionMap1() { //Set les collisions de la map numero 1
+		
+	}
+	
+		 
 	 
 	 
 	 

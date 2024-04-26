@@ -2,9 +2,8 @@ package fr.sae.game;
 
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.geom.Rectangle;
-import org.newdawn.slick.state.BasicGameState;
+import org.newdawn.slick.state.StateBasedGame;
 
-import fr.sae.game.maps.Foret;
 
 public class Warp {
     private float startX;
@@ -23,7 +22,7 @@ public class Warp {
     }
 
     public boolean collidesWith(float x, float y, float objectWidth, float objectHeight) {
-    	//Fonction pour savpir si le joueur entre en collision avec la zone de warp 
+    	//Fonction pour savoir si un object entre en collision avec un autre
         return x < this.startX + this.width && x + objectWidth > this.startX && y < this.startY + this.height && y + objectHeight > this.startY;
     }
     
@@ -91,13 +90,8 @@ public class Warp {
 		this.height = height;
 	}
 
-	public BasicGameState setNewMap(Class<? extends BasicGameState> mapClass) {
+	public void changeToMap(StateBasedGame game ,int ID) {
 		// A definir --> change la map actuelle ( avec surment un this.addState(new Classe(ID));)
-	    try {
-	        return mapClass.getDeclaredConstructor().newInstance();
-	    } catch (Exception e) {
-	        e.printStackTrace();
-	        return null;
-	    }
-	}
+		game.enterState(ID);
+		}
 }

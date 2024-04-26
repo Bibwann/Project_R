@@ -42,11 +42,10 @@ public class IntroGame extends BasicGameState {
 		//game.enterState(10);
 		
 		
-		
 		// ----------------------------------------------------------------------------------------------------------------
 		// $ Fin de la partie debug $
 		//-----------------------------------------------------------------------------------------------------------------
-		game.enterState(7); //      -->	Pour finir l'intro
+		game.enterState(6); //      -->	Pour finir l'intro
 	}
 
 	@Override

@@ -34,7 +34,7 @@ public class Collisions {
     }
 
     public List<Shape> checkCollisions(Shape shape) {
-    	// Fonction qui parcoutrt la liste des collisions et check si une collision a lieux en un instant T
+    	// Fonction qui parcoutrt la liste des collisions et check si une collision a lieux en un instant T ( experimentale )
     	
         List<Shape> collisions = new ArrayList<>();
         for (Shape collidable : this.collidables) {
@@ -46,7 +46,7 @@ public class Collisions {
     }
     
     public boolean willCollide(Shape shape1, Shape shape2) {
-    	// Fonction qui parcoutrt la liste des collisions et check si une collision a lieux en un instant T + 1 ( va avoir lieux si on continue le mouvement)
+    	// Fonction qui parcoutrt la liste des collisions et check si une collision a lieux en un instant T + 1 ( va avoir lieux si on continue le mouvement ( experimentale ))
 
 
         Shape tempShape1 = createTempShape(shape1);
@@ -72,7 +72,7 @@ public class Collisions {
         tempShape2.setX(originalX2);
         tempShape2.setY(originalY2);
 
-        //Resultat boolean de la collision en n+1
+        //Resultat boolean de la collision en n+1 ( experimentale )
         return collision;
     }
 

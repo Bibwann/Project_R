@@ -27,27 +27,37 @@ public class BattleScene extends BasicGameState {
         // Dessin des éléments de la scène de combat
 
         // Dessin des joueurs à gauche
-        g.drawImage(Global.P1.getSprite(), 50, 200);
-        g.drawImage(Global.P2.getSprite(), 50, 300);
-
+    	
+    	try {
+	    		
+	    	Global.P1.BattleScene(g, 200);
+	    	Global.P2.BattleScene(g, 300);
+    	} catch(Exception e) {
+    		e.getMessage();
+    	}
+    	
+    	
         // Dessin des ennemis
-        for (int i = 0; i < this.enemy.length; i++) {
-        	
-        	if (this.enemy[i] == null) {
-                continue;
-            }
-
-            g.drawImage(this.enemy[i].getSprite(), 550, 200 + i * 100);
-        }
+    	try {
+	        for (int i = 0; i < this.enemy.length; i++) {
+	        	
+	        	if (this.enemy[i] == null) {
+	                continue;
+	            }
+	
+	            g.drawImage(this.enemy[i].getSprite(), 550, 200 + i * 100);
+	        }
+    	} catch(Exception e) {
+    		e.getMessage();
+    	}
     }
 
     @Override
     public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
-        // Logique de mise à jour de la scène de combat
     }
 
     @Override
     public int getID() {
-        return 10;
+        return 100;
     }
 }

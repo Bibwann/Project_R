@@ -4,7 +4,7 @@ import org.newdawn.slick.Animation;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
-//Classe a refaire, gere les animation ( provient de ma beta teste )
+//Classe a refaire, gere les animation ( provient de ma beta teste )  ( experimentale )
 
 public class EntityAnimations {
 	

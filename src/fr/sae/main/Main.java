@@ -11,13 +11,14 @@ import fr.sae.game.EntityAnimations;
 import fr.sae.game.Global;
 import fr.sae.game.Warp;
 import fr.sae.game.cinematiques.IntroGame;
-import fr.sae.game.maps.Chateau;
-import fr.sae.game.maps.Foret;
+import fr.sae.game.maps.Chateau1;
+import fr.sae.game.maps.Foret1;
+import fr.sae.game.maps.Foret2;
+import fr.sae.game.maps.Foret3;
 import fr.sae.menus.ClassesSelect;
 import fr.sae.menus.MainMenu;
 import fr.sae.menus.OptionMenu;
 import fr.sae.menus.SetCharacterName;
-import fr.sae.warp.Taverne;
 
 public class Main  {
     
@@ -39,25 +40,23 @@ public class Main  {
                     
                     //Cinematiques
                     this.addState(new IntroGame(5));
-                    
-                    
-                    //Partie thomas 
 
-                    //Maps
-                    this.addState(new Foret(6));
+                    //Maps -->Partie thomas 
+                    this.addState(new Foret1(6));
+                    this.addState(new Foret2(7));
+                    this.addState(new Foret3(8));
 
-                  //Sous Maps
-                    this.addState(new Taverne(7));
+
                     
                   //Battle scene
-                  this.addState(new BattleScene(10));
+                  this.addState(new BattleScene(100));
 
                 }
             });
             
-            app.setShowFPS(false); //Affichage des fps en haut a gauche --> ptetre mettre un option pour l'activer serai stylé
+            app.setShowFPS(true); //Affichage des fps en haut a gauche --> ptetre mettre un option pour l'activer serai stylé
             
-            app.setIcons(new String[] {"data/image.png"});
+            app.setIcons(new String[] {"data/logo.png"});
             
             Global.width= app.getScreenWidth();
             Global.height= app.getScreenHeight();

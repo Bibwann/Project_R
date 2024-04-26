@@ -1,5 +1,6 @@
 package fr.sae.game.caractere;
 
+import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.geom.Rectangle;
 
@@ -19,7 +20,11 @@ public abstract class Player extends Entity { // A mettre en abstract et lui fai
 
     public Rectangle getHitbox() {
         return hitbox;
-    }   
+    }
+    
+    public void Sprite(Graphics g,int x , int y) {
+    	g.drawImage(this.getSprite(), x,y);
+	}
 
     public void setHitbox(Rectangle hitbox) {
         this.hitbox = hitbox;
@@ -62,4 +67,8 @@ public abstract class Player extends Entity { // A mettre en abstract et lui fai
     public void moveRight(float distance) {
         hitbox.setX(hitbox.getX() + distance * Global.speed);
     }
+    
+    public void BattleScene(Graphics g, int posY) {
+    	g.drawImage(this.getSprite(), 50, posY);
+	}
 }

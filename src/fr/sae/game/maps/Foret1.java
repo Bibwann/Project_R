@@ -23,7 +23,7 @@ public class Foret1 extends BasicGameState{
 
 	@Override
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
-
+		
 	}
 
 	@Override
@@ -38,13 +38,13 @@ public class Foret1 extends BasicGameState{
 
 	@Override
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
-		Global.updatePlayerMovement(gc.getInput());
+		Global.updatePlayerMovement(gc.getInput(), Global.CollisionMapForet1);
 		
 	}
 
 	@Override
 	public int getID() {
-		return 6;
+		return 11;
 	}
 
 }

@@ -90,8 +90,12 @@ public class Warp {
 		this.height = height;
 	}
 
-	public void changeToMap(StateBasedGame game ,int ID) {
-		// A definir --> change la map actuelle ( avec surment un this.addState(new Classe(ID));)
+	public void changeToMap(StateBasedGame game ,int ID, int CoordX, int CoordY) {
+		// A definir --> change la map actuelle
+		
+		Global.P1.getHitbox().setX(CoordX);
+		Global.P1.getHitbox().setY(CoordY);
+		
 		game.enterState(ID);
 		}
 }

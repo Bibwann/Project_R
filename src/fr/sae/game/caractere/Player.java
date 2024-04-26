@@ -9,13 +9,18 @@ import fr.sae.game.Global;
 public abstract class Player extends Entity { // A mettre en abstract et lui faire heriter 
 	
     protected Rectangle hitbox;
+    protected Rectangle Battlehitbox;
+
     protected int experienceBarrActu=0;
     protected int experienceBarrLvlUp=1000;
 
     public Player(String name, int level, Image sprite) {
         super(name, level, sprite);
 
-        this.hitbox=new Rectangle(100, 100, 32, 48);
+        this.hitbox=new Rectangle(Global.SpawnX, Global.SpawnY, 32, 48);
+        
+        this.Battlehitbox=new Rectangle(0, 0, 0, 0);
+
     }
 
     public Rectangle getHitbox() {
@@ -69,6 +74,16 @@ public abstract class Player extends Entity { // A mettre en abstract et lui fai
     }
     
     public void BattleScene(Graphics g, int posY) {
-    	g.drawImage(this.getSprite(), 50, posY);
+    	g.drawImage(this.getSprite(), Global.PlayerBattleDistance, posY);
 	}
+
+	public Rectangle getBattlehitbox() {
+		return Battlehitbox;
+	}
+
+	public void setBattlehitbox(Rectangle battlehitbox) {
+		Battlehitbox = battlehitbox;
+	}
+    
+   
 }

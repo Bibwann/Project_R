@@ -27,12 +27,19 @@ public abstract class Chateau1 extends BasicGameState {
 
 	@Override
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
-		
+		Global.updatePlayerMovement(gc.getInput(),Global.CollisionMapChateau1);
+
 	}
 
 	@Override
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
 		
 	}
+	
+	@Override
+	public int getID() {
+		return 51;
+	}
+
 
 }

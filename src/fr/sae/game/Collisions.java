@@ -13,6 +13,16 @@ public class Collisions {
 
     public Collisions() {
         this.collidables = new ArrayList<>();
+        
+        //Bordures de la map
+		Rectangle topBorder = new Rectangle(0, -1, Global.width, 1);
+        Rectangle bottomBorder = new Rectangle(0, Global.height, Global.width, 1);
+        Rectangle leftBorder = new Rectangle(-1, 0, 1, Global.height);
+        Rectangle rightBorder = new Rectangle(Global.width, 0, 1, Global.height);
+		this.collidables.add(topBorder);
+        this.collidables.add(bottomBorder);
+        this.collidables.add(leftBorder);
+        this.collidables.add(rightBorder);
     }
     
     
@@ -45,7 +55,7 @@ public class Collisions {
         return collisions;
     }
     
-    public boolean willCollide(Shape shape1, Shape shape2) {
+    public boolean willCollide(Shape shape1, Shape shape2,int x,int y) {
     	// Fonction qui parcoutrt la liste des collisions et check si une collision a lieux en un instant T + 1 ( va avoir lieux si on continue le mouvement ( experimentale ))
 
 
@@ -58,9 +68,9 @@ public class Collisions {
         float originalX2 = tempShape2.getX();
         float originalY2 = tempShape2.getY();
 
-        tempShape1.setX(originalX1 + 1);
-        tempShape1.setY(originalY1);
-        tempShape2.setX(originalX2 + 1);
+        tempShape1.setX(originalX1 + x);
+        tempShape1.setY(originalY1 + y);
+        tempShape2.setX(originalX2);
         tempShape2.setY(originalY2);
 
 
@@ -98,14 +108,15 @@ public class Collisions {
         }
     }
     
-    public boolean willCollideWithMap(Shape playerShape) {
+    public boolean willCollideWithMap(Shape playerShape,int x,int y) {
     	
-    	// Verifie si le player va collisionner la map ( experimentale )
-        for (Shape mapObject : this.collidables) {
-            if (willCollide(playerShape, mapObject)) {
-                return true;
-            }
+    	for (Shape collidable : this.collidables){
+    		if (this.willCollide(playerShape, collidable, x,y)){
+    			return true;
+    		}
+
+        	
         }
-        return false;
+		return false;
     }
 }

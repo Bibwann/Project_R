@@ -42,14 +42,19 @@ public class Main  {
                     this.addState(new IntroGame(5));
 
                     //Maps -->Partie thomas 
-                    this.addState(new Foret1(6));
-                    this.addState(new Foret2(7));
-                    this.addState(new Foret3(8));
-
-
                     
+                    //De 10 a 50 c'est les mapes de la foret ( oui on a de la marge )
+                    this.addState(new Foret1(11));
+                    this.addState(new Foret2(12));
+                    this.addState(new Foret3(13));
+                    
+                    
+                    //De 50 a 100 c'est les mapes du chateau ( oui on a de la marge )
+                    this.addState(new Foret3(51));
+
                   //Battle scene
-                  this.addState(new BattleScene(100));
+                  this.addState(new BattleScene(100));                  
+                  
 
                 }
             });

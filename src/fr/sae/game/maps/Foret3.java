@@ -6,6 +6,8 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
+import fr.sae.game.Global;
+
 public class Foret3 extends BasicGameState {
 
 	public Foret3(int stateID) {
@@ -23,12 +25,13 @@ public class Foret3 extends BasicGameState {
 
 	@Override
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
-		
+		Global.updatePlayerMovement(gc.getInput(),Global.CollisionMapForet3);
+
 	}
 
 	@Override
 	public int getID() {
-		return 8;
+		return 13;
 	}
 
 }

@@ -12,7 +12,7 @@ public class IntroGame extends BasicGameState {
 	
 	public IntroGame(int stateID) {
 	}
-	
+
     private StateBasedGame game;
 
 
@@ -39,13 +39,13 @@ public class IntroGame extends BasicGameState {
 		// initialisation du jeux, pratique pour du debug mais reste une zone seulement de dev
 		
 		
-		//game.enterState(10);
+		//game.enterState(100);
 		
 		
 		// ----------------------------------------------------------------------------------------------------------------
 		// $ Fin de la partie debug $
 		//-----------------------------------------------------------------------------------------------------------------
-		game.enterState(6); //      -->	Pour finir l'intro
+		game.enterState(11); //      -->	Pour finir l'intro
 	}
 
 	@Override

@@ -3,6 +3,7 @@ package fr.sae.game;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.state.BasicGameState;
 
 import fr.sae.game.caractere.Berserker;
@@ -19,12 +20,15 @@ import java.util.Map;
 
 public class Global {
 	
-
 	public static Player P1 = null;
 	public static Player P2 = null;
 		
 	public static float speed =0.3f;
 	
+	//Coordonee de spawn du Player 1 ( le tout premier spawn
+	public static int SpawnX =100;
+	public static int SpawnY =100;
+
 	//Local variable permettant de savoir qui a la main
 	
 	public static Integer id=null;
@@ -33,6 +37,10 @@ public class Global {
 	
 	public static boolean canMoovPlayer =true;
 	public static boolean canMoovDialogbox =false;
+
+	//Variable definissant la distance compare au bord gauche de l'ecran qu'auront les joueurs et les mobes en combat
+	public static int PlayerBattleDistance =250;
+	public static int MobsBattleDistance =0; //A modif
 
 	//Variables global d'input
 	
@@ -178,8 +186,13 @@ public class Global {
 	
 	//Collision maps
 	
-	public static Collisions Map1= new Collisions();
-	public static Collisions Map2= new Collisions();
+	public static Collisions CollisionMapForet1=new Collisions();
+	public static Collisions CollisionMapForet2=new Collisions();
+	public static Collisions CollisionMapForet3=new Collisions();
+	
+	public static Collisions CollisionMapChateau1=new Collisions();
+
+
 
 	
 	
@@ -222,10 +235,14 @@ public class Global {
 			        P2 = new Mage("Mage", 1, null);
 			        break;
 			}
-			
-			P2.setHitbox(null);
 
+	    	P1.setBattlehitbox(new Rectangle(PlayerBattleDistance, height/3, 32, 48));
+	    	P2.setBattlehitbox(new Rectangle(PlayerBattleDistance, (height/3)*2, 32, 48));
 		    
+	    	
+	    	//Initialisation des collisions des maps
+	    	CollisionMapForet1=new Collisions();
+	    	
 		} catch(Exception e){
 			
 			e.getMessage(); //Affiche le message d'erreur en cas ou l'initialisation du project mne marche pas correctement ducoup c'est une ligne importante en cas de debug
@@ -238,28 +255,35 @@ public class Global {
 		canMoovDialogbox=!canMoovDialogbox;
 	}
 	
-	public static void updatePlayerMovement(Input input) { //Fonction qui gere le deplacement du joueur P1
-        if (P1 != null && canMoovPlayer) {
-            boolean left = input.isKeyDown(Input.KEY_LEFT);
-            boolean right = input.isKeyDown(Input.KEY_RIGHT);
-            boolean up = input.isKeyDown(Input.KEY_UP);
-            boolean down = input.isKeyDown(Input.KEY_DOWN);
+	public static void updatePlayerMovement(Input input, Collisions c) { //Fonction qui gere le deplacement du joueur P1
+	    if (P1 != null && canMoovPlayer) {
+	        boolean left = input.isKeyDown(Input.KEY_LEFT);
+	        boolean right = input.isKeyDown(Input.KEY_RIGHT);
+	        boolean up = input.isKeyDown(Input.KEY_UP);
+	        boolean down = input.isKeyDown(Input.KEY_DOWN);
 
-            if (left) {
-                P1.moveLeft(1);
-            } else if (right) {
-                P1.moveRight(1);
-            } else if (up) {
-                P1.moveUp(1);
-            } else if (down) {
-                P1.moveDown(1);
-            }
-        }
-    }
-	
-	public static void setCollisionMap1() { //Set les collisions de la map numero 1
-		
+
+
+	        if (left) {
+	            if (!c.willCollideWithMap(Global.P1.getHitbox(),-1,0)) {
+	                P1.moveLeft(1);
+	            }
+	        } else if (right) {
+	            if (!c.willCollideWithMap(Global.P1.getHitbox(),1,0)) {
+	                P1.moveRight(1);
+	            }
+	        } else if (up) {
+	            if (!c.willCollideWithMap(Global.P1.getHitbox(),0,-1)) {
+	                P1.moveUp(1);
+	            }
+	        } else if (down) {
+	            if (!c.willCollideWithMap(Global.P1.getHitbox(),0,1)) {
+	                P1.moveDown(1);
+	            }
+	        }
+	    }
 	}
+	
 	
 		 
 	 

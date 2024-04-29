@@ -15,12 +15,16 @@ public abstract class Entity  {
 	protected String name;
 	protected int level;
 	protected Image sprite;
+	protected Image Battlesprite;
+
 	
 
-	public Entity(String n, int l,Image s) {
+	public Entity(String n, int l,Image s,Image bs) {
 		this.name = n;
 		this.level = l;
 		this.sprite = s;
+		this.Battlesprite = bs;
+
 	}
 
 

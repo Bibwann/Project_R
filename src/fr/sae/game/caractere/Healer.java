@@ -6,7 +6,7 @@ public class Healer extends Player{
 
 	private String classname;
 	public Healer(String name, int level, Image sprite) {
-		super(name, level, sprite);
+		super(name, level, sprite,null,null);
 		
 		this.classname="Healer";
 		this.hpMax=80;
@@ -16,10 +16,7 @@ public class Healer extends Player{
 		this.hpActuel=80;
 		this.manaActuel=20;
 	}
-	public void initSprite() {
-		//this.sprite= --> set le sprite ici
-	}
-	
+
 	//Sorts 
 	
 	

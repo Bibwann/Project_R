@@ -32,7 +32,6 @@ public class Foret1 extends BasicGameState{
 		this.Warp1= new Warp(Global.width-10, Global.height-320, 10, 320, 500, 500);
 		this.Warp2= new Warp(1324, 0, 66, 10, 500, 500);
 
-
 	}
 
 	@Override
@@ -55,7 +54,7 @@ public class Foret1 extends BasicGameState{
 	//Temp	    
 
 	    //Affiche toutes les collisions de la map et du joueur
-	    if (false) {
+	    if (true) {
 		    g.draw(Global.P1.getHitbox());
 		    
 		    Global.CollisionMapForet1.drawCollisions(g);

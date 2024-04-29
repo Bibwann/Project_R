@@ -4,8 +4,8 @@ import org.newdawn.slick.Image;
 
 public class Mobs extends Entity {
 	
-	public Mobs(String name, int level, Image sprite) {
-		super(name, level, sprite);
+	public Mobs(String name, int level, Image sprite, Image BattleSprite) {
+		super(name, level, sprite,BattleSprite);
 		
 	}
 

@@ -7,7 +7,7 @@ public class Mage extends Player{
 	private String classname;
 
 	public Mage(String name, int level, Image sprite) {
-		super(name, level, sprite);
+		super(name, level, sprite,null,null);
 		
 		this.classname="Mage";
 
@@ -19,9 +19,6 @@ public class Mage extends Player{
 		this.manaActuel=100;
 	}
 	
-	public void initSprite() {
-		//this.sprite= --> set le sprite ici
-	}
 
 	//Sorts
 }

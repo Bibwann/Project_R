@@ -10,6 +10,7 @@ import fr.sae.game.Global;
 
 public abstract class Player extends Entity { // A mettre en abstract et lui faire heriter 
 	
+	protected Image chibi;
     protected Rectangle hitbox;
     protected Rectangle Battlehitbox;
 
@@ -19,8 +20,8 @@ public abstract class Player extends Entity { // A mettre en abstract et lui fai
     protected int Orientation;
 	private Animation animation;
 
-    public Player(String name, int level, Image sprite) {
-        super(name, level, sprite);
+    public Player(String name, int level, Image sprite,Image BattleSprite, Image chibi) {
+        super(name, level, sprite,BattleSprite);
         
         this.Orientation=0;
         this.hitbox=new Rectangle(Global.SpawnX, Global.SpawnY, 36, 46);

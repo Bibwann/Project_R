@@ -8,7 +8,7 @@ public class Berserker extends Player{
 	private String classname;
 
 	public Berserker(String name, int level, Image sprite) {
-		super(name, level, sprite);
+		super(name, level, sprite,null,null);
 		
 		this.classname="Healer";
 
@@ -26,9 +26,6 @@ public class Berserker extends Player{
 		return 1+(1-(this.hpActuel/this.hpMax));
 	}
 	
-	public void initSprite() {
-		//this.sprite= --> set le sprite ici
-	}
 	
 	//Sorts
 

@@ -6,7 +6,7 @@ import org.newdawn.slick.SlickException;
 public class Swordsman extends Player{
 
 	public Swordsman(String name, int level) throws SlickException {
-		super(name, level, new Image("data/Swordman/Walk.png"));
+		super(name, level, new Image("data/Swordman/Walk.png"), new Image("data/Swordman/Battler.png"), new Image("data/Swordman/Face.png"));
 		
 		this.hpMax=120;
 		this.manaMax=40;
@@ -16,9 +16,7 @@ public class Swordsman extends Player{
 		this.manaActuel=40;
 		
 	}
-	
-	
-	
+
 	
 	//Sorts
 }

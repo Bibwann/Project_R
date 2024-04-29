@@ -26,8 +26,10 @@ public class Berserker extends Player{
 		return 1+(1-(this.hpActuel/this.hpMax));
 	}
 	
-	public void setSprite() {
+	public void initSprite() {
 		//this.sprite= --> set le sprite ici
 	}
+	
+	//Sorts
 
 }

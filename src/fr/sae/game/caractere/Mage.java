@@ -19,8 +19,9 @@ public class Mage extends Player{
 		this.manaActuel=100;
 	}
 	
-	public void setSprite() {
+	public void initSprite() {
 		//this.sprite= --> set le sprite ici
 	}
 
+	//Sorts
 }

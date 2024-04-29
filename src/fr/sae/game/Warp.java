@@ -1,8 +1,11 @@
 package fr.sae.game;
 
+import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.state.StateBasedGame;
+
+import fr.sae.game.caractere.Player;
 
 
 public class Warp {
@@ -36,8 +39,10 @@ public class Warp {
     public void draw(Graphics g) {
     	
     	//Dessine la zone de warp
-    	
+        g.setColor(Color.red);
         g.drawRect(this.startX, this.startY, this.width, this.height);
+        g.setColor(Color.white);
+
     }
 
 	public float getStartX() {
@@ -90,12 +95,19 @@ public class Warp {
 		this.height = height;
 	}
 
-	public void changeToMap(StateBasedGame game ,int ID, int CoordX, int CoordY) {
+	public void changeToMap(StateBasedGame game ,int ID) {
 		// A definir --> change la map actuelle
 		
-		Global.P1.getHitbox().setX(CoordX);
-		Global.P1.getHitbox().setY(CoordY);
+		Global.P1.getHitbox().setX(this.destinationX);
+		Global.P1.getHitbox().setY(this.destinationY);
 		
 		game.enterState(ID);
 		}
+	
+	public void warp(Player P,StateBasedGame game, int Id) {
+		if (this.collidesWith(P.getHitbox().getX(),P.getHitbox().getY(),36,46)) {
+			this.changeToMap(game, Id);
+		}
+		
+	}
 }

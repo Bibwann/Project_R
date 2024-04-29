@@ -1,16 +1,13 @@
 package fr.sae.game.caractere;
 
 import org.newdawn.slick.Image;
+import org.newdawn.slick.SlickException;
 
 public class Swordsman extends Player{
 
-	private String classname;
-
-	public Swordsman(String name, int level, Image sprite) {
-		super(name, level, sprite);
+	public Swordsman(String name, int level) throws SlickException {
+		super(name, level, new Image("data/Swordman/Walk.png"));
 		
-		this.classname="Healer";
-
 		this.hpMax=120;
 		this.manaMax=40;
 		this.dmg=7;
@@ -20,8 +17,8 @@ public class Swordsman extends Player{
 		
 	}
 	
-	public void setSprite() {
-		//this.sprite= --> set le sprite ici
-	}
-
+	
+	
+	
+	//Sorts
 }

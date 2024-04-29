@@ -1,5 +1,6 @@
 package fr.sae.game;
 
+import org.newdawn.slick.Graphics;
 import org.newdawn.slick.geom.Circle;
 import org.newdawn.slick.geom.Polygon;
 import org.newdawn.slick.geom.Rectangle;
@@ -19,6 +20,7 @@ public class Collisions {
         Rectangle bottomBorder = new Rectangle(0, Global.height, Global.width, 1);
         Rectangle leftBorder = new Rectangle(-1, 0, 1, Global.height);
         Rectangle rightBorder = new Rectangle(Global.width, 0, 1, Global.height);
+        
 		this.collidables.add(topBorder);
         this.collidables.add(bottomBorder);
         this.collidables.add(leftBorder);
@@ -43,7 +45,7 @@ public class Collisions {
     	this.collidables.remove(shape);
     }
 
-    public List<Shape> checkCollisions(Shape shape) {
+	protected List<Shape> checkCollisions(Shape shape) {
     	// Fonction qui parcoutrt la liste des collisions et check si une collision a lieux en un instant T ( experimentale )
     	
         List<Shape> collisions = new ArrayList<>();
@@ -55,7 +57,7 @@ public class Collisions {
         return collisions;
     }
     
-    public boolean willCollide(Shape shape1, Shape shape2,int x,int y) {
+	protected boolean willCollide(Shape shape1, Shape shape2,int x,int y) {
     	// Fonction qui parcoutrt la liste des collisions et check si une collision a lieux en un instant T + 1 ( va avoir lieux si on continue le mouvement ( experimentale ))
 
 
@@ -86,7 +88,7 @@ public class Collisions {
         return collision;
     }
 
-    private Shape createTempShape(Shape originalShape) {
+	protected Shape createTempShape(Shape originalShape) {
     	//Fonction privee pour creer des shapes a partir de formes geometriques ( utilie pour creer des shapes temporaires a l'interieur de cette classe )
         
     	if (originalShape instanceof Rectangle) {
@@ -108,15 +110,19 @@ public class Collisions {
         }
     }
     
-    public boolean willCollideWithMap(Shape playerShape,int x,int y) {
+	protected boolean willCollideWithMap(Shape playerShape,int x,int y) {
     	
     	for (Shape collidable : this.collidables){
     		if (this.willCollide(playerShape, collidable, x,y)){
     			return true;
     		}
-
-        	
         }
 		return false;
+    }
+    
+    public void drawCollisions(Graphics c) {
+    	for (Shape collidable : this.collidables){
+    		c.draw(collidable);
+    	}
     }
 }

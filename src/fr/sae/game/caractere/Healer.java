@@ -16,8 +16,12 @@ public class Healer extends Player{
 		this.hpActuel=80;
 		this.manaActuel=20;
 	}
-	public void setSprite() {
+	public void initSprite() {
 		//this.sprite= --> set le sprite ici
 	}
+	
+	//Sorts 
+	
+	
 
 }

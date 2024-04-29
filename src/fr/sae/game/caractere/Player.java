@@ -33,10 +33,11 @@ public abstract class Player extends Entity { // A mettre en abstract et lui fai
     }
     
     public void Sprite(Graphics g) {
-        g.drawImage(this.getSprite().getSubImage(4, this.Orientation+2, 42, 48), this.getHitbox().getX(), this.getHitbox().getY());
-        this.Animation();
+        this.animation.draw(this.getHitbox().getX(),this.getHitbox().getY());
+        
+        //g.drawImage(this.getAnimation().getImage(1).getSubImage(4, this.Orientation+2, 42, 48), this.getHitbox().getX(), this.getHitbox().getY());
+        //g.drawImage(this.getSprite().getSubImage(4, this.Orientation+2, 42, 48), this.getHitbox().getX(), this.getHitbox().getY());
 	}
-    
 
 	private Image getBattleSprite() { //Sprite de combat
 		return null;
@@ -114,7 +115,8 @@ public abstract class Player extends Entity { // A mettre en abstract et lui fai
 		if (this.Orientation !=48) {
 			this.Orientation=48;
 			this.Animation();
-		} 
+		}
+
         //g.drawImage(this.getSprite().getSubImage(0, 48, 42, 48), this.getHitbox().getX(), this.getHitbox().getY());
 	}
 	
@@ -135,24 +137,20 @@ public abstract class Player extends Entity { // A mettre en abstract et lui fai
 
         //g.drawImage(this.getSprite().getSubImage(0, 144, 42, 48), this.getHitbox().getX(), this.getHitbox().getY());
 	}
-	
+
 	public void Animation() {
 		try {
 			Image[] frames = {
-		            this.getSprite().getSubImage(0, this.Orientation, 42, 48),
-		            this.getSprite().getSubImage(48, this.Orientation, 42, 48),
-		            this.getSprite().getSubImage(96, this.Orientation, 42, 48)
+		            this.getSprite().getSubImage(0+4, this.Orientation+2, 42, 48),
+		            this.getSprite().getSubImage(48+4, this.Orientation+2, 42, 48),
+		            this.getSprite().getSubImage(96+4, this.Orientation+2, 42, 48)
 		        };
-		        this.animation= new Animation(frames, 100);
+		        this.animation= new Animation(frames, 300);
+		        
 		} catch (Exception e) {
 			e.getMessage();
 		}
 	}
-	
-	public void renderAnimation(GameContainer g, int delta) {
-		  this.animation.update(delta);
-	}
-
 	public int getOrientation() {
 		return Orientation;
 	}
@@ -168,5 +166,14 @@ public abstract class Player extends Entity { // A mettre en abstract et lui fai
 	public void setAnimation(Animation animation) {
 		this.animation = animation;
 	}
-   
+	
+	public void AnimateWhileMoove() {
+		if (Global.InputHandler.isPressed()) {
+	    	this.getAnimation().start();
+		} else {
+	    	this.getAnimation().stop();
+			this.getAnimation().setCurrentFrame(1);
+		}
+	}
+
 }

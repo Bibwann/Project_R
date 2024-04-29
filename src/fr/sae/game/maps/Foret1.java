@@ -39,40 +39,38 @@ public class Foret1 extends BasicGameState{
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
         g.drawImage(new Image("data/maps/Map001.png").getScaledCopy(Global.width, Global.height), 0, 0);
         
-        //--------------------------------------------------------------------------------------------------------------------------
-		//Temp	    
-	    try {
+        try {
 	    	Global.P1.Sprite(g);
+	    	Global.P1.getAnimation().stop();
+	    	
         }catch(Exception e) {	
         	e.getMessage();
         	System.out.print(e);
         }
-	    //Warp
-	    
-	    this.Warp1.draw(g);
-	    this.Warp2.draw(g);
+        
+		this.Warp1.warp(Global.P1, sbg, 12);
+		this.Warp2.warp(Global.P1, sbg, 13);
 
+//--------------------------------------------------------------------------------------------------------------------------
+	//Temp	    
 
 	    //Affiche toutes les collisions de la map et du joueur
-	    if (true) {
+	    if (false) {
 		    g.draw(Global.P1.getHitbox());
+		    
 		    Global.CollisionMapForet1.drawCollisions(g);
-	    }
-
-
-	    //--------------------------------------------------------------------------------------------------------------------------
+		    
+		    this.Warp1.draw(g);
+		    this.Warp2.draw(g);
+	    	}
+//--------------------------------------------------------------------------------------------------------------------------
 
 		}
 
 	@Override
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
 		Global.updatePlayerMovement(gc.getInput(), Global.CollisionMapForet1);
-		Global.P1.renderAnimation(gc, delta);
-		
-		this.Warp1.warp(Global.P1, sbg, 12);
-		this.Warp2.warp(Global.P1, sbg, 13);
-
- 
+		Global.P1.AnimateWhileMoove();
 		
 	}
 

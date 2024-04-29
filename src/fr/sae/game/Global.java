@@ -27,8 +27,8 @@ public class Global {
 	
 	public static Player P1 = null;
 	public static Player P2 = null;
-		
-	public static float speed =0.3f; //Vitesse du Player
+
+	public static float speed =0.11f; //Vitesse du Player
 	
 	//Coordonee de spawn du Player 1 ( le tout premier spawn
 	public static int SpawnX =375;
@@ -196,11 +196,14 @@ public class Global {
 	public static Collisions CollisionMapForet3;
 	
 	public static Collisions CollisionMapChateau1;
-
+	//Pour verifier si une touche est actuelleemnt pressé
+	public static InputHandler InputHandler;
+	
 	// Fonctions
 	
 	public static void InitializeGame() throws SlickException { //Fonction d'initialisation de project complet
 		try {	
+			InputHandler = new InputHandler(100);
 			
 			// Initialisation de P1
 			
@@ -219,7 +222,6 @@ public class Global {
 			        break;
 
 			}
-
 
 			// Initialisation de P2
 			
@@ -305,24 +307,32 @@ public class Global {
 
 
 		        if (left) {
+		        	InputHandler.keyPressed();
 		            if (!c.willCollideWithMap(Global.P1.getHitbox(),-1,0)) {
 		                P1.moveLeft(1);
-		                
 		            }
 		        } else if (right) {
+		        	InputHandler.keyPressed();
 		            if (!c.willCollideWithMap(Global.P1.getHitbox(),1,0)) {
 		                P1.moveRight(1);
+
 		            }
 		        } else if (up) {
+		        	InputHandler.keyPressed();
 		            if (!c.willCollideWithMap(Global.P1.getHitbox(),0,-1)) {
 		                P1.moveUp(1);
+
 		            }
 		        } else if (down) {
+		        	InputHandler.keyPressed();
 		            if (!c.willCollideWithMap(Global.P1.getHitbox(),0,1)) {
 		                P1.moveDown(1);
 		            }
 		        }
+		    
+		        
 		    }
+	    	
 	    }
 
 }

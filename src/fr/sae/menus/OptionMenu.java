@@ -45,9 +45,10 @@ public class OptionMenu extends BasicGameState {
     public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
         g.setColor(Color.black);
         g.fillRect(0, 0, gc.getWidth(), gc.getHeight());
-
+        
         g.setFont(titleFont);
-        g.setColor(Color.white);
+        g.setColor(Color.green); // Change this line
+        g.drawString("OPTIONS", (gc.getWidth() - titleFont.getWidth("OPTIONS")) / 2, gc.getHeight()*1/10);
         // Ajouter le titre "OPTIONS" en haut de l'écran
         g.drawString("OPTIONS", (gc.getWidth() - titleFont.getWidth("OPTIONS")) / 2, gc.getHeight()*1/10);
 

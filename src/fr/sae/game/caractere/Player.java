@@ -8,8 +8,11 @@ import org.newdawn.slick.GameContainer;
 
 import fr.sae.game.Global;
 
-public abstract class Player extends Entity { // A mettre en abstract et lui faire heriter 
+public abstract class Player extends Entity { 
 	
+	int deformationHitboxX=22; //Cette variable permet de reajuster la hitbox du player pour qu'il passe +/- proche des mures ( a  voir avec les hitbox pour comprendre)
+	int deformationHitboxY=8; //Cette variable permet de reajuster la hitbox du player pour qu'il passe +/- proche des mures ( a  voir avec les hitbox pour comprendre)
+
 	protected Image chibi;
     protected Rectangle hitbox;
     protected Rectangle Battlehitbox;
@@ -24,7 +27,7 @@ public abstract class Player extends Entity { // A mettre en abstract et lui fai
         super(name, level, sprite,BattleSprite);
         
         this.Orientation=0;
-        this.hitbox=new Rectangle(Global.SpawnX, Global.SpawnY, 36, 46);
+        this.hitbox=new Rectangle(Global.SpawnX, Global.SpawnY, 36-deformationHitboxY, 46-deformationHitboxX);
         this.Battlehitbox=new Rectangle(0, 0, 0, 0); //Hitbox unique a la battle scene pour pas que le plaer lance le combat de la ou il etait
 
     }
@@ -34,7 +37,7 @@ public abstract class Player extends Entity { // A mettre en abstract et lui fai
     }
     
     public void Sprite(Graphics g) {
-        this.animation.draw(this.getHitbox().getX(),this.getHitbox().getY());
+        this.animation.draw(this.getHitbox().getX()-deformationHitboxY/2,this.getHitbox().getY()-deformationHitboxX);
         
         //g.drawImage(this.getAnimation().getImage(1).getSubImage(4, this.Orientation+2, 42, 48), this.getHitbox().getX(), this.getHitbox().getY());
         //g.drawImage(this.getSprite().getSubImage(4, this.Orientation+2, 42, 48), this.getHitbox().getX(), this.getHitbox().getY());
@@ -68,27 +71,27 @@ public abstract class Player extends Entity { // A mettre en abstract et lui fai
     }
 
     public void moveUp(float distance) {
-    	this.UpSprite();
+    	//this.UpSprite();
         hitbox.setY(hitbox.getY() - distance * Global.speed); // Réduire la vitesse en ajustant le multiplicateur (ici 0.1f)
     }
 
     // Méthode pour déplacer le joueur vers le bas
     public void moveDown(float distance) {
-    	this.DownSprite();
+    	//this.DownSprite();
         hitbox.setY(hitbox.getY() + distance * Global.speed);
 
     }
 
     // Méthode pour déplacer le joueur vers la gauche
     public void moveLeft(float distance) {
-    	this.LeftSprite();
+    	//this.LeftSprite();
         hitbox.setX(hitbox.getX() - distance * Global.speed);
 
     }
 
     // Méthode pour déplacer le joueur vers la droite
     public void moveRight(float distance) {
-    	this.RightSprite();
+    	//this.RightSprite();
         hitbox.setX(hitbox.getX() + distance * Global.speed);
     }
     

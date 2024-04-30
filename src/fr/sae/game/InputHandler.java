@@ -1,7 +1,7 @@
 package fr.sae.game;
 import org.newdawn.slick.Input;
 
-public class InputHandler {
+public class InputHandler { //Classe permettant de savoir si une touche est enfoncé ou pas
     private boolean keyPressed;
     
     private long time;

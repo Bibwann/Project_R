@@ -1,15 +1,13 @@
 package fr.sae.menus;
 
 import java.awt.Font;
-
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.*;
 
 import fr.sae.game.Global;
 
 public class ClassesSelect extends BasicGameState {
-    private TrueTypeFont font;
-
+    private TrueTypeFont font, titleFont, menuFont;
     private String firstClass="";
     private String secondClass="";
     private String[] descriptions = {"Un guerrier robuste spécialisé dans le combat au corps à corps.",
@@ -21,13 +19,12 @@ public class ClassesSelect extends BasicGameState {
     private int selectedItemIndex = 0;
     private boolean isFirstClassSelected = false;
     private boolean isConfirmationVisible = false;
-    private boolean isConfirmSelected = true; // Added variable to track the selected option
+    private boolean isConfirmSelected = true;
 
     public ClassesSelect(int stateID) {
     }
     
     private StateBasedGame game;
-
 
     @Override
     public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
@@ -35,27 +32,34 @@ public class ClassesSelect extends BasicGameState {
         
         Font awtFont = new Font("Verdana", Font.BOLD, 24);
         font = new TrueTypeFont(awtFont, true);
-        
+
+        Font awtTitleFont = new Font("Verdana", Font.BOLD, 36);
+        titleFont = new TrueTypeFont(awtTitleFont, true);
+        Font awtMenuFont = new Font("Verdana", Font.PLAIN, 24);
+        menuFont = new TrueTypeFont(awtMenuFont, true);
     }
 
     @Override
     public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
-        g.setColor(Color.white);
+        g.setColor(Color.black);
+        g.fillRect(0, 0, gc.getWidth(), gc.getHeight());
 
-        int menuWidth = 200;
-        int menuHeight = classes.length * 50; 
+        g.setFont(titleFont);
+        g.setColor(Color.green);
+        g.drawString("SELECT YOUR CLASS", (gc.getWidth() - titleFont.getWidth("SELECT YOUR CLASS")) / 2, gc.getHeight()*1/10);
 
-        int menuX = (Global.width - menuWidth) / 2;
-        int menuY = (Global.height - menuHeight) / 2;
-
-        int y = menuY;
+        g.setFont(menuFont);
+        int y = gc.getHeight()*1/3;
         for (int i = 0; i < classes.length; i++) {
+            int x = (gc.getWidth() - menuFont.getWidth(classes[i])) / 2;
             if (i == selectedItemIndex) {
-                g.setColor(Color.red);
+                g.setColor(Color.green);
+                g.fillRect(x - 10, y - 10, menuFont.getWidth(classes[i]) + 20, menuFont.getHeight(classes[i]) + 20);
+                g.setColor(Color.black);
             } else {
                 g.setColor(Color.white);
             }
-            g.drawString(classes[i], menuX + 50, y);
+            g.drawString(classes[i], x, y);
             y += 50;
         }
 
@@ -63,27 +67,42 @@ public class ClassesSelect extends BasicGameState {
         g.drawString("Première classe : " + firstClass, 50, 50);
         g.drawString("Deuxième classe : " + secondClass, 50, 80);
 
-        // Affichage du bouton de confirmation
         if (isConfirmationVisible) {
-        	
+            String confirmOption = "Confirmer";
+            String cancelOption = "Annuler";
+            int confirmOptionWidth = menuFont.getWidth(confirmOption);
+            int cancelOptionWidth = menuFont.getWidth(cancelOption);
+            int margin = 50;
+            int xConfirm = (gc.getWidth() - confirmOptionWidth) / 2 - 100;
+            int xCancel = (gc.getWidth() - cancelOptionWidth) / 2 + 100;
+            int yOption = gc.getHeight() - menuFont.getHeight(confirmOption) - margin;
             if (isConfirmSelected) {
                 g.setColor(Color.green);
-                g.drawString("Confirmer", Global.width - 150, 20); 
+                g.fillRect(xConfirm - 10, yOption - 10, confirmOptionWidth + 20, menuFont.getHeight(confirmOption) + 20);
+                g.setColor(Color.black);
+                g.drawString(confirmOption, xConfirm, yOption);
                 g.setColor(Color.white);
-                g.drawString("Annuler", Global.width - 250, 20); 
+                g.drawString(cancelOption, xCancel, yOption);
             } else {
-                g.setColor(Color.white);
-                g.drawString("Confirmer", Global.width - 150, 20); 
                 g.setColor(Color.green);
-                g.drawString("Annuler", Global.width - 250, 20); 
+                g.fillRect(xCancel - 10, yOption - 10, cancelOptionWidth + 20, menuFont.getHeight(cancelOption) + 20);
+                g.setColor(Color.black);
+                g.drawString(cancelOption, xCancel, yOption);
+                g.setColor(Color.white);
+                g.drawString(confirmOption, xConfirm, yOption);
             }
         }
 
-        // Affichage de la description de la classe survolée
-        g.setColor(Color.white);
-        
-        g.drawString("Description :", 100, Global.height - 100);
-        g.drawString(descriptions[selectedItemIndex],120, Global.height - 70); 
+        if (!isConfirmationVisible) {
+            g.setColor(Color.white);
+            String descriptionTitle = "Description :";
+            String description = descriptions[selectedItemIndex];
+            int descriptionTitleX = (gc.getWidth() - menuFont.getWidth(descriptionTitle)) / 2;
+            int descriptionX = (gc.getWidth() - menuFont.getWidth(description)) / 2;
+            int descriptionY = gc.getHeight() - menuFont.getHeight(description) - 100;
+            g.drawString(descriptionTitle, descriptionTitleX, descriptionY);
+            g.drawString(description, descriptionX, descriptionY + 30);
+        }
     }
 
     @Override
@@ -99,13 +118,10 @@ public class ClassesSelect extends BasicGameState {
                 selectedItemIndex = (selectedItemIndex + 1) % classes.length;
             } else if (key == Input.KEY_ENTER) {
                 if (!isFirstClassSelected) {
-                   
                     firstClass = classes[selectedItemIndex];
                     isFirstClassSelected = true;
                 } else {
-                	
                     if (!classes[selectedItemIndex].equals(firstClass)) {
-                        
                         secondClass = classes[selectedItemIndex];
                         isConfirmationVisible = true;
                     }
@@ -114,23 +130,17 @@ public class ClassesSelect extends BasicGameState {
         } else {
             if (key == Input.KEY_ENTER) {
                 if (isConfirmSelected) {                    
-                    // Choix effectué, ferme l'application
-                    
                     Global.Player1Classe=firstClass;
                     Global.Player2Classe=secondClass;
-
-                    
                     game.enterState(5);
                 } else {
-                    // Réinitialiser les sélectiosns
                     isFirstClassSelected = false;
                     firstClass = "";
                     secondClass = "";
                     isConfirmationVisible = false;
                 }
             } else if (key == Input.KEY_LEFT || key == Input.KEY_RIGHT) {
-
-            		isConfirmSelected = !isConfirmSelected;
+                isConfirmSelected = !isConfirmSelected;
             }
         }
     }

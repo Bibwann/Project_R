@@ -1,38 +1,38 @@
 package fr.sae.menus;
 
 import java.awt.Font;
-
-import org.newdawn.slick.Color;
-import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Input;
-import org.newdawn.slick.SlickException;
-import org.newdawn.slick.TrueTypeFont;
-import org.newdawn.slick.state.BasicGameState;
-import org.newdawn.slick.state.StateBasedGame;
+import org.newdawn.slick.*;
+import org.newdawn.slick.state.*;
 
 import fr.sae.game.Global;
 
 public class SetCharacterName extends BasicGameState {
+
     private TrueTypeFont font;
     private String characterName = "";
-    private int maxNameLength = 10;
+    private int maxNameLength = 15; // Increase max name length to 15
     private Color textColor = Color.white;
     private Color backgroundColor = new Color(0, 0, 0, 200);
-    private int arrowPosition = 0;
-    private String[] characters = { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q",
-            "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" };
+    private int arrowPosition = 1;
+
+    private String[][] characters = { 
+    	    { " ", "A", "B", "C", "D", "E", "F", "G", "H", " " },
+    	    { "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R" },
+    	    { "S", "T", "U", "V", "W", "X", "Y", "Z", "a", "b" },
+    	    { "c", "d", "e", "f", "g", "h", "i", "j", "k", "l" },
+    	    { "m", "n", "o", "p", "q", "r", "s", "t", "u", "v" },
+    	    { " " ,"w", "x", "y", "z", "0", "1", "2", "3", " " },
+    	    { " ", " ", "4", "5", "6", "7", "8", "9", " ", " " }
+    	};
+    private StateBasedGame game;
 
     public SetCharacterName(int stateID) {
     }
-    
-    private StateBasedGame game;
 
     @Override
     public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
-    	
-    	this.game = sbg;
-        Font awtFont = new Font("Verdana", Font.BOLD, 24);
+        this.game = sbg;
+        Font awtFont = new Font("Verdana", Font.BOLD, 24); 
         font = new TrueTypeFont(awtFont, true);
     }
 
@@ -43,45 +43,75 @@ public class SetCharacterName extends BasicGameState {
 
         g.setColor(textColor);
         g.setFont(font);
-        g.drawString("Enter Character Name:", (Global.width/2)-200, 200);
-        g.drawString(characterName, (Global.width/2)-200, 250);
-        g.drawString(">", (Global.width/2)-230, 250);
+        g.drawString("Enter Character Name:", (Global.width/2)-200, 150); 
+        g.drawString(characterName, (Global.width/2)-200, 200); 
+        g.drawString(">", (Global.width/2)-230, 200); 
+
+        int y = 300;
+        int spacing = 60; 
+
+        for (int i = 0; i < characters.length; i++) {
+            int totalWidth = characters[i].length * spacing;
+
+            for (int j = 0; j < characters[i].length; j++) {
+                String character = characters[i][j];
+                int x = (gc.getWidth() - totalWidth) / 2 + j * spacing + spacing / 2; 
+
+                if (i * 10 + j == arrowPosition) {
+                    g.setColor(Color.green);
+                } else {
+                    g.setColor(Color.white);
+                }
+
+                g.drawString(character, x, y + i * 50);
+            }
+        }
+
+        String message = "Use the arrow keys to select a character and press SPACE to add it to your name.";
+        int messageWidth = g.getFont().getWidth(message);
+        g.drawString(message, (gc.getWidth() - messageWidth) / 2, gc.getHeight() - 50);
     }
 
     @Override
     public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
-    	
+        
     }
 
     @Override
     public void keyPressed(int key, char c) {
+        int maxPosition = characters.length * 10 - 1;
+        int minPosition = 0;
+
         if (Character.isLetterOrDigit(c) && characterName.length() < maxNameLength) {
             characterName += c;
         } else if (key == Input.KEY_BACK && characterName.length() > 0) {
             characterName = characterName.substring(0, characterName.length() - 1);
-        } else if (key == Input.KEY_ENTER && characterName!="") {
-        	
+        } else if (key == Input.KEY_ENTER && !characterName.isEmpty()) {
             Global.Player1Name = characterName;
             game.enterState(4);
-            
-            
         } else if (key == Input.KEY_LEFT) {
-            arrowPosition--;
-            if (arrowPosition < 0) {
-                arrowPosition = characters.length - 1;
+            if (arrowPosition > minPosition && !characters[(arrowPosition - 1) / 10][(arrowPosition - 1) % 10].equals(" ")) {
+                arrowPosition--;
             }
         } else if (key == Input.KEY_RIGHT) {
-            arrowPosition++;
-            if (arrowPosition >= characters.length) {
-                arrowPosition = 0;
+            if (arrowPosition < maxPosition && !characters[(arrowPosition + 1) / 10][(arrowPosition + 1) % 10].equals(" ")) {
+                arrowPosition++;
+            }
+        } else if (key == Input.KEY_UP) {
+            if (arrowPosition >= 10 && !characters[(arrowPosition - 10) / 10][(arrowPosition - 10) % 10].equals(" ")) {
+                arrowPosition -= 10;
+            }
+        } else if (key == Input.KEY_DOWN) {
+            if (arrowPosition < (characters.length - 1) * 10 && !characters[(arrowPosition + 10) / 10][(arrowPosition + 10) % 10].equals(" ")) {
+                arrowPosition += 10;
             }
         } else if (key == Input.KEY_SPACE) {
-            characterName += characters[arrowPosition];
+            characterName += characters[arrowPosition / 10][arrowPosition % 10];
         }
     }
 
     @Override
     public int getID() {
-        return 2; 
+        return 2;
     }
 }

@@ -30,13 +30,9 @@ public class Global {
 
 	public static float speed =0.11f; //Vitesse du Player
 	
-	//Coordonee de spawn du Player 1 ( le tout premier spawn
+	//Coordonee de spawn du Player 1 ( le tout premier spawn)
 	public static int SpawnX =375;
 	public static int SpawnY =280;
-
-	//Local variable permettant de savoir qui a la main
-	
-	public static Integer id=null;
 	
 	//Variables definissant si on doit utiliser les touches de mouvements pour se deplacer dans les dialogbox ou pour deplacer le personnage
 	
@@ -59,7 +55,11 @@ public class Global {
 	
 	//public static  Map<String, Integer> dictionnaireInputs = new HashMap<String, Integer>() {{put("UP", Input.KEY_UP);put("DOWN", Input.KEY_DOWN);put("LEFT", Input.KEY_LEFT);put("RIGHT", Input.KEY_RIGHT);put("SPACE", Input.KEY_SPACE);}};
 
-    public static Map<String, Integer> dictionnaireInputs = new HashMap<String, Integer>() {{
+    public static Map<String, Integer> dictionnaireInputs = new HashMap<String, Integer>() {
+
+		private static final long serialVersionUID = 1L;
+
+	{
         put("UP", Input.KEY_UP);
         put("DOWN", Input.KEY_DOWN);
         put("LEFT", Input.KEY_LEFT);
@@ -141,35 +141,96 @@ public class Global {
         put("SLASH", Input.KEY_SLASH);
         put("MINUS", Input.KEY_MINUS);
         put("SPACE", Input.KEY_SPACE);
-
-        
-        put("EXCLAMATION_MARK", (int) '!');
-        put("DOUBLE_QUOTE", (int) '"');
-        put("HASH", (int) '#');
-        put("DOLLAR", (int) '$');
-        put("PERCENT", (int) '%');
-        put("AMPERSAND", (int) '&');
-        put("SINGLE_QUOTE", (int) '\'');
-        put("LEFT_PARENTHESIS", (int) '(');
-        put("RIGHT_PARENTHESIS", (int) ')');
-        put("ASTERISK", (int) '*');
-        put("PLUS", (int) '+');
-        put("COLON", (int) ':');
-        put("LESS_THAN", (int) '<');
-        put("EQUAL", (int) '=');
-        put("GREATER_THAN", (int) '>');
-        put("QUESTION_MARK", (int) '?');
-        put("AT", (int) '@');
-        put("LEFT_BRACKET", (int) '[');
-        put("BACKSLASH", (int) '\\');
-        put("RIGHT_BRACKET", (int) ']');
-        put("CARET", (int) '^');
-        put("UNDERSCORE", (int) '_');
-        put("LEFT_BRACE", (int) '{');
-        put("VERTICAL_BAR", (int) '|');
-        put("RIGHT_BRACE", (int) '}');
-        put("TILDE", (int) '~');
     }};
+    
+    public static Map<Integer, String> reversedInputs = new HashMap<Integer, String>() {
+        private static final long serialVersionUID = 1L;
+
+        {
+            put(Input.KEY_UP, "UP");
+            put(Input.KEY_DOWN, "DOWN");
+            put(Input.KEY_LEFT, "LEFT");
+            put(Input.KEY_RIGHT, "RIGHT");
+            put(Input.KEY_SPACE, "SPACE");
+            put(Input.KEY_A, "A");
+            put(Input.KEY_B, "B");
+            put(Input.KEY_C, "C");
+            put(Input.KEY_D, "D");
+            put(Input.KEY_E, "E");
+            put(Input.KEY_F, "F");
+            put(Input.KEY_G, "G");
+            put(Input.KEY_H, "H");
+            put(Input.KEY_I, "I");
+            put(Input.KEY_J, "J");
+            put(Input.KEY_K, "K");
+            put(Input.KEY_L, "L");
+            put(Input.KEY_M, "M");
+            put(Input.KEY_N, "N");
+            put(Input.KEY_O, "O");
+            put(Input.KEY_P, "P");
+            put(Input.KEY_Q, "Q");
+            put(Input.KEY_R, "R");
+            put(Input.KEY_S, "S");
+            put(Input.KEY_T, "T");
+            put(Input.KEY_U, "U");
+            put(Input.KEY_V, "V");
+            put(Input.KEY_W, "W");
+            put(Input.KEY_X, "X");
+            put(Input.KEY_Y, "Y");
+            put(Input.KEY_Z, "Z");
+            put(Input.KEY_0, "0");
+            put(Input.KEY_1, "1");
+            put(Input.KEY_2, "2");
+            put(Input.KEY_3, "3");
+            put(Input.KEY_4, "4");
+            put(Input.KEY_5, "5");
+            put(Input.KEY_6, "6");
+            put(Input.KEY_7, "7");
+            put(Input.KEY_8, "8");
+            put(Input.KEY_9, "9");
+            put(Input.KEY_TAB, "TAB");
+            put(Input.KEY_ENTER, "ENTER");
+            put(Input.KEY_ESCAPE, "ESCAPE");
+            put(Input.KEY_INSERT, "INSERT");
+            put(Input.KEY_DELETE, "DELETE");
+            put(Input.KEY_HOME, "HOME");
+            put(Input.KEY_END, "END");
+            put(Input.KEY_F1, "F1");
+            put(Input.KEY_F2, "F2");
+            put(Input.KEY_F3, "F3");
+            put(Input.KEY_F4, "F4");
+            put(Input.KEY_F5, "F5");
+            put(Input.KEY_F6, "F6");
+            put(Input.KEY_F7, "F7");
+            put(Input.KEY_F8, "F8");
+            put(Input.KEY_F9, "F9");
+            put(Input.KEY_F10, "F10");
+            put(Input.KEY_F11, "F11");
+            put(Input.KEY_F12, "F12");
+            put(Input.KEY_NUMPAD0, "NUMPAD0");
+            put(Input.KEY_NUMPAD1, "NUMPAD1");
+            put(Input.KEY_NUMPAD2, "NUMPAD2");
+            put(Input.KEY_NUMPAD3, "NUMPAD3");
+            put(Input.KEY_NUMPAD4, "NUMPAD4");
+            put(Input.KEY_NUMPAD5, "NUMPAD5");
+            put(Input.KEY_NUMPAD6, "NUMPAD6");
+            put(Input.KEY_NUMPAD7, "NUMPAD7");
+            put(Input.KEY_NUMPAD8, "NUMPAD8");
+            put(Input.KEY_NUMPAD9, "NUMPAD9");
+            put(Input.KEY_ADD, "ADD");
+            put(Input.KEY_SUBTRACT, "SUBTRACT");
+            put(Input.KEY_MULTIPLY, "MULTIPLY");
+            put(Input.KEY_DIVIDE, "DIVIDE");
+            put(Input.KEY_EQUALS, "EQUALS");
+            put(Input.KEY_COMMA, "COMMA");
+            put(Input.KEY_PERIOD, "PERIOD");
+            put(Input.KEY_SEMICOLON, "SEMICOLON");
+            put(Input.KEY_SLASH, "SLASH");
+            put(Input.KEY_MINUS, "MINUS");
+            put(Input.KEY_SPACE, "SPACE");
+        }
+    };
+
 	// Taille de l'ecran 
 
 	public static int width;
@@ -260,8 +321,9 @@ public class Global {
 			e.getMessage(); //Affiche le message d'erreur en cas ou l'initialisation du project mne marche pas correctement ducoup c'est une ligne importante en cas de debug
 			System.out.println("Erreur dans le global sur la fonction initialize");
 		}
-	}	
+	}
 	
+	 
 	public static void CollisionsMapForet1() {
     	//Collisions bas a gauche + gauche
     	CollisionMapForet1.addCollidable(new Rectangle(0, 0, 200, height)); 
@@ -289,7 +351,7 @@ public class Global {
     	CollisionMapForet1.addCollidable(new Rectangle(width-330,570,330,130)); 
     	CollisionMapForet1.addCollidable(new Rectangle(width-200,700,200,66)); 
     	//Collision panneau
-    	CollisionMapForet1.addCollidable(new Rectangle(width-530,510,66,50)); 
+    	CollisionMapForet1.addCollidable(new Rectangle(width-530,510,66,60)); 
 
 	}
 	public static void switchModeControles() { //Fonction  propre permettant de savoir si on est en dialoge ou en deplacmeent libre
@@ -300,34 +362,39 @@ public class Global {
 		//A voir avec les animations 
 	public static void updatePlayerMovement(Input input, Collisions c) { //Fonction qui gere le deplacement du joueur P1
 	    	if (P1 != null && canMoovPlayer) {
-		        boolean left = input.isKeyDown(Input.KEY_LEFT);
-		        boolean right = input.isKeyDown(Input.KEY_RIGHT);
-		        boolean up = input.isKeyDown(Input.KEY_UP);
-		        boolean down = input.isKeyDown(Input.KEY_DOWN);
+		        boolean isleft = input.isKeyDown(left);
+		        boolean isright = input.isKeyDown(right);
+		        boolean isup = input.isKeyDown(up);
+		        boolean isdown = input.isKeyDown(down);
 
 
-		        if (left) {
+		        if (isleft) {
 		        	InputHandler.keyPressed();
 		            if (!c.willCollideWithMap(Global.P1.getHitbox(),-1,0)) {
+		            	Global.P1.LeftSprite();
 		                P1.moveLeft(1);
 		            }
-		        } else if (right) {
+		        } else if (isright) {
 		        	InputHandler.keyPressed();
+		        	Global.P1.RightSprite();
 		            if (!c.willCollideWithMap(Global.P1.getHitbox(),1,0)) {
 		                P1.moveRight(1);
 
 		            }
-		        } else if (up) {
+		        } else if (isup) {
 		        	InputHandler.keyPressed();
+		        	Global.P1.UpSprite();
 		            if (!c.willCollideWithMap(Global.P1.getHitbox(),0,-1)) {
 		                P1.moveUp(1);
 
 		            }
-		        } else if (down) {
+		        } else if (isdown) {
 		        	InputHandler.keyPressed();
+		        	Global.P1.DownSprite();
 		            if (!c.willCollideWithMap(Global.P1.getHitbox(),0,1)) {
 		                P1.moveDown(1);
 		            }
+		         
 		        }
 		    
 		        

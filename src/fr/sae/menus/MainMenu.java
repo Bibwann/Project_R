@@ -21,16 +21,15 @@ public class MainMenu extends BasicGameState {
     public MainMenu(int stateID) {
     }
     
-    
     private StateBasedGame game;
 
     @Override
     public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
-    	
-    	this.game = sbg;
+        
+        this.game = sbg;
         Font font = new Font("Verdana", Font.BOLD, 32);
         titleFont = new TrueTypeFont(font, true);
-        font = new Font("Verdana", Font.PLAIN, 20);
+        font = new Font("Verdana", Font.PLAIN, 24);
         menuFont = new TrueTypeFont(font, true);
         selectedItemIndex = 0;
     }
@@ -40,16 +39,23 @@ public class MainMenu extends BasicGameState {
         g.setColor(Color.white);
         g.setFont(titleFont);
         
-        g.drawString("Whiskers Rebellion", Global.height*4/5, Global.height*1/8);
+        g.drawString("Whiskers Rebellion", (Global.width - titleFont.getWidth("Whiskers Rebellion")) / 2, Global.height*1/8);
 
         for (int i = 0; i < menuItems.length; i++) {
+            String menuItem = menuItems[i];
+            int x = (Global.width - menuFont.getWidth(menuItem)) / 2;
+            int y = Global.height*1/3 + i * 100;
+
             if (i == selectedItemIndex) {
-                g.setColor(Color.red);
+                g.setColor(Color.green);
+                g.fillRect(x - 10, y - 10, menuFont.getWidth(menuItem) + 20, menuFont.getHeight(menuItem) + 20); // Draw a background for the selected item
+                g.setColor(Color.black); 
             } else {
                 g.setColor(Color.white);
             }
+
             g.setFont(menuFont);
-            g.drawString(menuItems[i], Global.height*4/5, Global.height*1/4 + i * 50);
+            g.drawString(menuItem, x, y);
         }
     }
 
@@ -64,15 +70,15 @@ public class MainMenu extends BasicGameState {
         } else if (key == Input.KEY_DOWN) {
             selectedItemIndex = (selectedItemIndex + 1) % menuItems.length;
         } else if (key == Input.KEY_ENTER) {
-        	
+            
             switch (selectedItemIndex) {
                 case 0:
                     // Start Game
-                	game.enterState(2);
-                	
+                    game.enterState(2);
+                    
                     break;
                 case 1:	
-                	game.enterState(3);
+                    game.enterState(3);
                     // Options
                     break;
                 case 2:

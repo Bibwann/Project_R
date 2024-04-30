@@ -28,7 +28,7 @@ public class Global {
 	public static Player P1 = null;
 	public static Player P2 = null;
 
-	public static float speed =0.11f; //Vitesse du Player
+	public static float speed =1.11f; //Vitesse du Player
 	
 	//Coordonee de spawn du Player 1 ( le tout premier spawn)
 	public static int SpawnX =375;

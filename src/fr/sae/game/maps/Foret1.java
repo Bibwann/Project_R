@@ -22,22 +22,36 @@ public class Foret1 extends BasicGameState{
 	
 	Warp Warp1;
 	Warp Warp2;
+	DialogueBox dialogueBoxPanneau; 
 	
 	public Foret1(int stateID) {
-		
 	}
 
 	@Override
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
 		this.Warp1= new Warp(Global.width-10, Global.height-320, 10, 320, 500, 500);
 		this.Warp2= new Warp(1324, 0, 66, 10, 500, 500);
+		
+		this.dialogueBoxPanneau = new DialogueBox(new String[] {
+				"\n" +
+			    "  ^  \n" +
+			    "  |         Montagne du Nord\n" +
+			    "  |  \n",
+			    "\n" +
+			    "\n" +
+			    " --->       Village\n"+
+			    "\n"
+			});		
+		
+		this.dialogueBoxPanneau.setTriggerZone(Global.width-530,570,66,10);
 
 	}
 
 	@Override
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
         g.drawImage(new Image("data/maps/Map001.png").getScaledCopy(Global.width, Global.height), 0, 0);
-        
+        dialogueBoxPanneau.render(g);
+
         try {
 	    	Global.P1.Sprite(g);
 	    	Global.P1.getAnimation().stop();
@@ -59,6 +73,7 @@ public class Foret1 extends BasicGameState{
 		    
 		    Global.CollisionMapForet1.drawCollisions(g);
 		    
+		    this.dialogueBoxPanneau.draw(g);
 		    this.Warp1.draw(g);
 		    this.Warp2.draw(g);
 	    	}
@@ -70,6 +85,9 @@ public class Foret1 extends BasicGameState{
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
 		Global.updatePlayerMovement(gc.getInput(), Global.CollisionMapForet1);
 		Global.P1.AnimateWhileMoove();
+		
+		this.dialogueBoxPanneau.dialogBox(gc.getInput());
+		
 		
 	}
 

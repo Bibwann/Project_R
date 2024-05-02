@@ -67,6 +67,6 @@ public class IntroGame extends BasicGameState {
 
     @Override
     public int getID() {
-        return 5;
+        return 6;
     }
 }

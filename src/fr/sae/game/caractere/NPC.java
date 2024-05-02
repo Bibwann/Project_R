@@ -2,19 +2,20 @@ package fr.sae.game.caractere;
 
 import org.newdawn.slick.Image;
 
-public class NPC extends Entity {
+import fr.sae.game.DialogueBox;
+
+public class NPC {
 	
-	@SuppressWarnings("null") //Les PNG ne peuvent pas avoir de level dcp on met en null leurs levels, l'ide aime pas ça
 	
-	public NPC(String name, int level, Image sprite, Image BattleSprite) {
-		super(name, level, sprite,BattleSprite);
-		
-		this.level=(Integer) null;
-		
+	private Image sprite;
+	private String name;
+	private DialogueBox dialogue;
+
+	public NPC(String name, int level, Image sprite,DialogueBox dialogue) {
+				
 		this.name=name;
 		this.sprite=sprite;
-		
-		
+		this.dialogue=dialogue;
 	}
 
 }

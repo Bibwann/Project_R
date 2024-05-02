@@ -46,7 +46,6 @@ public abstract class Entity  {
 		this.level = level;
 	}
 
-
 	public Image getSprite() {
 		return sprite;
 	}

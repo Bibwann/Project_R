@@ -88,7 +88,7 @@ public class SetCharacterName extends BasicGameState {
             characterName = characterName.substring(0, characterName.length() - 1);
         } else if (key == Input.KEY_ENTER && !characterName.isEmpty()) {
             Global.Player1Name = characterName;
-            game.enterState(4);
+            game.enterState(5);
         } else if (key == Input.KEY_LEFT) {
             if (arrowPosition > minPosition && !characters[(arrowPosition - 1) / 10][(arrowPosition - 1) % 10].equals(" ")) {
                 arrowPosition--;
@@ -112,6 +112,6 @@ public class SetCharacterName extends BasicGameState {
 
     @Override
     public int getID() {
-        return 2;
+        return 4;
     }
 }

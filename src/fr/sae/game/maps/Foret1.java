@@ -3,7 +3,9 @@ package fr.sae.game.maps;
 import org.newdawn.slick.state.BasicGameState;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
+import org.lwjgl.Sys;
 import org.newdawn.slick.*;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.Shape;
@@ -23,7 +25,9 @@ public class Foret1 extends BasicGameState{
 	Warp Warp1;
 	Warp Warp2;
 	DialogueBox dialogueBoxPanneau; 
-	
+    DialogueBox dialogueBoxBranche;
+	private DialogueBox tmpDialogbox= new DialogueBox(new String[] {});
+
 	public Foret1(int stateID) {
 	}
 
@@ -31,7 +35,9 @@ public class Foret1 extends BasicGameState{
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
 		this.Warp1= new Warp(Global.width-10, Global.height-320, 10, 320, 500, 500);
 		this.Warp2= new Warp(1324, 0, 66, 10, 500, 500);
-		
+	    this.tmpDialogbox.setTriggerZone(0, 0, 0, 0);
+
+
 		this.dialogueBoxPanneau = new DialogueBox(new String[] {
 				"\n" +
 			    "  ^  \n" +
@@ -42,8 +48,24 @@ public class Foret1 extends BasicGameState{
 			    " --->       Village\n"+
 			    "\n"
 			});		
-		
 		this.dialogueBoxPanneau.setTriggerZone(Global.width-530,570,66,10);
+
+		this.dialogueBoxBranche = new DialogueBox(new String[] {
+				"\n "+
+			    "     \n" +
+			    "           Ceci est une branche"
+	        });
+	    this.dialogueBoxBranche.setTriggerZone(718, 440, 86, 80);
+	    
+	    this.dialogueBoxBranche.setChoices(Arrays.asList("Taper la branche", "Ne rien faire"), choice -> {
+            switch (choice) {
+	            case 0:
+	                this.tmpDialogbox.setMessages(new String[] {"\n"+"\n"+"           Aie !!!!!!!!!"});
+	                this.tmpDialogbox.setActiveTempDialogbox(true);
+	                //Ajoutez recursivement des choix ici
+	                break;
+            }
+        });
 
 	}
 
@@ -51,6 +73,12 @@ public class Foret1 extends BasicGameState{
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
         g.drawImage(new Image("data/maps/Map001.png").getScaledCopy(Global.width, Global.height), 0, 0);
         dialogueBoxPanneau.render(g);
+        dialogueBoxBranche.render(g);
+        
+        if (this.tmpDialogbox.getMessages().length != 0) {
+        	tmpDialogbox.render(g);
+        }
+
 
         try {
 	    	Global.P1.Sprite(g);
@@ -74,6 +102,8 @@ public class Foret1 extends BasicGameState{
 		    Global.CollisionMapForet1.drawCollisions(g);
 		    
 		    this.dialogueBoxPanneau.draw(g);
+		    this.dialogueBoxBranche.draw(g);
+
 		    this.Warp1.draw(g);
 		    this.Warp2.draw(g);
 	    	}
@@ -83,12 +113,18 @@ public class Foret1 extends BasicGameState{
 
 	@Override
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
-		Global.updatePlayerMovement(gc.getInput(), Global.CollisionMapForet1);
+		Input input =gc.getInput();
+		Global.updatePlayerMovement(input, Global.CollisionMapForet1);
 		Global.P1.AnimateWhileMoove();
 		
-		this.dialogueBoxPanneau.dialogBox(gc.getInput());
-		
-		
+		//Structure obligatoire pour les dialogbox sinon ca marche po jsp pk
+		boolean i =input.isKeyPressed(Global.interract);
+        this.dialogueBoxPanneau.dialogBox(i);
+        this.dialogueBoxBranche.dialogBox(i,gc.getInput());
+        this.tmpDialogbox.dialogBox(i); 
+
+        
+        
 	}
 
 	@Override

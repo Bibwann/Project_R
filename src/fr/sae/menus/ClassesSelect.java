@@ -132,7 +132,7 @@ public class ClassesSelect extends BasicGameState {
                 if (isConfirmSelected) {                    
                     Global.Player1Classe=firstClass;
                     Global.Player2Classe=secondClass;
-                    game.enterState(5);
+                    game.enterState(6);
                 } else {
                     isFirstClassSelected = false;
                     firstClass = "";
@@ -147,6 +147,6 @@ public class ClassesSelect extends BasicGameState {
 
     @Override
     public int getID() {
-        return 4;
+        return 5;
     }
 }

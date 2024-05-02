@@ -6,15 +6,17 @@ import org.newdawn.slick.Input;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.TrueTypeFont;
 
-
 import fr.sae.game.caractere.Player;
 
 import java.awt.Font;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 
 public class DialogueBox {
     private Rectangle triggerZone;
+    
+    private boolean isActiveTempDialogbox;
     
     private String[] messages;
     private List<String> choices;
@@ -22,6 +24,12 @@ public class DialogueBox {
     private boolean visible;
     private boolean isWaitingForInput;
     private boolean canOpen;
+    private boolean canBeReuse;
+
+
+    private int currentChoice;
+    private Consumer<Integer> choiceCallback;
+
 
     public DialogueBox(String[] messages) {
         this.messages = messages;
@@ -31,7 +39,13 @@ public class DialogueBox {
         this.choices = new ArrayList<>();
         this.canOpen = true;
 
-        this.triggerZone = null;
+        this.triggerZone = new Rectangle(0, 0, 0, 0);
+        this.canBeReuse=true;
+
+        this.choices = new ArrayList<>();
+        this.currentChoice = -1;
+        this.choiceCallback = null;
+        this.isActiveTempDialogbox=false;
     }
 
     public void render(Graphics g) {
@@ -43,7 +57,7 @@ public class DialogueBox {
             int dialogY = Global.height - dialogHeight - margin;
 
             // Draw the background of the dialog box
-            g.setColor(new Color(0, 0, 0, 0.8f));
+            g.setColor(new Color(0, 0, 0, 0.94f));
             g.fillRect(dialogX, dialogY, dialogWidth, dialogHeight);
 
             // Create a new TrueTypeFont with the desired size
@@ -76,19 +90,42 @@ public class DialogueBox {
             }
 
             if (!choices.isEmpty()) {
-                y = dialogY + 2 * margin;
-                for (int i = 0; i < choices.size(); i++) {
-                    g.drawString((i + 1) + ": " + choices.get(i), dialogX + margin, y);
-                    y += font.getHeight(choices.get(i)) + margin; // Add a margin after each choice
+                // Calculate the maximum width among all choices
+                int maxWidth = 0;
+                for (String choice : choices) {
+                    maxWidth = Math.max(maxWidth, font.getWidth(choice));
+                }
+
+                int y1 = dialogY + dialogHeight - 3 * margin; // Start from the bottom and add extra margin
+                int x1 = dialogX + dialogWidth - maxWidth - 3 * margin; // Move choices to the left and add extra margin
+                for (int i = choices.size() - 1; i >= 0; i--) { // Reverse the loop to start from the bottom
+                    String choiceText = choices.get(i);
+                    int textX = x1 + (maxWidth - font.getWidth(choiceText)) / 2; // Center the text in the rectangle
+                    if (i == currentChoice) {
+                        g.setColor(Color.green);
+                        g.fillRect(x1 - 10, y1 - 10, maxWidth + 20, font.getHeight(choiceText) + 20); // Draw a background for the selected choice
+                        g.setColor(Color.black);
+                    } else {
+                        g.setColor(Color.white);
+                    }
+                    g.drawString(choiceText, textX, y1); // Draw the text from the right
+                    y1 -= font.getHeight(choiceText) + 2 * margin; // Move up for the next choice and add extra space between choices
                 }
             }
         }
+    }
+
+    public void setChoices(List<String> choices, Consumer<Integer> callback) {
+        this.choices = choices;
+        this.currentChoice = 0;
+        this.choiceCallback = callback;
     }
 
     public void nextMessage() {
         if (this.currentIndex < this.messages.length - 1) {
             this.currentIndex++;
             this.isWaitingForInput = true;
+            
         } else {
             this.currentIndex = 0;
             this.visible = false;
@@ -98,11 +135,6 @@ public class DialogueBox {
         }
     }
 
-    public void setChoices(List<String> choices) {
-        this.choices.clear();
-        this.choices.addAll(choices);
-        this.isWaitingForInput = false;
-    }
 
     public void setVisible(boolean visible) {
         this.visible = visible;
@@ -117,47 +149,105 @@ public class DialogueBox {
         this.triggerZone = new Rectangle(x, y, width, height);
     }
 
-    public boolean triggerZone(Rectangle other) {
-        return this.triggerZone.intersects(other);
+    public boolean triggerZone(Rectangle player) {
+        return this.triggerZone.intersects(player);
     }
     
     public boolean triggerZone(Player p) {
-        return triggerZone(p.getHitbox());
+        return this.triggerZone(p.getHitbox());
     }
     
     public Rectangle gettriggerZone() {
         return this.triggerZone;
     }
+    public void invertCanBeReuse() {
+        this.canBeReuse=!this.canBeReuse;
+    }
     
-    public void dialogBox(Input input) {
-        if (visible && isWaitingForInput && input.isKeyPressed(Global.interract)) {
+    
+    public String[] getMessages() {
+		return messages;
+	}
+
+	public void setMessages(String[] messages) {
+		this.messages = messages;
+	}
+
+	public boolean isActiveTempDialogbox() {
+		return isActiveTempDialogbox;
+	}
+
+	public void setActiveTempDialogbox(boolean isTempDialogbox) {
+		this.isActiveTempDialogbox = isTempDialogbox;
+	}
+
+	public void dialogBox(boolean isKeyPressed) {
+
+        if (this.visible && this.isWaitingForInput && isKeyPressed) {
             if (this.currentIndex < this.messages.length - 1) {
                 nextMessage();
             } else {
                 this.visible = false;
                 this.canOpen = false;
-                this.currentIndex = 0; // Reset currentIndex to 0 when the dialogue box is closed
+                this.currentIndex = 0;
+                this.isActiveTempDialogbox=false;
                 Global.switchModeControles();
             }
         }
-        else if (canOpen && input.isKeyPressed(Global.interract) && !Global.canMoovDialogbox && this.triggerZone(Global.P1)) {
+
+        else if (this.canOpen  && !Global.canMoovDialogbox && ((isKeyPressed && this.triggerZone(Global.P1))|| this.isActiveTempDialogbox)) {
             this.setVisible(true);
             Global.switchModeControles();
         }
     
-        if (!input.isKeyDown(Global.interract)) {
+        if (!isKeyPressed && this.canBeReuse) {
             this.canOpen = true;
         }
     }
     
-	 public void draw(Graphics g) {
-	    	
-	    	//Dessine la zone de warp
-	        g.setColor(Color.green);
-	        g.drawRect(this.triggerZone.getX(), this.triggerZone.getY(), this.triggerZone.getWidth(), this.triggerZone.getHeight());
-	        g.setColor(Color.white);
-	
-	    }
+    public void dialogBox(boolean isKeyPressed, Input input) {
+        if (this.visible && this.isWaitingForInput) {
+            if (isKeyPressed) {
+                if (!choices.isEmpty()) {
+                    if (choiceCallback != null) {
+                        choiceCallback.accept(currentChoice);
+                    }
+                    this.visible = false;
+                    this.canOpen = false;
+                    this.currentIndex = 0;
+                    Global.switchModeControles();
+                } else if (this.currentIndex < this.messages.length - 1) {
+                    nextMessage();
+                } else {
+                    this.visible = false;
+                    this.canOpen = false;
+                    this.currentIndex = 0;
+                    Global.switchModeControles();
+                }
+            } else if (input.isKeyPressed(Input.KEY_UP)) {
+                if (currentChoice > 0) {
+                    currentChoice--;
+                }
+            } else if (input.isKeyPressed(Input.KEY_DOWN)) {
+                if (currentChoice < choices.size() - 1) {
+                    currentChoice++;
+                }
+            }
+        } else if (this.canOpen && isKeyPressed && !Global.canMoovDialogbox && this.triggerZone(Global.P1)) {
+            this.setVisible(true);
+            Global.switchModeControles();
+        }
+
+        if (!isKeyPressed && this.canBeReuse) {
+            this.canOpen = true;
+        }
+    } 
     
-    
+    public void draw(Graphics g) {
+        
+        //Dessine la zone de warp
+        g.setColor(Color.green);
+        g.drawRect(this.triggerZone.getX(), this.triggerZone.getY(), this.triggerZone.getWidth(), this.triggerZone.getHeight());
+        g.setColor(Color.white);
+    }
 }

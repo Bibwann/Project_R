@@ -18,6 +18,7 @@ import fr.sae.game.maps.Foret3;
 import fr.sae.menus.ClassesSelect;
 import fr.sae.menus.MainMenu;
 import fr.sae.menus.OptionMenu;
+import fr.sae.menus.SaveFileSelection;
 import fr.sae.menus.SetCharacterName;
 
 public class Main  {
@@ -34,12 +35,14 @@ public class Main  {
 
                 	//Menus
                     this.addState(new MainMenu(1));
-                    this.addState(new SetCharacterName(2));
+                    this.addState(new SaveFileSelection(2));
                     this.addState(new OptionMenu(3));
-                    this.addState(new ClassesSelect(4));
+                    this.addState(new SetCharacterName(4));
+                    this.addState(new ClassesSelect(5));
+
                     
                     //Cinematiques
-                    this.addState(new IntroGame(5));
+                    this.addState(new IntroGame(6));
 
                     //Maps -->Partie thomas 
                     

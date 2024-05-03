@@ -26,7 +26,9 @@ public class Foret1 extends BasicGameState{
 	Warp Warp2;
 	DialogueBox dialogueBoxPanneau; 
     DialogueBox dialogueBoxBranche;
-	private DialogueBox tmpDialogbox= new DialogueBox(new String[] {});
+    
+	private DialogueBox tmpDialogbox1= new DialogueBox(new String[] {});
+
 
 	public Foret1(int stateID) {
 	}
@@ -35,7 +37,8 @@ public class Foret1 extends BasicGameState{
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
 		this.Warp1= new Warp(Global.width-10, Global.height-320, 10, 320, 500, 500);
 		this.Warp2= new Warp(1324, 0, 66, 10, 500, 500);
-	    this.tmpDialogbox.setTriggerZone(0, 0, 0, 0);
+	    this.tmpDialogbox1.setTriggerZone(0, 0, 0, 0);
+
 
 
 		this.dialogueBoxPanneau = new DialogueBox(new String[] {
@@ -45,7 +48,7 @@ public class Foret1 extends BasicGameState{
 			    "  |  \n",
 			    "\n" +
 			    "\n" +
-			    " --->       Village\n"+
+			    " -- -- >       Village\n"+
 			    "\n"
 			});		
 		this.dialogueBoxPanneau.setTriggerZone(Global.width-530,570,66,10);
@@ -57,15 +60,39 @@ public class Foret1 extends BasicGameState{
 	        });
 	    this.dialogueBoxBranche.setTriggerZone(718, 440, 86, 80);
 	    
-	    this.dialogueBoxBranche.setChoices(Arrays.asList("Taper la branche", "Ne rien faire"), choice -> {
-            switch (choice) {
+	    this.dialogueBoxBranche.setChoices(Arrays.asList("Taper la branche", "Ne rien faire"), choice1 -> {
+            switch (choice1) {
+            
 	            case 0:
-	                this.tmpDialogbox.setMessages(new String[] {"\n"+"\n"+"           Aie !!!!!!!!!"});
-	                this.tmpDialogbox.setActiveTempDialogbox(true);
+	            	this.tmpDialogbox1.setActiveTempDialogbox(true);
+	                this.tmpDialogbox1.setMessages(new String[] {"\n"+"\n"+"           Aie !"});
+	                
 	                //Ajoutez recursivement des choix ici
+
+	                this.tmpDialogbox1.setChoices(Arrays.asList("Retaper la branche", "Ne rien faire"), choice2 -> {
+	                    switch (choice2) {
+	                    
+	                        case 0:
+	                        	this.tmpDialogbox1.setActiveTempDialogbox(true);
+	                            this.tmpDialogbox1.setMessages(new String[] {"\n"+"\n"+"           Aie !!!!!!!!!"});
+	                            this.tmpDialogbox1.setChoices(Arrays.asList(),null);
+	                            break;
+	                            
+	                        case 1:
+	                        	this.tmpDialogbox1.setActiveTempDialogbox(false);
+	                    }
+	                });
+	                
 	                break;
+	                
+	            case 1:
+	            	this.tmpDialogbox1.setActiveTempDialogbox(false);
+	            	break;
+	            	
             }
         });
+	    
+	    
 
 	}
 
@@ -75,8 +102,8 @@ public class Foret1 extends BasicGameState{
         dialogueBoxPanneau.render(g);
         dialogueBoxBranche.render(g);
         
-        if (this.tmpDialogbox.getMessages().length != 0) {
-        	tmpDialogbox.render(g);
+        if (this.tmpDialogbox1.getMessages().length != 0) {
+        	tmpDialogbox1.render(g);
         }
 
 
@@ -121,7 +148,14 @@ public class Foret1 extends BasicGameState{
 		boolean i =input.isKeyPressed(Global.interract);
         this.dialogueBoxPanneau.dialogBox(i);
         this.dialogueBoxBranche.dialogBox(i,gc.getInput());
-        this.tmpDialogbox.dialogBox(i); 
+        
+        
+        if (this.tmpDialogbox1.getChoices().isEmpty()) {
+        	this.tmpDialogbox1.dialogBox(i); 
+        }else {
+        	this.tmpDialogbox1.dialogBox(i,gc.getInput()); 
+        }
+
 
         
         

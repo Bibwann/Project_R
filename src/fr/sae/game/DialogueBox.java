@@ -169,6 +169,14 @@ public class DialogueBox {
 		return messages;
 	}
 
+	public List<String> getChoices() {
+		return choices;
+	}
+
+	public void setChoices(List<String> choices) {
+		this.choices = choices;
+	}
+
 	public void setMessages(String[] messages) {
 		this.messages = messages;
 	}
@@ -233,7 +241,7 @@ public class DialogueBox {
                     currentChoice++;
                 }
             }
-        } else if (this.canOpen && isKeyPressed && !Global.canMoovDialogbox && this.triggerZone(Global.P1)) {
+        } else if (this.canOpen && !Global.canMoovDialogbox && ((isKeyPressed && this.triggerZone(Global.P1))|| this.isActiveTempDialogbox)) {
             this.setVisible(true);
             Global.switchModeControles();
         }
@@ -242,6 +250,8 @@ public class DialogueBox {
             this.canOpen = true;
         }
     } 
+    
+   
     
     public void draw(Graphics g) {
         

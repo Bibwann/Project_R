@@ -142,10 +142,9 @@ public class Global {
         put("MINUS", Input.KEY_MINUS);
         put("SPACE", Input.KEY_SPACE);
     }};
-    
+
     public static Map<Integer, String> reversedInputs = new HashMap<Integer, String>() {
         private static final long serialVersionUID = 1L;
-
         {
             put(Input.KEY_UP, "UP");
             put(Input.KEY_DOWN, "DOWN");
@@ -352,8 +351,8 @@ public class Global {
     	CollisionMapForet1.addCollidable(new Rectangle(width-200,700,200,66)); 
     	//Collision panneau
     	CollisionMapForet1.addCollidable(new Rectangle(width-530,510,66,60)); 
-
 	}
+	
 	public static void switchModeControles() { //Fonction  propre permettant de savoir si on est en dialoge ou en deplacmeent libre
 		canMoovPlayer=!canMoovPlayer;
 		canMoovDialogbox=!canMoovDialogbox;

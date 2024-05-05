@@ -19,4 +19,10 @@ public class Swordsman extends Player{
 
 	
 	//Sorts
+	
+	public double swordHit() {
+		return (this.dmgMultipler(this.dmg)*this.dmg);
+	}
+	
+	
 }

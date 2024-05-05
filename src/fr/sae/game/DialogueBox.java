@@ -1,6 +1,7 @@
 package fr.sae.game;
 
 import org.newdawn.slick.Color;
+import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.geom.Rectangle;
@@ -250,8 +251,19 @@ public class DialogueBox {
             this.canOpen = true;
         }
     } 
+    public void renderTempDialgbox( Graphics g) {
+    	if (this.getMessages().length != 0) {
+        	this.render(g);
+        }
+    }
     
-   
+   public void updateTempDialgbox(boolean i,GameContainer gc) {
+	   if (this.getChoices().isEmpty()) {
+       	this.dialogBox(i); 
+       }else {
+       	this.dialogBox(i,gc.getInput()); 
+       }
+   }
     
     public void draw(Graphics g) {
         

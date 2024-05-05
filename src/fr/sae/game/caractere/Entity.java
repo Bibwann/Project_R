@@ -9,15 +9,11 @@ public abstract class Entity  {
 	protected int manaMax;
 	
 	protected int dmg;
-
-	
 	
 	protected String name;
 	protected int level;
 	protected Image sprite;
 	protected Image Battlesprite;
-
-	
 
 	public Entity(String n, int l,Image s,Image bs) {
 		this.name = n;
@@ -27,16 +23,13 @@ public abstract class Entity  {
 
 	}
 
-
 	public String getName() {
 		return name;
 	}
 
-
 	public void setName(String name) {
 		this.name = name;
 	}
-
 
 	public int getLevel() {
 		return level;
@@ -50,13 +43,16 @@ public abstract class Entity  {
 		return sprite;
 	}
 
-
 	public void setSprite(Image sprite) {
 		this.sprite = sprite;
 	}
 	
 	public double dmgMultipler(int spellDmg) {
 		return (spellDmg*(1+((this.level)*0.05)));
+	}
+	
+	public boolean isDead() {
+		return this.hpActuel<=0;
 	}
 	
 }

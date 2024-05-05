@@ -19,6 +19,7 @@ import fr.sae.game.caractere.Player;
 import fr.sae.game.caractere.Swordsman;
 import fr.sae.game.maps.Foret1;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -366,7 +367,6 @@ public class Global {
 		        boolean isup = input.isKeyDown(up);
 		        boolean isdown = input.isKeyDown(down);
 
-
 		        if (isleft) {
 		        	InputHandler.keyPressed();
 		            if (!c.willCollideWithMap(Global.P1.getHitbox(),-1,0)) {
@@ -395,10 +395,25 @@ public class Global {
 		            }
 		         
 		        }
-		    
 		        
 		    }
 	    	
 	    }
 
+	//Variables necessaire au lore ( genre pour definir les evenements et leurs ordonances) 
+	//D'ailleur ces variables permetteront de sauvgarder la partie
+	
+	
+	//Variables a sauvgarder ( rien ne doit etre instancié, il ne doit y avoir que de simples variables )
+	
+	public static int actualGameState;
+	
+	//Fonctions de sauvgarde
+	public static void LoadGame(File file) {
+		
+	}
+	
+	public static void SaveGame(File file) {
+		
+	}
 }

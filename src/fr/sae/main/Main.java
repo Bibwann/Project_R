@@ -1,15 +1,10 @@
 package fr.sae.main;
 
 import org.newdawn.slick.*;
-import org.newdawn.slick.geom.Rectangle;
-import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
 import fr.sae.game.BattleScene;
-import fr.sae.game.DialogueBox;
-import fr.sae.game.EntityAnimations;
 import fr.sae.game.Global;
-import fr.sae.game.Warp;
 import fr.sae.game.cinematiques.IntroGame;
 import fr.sae.game.maps.Chateau1;
 import fr.sae.game.maps.Foret1;
@@ -50,7 +45,6 @@ public class Main  {
                     this.addState(new Foret1(11));
                     this.addState(new Foret2(12));
                     this.addState(new Foret3(13));
-                    
                     
                     //De 50 a 100 c'est les mapes du chateau ( oui on a de la marge )
                     this.addState(new Foret3(51));

@@ -19,6 +19,7 @@ import fr.sae.game.Warp;
 import fr.sae.menus.MainMenu;
 import fr.sae.menus.OptionMenu;
 import fr.sae.menus.SetCharacterName;
+import fr.sae.mobes.Chaton;
 
 public class Foret1 extends BasicGameState{
 	
@@ -29,18 +30,21 @@ public class Foret1 extends BasicGameState{
     
 	private DialogueBox tmpDialogbox1= new DialogueBox(new String[] {});
 
-
 	public Foret1(int stateID) {
 	}
 
 	@Override
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
+		//Obligatoire que tmpDialogbox1 aie une triggerzone hors map
+	    this.tmpDialogbox1.setTriggerZone(-1, -1, 0, 0);
+
 		this.Warp1= new Warp(Global.width-10, Global.height-320, 10, 320, 500, 500);
 		this.Warp2= new Warp(1324, 0, 66, 10, 500, 500);
-	    this.tmpDialogbox1.setTriggerZone(0, 0, 0, 0);
 
-
-
+//-----------------------------------------------------------------------------------------------------------------------
+//Ici se trouve l'horreur des dialogbox --> ces dialogbox servent d'exemples
+	    
+	    //Dialogbox sans choix du panneau
 		this.dialogueBoxPanneau = new DialogueBox(new String[] {
 				"\n" +
 			    "  ^  \n" +
@@ -50,9 +54,11 @@ public class Foret1 extends BasicGameState{
 			    "\n" +
 			    " -- -- >       Village\n"+
 			    "\n"
-			});		
+			});	
 		this.dialogueBoxPanneau.setTriggerZone(Global.width-530,570,66,10);
 
+		
+		//Dialogbox Avec choix multiples
 		this.dialogueBoxBranche = new DialogueBox(new String[] {
 				"\n "+
 			    "     \n" +
@@ -62,22 +68,23 @@ public class Foret1 extends BasicGameState{
 	    
 	    this.dialogueBoxBranche.setChoices(Arrays.asList("Taper la branche", "Ne rien faire"), choice1 -> {
             switch (choice1) {
-            
 	            case 0:
 	            	this.tmpDialogbox1.setActiveTempDialogbox(true);
 	                this.tmpDialogbox1.setMessages(new String[] {"\n"+"\n"+"           Aie !"});
 	                
-	                //Ajoutez recursivement des choix ici
+	                //Ajoutez recursivement des choix ici de la meme maniere que moi
 
 	                this.tmpDialogbox1.setChoices(Arrays.asList("Retaper la branche", "Ne rien faire"), choice2 -> {
 	                    switch (choice2) {
-	                    
+
 	                        case 0:
 	                        	this.tmpDialogbox1.setActiveTempDialogbox(true);
-	                            this.tmpDialogbox1.setMessages(new String[] {"\n"+"\n"+"           Aie !!!!!!!!!"});
+	                            this.tmpDialogbox1.setMessages(new String[] {"\n"+"\n"+"           AIE !!!!!!!!!"});
+	                            
+	                            //Permet de dire qu'il s'agissait du dernier choix
 	                            this.tmpDialogbox1.setChoices(Arrays.asList(),null);
 	                            break;
-	                            
+
 	                        case 1:
 	                        	this.tmpDialogbox1.setActiveTempDialogbox(false);
 	                    }
@@ -88,23 +95,22 @@ public class Foret1 extends BasicGameState{
 	            case 1:
 	            	this.tmpDialogbox1.setActiveTempDialogbox(false);
 	            	break;
-	            	
-            }
-        });
+
+            }       
+     });
 	    
-	    
+//-----------------------------------------------------------------------------------------------------------------------
+
 
 	}
 
 	@Override
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
+		//Fait les rendu des modeles
         g.drawImage(new Image("data/maps/Map001.png").getScaledCopy(Global.width, Global.height), 0, 0);
+        
         dialogueBoxPanneau.render(g);
         dialogueBoxBranche.render(g);
-        
-        if (this.tmpDialogbox1.getMessages().length != 0) {
-        	tmpDialogbox1.render(g);
-        }
 
 
         try {
@@ -119,8 +125,11 @@ public class Foret1 extends BasicGameState{
 		this.Warp1.warp(Global.P1, sbg, 12);
 		this.Warp2.warp(Global.P1, sbg, 13);
 
+        //Obligatoire, premet de rendre a l'ecran la dialogbox temp quand elle est necessaire
+        this.tmpDialogbox1.renderTempDialgbox(g);
+        
 //--------------------------------------------------------------------------------------------------------------------------
-	//Temp	    
+	//Temp	     
 
 	    //Affiche toutes les collisions de la map et du joueur
 	    if (true) {
@@ -141,24 +150,23 @@ public class Foret1 extends BasicGameState{
 	@Override
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
 		Input input =gc.getInput();
+		
 		Global.updatePlayerMovement(input, Global.CollisionMapForet1);
 		Global.P1.AnimateWhileMoove();
 		
 		//Structure obligatoire pour les dialogbox sinon ca marche po jsp pk
 		boolean i =input.isKeyPressed(Global.interract);
+		
+		//Dialogbox sans input --> sans choix
         this.dialogueBoxPanneau.dialogBox(i);
+        
+		//Dialogbox avec input --> avec choix
         this.dialogueBoxBranche.dialogBox(i,gc.getInput());
         
         
-        if (this.tmpDialogbox1.getChoices().isEmpty()) {
-        	this.tmpDialogbox1.dialogBox(i); 
-        }else {
-        	this.tmpDialogbox1.dialogBox(i,gc.getInput()); 
-        }
-
-
-        
-        
+        //Structure obligatoire qui check l'etat de la dialogbox temp
+        this.tmpDialogbox1.updateTempDialgbox(i, gc);
+                
 	}
 
 	@Override

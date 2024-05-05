@@ -15,6 +15,7 @@ import fr.sae.game.Warp;
 import fr.sae.menus.MainMenu;
 import fr.sae.menus.OptionMenu;
 import fr.sae.menus.SetCharacterName;
+import fr.sae.mobes.Chaton;
 
 public class Foret2 extends BasicGameState{
 
@@ -58,6 +59,15 @@ public class Foret2 extends BasicGameState{
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
 		Global.updatePlayerMovement(gc.getInput(),Global.CollisionMapForet2);
 		Global.P1.AnimateWhileMoove();
+		
+//----------------------------------------------------------------------------------------------------------------------------
+	//Temp
+		
+		//Lance un combat de force -- present pour le debug a retirer
+
+		Global.mobs[0]=new Chaton("chaton", 1, null, null);
+        sbg.enterState(100);
+//----------------------------------------------------------------------------------------------------------------------------
 
 	}
 

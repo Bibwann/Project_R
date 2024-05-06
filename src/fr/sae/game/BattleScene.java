@@ -12,7 +12,6 @@ import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
 import fr.sae.game.caractere.Mobs;
-import fr.sae.game.caractere.Player;
 
 public class BattleScene extends BasicGameState {
 
@@ -21,6 +20,8 @@ public class BattleScene extends BasicGameState {
     private boolean isLoose;
     private int currentTurn; // Ajout de la variable currentTurn
     private DialogueBox dialogueBox; // Ajout de la variable dialogueBox
+    private DialogueBox dialogueBoxTour;
+    private DialogueBox tmpDialogbox1= new DialogueBox(new String[] {});
 
     public BattleScene(int stateID) {
         this.enemy = Global.mobs;
@@ -51,6 +52,44 @@ public class BattleScene extends BasicGameState {
                     break;
             }
         });
+        
+        this.dialogueBoxTour = new DialogueBox(new String[] {
+    			"\n "+
+    					"     \n" +
+    					"           À toi de jouer"
+    	});
+    	this.dialogueBoxTour.setChoices(Arrays.asList("Taper", "Ne rien faire"), choice1 -> {
+    		switch (choice1) {
+    		case 0:
+    			this.tmpDialogbox1.setActiveTempDialogbox(true);
+    			this.tmpDialogbox1.setMessages(new String[] {"\n"+"\n"+"           Aie !"});
+    			
+    			//Ajoutez recursivement des choix ici de la meme maniere que moi
+    			
+    			this.tmpDialogbox1.setChoices(Arrays.asList("Retaper la branche", "Ne rien faire"), choice2 -> {
+    				switch (choice2) {
+    				
+    				case 0:
+    					this.tmpDialogbox1.setActiveTempDialogbox(true);
+    					this.tmpDialogbox1.setMessages(new String[] {"\n"+"\n"+"           AIE !!!!!!!!!"});
+    					
+    					//Permet de dire qu'il s'agissait du dernier choix
+    					this.tmpDialogbox1.setChoices(Arrays.asList(),null);
+    					break;
+    					
+    				case 1:
+    					this.tmpDialogbox1.setActiveTempDialogbox(false);
+    				}
+    			});
+    			
+    			break;
+    			
+    		case 1:
+    			this.tmpDialogbox1.setActiveTempDialogbox(false);
+    			break;
+    			
+    		}       
+    	});
     }
     
     @Override
@@ -61,7 +100,10 @@ public class BattleScene extends BasicGameState {
 
     @Override
     public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
-    	this.dialogueBox.render(g);
+    	
+		this.dialogueBoxTour.renderForceDialogbox(g);
+    	this.dialogueBoxTour.render(g);
+    	//this.dialogueBox.render(g);
 
         // Dessin des éléments de la scène de combat
 
@@ -142,13 +184,16 @@ public class BattleScene extends BasicGameState {
     	//Si win ou loose
     	if (this.isWin) {
             sbg.enterState(2);
-
     	}
     	
     	if (this.isLoose) {
             sbg.enterState(2);
 
     	}
+    	
+    	this.tmpDialogbox1.renderTempDialgbox(g);
+    	this.dialogueBox.renderForceDialogbox(g);
+
     }
 
     @Override
@@ -157,7 +202,7 @@ public class BattleScene extends BasicGameState {
 		Input input =gc.getInput();
 		boolean i =input.isKeyPressed(Global.interract);
 
-        this.dialogueBox.dialogBox(i,gc.getInput());
+       //this.dialogueBox.dialogBox(i,gc.getInput());
 
     	 if (currentTurn % 2 == 0) {
              // Afficher la DialogueBox
@@ -166,9 +211,11 @@ public class BattleScene extends BasicGameState {
              // Gérer l'interaction de l'ennemi
              // Par exemple, vous pouvez parcourir le tableau enemy et appeler une méthode e.takeTurn() pour chaque ennemi e
          }
+    	 
+    	 this.dialogueBoxTour.forceDialogBox(i,gc.getInput());
+    	 this.tmpDialogbox1.updateTempDialgbox(i, gc);
     }
 
-    @Override
     public int getID() {
         return 100;
     }

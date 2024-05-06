@@ -8,7 +8,6 @@ import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
 import fr.sae.game.DialogueBox;
-import fr.sae.game.EntityAnimations;
 import fr.sae.game.Global;
 import fr.sae.game.Warp;
 import fr.sae.menus.MainMenu;

@@ -244,6 +244,7 @@ public class Global {
 	public static String Player2Classe;
 	
 	public static String Player1Name="";
+		
 	
 	//Mobs --> Definisez tous les mobes ici 
 	

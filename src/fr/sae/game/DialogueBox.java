@@ -251,11 +251,77 @@ public class DialogueBox {
             this.canOpen = true;
         }
     } 
+    
     public void renderTempDialgbox( Graphics g) {
     	if (this.getMessages().length != 0) {
         	this.render(g);
         }
     }
+    
+    public void renderForceDialogbox( Graphics g) {
+        this.render(g);
+    }
+    
+    public void forceDialogBox(boolean isKeyPressed) {
+    	if (this.visible && this.isWaitingForInput && isKeyPressed) {
+            if (this.currentIndex < this.messages.length - 1) {
+                nextMessage();
+            } else {
+                this.visible = false;
+                this.canOpen = false;
+                this.currentIndex = 0;
+                this.isActiveTempDialogbox=false;
+                Global.switchModeControles();
+            }
+        }
+
+        else if (this.canOpen  && !Global.canMoovDialogbox ) {
+            this.setVisible(true);
+            Global.switchModeControles();
+        }
+    
+        if (!isKeyPressed && this.canBeReuse) {
+            this.canOpen = true;
+        }
+    }
+    
+    public void forceDialogBox(boolean isKeyPressed, Input input) {
+        if (this.visible && this.isWaitingForInput) {
+            if (isKeyPressed) {
+                if (!choices.isEmpty()) {
+                    if (choiceCallback != null) {
+                        choiceCallback.accept(currentChoice);
+                    }
+                    this.visible = false;
+                    this.canOpen = false;
+                    this.currentIndex = 0;
+                    Global.switchModeControles();
+                } else if (this.currentIndex < this.messages.length - 1) {
+                    nextMessage();
+                } else {
+                    this.visible = false;
+                    this.canOpen = false;
+                    this.currentIndex = 0;
+                    Global.switchModeControles();
+                }
+            } else if (input.isKeyPressed(Input.KEY_UP)) {
+                if (currentChoice > 0) {
+                    currentChoice--;
+                }
+            } else if (input.isKeyPressed(Input.KEY_DOWN)) {
+                if (currentChoice < choices.size() - 1) {
+                    currentChoice++;
+                }
+            }
+        } else if (this.canOpen && !Global.canMoovDialogbox) {
+            this.setVisible(true);
+            Global.switchModeControles();
+        }
+
+        if (!isKeyPressed && this.canBeReuse) {
+            this.canOpen = true;
+        }
+    } 
     
    public void updateTempDialgbox(boolean i,GameContainer gc) {
 	   if (this.getChoices().isEmpty()) {

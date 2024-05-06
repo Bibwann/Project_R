@@ -9,7 +9,6 @@ import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
 import fr.sae.game.DialogueBox;
-import fr.sae.game.EntityAnimations;
 import fr.sae.game.Global;
 import fr.sae.game.Warp;
 import fr.sae.menus.MainMenu;
@@ -62,7 +61,7 @@ public class Foret2 extends BasicGameState{
 		
 //----------------------------------------------------------------------------------------------------------------------------
 	//Temp
-		
+			
 		//Lance un combat de force -- present pour le debug a retirer
 
 		Global.mobs[0]=new Chaton("chaton", 1, null, null);

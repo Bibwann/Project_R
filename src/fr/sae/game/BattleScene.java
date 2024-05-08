@@ -40,6 +40,8 @@ public class BattleScene extends BasicGameState {
             switch (choice) {
                 case 0:
                     // Gérer l'attaque
+                	this.tmpDialogbox1.setActiveTempDialogbox(true);
+        			this.tmpDialogbox1.setMessages(new String[] {"\n"+"\n"+"           Vous avez choisit d'attaquer !"});
                     break;
                 case 1:
                     // Gérer la défense
@@ -53,6 +55,7 @@ public class BattleScene extends BasicGameState {
             }
         });
         
+        //exemple, inutile maintenant
         this.dialogueBoxTour = new DialogueBox(new String[] {
     			"\n "+
     					"     \n" +
@@ -101,15 +104,16 @@ public class BattleScene extends BasicGameState {
     @Override
     public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
     	
-		this.dialogueBoxTour.renderForceDialogbox(g);
-    	this.dialogueBoxTour.render(g);
-    	//this.dialogueBox.render(g);
+		//this.dialogueBoxTour.renderForceDialogbox(g);
+    	//this.dialogueBoxTour.render(g);
+    	this.dialogueBox.renderForceDialogbox(g);
+    	this.dialogueBox.render(g);
 
         // Dessin des éléments de la scène de combat
 
         // Dessin des joueurs à gauche
     	try {
-    	    int player1Y = Global.height / 3; // Position du joueur 1 sur le premier tiers vertical de l'écran
+    	    int player1Y = Global.height / 9; 
     	    // Appel de la méthode BattleScene pour le joueur 1
     	    Global.P1.BattleScene(g, player1Y);
     	} catch(Exception e) {
@@ -129,13 +133,13 @@ public class BattleScene extends BasicGameState {
     	}
 
     	try {
-    	    int player2Y = Global.height / 3 * 2; // Position du joueur 2 sur le deuxième tiers vertical de l'écran
+    	    int player2Y = Global.height / 9 ;
     	    // Appel de la méthode BattleScene pour le joueur 2
     	    Global.P2.BattleScene(g, player2Y);
     	} catch(Exception e) {
     	    // Affichage de l'erreur
     	    System.out.println("Affichage des Hitbox prsk sprites ont buggé --> on est dans la classe Battle scene dans le render le 1er try pour P2");
-    	    System.out.println(e);
+    	    //System.out.println(e);
     	    // Tentative d'affichage des hitbox
     	    try {
     	        // Récupération de la hitbox du joueur 2
@@ -157,11 +161,12 @@ public class BattleScene extends BasicGameState {
     	        if (this.enemy[i] == null) {
     	            continue; // Si l'ennemi est null, passer au suivant
     	        }
+    	        this.enemy[i].setBattlehitbox(new Rectangle(Global.MobsBattleDistance, Global.height/3, 32, 48));
     	        // Affichage du sprite de l'ennemi
     	        g.drawImage(this.enemy[i].getSprite(), 550, 200 + i * 100);
     	    }
     	} catch(Exception e) {
-    	    System.out.println(e.getMessage());
+    	    System.out.println("pas de sprite pour un mob");
     	    // Tentative de création et d'affichage d'une hitbox
     	    
     	    try {
@@ -170,9 +175,9 @@ public class BattleScene extends BasicGameState {
         	            continue; // Si l'ennemi est null, passer au suivant
         	        }
         	        // Affichage du sprite de l'ennemi
-        	        Shape hitbox = new Rectangle(550, 200+i*100, 48, 64);
+        	        //Shape hitbox = new Rectangle(550, 200+i*100, 48, 64);
         	        // Affichage de la hitbox
-        	        g.draw(hitbox);
+        	        g.draw(this.enemy[i].getBattleHitbox());
         	    }
     	    } catch(Exception ex) {
     	        // Génération d'une nouvelle exception si la hitbox ne peut pas être créée
@@ -212,7 +217,8 @@ public class BattleScene extends BasicGameState {
              // Par exemple, vous pouvez parcourir le tableau enemy et appeler une méthode e.takeTurn() pour chaque ennemi e
          }
     	 
-    	 this.dialogueBoxTour.forceDialogBox(i,gc.getInput());
+    	 //this.dialogueBoxTour.forceDialogBox(i,gc.getInput());
+    	 this.dialogueBox.forceDialogBox(i, gc.getInput());
     	 this.tmpDialogbox1.updateTempDialgbox(i, gc);
     }
 

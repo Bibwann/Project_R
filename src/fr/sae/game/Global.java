@@ -42,7 +42,7 @@ public class Global {
 
 	//Variable definissant la distance compare au bord gauche de l'ecran qu'auront les joueurs et les mobes en combat
 	public static int PlayerBattleDistance =250;
-	public static int MobsBattleDistance =0; //A modif
+	public static int MobsBattleDistance =750;
 
 	//Variables global d'input
 	
@@ -303,7 +303,7 @@ public class Global {
 			}
 
 	    	P1.setBattlehitbox(new Rectangle(PlayerBattleDistance, height/3, 32, 48));
-	    	P2.setBattlehitbox(new Rectangle(PlayerBattleDistance, (height/3)*2, 32, 48));
+	    	P2.setBattlehitbox(new Rectangle(PlayerBattleDistance, height/3, 32, 48));
 		    
 	    	P1.Animation();
 	    	

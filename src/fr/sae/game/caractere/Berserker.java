@@ -9,7 +9,7 @@ public class Berserker extends Player{
 	private String classname;
 
 	public Berserker(String name, int level, Image sprite) throws SlickException {
-		super(name, level, new Image("data/Berserker/Walk.png"), new Image("data/Berserker/Battler.png"), new Image("data/Swordman/Face.png"));
+		super(name, level, new Image("data/Berserker/Walk.png"), new Image("data/Berserker/Battler.png"), new Image("data/Berserker/Face.png"));
 		
 		this.classname="Healer";
 

@@ -56,7 +56,7 @@ public class Foret1 extends BasicGameState{
 			});	
 		this.dialogueBoxPanneau.setTriggerZone(Global.width-530,570,66,10);
 
-		
+
 		//Dialogbox Avec choix multiples
 		this.dialogueBoxBranche = new DialogueBox(new String[] {
 				"\n "+
@@ -86,6 +86,7 @@ public class Foret1 extends BasicGameState{
 
 	                        case 1:
 	                        	this.tmpDialogbox1.setActiveTempDialogbox(false);
+
 	                    }
 	                });
 	                

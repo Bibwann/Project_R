@@ -24,9 +24,9 @@ public class BattleScene extends BasicGameState {
     private DialogueBox dialogueBoxTour;
     private DialogueBox tmpDialogbox1= new DialogueBox(new String[] {});
 
+
     public BattleScene(int stateID) {
         this.enemy = Global.mobs;
-        Global.mobs = new Mobs[4];
 
         this.isWin = isWin = false;
         this.isLoose = isLoose = false;
@@ -37,60 +37,29 @@ public class BattleScene extends BasicGameState {
             "C'est votre tour. Que voulez-vous faire ?",
             "C'est le tour de l'ennemi."
         });
-        this.dialogueBox.setChoices(Arrays.asList("Attaquer", "Défendre", "Utiliser un sort", "Fuir"), choice -> {
-            switch (choice) {
-                case 0:
-                    // Gérer l'attaque
-                    break;
-                case 1:
-                    // Gérer la défense
-                    break;
-                case 2:
-                    // Gérer l'utilisation d'un sort
-                    break;
-                case 3:
-                    // Gérer la fuite
-                    break;
-            }
-        });
+       
         
         this.dialogueBoxTour = new DialogueBox(new String[] {
     			"\n "+
     					"     \n" +
     					"           À toi de jouer"
     	});
-    	this.dialogueBoxTour.setChoices(Arrays.asList("Taper", "Ne rien faire"), choice1 -> {
-    		switch (choice1) {
-    		case 0:
-    			this.tmpDialogbox1.setActiveTempDialogbox(true);
-    			this.tmpDialogbox1.setMessages(new String[] {"\n"+"\n"+"           Aie !"});
-    			
-    			//Ajoutez recursivement des choix ici de la meme maniere que moi
-    			
-    			this.tmpDialogbox1.setChoices(Arrays.asList("Retaper la branche", "Ne rien faire"), choice2 -> {
-    				switch (choice2) {
-    				
-    				case 0:
-    					this.tmpDialogbox1.setActiveTempDialogbox(true);
-    					this.tmpDialogbox1.setMessages(new String[] {"\n"+"\n"+"           AIE !!!!!!!!!"});
-    					
-    					//Permet de dire qu'il s'agissait du dernier choix
-    					this.tmpDialogbox1.setChoices(Arrays.asList(),null);
-    					break;
-    					
-    				case 1:
-    					this.tmpDialogbox1.setActiveTempDialogbox(false);
-    				}
-    			});
-    			
-    			break;
-    			
-    		case 1:
-    			this.tmpDialogbox1.setActiveTempDialogbox(false);
-    			break;
-    			
-    		}       
-    	});
+    	this.dialogueBoxTour.setChoices(Arrays.asList("Attaquer", "Défendre", "Utiliser un sort", "Fuir"), choice -> {
+            switch (choice) {
+            case 0:
+                // Gérer l'attaque
+                break;
+            case 1:
+                // Gérer la défense
+                break;
+            case 2:
+                // Gérer l'utilisation d'un sort
+                break;
+            case 3:
+                // Gérer la fuite
+                break;
+        }
+    });
     }
     
     @Override
@@ -172,7 +141,7 @@ public class BattleScene extends BasicGameState {
         	            continue; // Si l'ennemi est null, passer au suivant
         	        }
         	        // Affichage du sprite de l'ennemi
-        	        Shape hitbox = new Rectangle(550, 200+i*100, 48, 64);
+        	        Shape hitbox = new Rectangle(1400, 200+i*200, 48, 64);
         	        // Affichage de la hitbox
         	        g.draw(hitbox);
         	    }

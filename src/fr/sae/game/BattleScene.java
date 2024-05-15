@@ -21,12 +21,14 @@ public class BattleScene extends BasicGameState {
     private Mobs[] enemy;
     private boolean isWin;
     private boolean isLoose;
-    private int currentTurn; // Ajout de la variable currentTurn
+    private int currentTurn=0; // Ajout de la variable currentTurn
     private DialogueBox dialogueBox; // Ajout de la variable dialogueBox
     private DialogueBox dialogueBoxTourP1;
     private DialogueBox dialogueBoxTourP2;
     private DialogueBox dialogueBoxTourCurrentMob;
     private DialogueBox tmpDialogbox1= new DialogueBox(new String[] {});
+    private String P1Name = "";
+    private String P2Name = "";
     
     
     
@@ -53,7 +55,7 @@ public class BattleScene extends BasicGameState {
         this.dialogueBoxTourP1 = new DialogueBox(new String[] {
     			"\n "+
     					"     \n" +
-    					"           C'est au tour de " + Global.P1.getName() + " de jouer"
+    					"           C'est au tour de P1 de jouer"
     	});
     	this.dialogueBoxTourP1.setChoices(Arrays.asList("Attaquer", "Défendre", "Utiliser un sort", "Fuir"), choice -> {
             switch (choice) {
@@ -79,7 +81,7 @@ public class BattleScene extends BasicGameState {
     	this.dialogueBoxTourP2 = new DialogueBox(new String[] {
     			"\n "+
     					"     \n" +
-    					"           C'est au tour de " + Global.P2.getName() + " de jouer"
+    					"           C'est au tour de P2 de jouer"
     	});
     	this.dialogueBoxTourP2.setChoices(Arrays.asList("Attaquer", "Défendre", "Utiliser un sort", "Fuir"), choice -> {
             switch (choice) {
@@ -110,31 +112,35 @@ public class BattleScene extends BasicGameState {
     }
     
     public void initializeBattle() {
-        entities.add(Global.P1);
-        
-        for(int i=0; i < this.enemy.length; i++) {
-        	if(i == 1 && this.entities.indexOf(Global.P2) == -1) {
-        		entities.add(Global.P2);
-        		i--;
-        	} else if(this.enemy[i]!= null) {
-        		entities.add(this.enemy[i]);
-        	}
+        if(this.entities.isEmpty()) {
+        	entities.add(Global.P1);
+            
+            for(int i=0; i < this.enemy.length; i++) {
+            	if(i == 1 && this.entities.indexOf(Global.P2) == -1) {
+            		entities.add(Global.P2);
+            		i--;
+            	} else if(this.enemy[i]!= null) {
+            		entities.add(this.enemy[i]);
+            	}
+            }
         }
+        
+        //this.P1Name = Global.P1.getName();
+        //this.P2Name = Global.P2.getName();
         
     }
     
     @Override
     public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
         // Initialisation des ressources de la scène de combat
-    	
     }
 
     @Override
     public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
-    	initializeBattle();
         g.drawImage(new Image("data/BattleScenes/Foret.png").getScaledCopy(Global.width, Global.height), 0, 0);
-
+        this.initializeBattle();
         // gère l'affichage de la dialogBox pour l'entité qui joue le tour
+        System.out.println(this.currentTurnIndex);
         if(this.currentTurnIndex == 0) {        	
         	this.dialogueBoxTourP1.renderForceDialogbox(g);
         	this.dialogueBoxTourP1.render(g);

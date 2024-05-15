@@ -8,8 +8,7 @@ import java.util.Arrays;
 public class Berserker extends Player{
 
 
-	private String classname;
-	ArrayList<Integer> inventory;
+	protected ArrayList<Integer> inventory;
 
 	public Berserker(String name, int level, Image sprite) throws SlickException {
 		super(name, level, new Image("data/Berserker/Walk.png"), new Image("data/Berserker/Battler.png"), new Image("data/Berserker/Face.png"));
@@ -42,8 +41,8 @@ public class Berserker extends Player{
 	}
 	
 	
-	
-	
 	//Sorts
-
+	public void hit(Entity entity, int damage) {
+		entity.getHit(passif(damage));
+	}
 }

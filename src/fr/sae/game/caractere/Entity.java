@@ -11,6 +11,7 @@ public abstract class Entity  {
 	protected int dmg;
 	
 	protected String name;
+	protected String classname=null;
 	protected int level;
 	protected Image sprite;
 	protected Image Battlesprite;
@@ -55,4 +56,16 @@ public abstract class Entity  {
 		return this.hpActuel<=0;
 	}
 	
+	public void resetStats(){
+		this.hpActuel = this.hpMax;
+		this.manaActuel = this.manaMax;
+	}
+	
+	public void getHit(int damage) {
+		this.hpActuel -= damage;
+	}
+	
+	public int getHpActuel() {
+		return this.hpActuel;
+	}
 }

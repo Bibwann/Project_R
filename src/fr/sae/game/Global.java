@@ -20,6 +20,8 @@ import fr.sae.game.caractere.Swordsman;
 import fr.sae.game.maps.Foret1;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 

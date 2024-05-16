@@ -62,18 +62,26 @@ public class BattleScene extends BasicGameState {
             case 0:
                 // Gérer l'attaque
             	this.tmpDialogbox1.setActiveTempDialogbox(false);
+    			this.currentTurnIndex = (this.currentTurnIndex + 1 ) % (this.entities.size()); // sert à incrémenter les tours (oui juste ça)
+
                 break;
             case 1:
                 // Gérer la défense
             	this.tmpDialogbox1.setActiveTempDialogbox(false);
+    			this.currentTurnIndex = (this.currentTurnIndex + 1 ) % (this.entities.size()); // sert à incrémenter les tours (oui juste ça)
+
                 break;
             case 2:
                 // Gérer l'utilisation d'un sort
             	this.tmpDialogbox1.setActiveTempDialogbox(false);
+    			this.currentTurnIndex = (this.currentTurnIndex + 1 ) % (this.entities.size()); // sert à incrémenter les tours (oui juste ça)
+
                 break;
             case 3:
                 // Gérer la fuite
             	this.tmpDialogbox1.setActiveTempDialogbox(false);
+    			this.currentTurnIndex = (this.currentTurnIndex + 1 ) % (this.entities.size()); // sert à incrémenter les tours (oui juste ça)
+
                 break;
         }
     });
@@ -88,18 +96,26 @@ public class BattleScene extends BasicGameState {
             case 0:
                 // Gérer l'attaque
             	this.tmpDialogbox1.setActiveTempDialogbox(false);
+    			this.currentTurnIndex = (this.currentTurnIndex + 1 ) % (this.entities.size()); // sert à incrémenter les tours (oui juste ça)
+
                 break;
             case 1:
                 // Gérer la défense
             	this.tmpDialogbox1.setActiveTempDialogbox(false);
+    			this.currentTurnIndex = (this.currentTurnIndex + 1 ) % (this.entities.size()); // sert à incrémenter les tours (oui juste ça)
+
                 break;
             case 2:
                 // Gérer l'utilisation d'un sort
             	this.tmpDialogbox1.setActiveTempDialogbox(false);
+    			this.currentTurnIndex = (this.currentTurnIndex + 1 ) % (this.entities.size()); // sert à incrémenter les tours (oui juste ça)
+
                 break;
             case 3:
                 // Gérer la fuite
             	this.tmpDialogbox1.setActiveTempDialogbox(false);
+    			this.currentTurnIndex = (this.currentTurnIndex + 1 ) % (this.entities.size()); // sert à incrémenter les tours (oui juste ça)
+
                 break;
         }
     });
@@ -109,6 +125,19 @@ public class BattleScene extends BasicGameState {
     					"     \n" +
     					"           C'est au tour de bob de jouer"
     	});
+    	
+    	this.dialogueBoxTourCurrentMob.setChoices(Arrays.asList("Continuer"), choice -> {
+            switch (choice) {
+            case 0:
+                // Gérer l'attaque
+            	this.tmpDialogbox1.setActiveTempDialogbox(false);
+    			this.currentTurnIndex = (this.currentTurnIndex + 1 ) % (this.entities.size()); // sert à incrémenter les tours (oui juste ça)
+
+                break;
+        }
+    });
+    	
+    	
     }
     
     public void initializeBattle() {
@@ -140,7 +169,7 @@ public class BattleScene extends BasicGameState {
         g.drawImage(new Image("data/BattleScenes/Foret.png").getScaledCopy(Global.width, Global.height), 0, 0);
         this.initializeBattle();
         // gère l'affichage de la dialogBox pour l'entité qui joue le tour
-        System.out.println(this.currentTurnIndex);
+
         if(this.currentTurnIndex == 0) {        	
         	this.dialogueBoxTourP1.renderForceDialogbox(g);
         	this.dialogueBoxTourP1.render(g);
@@ -209,7 +238,7 @@ public class BattleScene extends BasicGameState {
     	        g.drawImage(this.enemy[i].getSprite(), 550, 200 + i * 100);
     	    }
     	} catch(Exception e) {
-    	    System.out.println(e.getMessage());
+    	    //System.out.println(e.getMessage());
     	    // Tentative de création et d'affichage d'une hitbox
     	    
     	    try {
@@ -240,25 +269,25 @@ public class BattleScene extends BasicGameState {
     	}
     	
     	this.tmpDialogbox1.renderTempDialgbox(g);
-    	this.dialogueBox.renderForceDialogbox(g);
+    	//this.dialogueBox.renderForceDialogbox(g);
 
     }
 
     @Override
     public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
-    	
 		Input input =gc.getInput();
 		boolean boolInput =input.isKeyPressed(Global.interract);
     	
 		if(this.currentTurnIndex == 0) {			
 			this.dialogueBoxTourP1.forceDialogBox(boolInput,gc.getInput());
-			this.currentTurnIndex = (this.currentTurnIndex + 1 ) % (this.entities.size()-1); // sert à incrémenter les tours (oui juste ça)
+			//this.currentTurnIndex = (this.currentTurnIndex + 1 ) % (this.entities.size()-1); // sert à incrémenter les tours (oui juste ça)
+
 		} else if (this.currentTurnIndex == 2) {
 			this.dialogueBoxTourP2.forceDialogBox(boolInput,gc.getInput());
-			this.currentTurnIndex = (this.currentTurnIndex + 1 ) % (this.entities.size()-1); // mais en ne depassant pas le nombre d'entités -1
+			//this.currentTurnIndex = (this.currentTurnIndex + 1 ) % (this.entities.size()-1); // mais en ne depassant pas le nombre d'entités -1
 		} else {
 			this.dialogueBoxTourCurrentMob.forceDialogBox(boolInput,gc.getInput());
-			this.currentTurnIndex = (this.currentTurnIndex + 1 ) % (this.entities.size()-1); // oui c'est moche
+			//this.currentTurnIndex = (this.currentTurnIndex + 1 ) % (this.entities.size()-1); // oui c'est moche
 		}
     	
     	this.tmpDialogbox1.updateTempDialgbox(boolInput, gc);

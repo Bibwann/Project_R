@@ -20,6 +20,8 @@ import fr.sae.game.caractere.Swordsman;
 import fr.sae.game.maps.Foret1;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -315,15 +317,15 @@ public class Global {
 
 	    	// Creer les collisions ici
 	    	CollisionsMapForet1();
+	    	CollisionsMapForet2();
+
 	    	
 		} catch(Exception e){
-			
 			e.getMessage(); //Affiche le message d'erreur en cas ou l'initialisation du project mne marche pas correctement ducoup c'est une ligne importante en cas de debug
 			System.out.println("Erreur dans le global sur la fonction initialize");
 		}
 	}
-	
-	 
+
 	public static void CollisionsMapForet1() {
     	//Collisions bas a gauche + gauche
     	CollisionMapForet1.addCollidable(new Rectangle(0, 0, 200, height)); 
@@ -352,6 +354,10 @@ public class Global {
     	CollisionMapForet1.addCollidable(new Rectangle(width-200,700,200,66)); 
     	//Collision panneau
     	CollisionMapForet1.addCollidable(new Rectangle(width-530,510,66,60)); 
+	}
+	
+	public static void CollisionsMapForet2() {
+
 	}
 	
 	public static void switchModeControles() { //Fonction  propre permettant de savoir si on est en dialoge ou en deplacmeent libre

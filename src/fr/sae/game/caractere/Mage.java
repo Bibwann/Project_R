@@ -1,13 +1,14 @@
 package fr.sae.game.caractere;
 
 import org.newdawn.slick.Image;
+import org.newdawn.slick.SlickException;
 
 public class Mage extends Player{
 
 	private String classname;
 
-	public Mage(String name, int level, Image sprite) {
-		super(name, level, sprite,null,null);
+	public Mage(String name, int level, Image sprite) throws SlickException {
+		super(name, level, new Image("data/Mage/Walk.png"), new Image("data/Mage/Battler.png"), new Image("data/Mage/Face.png"));
 		
 		this.classname="Mage";
 

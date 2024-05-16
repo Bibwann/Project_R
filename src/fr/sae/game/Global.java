@@ -54,8 +54,7 @@ public class Global {
 	public static int pause =Input.KEY_ESCAPE;
 	public static int interract =Input.KEY_SPACE;
 	
-	//public static  Map<String, Integer> dictionnaireInputs = new HashMap<String, Integer>() {{put("UP", Input.KEY_UP);put("DOWN", Input.KEY_DOWN);put("LEFT", Input.KEY_LEFT);put("RIGHT", Input.KEY_RIGHT);put("SPACE", Input.KEY_SPACE);}};
-
+	//Hashmap permettant le changement de touches proprement
     public static Map<String, Integer> dictionnaireInputs = new HashMap<String, Integer>() {
 
 		private static final long serialVersionUID = 1L;

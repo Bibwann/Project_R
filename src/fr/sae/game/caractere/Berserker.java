@@ -1,14 +1,15 @@
 package fr.sae.game.caractere;
 
 import org.newdawn.slick.Image;
+import org.newdawn.slick.SlickException;
 
 public class Berserker extends Player{
 
 
 	private String classname;
 
-	public Berserker(String name, int level, Image sprite) {
-		super(name, level, sprite,null,null);
+	public Berserker(String name, int level, Image sprite) throws SlickException {
+		super(name, level, new Image("data/Berserker/Walk.png"), new Image("data/Berserker/Battler.png"), new Image("data/Swordman/Face.png"));
 		
 		this.classname="Healer";
 

@@ -8,7 +8,7 @@ import org.newdawn.slick.GameContainer;
 
 import fr.sae.game.Global;
 
-public abstract class Player extends Entity { 
+public abstract class Player extends Entity{ 
 	
 	int deformationHitboxX=22; //Cette variable permet de reajuster la hitbox du player pour qu'il passe +/- proche des mures ( a  voir avec les hitbox pour comprendre)
 	int deformationHitboxY=8; //Cette variable permet de reajuster la hitbox du player pour qu'il passe +/- proche des mures ( a  voir avec les hitbox pour comprendre)
@@ -178,5 +178,6 @@ public abstract class Player extends Entity {
 			this.getAnimation().setCurrentFrame(1);
 		}
 	}
+	
 
 }

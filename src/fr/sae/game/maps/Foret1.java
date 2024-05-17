@@ -56,7 +56,7 @@ public class Foret1 extends BasicGameState{
 			});	
 		this.dialogueBoxPanneau.setTriggerZone(Global.width-530,570,66,10);
 
-		
+
 		//Dialogbox Avec choix multiples
 		this.dialogueBoxBranche = new DialogueBox(new String[] {
 				"\n "+
@@ -70,7 +70,6 @@ public class Foret1 extends BasicGameState{
 	            case 0:
 	            	this.tmpDialogbox1.setActiveTempDialogbox(true);
 	                this.tmpDialogbox1.setMessages(new String[] {"\n"+"\n"+"           Aie !"});
-	                
 	                //Ajoutez recursivement des choix ici de la meme maniere que moi
 
 	                this.tmpDialogbox1.setChoices(Arrays.asList("Retaper la branche", "Ne rien faire"), choice2 -> {
@@ -86,6 +85,7 @@ public class Foret1 extends BasicGameState{
 
 	                        case 1:
 	                        	this.tmpDialogbox1.setActiveTempDialogbox(false);
+
 	                    }
 	                });
 	                

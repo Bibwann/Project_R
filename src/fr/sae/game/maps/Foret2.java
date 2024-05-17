@@ -68,8 +68,10 @@ public class Foret2 extends BasicGameState{
 	//Temp
 		//Lance un combat de force -- present pour le debug a retirer
 
-		//Global.mobs[0]=new Chaton("chaton", 1, null, null);
-		//sbg.enterState(100);
+		Global.mobs[0]=new Chaton("chaton1", 1, null, null);
+		Global.mobs[1]=new Chaton("chaton2", 1, null, null);
+
+        sbg.enterState(100);
 //----------------------------------------------------------------------------------------------------------------------------
 	}
 

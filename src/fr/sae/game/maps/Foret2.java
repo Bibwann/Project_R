@@ -17,12 +17,15 @@ import fr.sae.menus.SetCharacterName;
 import fr.sae.mobes.Chaton;
 
 public class Foret2 extends BasicGameState{
-
+	Warp Warp1;
+	Warp Warp2;
 	public Foret2(int stateID) {
 	}
 
 	@Override
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
+		this.Warp1= new Warp(0, 60, 10, 380, 1860, 160);
+		this.Warp2= new Warp(1400, 1070, 380, 10, 1540, 50);
 
 	}
 
@@ -39,7 +42,8 @@ public class Foret2 extends BasicGameState{
         	e.getMessage();
         	System.out.print(e);
         }
-       
+        this.Warp1.warp(Global.P1, sbg, 15);
+        this.Warp2.warp(Global.P1, sbg, 13);
 
 //--------------------------------------------------------------------------------------------------------------------------
 	//Temp	    
@@ -49,7 +53,8 @@ public class Foret2 extends BasicGameState{
 		    g.draw(Global.P1.getHitbox());
 		    
 		    Global.CollisionMapForet2.drawCollisions(g);
-		    
+		    this.Warp1.draw(g);
+		    this.Warp2.draw(g);
 	    	}
 //--------------------------------------------------------------------------------------------------------------------------
 	}

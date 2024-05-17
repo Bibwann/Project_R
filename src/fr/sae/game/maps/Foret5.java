@@ -8,14 +8,18 @@ import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
 import fr.sae.game.Global;
+import fr.sae.game.Warp;
 
 public class Foret5 extends BasicGameState {
-
+	Warp Warp1;
+	Warp Warp2;
 	public Foret5(int stateID) {
 	}
 
 	@Override
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
+		this.Warp1= new Warp(0, 560, 10, Global.height-560, 1800, 860);
+		this.Warp2= new Warp(1910, 60, 10, 380, 40, 160);
 
 	}
 
@@ -32,7 +36,8 @@ public class Foret5 extends BasicGameState {
         	e.getMessage();
         	System.out.print(e);
         }
-       
+        this.Warp1.warp(Global.P1, sbg, 11);
+        this.Warp2.warp(Global.P1, sbg, 12);
 
 //--------------------------------------------------------------------------------------------------------------------------
 	//Temp	    
@@ -41,15 +46,16 @@ public class Foret5 extends BasicGameState {
 	    if (true) {
 		    g.draw(Global.P1.getHitbox());
 		    
-		    Global.CollisionMapForet3.drawCollisions(g);
-		    
+		    Global.CollisionMapForet5.drawCollisions(g);
+		    this.Warp1.draw(g);
+		    this.Warp2.draw(g);
 	    	}
 //--------------------------------------------------------------------------------------------------------------------------
 	}
 
 	@Override
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
-		Global.updatePlayerMovement(gc.getInput(),Global.CollisionMapForet3);
+		Global.updatePlayerMovement(gc.getInput(),Global.CollisionMapForet5);
 		Global.P1.AnimateWhileMoove();
 
 	}

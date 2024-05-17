@@ -37,8 +37,8 @@ public class Foret1 extends BasicGameState{
 		//Obligatoire que tmpDialogbox1 aie une triggerzone hors map
 	    this.tmpDialogbox1.setTriggerZone(-1, -1, 0, 0);
 
-		this.Warp1= new Warp(Global.width-10, Global.height-320, 10, 320, 500, 500);
-		this.Warp2= new Warp(1324, 0, 66, 10, 500, 500);
+		this.Warp1= new Warp(Global.width-10, Global.height-320, 10, 320, 40, 860);
+		this.Warp2= new Warp(860, 0, 530, 10, 1000, 1020);
 
 //-----------------------------------------------------------------------------------------------------------------------
 //Ici se trouve l'horreur des dialogbox --> ces dialogbox servent d'exemples
@@ -47,11 +47,11 @@ public class Foret1 extends BasicGameState{
 		this.dialogueBoxPanneau = new DialogueBox(new String[] {
 				"\n" +
 			    "  ^  \n" +
-			    "  |         Montagne du Nord\n" +
+			    "  |         Cimetierre\n" +
 			    "  |  \n",
 			    "\n" +
 			    "\n" +
-			    " -- -- >       Village\n"+
+			    " -- -- >       Chateau\n"+
 			    "\n"
 			});	
 		this.dialogueBoxPanneau.setTriggerZone(Global.width-530,570,66,10);
@@ -121,8 +121,8 @@ public class Foret1 extends BasicGameState{
         	System.out.print(e);
         }
         
-		this.Warp1.warp(Global.P1, sbg, 12);
-		this.Warp2.warp(Global.P1, sbg, 13);
+		this.Warp1.warp(Global.P1, sbg, 15);
+		this.Warp2.warp(Global.P1, sbg, 16);
 
         //Obligatoire, premet de rendre a l'ecran la dialogbox temp quand elle est necessaire
         this.tmpDialogbox1.renderTempDialgbox(g);

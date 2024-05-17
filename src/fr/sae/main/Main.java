@@ -10,6 +10,9 @@ import fr.sae.game.maps.Chateau1;
 import fr.sae.game.maps.Foret1;
 import fr.sae.game.maps.Foret2;
 import fr.sae.game.maps.Foret3;
+import fr.sae.game.maps.Foret4;
+import fr.sae.game.maps.Foret5;
+import fr.sae.game.maps.Foret6;
 import fr.sae.menus.ClassesSelect;
 import fr.sae.menus.MainMenu;
 import fr.sae.menus.OptionMenu;
@@ -45,6 +48,9 @@ public class Main  {
                     this.addState(new Foret1(11));
                     this.addState(new Foret2(12));
                     this.addState(new Foret3(13));
+                    this.addState(new Foret4(14));
+                    this.addState(new Foret5(15));
+                    this.addState(new Foret6(16));
                     
                     //De 50 a 100 c'est les mapes du chateau ( oui on a de la marge )
                     this.addState(new Foret3(51));

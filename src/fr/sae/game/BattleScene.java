@@ -25,7 +25,8 @@ public class BattleScene extends BasicGameState {
     private DialogueBox dialogueBox; // Ajout de la variable dialogueBox
     private DialogueBox dialogueBoxTourP1;
     private DialogueBox dialogueBoxTourP2;
-    private DialogueBox dialogueBoxTourCurrentMob;
+    private DialogueBox dialogueBoxTourCurrentMobAttaque;
+    private DialogueBox dialogueBoxTourCurrentMobSoin;
     private DialogueBox tmpDialogbox1= new DialogueBox(new String[] {});
     private String P1Name = "";
     private String P2Name = "";
@@ -50,33 +51,9 @@ public class BattleScene extends BasicGameState {
             "C'est votre tour. Que voulez-vous faire ?",
             "C'est le tour de l'ennemi."
         });
-<<<<<<< HEAD
-        this.dialogueBox.setChoices(Arrays.asList("Attaquer", "Défendre", "Utiliser un sort", "Fuir"), choice -> {
-            switch (choice) {
-                case 0:
-                    // Gérer l'attaque
-                	this.tmpDialogbox1.setActiveTempDialogbox(true);
-        			this.tmpDialogbox1.setMessages(new String[] {"\n"+"\n"+"           Vous avez choisit d'attaquer !"});
-                    break;
-                case 1:
-                    // Gérer la défense
-                    break;
-                case 2:
-                    // Gérer l'utilisation d'un sort
-                    break;
-                case 3:
-                    // Gérer la fuite
-                    break;
-            }
-        });
-        
-        //exemple, inutile maintenant
-        this.dialogueBoxTour = new DialogueBox(new String[] {
-=======
        
         
         this.dialogueBoxTourP1 = new DialogueBox(new String[] {
->>>>>>> 240c07990c53f379bf58945784e20272b01881f3
     			"\n "+
     					"     \n" +
     					"           C'est au tour de P1 de jouer"
@@ -144,13 +121,14 @@ public class BattleScene extends BasicGameState {
         }
     });
     	
-    	this.dialogueBoxTourCurrentMob= new DialogueBox(new String[] {
+    	this.dialogueBoxTourCurrentMobAttaque= new DialogueBox(new String[] {
     			"\n "+
     					"     \n" +
-    					"           C'est au tour de bob de jouer"
+    					"           Bob attaque"
     	});
     	
-    	this.dialogueBoxTourCurrentMob.setChoices(Arrays.asList("Continuer"), choice -> {
+    	
+    	this.dialogueBoxTourCurrentMobAttaque.setChoices(Arrays.asList("Continuer"), choice -> {
             switch (choice) {
             case 0:
                 // Gérer l'attaque
@@ -161,8 +139,26 @@ public class BattleScene extends BasicGameState {
         }
     });
     	
+    	this.dialogueBoxTourCurrentMobSoin= new DialogueBox(new String[] {
+    		"\n "+
+					"     \n" +
+					"           Bob se soigne"
+    	});
+    	
+    	this.dialogueBoxTourCurrentMobSoin.setChoices(Arrays.asList("Continuer"), choice -> {
+            switch (choice) {
+            case 0:
+                // Gérer l'attaque
+            	this.tmpDialogbox1.setActiveTempDialogbox(false);
+    			this.currentTurnIndex = (this.currentTurnIndex + 1 ) % (this.entities.size()); // sert à incrémenter les tours (oui juste ça)
+
+                break;
+        }
+    });
     	
     }
+    
+    
     
     public void initializeBattle() {
         if(this.entities.isEmpty()) {
@@ -190,17 +186,10 @@ public class BattleScene extends BasicGameState {
 
     @Override
     public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
-<<<<<<< HEAD
-    	
-		//this.dialogueBoxTour.renderForceDialogbox(g);
-    	//this.dialogueBoxTour.render(g);
-    	this.dialogueBox.renderForceDialogbox(g);
-    	this.dialogueBox.render(g);
-=======
         g.drawImage(new Image("data/BattleScenes/Foret.png").getScaledCopy(Global.width, Global.height), 0, 0);
         this.initializeBattle();
         // gère l'affichage de la dialogBox pour l'entité qui joue le tour
-
+        
         if(this.currentTurnIndex == 0) {        	
         	this.dialogueBoxTourP1.renderForceDialogbox(g);
         	this.dialogueBoxTourP1.render(g);
@@ -208,17 +197,28 @@ public class BattleScene extends BasicGameState {
         	this.dialogueBoxTourP2.renderForceDialogbox(g);
         	this.dialogueBoxTourP2.render(g);
         } else {
-        	this.dialogueBoxTourCurrentMob.renderForceDialogbox(g);
-        	this.dialogueBoxTourCurrentMob.render(g);
+        	if(this.entities.get(currentTurnIndex).getHpActuel() < this.entities.get(currentTurnIndex).getHpMax()) {
+        		this.dialogueBoxTourCurrentMobSoin.renderForceDialogbox(g);
+            	this.dialogueBoxTourCurrentMobSoin.render(g);
+        	} else {
+        		//this.dialogueBoxTourCurrentMobAttaque.renderForceDialogbox(g);
+            	//this.dialogueBoxTourCurrentMobAttaque.render(g);
+            	
+            	if (Global.P1.getHpActuel() < Global.P2.getHpActuel()) { // foutre des dégats au plus faible (oui c'est du harcèlement)
+            		//Global.P1.getHit(); 
+            	} else {
+            		//Global.P2.getHit(this.entities.get(currentTurnIndex).());
+            	}
+            	
+        	}
         }
     	//this.dialogueBox.render(g);
->>>>>>> 240c07990c53f379bf58945784e20272b01881f3
 
         // Dessin des éléments de la scène de combat
 
         // Dessin des joueurs à gauche
     	try {
-    	    int player1Y = Global.height / 9; 
+    	    int player1Y = Global.height / 3; // Position du joueur 1 sur le premier tiers vertical de l'écran
     	    // Appel de la méthode BattleScene pour le joueur 1
     	    Global.P1.BattleScene(g, player1Y);
     	} catch(Exception e) {
@@ -238,13 +238,13 @@ public class BattleScene extends BasicGameState {
     	}
 
     	try {
-    	    int player2Y = Global.height / 9 ;
+    	    int player2Y = Global.height / 3 * 2; // Position du joueur 2 sur le deuxième tiers vertical de l'écran
     	    // Appel de la méthode BattleScene pour le joueur 2
     	    Global.P2.BattleScene(g, player2Y);
     	} catch(Exception e) {
     	    // Affichage de l'erreur
     	    System.out.println("Affichage des Hitbox prsk sprites ont buggé --> on est dans la classe Battle scene dans le render le 1er try pour P2");
-    	    //System.out.println(e);
+    	    System.out.println(e);
     	    // Tentative d'affichage des hitbox
     	    try {
     	        // Récupération de la hitbox du joueur 2
@@ -266,16 +266,11 @@ public class BattleScene extends BasicGameState {
     	        if (this.enemy[i] == null) {
     	            continue; // Si l'ennemi est null, passer au suivant
     	        }
-    	        this.enemy[i].setBattlehitbox(new Rectangle(Global.MobsBattleDistance, Global.height/3, 32, 48));
     	        // Affichage du sprite de l'ennemi
     	        g.drawImage(this.enemy[i].getSprite(), 550, 200 + i * 100);
     	    }
     	} catch(Exception e) {
-<<<<<<< HEAD
-    	    System.out.println("pas de sprite pour un mob");
-=======
     	    //System.out.println(e.getMessage());
->>>>>>> 240c07990c53f379bf58945784e20272b01881f3
     	    // Tentative de création et d'affichage d'une hitbox
     	    
     	    try {
@@ -284,13 +279,9 @@ public class BattleScene extends BasicGameState {
         	            continue; // Si l'ennemi est null, passer au suivant
         	        }
         	        // Affichage du sprite de l'ennemi
-<<<<<<< HEAD
-        	        //Shape hitbox = new Rectangle(550, 200+i*100, 48, 64);
-=======
         	        Shape hitbox = new Rectangle(1400, 200+i*200, 48, 64);
->>>>>>> 240c07990c53f379bf58945784e20272b01881f3
         	        // Affichage de la hitbox
-        	        g.draw(this.enemy[i].getBattleHitbox());
+        	        g.draw(hitbox);
         	    }
     	    } catch(Exception ex) {
     	        // Génération d'une nouvelle exception si la hitbox ne peut pas être créée
@@ -318,7 +309,7 @@ public class BattleScene extends BasicGameState {
     public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
 		Input input =gc.getInput();
 		boolean boolInput =input.isKeyPressed(Global.interract);
-    	
+    		
 		if(this.currentTurnIndex == 0) {			
 			this.dialogueBoxTourP1.forceDialogBox(boolInput,gc.getInput());
 			//this.currentTurnIndex = (this.currentTurnIndex + 1 ) % (this.entities.size()-1); // sert à incrémenter les tours (oui juste ça)
@@ -327,18 +318,16 @@ public class BattleScene extends BasicGameState {
 			this.dialogueBoxTourP2.forceDialogBox(boolInput,gc.getInput());
 			//this.currentTurnIndex = (this.currentTurnIndex + 1 ) % (this.entities.size()-1); // mais en ne depassant pas le nombre d'entités -1
 		} else {
-			this.dialogueBoxTourCurrentMob.forceDialogBox(boolInput,gc.getInput());
+			if(this.entities.get(currentTurnIndex).getHpActuel() < this.entities.get(currentTurnIndex).getHpMax()) {
+				this.dialogueBoxTourCurrentMobSoin.forceDialogBox(boolInput,gc.getInput());
+        	} else {
+        		this.dialogueBoxTourCurrentMobAttaque.forceDialogBox(boolInput,gc.getInput());
+        	}
 			//this.currentTurnIndex = (this.currentTurnIndex + 1 ) % (this.entities.size()-1); // oui c'est moche
 		}
     	
     	this.tmpDialogbox1.updateTempDialgbox(boolInput, gc);
     	 
-<<<<<<< HEAD
-    	 //this.dialogueBoxTour.forceDialogBox(i,gc.getInput());
-    	 this.dialogueBox.forceDialogBox(i, gc.getInput());
-    	 this.tmpDialogbox1.updateTempDialgbox(i, gc);
-=======
->>>>>>> 240c07990c53f379bf58945784e20272b01881f3
     }
 
     public int getID() {

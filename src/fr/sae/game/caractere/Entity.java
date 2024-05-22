@@ -68,4 +68,8 @@ public abstract class Entity  {
 	public int getHpActuel() {
 		return this.hpActuel;
 	}
+	
+	public int getHpMax() {
+		return this.hpMax;
+	}
 }

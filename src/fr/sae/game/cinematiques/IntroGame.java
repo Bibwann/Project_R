@@ -55,13 +55,16 @@ public class IntroGame extends BasicGameState {
 
     @Override
     public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
-        if (!fadeInComplete) {
-            opacity += 0.001f; // Adjust this value to control the speed of the fade in
-            if (opacity > 1f) {
-                opacity = 1f;
-                fadeInComplete = true;
-            }
-        }
+        //if (!fadeInComplete) {
+        //    opacity += 0.001f; // Adjust this value to control the speed of the fade in
+        //    if (opacity > 1f) {
+        //        opacity = 1f;
+        //        fadeInComplete = true;
+        //    }
+        //}
+    	
+    	opacity = 1f;
+    	fadeInComplete = true;
     }
 
 

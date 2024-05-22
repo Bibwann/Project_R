@@ -15,12 +15,11 @@ import org.newdawn.slick.state.StateBasedGame;
 import fr.sae.game.Global;
 import fr.sae.game.caractere.Entity;
 import fr.sae.game.caractere.Mobs;
+import fr.sae.mobes.Chaton;
 
 public class BattleScene extends BasicGameState {
 
     private Mobs[] enemy;
-    private boolean isWin;
-    private boolean isLoose;
     private int currentTurn=0; // Ajout de la variable currentTurn
     private DialogueBox dialogueBox; // Ajout de la variable dialogueBox
     private DialogueBox dialogueBoxTourP1;
@@ -41,9 +40,6 @@ public class BattleScene extends BasicGameState {
     public BattleScene(int stateID) {
         this.enemy = Global.mobs;
         
-
-        this.isWin = isWin = false;
-        this.isLoose = isLoose = false;
         this.currentTurn = 0; // Initialisation de currentTurn à 0
 
         // Initialisation de la DialogueBox
@@ -56,7 +52,7 @@ public class BattleScene extends BasicGameState {
         this.dialogueBoxTourP1 = new DialogueBox(new String[] {
     			"\n "+
     					"     \n" +
-    					"           C'est au tour de P1 de jouer"
+    					"           C'est à vous de jouer"
     	});
     	this.dialogueBoxTourP1.setChoices(Arrays.asList("Attaquer", "Défendre", "Utiliser un sort", "Fuir"), choice -> {
             switch (choice) {
@@ -90,7 +86,7 @@ public class BattleScene extends BasicGameState {
     	this.dialogueBoxTourP2 = new DialogueBox(new String[] {
     			"\n "+
     					"     \n" +
-    					"           C'est au tour de P2 de jouer"
+    					"           C'est à vous de jouer"
     	});
     	this.dialogueBoxTourP2.setChoices(Arrays.asList("Attaquer", "Défendre", "Utiliser un sort", "Fuir"), choice -> {
             switch (choice) {
@@ -174,9 +170,8 @@ public class BattleScene extends BasicGameState {
             }
         }
         
-        //this.P1Name = Global.P1.getName();
-        //this.P2Name = Global.P2.getName();
-        
+        this.P1Name = Global.P1.getName();
+        this.P2Name = Global.P2.getName();        
     }
     
     @Override
@@ -187,6 +182,7 @@ public class BattleScene extends BasicGameState {
     @Override
     public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
         g.drawImage(new Image("data/BattleScenes/Foret.png").getScaledCopy(Global.width, Global.height), 0, 0);
+        
         this.initializeBattle();
         // gère l'affichage de la dialogBox pour l'entité qui joue le tour
         
@@ -197,17 +193,21 @@ public class BattleScene extends BasicGameState {
         	this.dialogueBoxTourP2.renderForceDialogbox(g);
         	this.dialogueBoxTourP2.render(g);
         } else {
+        	
         	if(this.entities.get(currentTurnIndex).getHpActuel() < this.entities.get(currentTurnIndex).getHpMax()) {
         		this.dialogueBoxTourCurrentMobSoin.renderForceDialogbox(g);
             	this.dialogueBoxTourCurrentMobSoin.render(g);
         	} else {
-        		//this.dialogueBoxTourCurrentMobAttaque.renderForceDialogbox(g);
-            	//this.dialogueBoxTourCurrentMobAttaque.render(g);
+        		int hit = ((Chaton) this.entities.get(currentTurnIndex)).griffesHit();
+        		this.dialogueBoxTourCurrentMobAttaque.renderForceDialogbox(g);
+            	this.dialogueBoxTourCurrentMobAttaque.render(g);
             	
-            	if (Global.P1.getHpActuel() < Global.P2.getHpActuel()) { // foutre des dégats au plus faible (oui c'est du harcèlement)
-            		//Global.P1.getHit(); 
+            	if (!Global.P1.isDead()) { // foutre des dégats au plus faible (oui c'est du harcèlement)
+            		Global.P1.getHit(hit);
+            		System.out.println( "-"+ hit + " pour P1");
             	} else {
-            		//Global.P2.getHit(this.entities.get(currentTurnIndex).());
+            		Global.P2.getHit(hit);
+            		System.out.println( "-"+ hit + " pour P2");
             	}
             	
         	}
@@ -290,14 +290,23 @@ public class BattleScene extends BasicGameState {
     	}
     	
     	
-    	//Si win ou loose
-    	if (this.isWin) {
-            sbg.enterState(2);
+    	//Si win 
+    	if (this.isWin()) {
+    		Global.P1.resetStats();
+    		Global.P2.resetStats();
+    		Global.mobs = new Mobs[4];
+    		this.entities =  new ArrayList<>();
+            sbg.enterState(Global.actualId);
+            
     	}
     	
-    	if (this.isLoose) {
-            sbg.enterState(2);
-
+    	//Si loose
+    	if (Global.P1.isDead() && Global.P2.isDead()) {
+    		Global.P1.resetStats();
+    		Global.P2.resetStats();
+    		Global.mobs = new Mobs[4];
+    		this.entities =  new ArrayList<>();
+            sbg.enterState(Global.actualId);
     	}
     	
     	this.tmpDialogbox1.renderTempDialgbox(g);
@@ -328,6 +337,15 @@ public class BattleScene extends BasicGameState {
     	
     	this.tmpDialogbox1.updateTempDialgbox(boolInput, gc);
     	 
+    }
+    
+    public boolean isWin() {
+    	for (int i = 0; i < this.enemy.length; i++) {
+    		if (!(enemy[i].isDead())) {
+    			return false;
+    		}
+    	}
+    	return true;
     }
 
     public int getID() {

@@ -33,6 +33,8 @@ public class Global {
 
 	public static float speed =1.11f; //Vitesse du Player
 	
+	public static int actualId = 10;
+	
 	//Coordonee de spawn du Player 1 ( le tout premier spawn)
 	public static int SpawnX =375;
 	public static int SpawnY =280;

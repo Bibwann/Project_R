@@ -48,8 +48,8 @@ public abstract class Entity  {
 		this.sprite = sprite;
 	}
 	
-	public double dmgMultipler(int spellDmg) {
-		return (spellDmg*(1+((this.level)*0.05)));
+	public int dmgMultipler(int spellDmg) {
+		return (spellDmg*(1+(this.level)));
 	}
 	
 	public boolean isDead() {

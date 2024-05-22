@@ -166,7 +166,10 @@ public class BattleScene extends BasicGameState {
 
     @Override
     public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
+        g.drawImage(new Image("data/BattleScenes/Bottom.png").getScaledCopy(Global.width, Global.height), 0, 0);
         g.drawImage(new Image("data/BattleScenes/Foret.png").getScaledCopy(Global.width, Global.height), 0, 0);
+
+
         this.initializeBattle();
         // gère l'affichage de la dialogBox pour l'entité qui joue le tour
 
@@ -188,7 +191,7 @@ public class BattleScene extends BasicGameState {
     	try {
     	    int player1Y = Global.height / 3; // Position du joueur 1 sur le premier tiers vertical de l'écran
     	    // Appel de la méthode BattleScene pour le joueur 1
-    	    Global.P1.BattleScene(g, player1Y);
+    	    Global.P1.BattleScene(g, player1Y+100);
     	} catch(Exception e) {
     	    // Affichage de l'erreur
     	    System.out.println("Affichage des Hitbox prsk sprites ont buggé --> on est dans la classe Battle scene dans le render le 1er try pour P1");
@@ -208,7 +211,7 @@ public class BattleScene extends BasicGameState {
     	try {
     	    int player2Y = Global.height / 3 * 2; // Position du joueur 2 sur le deuxième tiers vertical de l'écran
     	    // Appel de la méthode BattleScene pour le joueur 2
-    	    Global.P2.BattleScene(g, player2Y);
+    	    Global.P2.BattleScene(g, player2Y-100);
     	} catch(Exception e) {
     	    // Affichage de l'erreur
     	    System.out.println("Affichage des Hitbox prsk sprites ont buggé --> on est dans la classe Battle scene dans le render le 1er try pour P2");
@@ -247,7 +250,7 @@ public class BattleScene extends BasicGameState {
         	            continue; // Si l'ennemi est null, passer au suivant
         	        }
         	        // Affichage du sprite de l'ennemi
-        	        Shape hitbox = new Rectangle(1400, 200+i*200, 48, 64);
+        	        Shape hitbox = new Rectangle(1400, 400+i*200, 48, 64);
         	        // Affichage de la hitbox
         	        g.draw(hitbox);
         	    }
@@ -277,7 +280,7 @@ public class BattleScene extends BasicGameState {
     public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
 		Input input =gc.getInput();
 		boolean boolInput =input.isKeyPressed(Global.interract);
-    	
+    		
 		if(this.currentTurnIndex == 0) {			
 			this.dialogueBoxTourP1.forceDialogBox(boolInput,gc.getInput());
 			//this.currentTurnIndex = (this.currentTurnIndex + 1 ) % (this.entities.size()-1); // sert à incrémenter les tours (oui juste ça)

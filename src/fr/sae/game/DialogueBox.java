@@ -58,7 +58,9 @@ public class DialogueBox {
             int dialogY = Global.height - dialogHeight - margin;
 
             // Draw the background of the dialog box
-            g.setColor(new Color(0, 0, 0, 0.94f));
+            g.setColor(new Color(0, 0, 0, 0.94f)); // Reduced opacity by 20%
+
+            //g.setColor(new Color(0, 0, 0, 0.94f * 0.7f)); // Reduced opacity by 20%
             g.fillRect(dialogX, dialogY, dialogWidth, dialogHeight);
 
             // Create a new TrueTypeFont with the desired size
@@ -106,6 +108,7 @@ public class DialogueBox {
                         g.setColor(Color.green);
                         g.fillRect(x1 - 10, y1 - 10, maxWidth + 20, font.getHeight(choiceText) + 20); // Draw a background for the selected choice
                         g.setColor(Color.black);
+                        
                     } else {
                         g.setColor(Color.white);
                     }

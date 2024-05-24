@@ -66,6 +66,7 @@ public class Main  {
             //app.setDisplayMode(800, 600, false);
             
             app.setIcons(new String[] {"data/ico.png"});
+            app.setTargetFrameRate(60); //limit to 60fps
             app.start(); 
             
         } catch (SlickException e) {

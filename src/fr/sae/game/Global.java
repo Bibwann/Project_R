@@ -31,7 +31,7 @@ public class Global {
 	public static Player P1 = null;
 	public static Player P2 = null;
 
-	public static float speed =1.11f; //Vitesse du Player
+	public static float speed =5f; //Vitesse du Player
 	
 	public static int actualId = 10;
 	
@@ -47,6 +47,15 @@ public class Global {
 	//Variable definissant la distance compare au bord gauche de l'ecran qu'auront les joueurs et les mobes en combat
 	public static int PlayerBattleDistance =250;
 	public static int MobsBattleDistance =750;
+
+	//Variables pour les invetaires	
+	public static Map<String, Integer> dictionnaireInventory = new HashMap<String, Integer>() {{
+		put("SWORD", 0);
+		put("WAND", 0);
+		put("BOOK", 0);
+		put("TOMAHAWK", 0);
+		put("POTION", 0);
+	}};
 
 	//Variables global d'input
 	

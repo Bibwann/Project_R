@@ -54,7 +54,7 @@ public class BattleScene extends BasicGameState {
     					"     \n" +
     					"           C'est à vous de jouer"
     	});
-    	this.dialogueBoxTourP1.setChoices(Arrays.asList("Attaquer", "Défendre", "Utiliser un sort", "Fuir"), choice -> {
+    	this.dialogueBoxTourP1.setChoices(Arrays.asList("Attaquer", "Défendre","Fuir"), choice -> {
             switch (choice) {
             case 0:
                 // Gérer l'attaque
@@ -69,12 +69,6 @@ public class BattleScene extends BasicGameState {
 
                 break;
             case 2:
-                // Gérer l'utilisation d'un sort
-            	this.tmpDialogbox1.setActiveTempDialogbox(false);
-    			this.currentTurnIndex = (this.currentTurnIndex + 1 ) % (this.entities.size()); // sert à incrémenter les tours (oui juste ça)
-
-                break;
-            case 3:
                 // Gérer la fuite
             	this.tmpDialogbox1.setActiveTempDialogbox(false);
     			this.currentTurnIndex = (this.currentTurnIndex + 1 ) % (this.entities.size()); // sert à incrémenter les tours (oui juste ça)
@@ -88,7 +82,7 @@ public class BattleScene extends BasicGameState {
     					"     \n" +
     					"           C'est à vous de jouer"
     	});
-    	this.dialogueBoxTourP2.setChoices(Arrays.asList("Attaquer", "Défendre", "Utiliser un sort", "Fuir"), choice -> {
+    	this.dialogueBoxTourP2.setChoices(Arrays.asList("Attaquer", "Défendre", "Fuir"), choice -> {
             switch (choice) {
             case 0:
                 // Gérer l'attaque
@@ -103,12 +97,6 @@ public class BattleScene extends BasicGameState {
 
                 break;
             case 2:
-                // Gérer l'utilisation d'un sort
-            	this.tmpDialogbox1.setActiveTempDialogbox(false);
-    			this.currentTurnIndex = (this.currentTurnIndex + 1 ) % (this.entities.size()); // sert à incrémenter les tours (oui juste ça)
-
-                break;
-            case 3:
                 // Gérer la fuite
             	this.tmpDialogbox1.setActiveTempDialogbox(false);
     			this.currentTurnIndex = (this.currentTurnIndex + 1 ) % (this.entities.size()); // sert à incrémenter les tours (oui juste ça)
@@ -295,7 +283,7 @@ public class BattleScene extends BasicGameState {
     		Global.P1.resetStats();
     		Global.P2.resetStats();
     		Global.mobs = new Mobs[4];
-    		this.entities =  new ArrayList<>();
+    		//this.entities =  new ArrayList<>();
             sbg.enterState(Global.actualId);
             
     	}
@@ -305,7 +293,7 @@ public class BattleScene extends BasicGameState {
     		Global.P1.resetStats();
     		Global.P2.resetStats();
     		Global.mobs = new Mobs[4];
-    		this.entities =  new ArrayList<>();
+    		//this.entities =  new ArrayList<>();
             sbg.enterState(Global.actualId);
     	}
     	

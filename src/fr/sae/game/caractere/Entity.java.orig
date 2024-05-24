@@ -68,6 +68,7 @@ public abstract class Entity  {
 	public int getHpActuel() {
 		return this.hpActuel;
 	}
+<<<<<<< HEAD
 
 	public int getManaActuel() {
 		return manaActuel;
@@ -119,5 +120,10 @@ public abstract class Entity  {
 
 	public void setHpActuel(int hpActuel) {
 		this.hpActuel = hpActuel;
+=======
+	
+	public int getHpMax() {
+		return this.hpMax;
+>>>>>>> 97b3c3023b5780d38d3fd26872986153db3dd92e
 	}
 }

@@ -31,9 +31,13 @@ public class Global {
 	public static Player P1 = null;
 	public static Player P2 = null;
 
+<<<<<<< HEAD
+	public static float speed =0.5f; //Vitesse du Player
+=======
 	public static float speed =5f; //Vitesse du Player
 	
 	public static int actualId = 10;
+>>>>>>> 97b3c3023b5780d38d3fd26872986153db3dd92e
 	
 	//Coordonee de spawn du Player 1 ( le tout premier spawn)
 	public static int SpawnX =375;
@@ -59,10 +63,10 @@ public class Global {
 
 	//Variables global d'input
 	
-	public static int up =Input.KEY_UP;
-	public static int down =Input.KEY_DOWN;
-	public static int left =Input.KEY_LEFT;
-	public static int right =Input.KEY_RIGHT;
+	public static int up =Input.KEY_Z;
+	public static int down =Input.KEY_S;
+	public static int left =Input.KEY_Q;
+	public static int right =Input.KEY_D;
 	
 	public static int pause =Input.KEY_ESCAPE;
 	public static int interract =Input.KEY_SPACE;
@@ -354,8 +358,7 @@ public class Global {
     	//Collision Foret du haut
     	CollisionMapForet1.addCollidable(new Rectangle(200, 0, 66, 320)); 
     	CollisionMapForet1.addCollidable(new Rectangle(266, 0, 66, 66)); 
-    	CollisionMapForet1.addCollidable(new Rectangle(728, 0, 530, 130)); 
-    	CollisionMapForet1.addCollidable(new Rectangle(1258, 0, 66, 66)); 
+    	CollisionMapForet1.addCollidable(new Rectangle(728, 0, 130, 130));  
     	CollisionMapForet1.addCollidable(new Rectangle(794, 130, 400, 250)); 
     	CollisionMapForet1.addCollidable(new Rectangle(992, 380, 202, 66)); 
     	//Collision Taverne

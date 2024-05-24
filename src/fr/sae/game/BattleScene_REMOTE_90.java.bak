@@ -169,7 +169,6 @@ public class BattleScene extends BasicGameState {
 
     @Override
     public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
-        g.drawImage(new Image("data/BattleScenes/Bottom.png").getScaledCopy(Global.width, Global.height), 0, 0);
         g.drawImage(new Image("data/BattleScenes/Foret.png").getScaledCopy(Global.width, Global.height), 0, 0);
         
         this.initializeBattle();
@@ -268,7 +267,7 @@ public class BattleScene extends BasicGameState {
         	            continue; // Si l'ennemi est null, passer au suivant
         	        }
         	        // Affichage du sprite de l'ennemi
-        	        Shape hitbox = new Rectangle(1400, 400+i*200, 48, 64);
+        	        Shape hitbox = new Rectangle(1400, 200+i*200, 48, 64);
         	        // Affichage de la hitbox
         	        g.draw(hitbox);
         	    }

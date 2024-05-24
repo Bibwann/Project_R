@@ -17,10 +17,14 @@ import fr.sae.menus.SetCharacterName;
 import fr.sae.mobes.Chaton;
 
 public class Foret2 extends BasicGameState{
+<<<<<<< HEAD
 	Warp Warp1;
 	Warp Warp2;
+=======
+	
 	private boolean battle = true;
 
+>>>>>>> 97b3c3023b5780d38d3fd26872986153db3dd92e
 	public Foret2(int stateID) {
 	}
 

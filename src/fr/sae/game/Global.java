@@ -31,7 +31,8 @@ public class Global {
 	public static Player P1 = null;
 	public static Player P2 = null;
 
-	public static float speed =0.5f; //Vitesse du Player
+	public static float speed =0.99f; //Vitesse du Player
+	public static int actualId = 10;
 	
 	//Coordonee de spawn du Player 1 ( le tout premier spawn)
 	public static int SpawnX =375;
@@ -44,106 +45,29 @@ public class Global {
 
 	//Variable definissant la distance compare au bord gauche de l'ecran qu'auront les joueurs et les mobes en combat
 	public static int PlayerBattleDistance =250;
-	public static int MobsBattleDistance =0; //A modif
+	public static int MobsBattleDistance =750;
+
+	//Variables pour les invetaires	
+	public static Map<String, Integer> dictionnaireInventory = new HashMap<String, Integer>() {{
+		put("SWORD", 0);
+		put("WAND", 0);
+		put("BOOK", 0);
+		put("TOMAHAWK", 0);
+		put("POTION", 0);
+	}};
 
 	//Variables global d'input
 	
-	public static int up =Input.KEY_Z;
-	public static int down =Input.KEY_S;
-	public static int left =Input.KEY_Q;
-	public static int right =Input.KEY_D;
+	public static int up =Input.KEY_UP;
+	public static int down =Input.KEY_DOWN;
+	public static int left =Input.KEY_LEFT;
+	public static int right =Input.KEY_RIGHT;
 	
 	public static int pause =Input.KEY_ESCAPE;
 	public static int interract =Input.KEY_SPACE;
 	
 	//Hashmap permettant le changement de touches proprement
-    public static Map<String, Integer> dictionnaireInputs = new HashMap<String, Integer>() {
 
-		private static final long serialVersionUID = 1L;
-
-	{
-        put("UP", Input.KEY_UP);
-        put("DOWN", Input.KEY_DOWN);
-        put("LEFT", Input.KEY_LEFT);
-        put("RIGHT", Input.KEY_RIGHT);
-        put("SPACE", Input.KEY_SPACE);
-        put("A", Input.KEY_A);
-        put("B", Input.KEY_B);
-        put("C", Input.KEY_C);
-        put("D", Input.KEY_D);
-        put("E", Input.KEY_E);
-        put("F", Input.KEY_F);
-        put("G", Input.KEY_G);
-        put("H", Input.KEY_H);
-        put("I", Input.KEY_I);
-        put("J", Input.KEY_J);
-        put("K", Input.KEY_K);
-        put("L", Input.KEY_L);
-        put("M", Input.KEY_M);
-        put("N", Input.KEY_N);
-        put("O", Input.KEY_O);
-        put("P", Input.KEY_P);
-        put("Q", Input.KEY_Q);
-        put("R", Input.KEY_R);
-        put("S", Input.KEY_S);
-        put("T", Input.KEY_T);
-        put("U", Input.KEY_U);
-        put("V", Input.KEY_V);
-        put("W", Input.KEY_W);
-        put("X", Input.KEY_X);
-        put("Y", Input.KEY_Y);
-        put("Z", Input.KEY_Z);
-        put("0", Input.KEY_0);
-        put("1", Input.KEY_1);
-        put("2", Input.KEY_2);
-        put("3", Input.KEY_3);
-        put("4", Input.KEY_4);
-        put("5", Input.KEY_5);
-        put("6", Input.KEY_6);
-        put("7", Input.KEY_7);
-        put("8", Input.KEY_8);
-        put("9", Input.KEY_9);
-        put("TAB", Input.KEY_TAB);
-        put("ENTER", Input.KEY_ENTER);
-        put("ESCAPE", Input.KEY_ESCAPE);
-        put("INSERT", Input.KEY_INSERT);
-        put("DELETE", Input.KEY_DELETE);
-        put("HOME", Input.KEY_HOME);
-        put("END", Input.KEY_END);
-        put("F1", Input.KEY_F1);
-        put("F2", Input.KEY_F2);
-        put("F3", Input.KEY_F3);
-        put("F4", Input.KEY_F4);
-        put("F5", Input.KEY_F5);
-        put("F6", Input.KEY_F6);
-        put("F7", Input.KEY_F7);
-        put("F8", Input.KEY_F8);
-        put("F9", Input.KEY_F9);
-        put("F10", Input.KEY_F10);
-        put("F11", Input.KEY_F11);
-        put("F12", Input.KEY_F12);
-        put("NUMPAD0", Input.KEY_NUMPAD0);
-        put("NUMPAD1", Input.KEY_NUMPAD1);
-        put("NUMPAD2", Input.KEY_NUMPAD2);
-        put("NUMPAD3", Input.KEY_NUMPAD3);
-        put("NUMPAD4", Input.KEY_NUMPAD4);
-        put("NUMPAD5", Input.KEY_NUMPAD5);
-        put("NUMPAD6", Input.KEY_NUMPAD6);
-        put("NUMPAD7", Input.KEY_NUMPAD7);
-        put("NUMPAD8", Input.KEY_NUMPAD8);
-        put("NUMPAD9", Input.KEY_NUMPAD9);
-        put("ADD", Input.KEY_ADD);
-        put("SUBTRACT", Input.KEY_SUBTRACT);
-        put("MULTIPLY", Input.KEY_MULTIPLY);
-        put("DIVIDE", Input.KEY_DIVIDE);
-        put("EQUALS", Input.KEY_EQUALS);
-        put("COMMA", Input.KEY_COMMA);
-        put("PERIOD", Input.KEY_PERIOD);
-        put("SEMICOLON", Input.KEY_SEMICOLON);
-        put("SLASH", Input.KEY_SLASH);
-        put("MINUS", Input.KEY_MINUS);
-        put("SPACE", Input.KEY_SPACE);
-    }};
 
     public static Map<Integer, String> reversedInputs = new HashMap<Integer, String>() {
         private static final long serialVersionUID = 1L;
@@ -236,11 +160,9 @@ public class Global {
 
 	public static int width;
 	public static int height;
-
 	
 	//Characters
-	public static Integer MainPlayer=null;
-	
+
 	public static String Player1Classe;
 	public static String Player2Classe;
 	
@@ -274,7 +196,7 @@ public class Global {
 	
 	public static void InitializeGame() throws SlickException { //Fonction d'initialisation de project complet
 		try {	
-			InputHandler = new InputHandler(100);
+			InputHandler = new InputHandler(200);
 			
 			// Initialisation de P1
 			
@@ -312,7 +234,7 @@ public class Global {
 			}
 
 	    	P1.setBattlehitbox(new Rectangle(PlayerBattleDistance, height/3, 32, 48));
-	    	P2.setBattlehitbox(new Rectangle(PlayerBattleDistance, (height/3)*2, 32, 48));
+	    	P2.setBattlehitbox(new Rectangle(PlayerBattleDistance, height/3, 32, 48));
 		    
 	    	P1.Animation();
 	    	
@@ -361,7 +283,8 @@ public class Global {
     	//Collision Foret du haut
     	CollisionMapForet1.addCollidable(new Rectangle(200, 0, 66, 320)); 
     	CollisionMapForet1.addCollidable(new Rectangle(266, 0, 66, 66)); 
-    	CollisionMapForet1.addCollidable(new Rectangle(728, 0, 130, 130));  
+    	CollisionMapForet1.addCollidable(new Rectangle(728, 0, 530, 130)); 
+    	CollisionMapForet1.addCollidable(new Rectangle(1258, 0, 66, 66)); 
     	CollisionMapForet1.addCollidable(new Rectangle(794, 130, 400, 250)); 
     	CollisionMapForet1.addCollidable(new Rectangle(992, 380, 202, 66)); 
     	//Collision Taverne
@@ -472,7 +395,7 @@ public class Global {
 	}
 	
 		//A voir avec les animations 
-	public static void updatePlayerMovement(Input input, Collisions c) { //Fonction qui gere le deplacement du joueur P1
+	public static void updatePlayerMovement(Input input, Collisions c, int delta) { //Fonction qui gere le deplacement du joueur P1
 	    	if (P1 != null && canMoovPlayer) {
 		        boolean isleft = input.isKeyDown(left);
 		        boolean isright = input.isKeyDown(right);
@@ -483,27 +406,27 @@ public class Global {
 		        	InputHandler.keyPressed();
 		            if (!c.willCollideWithMap(Global.P1.getHitbox(),-1,0)) {
 		            	Global.P1.LeftSprite();
-		                P1.moveLeft(1);
+		                P1.moveLeft(1,delta);
 		            }
 		        } else if (isright) {
 		        	InputHandler.keyPressed();
 		        	Global.P1.RightSprite();
 		            if (!c.willCollideWithMap(Global.P1.getHitbox(),1,0)) {
-		                P1.moveRight(1);
+		                P1.moveRight(1,delta);
 
 		            }
 		        } else if (isup) {
 		        	InputHandler.keyPressed();
 		        	Global.P1.UpSprite();
 		            if (!c.willCollideWithMap(Global.P1.getHitbox(),0,-1)) {
-		                P1.moveUp(1);
+		                P1.moveUp(1,delta);
 
 		            }
 		        } else if (isdown) {
 		        	InputHandler.keyPressed();
 		        	Global.P1.DownSprite();
 		            if (!c.willCollideWithMap(Global.P1.getHitbox(),0,1)) {
-		                P1.moveDown(1);
+		                P1.moveDown(1,delta);
 		            }
 		         
 		        }
@@ -514,7 +437,6 @@ public class Global {
 
 	//Variables necessaire au lore ( genre pour definir les evenements et leurs ordonances) 
 	//D'ailleur ces variables permetteront de sauvgarder la partie
-	
 	
 	//Variables a sauvgarder ( rien ne doit etre instancié, il ne doit y avoir que de simples variables )
 	

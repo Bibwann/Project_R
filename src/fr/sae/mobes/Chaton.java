@@ -20,7 +20,7 @@ public class Chaton extends Mobs{
 	
 	//Sorts
 	
-	public double griffesHit() {
+	public int griffesHit() {
 		return (this.dmgMultipler(this.dmg)*this.dmg);
 
 	}

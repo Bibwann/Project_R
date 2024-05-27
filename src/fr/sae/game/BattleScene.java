@@ -15,17 +15,17 @@ import org.newdawn.slick.state.StateBasedGame;
 import fr.sae.game.Global;
 import fr.sae.game.caractere.Entity;
 import fr.sae.game.caractere.Mobs;
+import fr.sae.mobes.Chaton;
 
 public class BattleScene extends BasicGameState {
 
     private Mobs[] enemy;
-    private boolean isWin;
-    private boolean isLoose;
     private int currentTurn=0; // Ajout de la variable currentTurn
     private DialogueBox dialogueBox; // Ajout de la variable dialogueBox
     private DialogueBox dialogueBoxTourP1;
     private DialogueBox dialogueBoxTourP2;
-    private DialogueBox dialogueBoxTourCurrentMob;
+    private DialogueBox dialogueBoxTourCurrentMobAttaque;
+    private DialogueBox dialogueBoxTourCurrentMobSoin;
     private DialogueBox tmpDialogbox1= new DialogueBox(new String[] {});
     private String P1Name = "";
     private String P2Name = "";
@@ -40,9 +40,6 @@ public class BattleScene extends BasicGameState {
     public BattleScene(int stateID) {
         this.enemy = Global.mobs;
         
-
-        this.isWin = isWin = false;
-        this.isLoose = isLoose = false;
         this.currentTurn = 0; // Initialisation de currentTurn à 0
 
         // Initialisation de la DialogueBox
@@ -55,9 +52,9 @@ public class BattleScene extends BasicGameState {
         this.dialogueBoxTourP1 = new DialogueBox(new String[] {
     			"\n "+
     					"     \n" +
-    					"           C'est au tour de P1 de jouer"
+    					"           C'est à vous de jouer"
     	});
-    	this.dialogueBoxTourP1.setChoices(Arrays.asList("Attaquer", "Défendre", "Utiliser un sort", "Fuir"), choice -> {
+    	this.dialogueBoxTourP1.setChoices(Arrays.asList("Attaquer", "Défendre","Fuir"), choice -> {
             switch (choice) {
             case 0:
                 // Gérer l'attaque
@@ -72,12 +69,6 @@ public class BattleScene extends BasicGameState {
 
                 break;
             case 2:
-                // Gérer l'utilisation d'un sort
-            	this.tmpDialogbox1.setActiveTempDialogbox(false);
-    			this.currentTurnIndex = (this.currentTurnIndex + 1 ) % (this.entities.size()); // sert à incrémenter les tours (oui juste ça)
-
-                break;
-            case 3:
                 // Gérer la fuite
             	this.tmpDialogbox1.setActiveTempDialogbox(false);
     			this.currentTurnIndex = (this.currentTurnIndex + 1 ) % (this.entities.size()); // sert à incrémenter les tours (oui juste ça)
@@ -89,9 +80,9 @@ public class BattleScene extends BasicGameState {
     	this.dialogueBoxTourP2 = new DialogueBox(new String[] {
     			"\n "+
     					"     \n" +
-    					"           C'est au tour de P2 de jouer"
+    					"           C'est à vous de jouer"
     	});
-    	this.dialogueBoxTourP2.setChoices(Arrays.asList("Attaquer", "Défendre", "Utiliser un sort", "Fuir"), choice -> {
+    	this.dialogueBoxTourP2.setChoices(Arrays.asList("Attaquer", "Défendre", "Fuir"), choice -> {
             switch (choice) {
             case 0:
                 // Gérer l'attaque
@@ -106,12 +97,6 @@ public class BattleScene extends BasicGameState {
 
                 break;
             case 2:
-                // Gérer l'utilisation d'un sort
-            	this.tmpDialogbox1.setActiveTempDialogbox(false);
-    			this.currentTurnIndex = (this.currentTurnIndex + 1 ) % (this.entities.size()); // sert à incrémenter les tours (oui juste ça)
-
-                break;
-            case 3:
                 // Gérer la fuite
             	this.tmpDialogbox1.setActiveTempDialogbox(false);
     			this.currentTurnIndex = (this.currentTurnIndex + 1 ) % (this.entities.size()); // sert à incrémenter les tours (oui juste ça)
@@ -120,13 +105,14 @@ public class BattleScene extends BasicGameState {
         }
     });
     	
-    	this.dialogueBoxTourCurrentMob= new DialogueBox(new String[] {
+    	this.dialogueBoxTourCurrentMobAttaque= new DialogueBox(new String[] {
     			"\n "+
     					"     \n" +
-    					"           C'est au tour de bob de jouer"
+    					"           Bob attaque"
     	});
     	
-    	this.dialogueBoxTourCurrentMob.setChoices(Arrays.asList("Continuer"), choice -> {
+    	
+    	this.dialogueBoxTourCurrentMobAttaque.setChoices(Arrays.asList("Continuer"), choice -> {
             switch (choice) {
             case 0:
                 // Gérer l'attaque
@@ -137,8 +123,26 @@ public class BattleScene extends BasicGameState {
         }
     });
     	
+    	this.dialogueBoxTourCurrentMobSoin= new DialogueBox(new String[] {
+    		"\n "+
+					"     \n" +
+					"           Bob se soigne"
+    	});
+    	
+    	this.dialogueBoxTourCurrentMobSoin.setChoices(Arrays.asList("Continuer"), choice -> {
+            switch (choice) {
+            case 0:
+                // Gérer l'attaque
+            	this.tmpDialogbox1.setActiveTempDialogbox(false);
+    			this.currentTurnIndex = (this.currentTurnIndex + 1 ) % (this.entities.size()); // sert à incrémenter les tours (oui juste ça)
+
+                break;
+        }
+    });
     	
     }
+    
+    
     
     public void initializeBattle() {
         if(this.entities.isEmpty()) {
@@ -154,9 +158,8 @@ public class BattleScene extends BasicGameState {
             }
         }
         
-        //this.P1Name = Global.P1.getName();
-        //this.P2Name = Global.P2.getName();
-        
+        this.P1Name = Global.P1.getName();
+        this.P2Name = Global.P2.getName();        
     }
     
     @Override
@@ -166,10 +169,12 @@ public class BattleScene extends BasicGameState {
 
     @Override
     public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
+        g.drawImage(new Image("data/BattleScenes/Bottom.png").getScaledCopy(Global.width, Global.height), 0, 0);
         g.drawImage(new Image("data/BattleScenes/Foret.png").getScaledCopy(Global.width, Global.height), 0, 0);
+        
         this.initializeBattle();
         // gère l'affichage de la dialogBox pour l'entité qui joue le tour
-
+        
         if(this.currentTurnIndex == 0) {        	
         	this.dialogueBoxTourP1.renderForceDialogbox(g);
         	this.dialogueBoxTourP1.render(g);
@@ -177,8 +182,24 @@ public class BattleScene extends BasicGameState {
         	this.dialogueBoxTourP2.renderForceDialogbox(g);
         	this.dialogueBoxTourP2.render(g);
         } else {
-        	this.dialogueBoxTourCurrentMob.renderForceDialogbox(g);
-        	this.dialogueBoxTourCurrentMob.render(g);
+        	
+        	if(this.entities.get(currentTurnIndex).getHpActuel() < this.entities.get(currentTurnIndex).getHpMax()) {
+        		this.dialogueBoxTourCurrentMobSoin.renderForceDialogbox(g);
+            	this.dialogueBoxTourCurrentMobSoin.render(g);
+        	} else {
+        		int hit = ((Chaton) this.entities.get(currentTurnIndex)).griffesHit();
+        		this.dialogueBoxTourCurrentMobAttaque.renderForceDialogbox(g);
+            	this.dialogueBoxTourCurrentMobAttaque.render(g);
+            	
+            	if (!Global.P1.isDead()) { // foutre des dégats au plus faible (oui c'est du harcèlement)
+            		Global.P1.getHit(hit);
+            		System.out.println( "-"+ hit + " pour P1");
+            	} else {
+            		Global.P2.getHit(hit);
+            		System.out.println( "-"+ hit + " pour P2");
+            	}
+            	
+        	}
         }
     	//this.dialogueBox.render(g);
 
@@ -247,7 +268,7 @@ public class BattleScene extends BasicGameState {
         	            continue; // Si l'ennemi est null, passer au suivant
         	        }
         	        // Affichage du sprite de l'ennemi
-        	        Shape hitbox = new Rectangle(1400, 200+i*200, 48, 64);
+        	        Shape hitbox = new Rectangle(1400, 400+i*200, 48, 64);
         	        // Affichage de la hitbox
         	        g.draw(hitbox);
         	    }
@@ -258,14 +279,23 @@ public class BattleScene extends BasicGameState {
     	}
     	
     	
-    	//Si win ou loose
-    	if (this.isWin) {
-            sbg.enterState(2);
+    	//Si win 
+    	if (this.isWin()) {
+    		Global.P1.resetStats();
+    		Global.P2.resetStats();
+    		Global.mobs = new Mobs[4];
+    		//this.entities =  new ArrayList<>();
+            sbg.enterState(Global.actualId);
+            
     	}
     	
-    	if (this.isLoose) {
-            sbg.enterState(2);
-
+    	//Si loose
+    	if (Global.P1.isDead() && Global.P2.isDead()) {
+    		Global.P1.resetStats();
+    		Global.P2.resetStats();
+    		Global.mobs = new Mobs[4];
+    		//this.entities =  new ArrayList<>();
+            sbg.enterState(Global.actualId);
     	}
     	
     	this.tmpDialogbox1.renderTempDialgbox(g);
@@ -277,7 +307,7 @@ public class BattleScene extends BasicGameState {
     public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
 		Input input =gc.getInput();
 		boolean boolInput =input.isKeyPressed(Global.interract);
-    	
+    		
 		if(this.currentTurnIndex == 0) {			
 			this.dialogueBoxTourP1.forceDialogBox(boolInput,gc.getInput());
 			//this.currentTurnIndex = (this.currentTurnIndex + 1 ) % (this.entities.size()-1); // sert à incrémenter les tours (oui juste ça)
@@ -286,12 +316,25 @@ public class BattleScene extends BasicGameState {
 			this.dialogueBoxTourP2.forceDialogBox(boolInput,gc.getInput());
 			//this.currentTurnIndex = (this.currentTurnIndex + 1 ) % (this.entities.size()-1); // mais en ne depassant pas le nombre d'entités -1
 		} else {
-			this.dialogueBoxTourCurrentMob.forceDialogBox(boolInput,gc.getInput());
+			if(this.entities.get(currentTurnIndex).getHpActuel() < this.entities.get(currentTurnIndex).getHpMax()) {
+				this.dialogueBoxTourCurrentMobSoin.forceDialogBox(boolInput,gc.getInput());
+        	} else {
+        		this.dialogueBoxTourCurrentMobAttaque.forceDialogBox(boolInput,gc.getInput());
+        	}
 			//this.currentTurnIndex = (this.currentTurnIndex + 1 ) % (this.entities.size()-1); // oui c'est moche
 		}
     	
     	this.tmpDialogbox1.updateTempDialgbox(boolInput, gc);
     	 
+    }
+    
+    public boolean isWin() {
+    	for (int i = 0; i < this.enemy.length; i++) {
+    		if (!(enemy[i].isDead())) {
+    			return false;
+    		}
+    	}
+    	return true;
     }
 
     public int getID() {

@@ -28,6 +28,8 @@ public class Foret5 extends BasicGameState {
 	@Override
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
 		
+		Global.actualId = 15;
+		
 		g.drawImage(new Image("data/maps/Map005.png").getScaledCopy(Global.width, Global.height), 0, 0);
         
         try {
@@ -60,7 +62,7 @@ public class Foret5 extends BasicGameState {
 
 	@Override
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
-		Global.updatePlayerMovement(gc.getInput(),Global.CollisionMapForet5);
+		Global.updatePlayerMovement(gc.getInput(),Global.CollisionMapForet5,delta);
 		Global.P1.AnimateWhileMoove();
 
 	}

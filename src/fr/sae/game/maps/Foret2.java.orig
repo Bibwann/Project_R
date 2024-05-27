@@ -19,11 +19,15 @@ import fr.sae.mobes.Chaton;
 public class Foret2 extends BasicGameState{
 	Warp Warp1;
 	Warp Warp2;
+<<<<<<< HEAD
 	Warp Warp3;
 	Warp Warp4;
 	Warp Warp5;
 	Warp Warp6;
+=======
 	private boolean battle = true;
+
+>>>>>>> 2f48754f0e0bc7179aeae1ef531ad07907527f6d
 	public Foret2(int stateID) {
 	}
 
@@ -41,6 +45,7 @@ public class Foret2 extends BasicGameState{
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
 		
 		Global.actualId = 12;
+		
 		g.drawImage(new Image("data/maps/Map002.png").getScaledCopy(Global.width, Global.height), 0, 0);
         
         try {
@@ -78,12 +83,20 @@ public class Foret2 extends BasicGameState{
 
 	@Override
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
+		
 		Global.updatePlayerMovement(gc.getInput(),Global.CollisionMapForet2,delta);
 		Global.P1.AnimateWhileMoove();
 		
 //----------------------------------------------------------------------------------------------------------------------------
 	//Temp
 		//Lance un combat de force -- present pour le debug a retirer
+<<<<<<< HEAD
+
+		//Global.mobs[0]=new Chaton("chaton1", 1, null, null);
+		//Global.mobs[1]=new Chaton("chaton2", 1, null, null);
+
+        //sbg.enterState(100);
+=======
 		if (this.battle) {
 			this.battle=false;
 			Global.mobs[0]=new Chaton("chaton1", 1, null, null);
@@ -91,6 +104,7 @@ public class Foret2 extends BasicGameState{
 		}
 		
         sbg.enterState(100);
+>>>>>>> 2f48754f0e0bc7179aeae1ef531ad07907527f6d
 //----------------------------------------------------------------------------------------------------------------------------
 	}
 

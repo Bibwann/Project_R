@@ -83,7 +83,7 @@ public class Main  {
             Global.width= app.getScreenWidth();
             Global.height= app.getScreenHeight();
             
-            app.setDisplayMode(1920, 1080, true); // --> true = Pleine ecran / false = Fenestré 
+            app.setDisplayMode(1920, 1080, true); // --> true = Pleine ecran / false = Fenetré 
             //app.setDisplayMode(Global.width, Global.height, true); ---> Pourrais generer des bug ( ecran auto adapatif )
             //app.setDisplayMode(800, 600, false);
             

@@ -48,8 +48,8 @@ public abstract class Entity  {
 		this.sprite = sprite;
 	}
 	
-	public double dmgMultipler(int spellDmg) {
-		return (spellDmg*(1+((this.level)*0.05)));
+	public int dmgMultipler(int spellDmg) {
+		return (spellDmg*(1+(this.level)));
 	}
 	
 	public boolean isDead() {
@@ -67,5 +67,57 @@ public abstract class Entity  {
 	
 	public int getHpActuel() {
 		return this.hpActuel;
+	}
+
+	public int getManaActuel() {
+		return manaActuel;
+	}
+
+	public void setManaActuel(int manaActuel) {
+		this.manaActuel = manaActuel;
+	}
+
+	public int getHpMax() {
+		return hpMax;
+	}
+
+	public void setHpMax(int hpMax) {
+		this.hpMax = hpMax;
+	}
+
+	public int getManaMax() {
+		return manaMax;
+	}
+
+	public void setManaMax(int manaMax) {
+		this.manaMax = manaMax;
+	}
+
+	public int getDmg() {
+		return dmg;
+	}
+
+	public void setDmg(int dmg) {
+		this.dmg = dmg;
+	}
+
+	public String getClassname() {
+		return classname;
+	}
+
+	public void setClassname(String classname) {
+		this.classname = classname;
+	}
+
+	public Image getBattlesprite() {
+		return Battlesprite;
+	}
+
+	public void setBattlesprite(Image battlesprite) {
+		Battlesprite = battlesprite;
+	}
+
+	public void setHpActuel(int hpActuel) {
+		this.hpActuel = hpActuel;
 	}
 }

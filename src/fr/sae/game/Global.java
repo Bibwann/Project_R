@@ -259,7 +259,13 @@ public class Global {
 	public static Collisions CollisionMapForet3;
 	public static Collisions CollisionMapForet5;
 	public static Collisions CollisionMapForet6;
-	
+	public static Collisions CollisionMapForet7;
+	public static Collisions CollisionMapForet8;
+	public static Collisions CollisionMapForet9;
+	public static Collisions CollisionMapForet10;
+	public static Collisions CollisionMapForet11;
+	public static Collisions CollisionMapForet12;
+	public static Collisions CollisionMapForet13;
 	public static Collisions CollisionMapChateau1;
 	//Pour verifier si une touche est actuelleemnt pressé
 	public static InputHandler InputHandler;
@@ -316,7 +322,13 @@ public class Global {
 	    	CollisionMapForet3=new Collisions();
 	    	CollisionMapForet5=new Collisions();
 	    	CollisionMapForet6=new Collisions();
-	    	
+	    	CollisionMapForet7=new Collisions();
+	    	CollisionMapForet8=new Collisions();
+	    	CollisionMapForet9=new Collisions();
+	    	CollisionMapForet10=new Collisions();
+	    	CollisionMapForet11=new Collisions();
+	    	CollisionMapForet12=new Collisions();
+	    	CollisionMapForet13=new Collisions();
 	    	CollisionMapChateau1=new Collisions();
 
 	    	// Creer les collisions ici
@@ -324,7 +336,13 @@ public class Global {
 	    	CollisionsMapForet2();
 	    	CollisionsMapForet5();
 	    	CollisionsMapForet6();
-	    	
+	    	CollisionsMapForet7();
+	    	CollisionsMapForet8();
+	    	CollisionsMapForet9();
+	    	CollisionsMapForet10();
+	    	CollisionsMapForet11();
+	    	CollisionsMapForet12();
+	    	CollisionsMapForet13();
 
 	    	
 		} catch(Exception e){
@@ -418,6 +436,35 @@ public class Global {
 		CollisionMapForet5.addCollidable(new Rectangle(0, 0, 1920, 60));
 		
 	}
+	
+	public static void CollisionsMapForet7() {
+		
+	}
+	
+	public static void CollisionsMapForet8() {
+	
+	}
+	
+	public static void CollisionsMapForet9() {
+		
+	}
+	
+	public static void CollisionsMapForet10() {
+		
+	}
+	
+	public static void CollisionsMapForet11() {
+		
+	}
+	
+	public static void CollisionsMapForet12() {
+		
+	}
+	
+	public static void CollisionsMapForet13() {
+		
+	}
+	
 	
 	public static void switchModeControles() { //Fonction  propre permettant de savoir si on est en dialoge ou en deplacmeent libre
 		canMoovPlayer=!canMoovPlayer;

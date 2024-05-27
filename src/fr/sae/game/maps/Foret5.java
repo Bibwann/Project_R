@@ -13,13 +13,15 @@ import fr.sae.game.Warp;
 public class Foret5 extends BasicGameState {
 	Warp Warp1;
 	Warp Warp2;
+	Warp Warp3;
 	public Foret5(int stateID) {
 	}
 
 	@Override
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
-		this.Warp1= new Warp(0, 560, 10, Global.height-560, 1800, 860);
-		this.Warp2= new Warp(1910, 60, 10, 380, 40, 160);
+		this.Warp1= new Warp(0, 560, 10, Global.height-560, 1800, 860);//GAUCHE
+		this.Warp2= new Warp(1910, 60, 10, 380, 40, 160);//DROITE
+		this.Warp3= new Warp(0, 1070, 1160, 10, 400, 50);//BAS
 
 	}
 
@@ -36,8 +38,10 @@ public class Foret5 extends BasicGameState {
         	e.getMessage();
         	System.out.print(e);
         }
-        this.Warp1.warp(Global.P1, sbg, 11);
-        this.Warp2.warp(Global.P1, sbg, 12);
+        this.Warp1.warp(Global.P1, sbg, 11);//GAUCHE
+        this.Warp2.warp(Global.P1, sbg, 12);//DROITE
+        this.Warp3.warp(Global.P1, sbg, 17);//BAS
+        
 
 //--------------------------------------------------------------------------------------------------------------------------
 	//Temp	    
@@ -49,6 +53,7 @@ public class Foret5 extends BasicGameState {
 		    Global.CollisionMapForet5.drawCollisions(g);
 		    this.Warp1.draw(g);
 		    this.Warp2.draw(g);
+		    this.Warp3.draw(g);
 	    	}
 //--------------------------------------------------------------------------------------------------------------------------
 	}

@@ -69,29 +69,29 @@ public abstract class Player extends Entity{
         this.experienceBarrActu = experienceBarrActu;
     }
 
-    public void moveUp(float distance) {
+    public void moveUp(float distance, int delta) {
     	//this.UpSprite();
-        hitbox.setY(hitbox.getY() - distance * Global.speed); // Réduire la vitesse en ajustant le multiplicateur (ici 0.1f)
+        hitbox.setY(hitbox.getY() - distance * Global.speed*delta); // Réduire la vitesse en ajustant le multiplicateur (ici 0.1f)
     }
 
     // Méthode pour déplacer le joueur vers le bas
-    public void moveDown(float distance) {
+    public void moveDown(float distance, int delta) {
     	//this.DownSprite();
-        hitbox.setY(hitbox.getY() + distance * Global.speed);
+        hitbox.setY(hitbox.getY() + distance * Global.speed*delta);
 
     }
 
     // Méthode pour déplacer le joueur vers la gauche
-    public void moveLeft(float distance) {
+    public void moveLeft(float distance, int delta) {
     	//this.LeftSprite();
-        hitbox.setX(hitbox.getX() - distance * Global.speed);
+        hitbox.setX(hitbox.getX() - distance * Global.speed*delta);
 
     }
 
     // Méthode pour déplacer le joueur vers la droite
-    public void moveRight(float distance) {
+    public void moveRight(float distance, int delta) {
     	//this.RightSprite();
-        hitbox.setX(hitbox.getX() + distance * Global.speed);
+        hitbox.setX(hitbox.getX() + distance * Global.speed*delta);
     }
     
     public void BattleScene(Graphics g, int posY) {

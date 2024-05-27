@@ -153,7 +153,7 @@ public class Foret1 extends BasicGameState{
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
 		Input input =gc.getInput();
 		
-		Global.updatePlayerMovement(input, Global.CollisionMapForet1);
+		Global.updatePlayerMovement(input, Global.CollisionMapForet1,delta);
 		Global.P1.AnimateWhileMoove();
 		
 		//Structure obligatoire pour les dialogbox sinon ca marche po jsp pk

@@ -22,6 +22,7 @@ public class Underground2 extends BasicGameState {
 		this.Warp2= new Warp(330, 130, 60, 60, 1100, 600);
 	}
 
+	
 	@Override
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
 		
@@ -55,7 +56,7 @@ public class Underground2 extends BasicGameState {
 
 	@Override
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
-		Global.updatePlayerMovement(gc.getInput(),Global.CollisionMapForet6);
+		Global.updatePlayerMovement(gc.getInput(),Global.CollisionMapForet6,delta);
 		Global.P1.AnimateWhileMoove();
 		
 	}

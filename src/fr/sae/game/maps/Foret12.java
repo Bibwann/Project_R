@@ -22,6 +22,7 @@ public class Foret12 extends BasicGameState {
 		
 	}
 
+	
 	@Override
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
 		
@@ -55,7 +56,7 @@ public class Foret12 extends BasicGameState {
 
 	@Override
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
-		Global.updatePlayerMovement(gc.getInput(),Global.CollisionMapForet12);
+		Global.updatePlayerMovement(gc.getInput(),Global.CollisionMapForet12,delta);
 		Global.P1.AnimateWhileMoove();
 		
 	}

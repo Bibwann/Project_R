@@ -283,8 +283,7 @@ public class Global {
     	//Collision Foret du haut
     	CollisionMapForet1.addCollidable(new Rectangle(200, 0, 66, 320)); 
     	CollisionMapForet1.addCollidable(new Rectangle(266, 0, 66, 66)); 
-    	CollisionMapForet1.addCollidable(new Rectangle(728, 0, 530, 130)); 
-    	CollisionMapForet1.addCollidable(new Rectangle(1258, 0, 66, 66)); 
+    	CollisionMapForet1.addCollidable(new Rectangle(728, 0, 120, 130)); 
     	CollisionMapForet1.addCollidable(new Rectangle(794, 130, 400, 250)); 
     	CollisionMapForet1.addCollidable(new Rectangle(992, 380, 202, 66)); 
     	//Collision Taverne
@@ -302,6 +301,7 @@ public class Global {
     	//Collision panneau
     	CollisionMapForet1.addCollidable(new Rectangle(width-530,510,66,60)); 
 	}
+	
 	
 	public static void CollisionsMapForet6() {
 		//HAUT GAUCHE

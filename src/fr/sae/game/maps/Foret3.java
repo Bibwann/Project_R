@@ -46,6 +46,7 @@ public class Foret3 extends BasicGameState {
 		
 		g.drawImage(new Image("data/maps/Map003.png").getScaledCopy(Global.width, Global.height), 0, 0);
         
+		
         try {
 	    	Global.P1.Sprite(g);
 	    	Global.P1.getAnimation().stop();

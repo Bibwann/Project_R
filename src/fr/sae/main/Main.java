@@ -26,6 +26,7 @@ import fr.sae.menus.OptionMenu;
 import fr.sae.menus.SaveFileSelection;
 import fr.sae.menus.SetCharacterName;
 
+
 public class Main  {
     
     public static void main(String[] args) {

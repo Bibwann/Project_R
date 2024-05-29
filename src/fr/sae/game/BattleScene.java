@@ -278,15 +278,14 @@ public class BattleScene extends BasicGameState {
     	    }
     	}
     	
-    	
     	//Si win 
     	if (this.isWin()) {
+    		Global.canMoovPlayer=true;
     		Global.P1.resetStats();
     		Global.P2.resetStats();
     		Global.mobs = new Mobs[4];
     		//this.entities =  new ArrayList<>();
             sbg.enterState(Global.actualId);
-            
     	}
     	
     	//Si loose
@@ -325,6 +324,8 @@ public class BattleScene extends BasicGameState {
 		}
     	
     	this.tmpDialogbox1.updateTempDialgbox(boolInput, gc);
+    	Global.updatePlayerMovement(gc.getInput(),Global.CollisionMapForet2,delta);
+		Global.P1.AnimateWhileMoove();
     	 
     }
     

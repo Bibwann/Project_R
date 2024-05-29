@@ -45,6 +45,7 @@ public class Foret10 extends BasicGameState {
 //--------------------------------------------------------------------------------------------------------------------------
 	//Temp	    
 
+        
 	    //Affiche toutes les collisions de la map et du joueur
 	    if (true) {
 		    g.draw(Global.P1.getHitbox());
@@ -59,7 +60,7 @@ public class Foret10 extends BasicGameState {
 
 	@Override
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
-		Global.updatePlayerMovement(gc.getInput(),Global.CollisionMapForet10);
+		Global.updatePlayerMovement(gc.getInput(),Global.CollisionMapForet10,delta);
 		Global.P1.AnimateWhileMoove();
 		
 	}

@@ -27,6 +27,7 @@ public class Foret2 extends BasicGameState{
 	public Foret2(int stateID) {
 	}
 
+	
 	@Override
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
 		this.Warp1= new Warp(0, 60, 10, 380, 1860, 160);//G

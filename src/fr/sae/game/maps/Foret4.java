@@ -21,6 +21,7 @@ public class Foret4 extends BasicGameState {
 	public Foret4(int stateID) {
 	}
 
+	
 	@Override
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
 		this.Warp1= new Warp(180, 0, 140, 10, 290, 1020);//H
@@ -74,6 +75,7 @@ public class Foret4 extends BasicGameState {
 //--------------------------------------------------------------------------------------------------------------------------
 	}
 
+	
 	@Override
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
 		Global.updatePlayerMovement(gc.getInput(),Global.CollisionMapForet3,delta);

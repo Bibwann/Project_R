@@ -11,21 +11,22 @@ import fr.sae.game.Global;
 import fr.sae.game.Warp;
 
 public class Underground3 extends BasicGameState {
-	Warp Warp1;
+	//Warp Warp1;
 	Warp Warp2;
 	public Underground3(int stateID) {
 	}
 
 	@Override
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
-		this.Warp1= new Warp(860, 1070, 470, 10, 1100, 50);
-		this.Warp2= new Warp(330, 130, 60, 60, 1100, 600);
+		//this.Warp1= new Warp(860, 1070, 470, 10, 1100, 50);
+		this.Warp2= new Warp(190, 240, 60, 60, 330, 170);
 	}
 
+	
 	@Override
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
 		
-		g.drawImage(new Image("data/maps/Map006.png").getScaledCopy(Global.width, Global.height), 0, 0);
+		g.drawImage(new Image("data/MapsSouterain/Map016.png").getScaledCopy(Global.width, Global.height), 0, 0);
         
         try {
 	    	Global.P1.Sprite(g);
@@ -35,8 +36,8 @@ public class Underground3 extends BasicGameState {
         	e.getMessage();
         	System.out.print(e);
         }
-        this.Warp1.warp(Global.P1, sbg, 11);
-        this.Warp2.warp(Global.P1, sbg, 16);
+        //this.Warp1.warp(Global.P1, sbg, 11);
+        this.Warp2.warp(Global.P1, sbg, 16);//GROTTE SORTIE
        
 
 //--------------------------------------------------------------------------------------------------------------------------
@@ -47,7 +48,7 @@ public class Underground3 extends BasicGameState {
 		    g.draw(Global.P1.getHitbox());
 		    
 		    Global.CollisionMapForet6.drawCollisions(g);
-		    this.Warp1.draw(g);
+		    //this.Warp1.draw(g);
 		    this.Warp2.draw(g);
 	    	}
 //--------------------------------------------------------------------------------------------------------------------------
@@ -55,7 +56,7 @@ public class Underground3 extends BasicGameState {
 
 	@Override
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
-		Global.updatePlayerMovement(gc.getInput(),Global.CollisionMapForet6);
+		Global.updatePlayerMovement(gc.getInput(),Global.CollisionMapForet6,delta);
 		Global.P1.AnimateWhileMoove();
 		
 	}

@@ -22,6 +22,7 @@ public class Foret6 extends BasicGameState {
 		this.Warp2= new Warp(330, 130, 60, 60, 1100, 600);
 	}
 
+
 	@Override
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
 		
@@ -38,9 +39,10 @@ public class Foret6 extends BasicGameState {
         	System.out.print(e);
         }
         this.Warp1.warp(Global.P1, sbg, 11);
-        this.Warp2.warp(Global.P1, sbg, 16);
+        this.Warp2.warp(Global.P1, sbg, 26);//GROTTE
        
 
+        
 //--------------------------------------------------------------------------------------------------------------------------
 	//Temp	    
 

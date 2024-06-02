@@ -120,4 +120,11 @@ public abstract class Entity  {
 	public void setHpActuel(int hpActuel) {
 		this.hpActuel = hpActuel;
 	}
+	
+	public void healEntity() {
+		if(this.hpActuel + 50 > this.hpMax) {
+			this.hpActuel = this.hpMax;
+		} else 
+			this.hpActuel += 50;
+	}
 }

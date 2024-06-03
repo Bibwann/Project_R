@@ -85,6 +85,7 @@ public class Foret1 extends BasicGameState{
 
 	                        case 1:
 	                        	this.tmpDialogbox1.setActiveTempDialogbox(false);
+	                        	break;
 
 	                    }
 	                    

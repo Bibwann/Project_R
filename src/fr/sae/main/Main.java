@@ -8,18 +8,11 @@ import fr.sae.game.Global;
 import fr.sae.game.cinematiques.IntroGame;
 import fr.sae.game.maps.Chateau1;
 import fr.sae.game.maps.Foret1;
-import fr.sae.game.maps.Foret10;
-import fr.sae.game.maps.Foret11;
-import fr.sae.game.maps.Foret12;
-import fr.sae.game.maps.Foret13;
 import fr.sae.game.maps.Foret2;
 import fr.sae.game.maps.Foret3;
 import fr.sae.game.maps.Foret4;
 import fr.sae.game.maps.Foret5;
 import fr.sae.game.maps.Foret6;
-import fr.sae.game.maps.Foret7;
-import fr.sae.game.maps.Foret8;
-import fr.sae.game.maps.Foret9;
 import fr.sae.menus.ClassesSelect;
 import fr.sae.menus.MainMenu;
 import fr.sae.menus.OptionMenu;
@@ -59,13 +52,6 @@ public class Main  {
                     this.addState(new Foret4(14));
                     this.addState(new Foret5(15));
                     this.addState(new Foret6(16));
-                    this.addState(new Foret7(17));
-                    this.addState(new Foret8(18));
-                    this.addState(new Foret9(19));
-                    this.addState(new Foret10(20));
-                    this.addState(new Foret11(21));
-                    this.addState(new Foret12(22));
-                    this.addState(new Foret13(23));
                     
                     
                     

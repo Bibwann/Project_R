@@ -63,7 +63,6 @@ public class BattleScene extends BasicGameState {
                 // Gérer l'attaque
             	this.tmpDialogbox1.setActiveTempDialogbox(false);
     			this.currentTurnIndex = (this.currentTurnIndex + 1 ) % (this.entities.size()); // sert à incrémenter les tours (oui juste ça)
-    			
     			this.tmpDialogbox1.setChoices(Arrays.asList("bob", "bob mais en mieux"), choice2 -> {
                     switch (choice2) {
                         case 0:
@@ -73,7 +72,6 @@ public class BattleScene extends BasicGameState {
                             
                             //Permet de dire qu'il s'agissait du dernier choix
                             this.tmpDialogbox1.setChoices(Arrays.asList(),null);
-                            
                             break;
 
                         case 1:
@@ -93,8 +91,6 @@ public class BattleScene extends BasicGameState {
 
                 break;
             }
-        	this.tmpDialogbox1.setActiveTempDialogbox(false);
-
     });
     	
     	this.dialogueBoxTourP2 = new DialogueBox(new String[] {
@@ -142,7 +138,7 @@ public class BattleScene extends BasicGameState {
     					"     \n" +
     					"           Bob attaque"
     	});
-    		
+    	
     	
     	this.dialogueBoxTourCurrentMobAttaque.setChoices(Arrays.asList("Continuer"), choice -> {
             switch (choice) {
@@ -332,9 +328,9 @@ public class BattleScene extends BasicGameState {
 			//this.currentTurnIndex = (this.currentTurnIndex + 1 ) % (this.entities.size()-1); // mais en ne depassant pas le nombre d'entités -1
 		} else {
 			if(this.entities.get(currentTurnIndex).getHpActuel() < this.entities.get(currentTurnIndex).getHpMax()) {
-				this.dialogueBoxTourCurrentMobSoin.forceDialogBox(boolInput);
+				this.dialogueBoxTourCurrentMobSoin.forceDialogBox(boolInput,gc.getInput());
         	} else {
-        		this.dialogueBoxTourCurrentMobAttaque.forceDialogBox(boolInput);
+        		this.dialogueBoxTourCurrentMobAttaque.forceDialogBox(boolInput,gc.getInput());
         	}
 			//this.currentTurnIndex = (this.currentTurnIndex + 1 ) % (this.entities.size()-1); // oui c'est moche
 		}
@@ -359,22 +355,20 @@ public class BattleScene extends BasicGameState {
     }
     
     public void tour(Graphics g) {
-    	if((this.playedTurn % this.entities.size()) != this.currentTurnIndex) {
+    	
+    	System.out.println(Global.P1.isDead());
+    	if(this.playedTurn % this.entities.size() != this.currentTurnIndex) {
     		if(this.currentTurnIndex == 0) {        	
     			this.dialogueBoxTourP1.renderForceDialogbox(g);
     			this.dialogueBoxTourP1.render(g);
-    			this.playedTurn ++;
     		} else if(this.currentTurnIndex == 2) {        	
     			this.dialogueBoxTourP2.renderForceDialogbox(g);
     			this.dialogueBoxTourP2.render(g);
-    			this.playedTurn ++;
     		} else {
-
     			if(this.entities.get(currentTurnIndex).getHpActuel() < this.entities.get(currentTurnIndex).getHpMax()) {
     				this.dialogueBoxTourCurrentMobSoin.renderForceDialogbox(g);
     				this.dialogueBoxTourCurrentMobSoin.render(g);
     			} else {
-
     				int hit = ((Chaton) this.entities.get(currentTurnIndex)).griffesHit();
     				this.dialogueBoxTourCurrentMobAttaque.renderForceDialogbox(g);
     				this.dialogueBoxTourCurrentMobAttaque.render(g);
@@ -382,12 +376,26 @@ public class BattleScene extends BasicGameState {
     					Global.P1.getHit(hit);
     					//System.out.println( "-"+ hit + " pour P1");
     					if( Global.P1.isDead()) {
-    						this.dialogueBoxTourCurrentMobAttaque= new DialogueBox(new String[] {
-	    			    			"\n "+
-	    			    					"     \n" +
-	    			    					"           Bob attaque " + Global.P1.getName() +"     \n"+
-	    			    					"            " + Global.P1.getName() + " est mort"
-	    			    	});
+    						
+							this.dialogueBoxTourCurrentMobAttaque.setChoices(Arrays.asList("Continuer"), choice2 -> {
+				                   switch (choice2) {
+	
+				                       case 0:
+				                    	   this.tmpDialogbox1.setActiveTempDialogbox(true);
+				                           this.tmpDialogbox1.setMessages(new String[] {
+					    			    			"\n "+
+					    			    					"     \n" +
+					    			    					"           Bob attaque " + Global.P1.getName() +"     \n"+
+					    			    					"            " + Global.P1.getName() + " est mort"});
+				                            
+				                            //Permet de dire qu'il s'agissait du dernier choix
+				                           this.tmpDialogbox1.setChoices(Arrays.asList(),null);
+				                           break;
+	
+				                   }
+				                    
+				               });
+							this.tmpDialogbox1.setActiveTempDialogbox(false);
     					} else {    						
     						this.dialogueBoxTourCurrentMobAttaque= new DialogueBox(new String[] {
     								"\n "+
@@ -404,7 +412,7 @@ public class BattleScene extends BasicGameState {
 	    			    			"\n "+
 	    			    					"     \n" +
 	    			    					"           Bob attaque " + Global.P2.getName() +"     \n"+
-	    			    							"            " + Global.P2.getName()+ " est mort"
+	    			    							"            " + Global.P2.getName() + " est mort"
 	    			    	});
     					} else {    						
     						this.dialogueBoxTourCurrentMobAttaque= new DialogueBox(new String[] {
@@ -418,6 +426,7 @@ public class BattleScene extends BasicGameState {
     				
     			}
     		}
+    		this.playedTurn ++;
     	}
     }
 }

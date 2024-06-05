@@ -29,9 +29,9 @@ public abstract class Mobs extends Entity {
 		battleHitbox = battlehitbox;
 	}
 	
-	private Image getBattleSprite() { //Sprite de combat
-		return this.Battlesprite.getSubImage(0, 0, 48, 64).getFlippedCopy(true, false);	
-	}
+	 private Image getBattleSprite() { //Sprite de combat
+        return this.Battlesprite.getSubImage(142, 48, 48, 48).getFlippedCopy(false, false);    
+    }
 	
 	public void moveUp(float distance) {
     	//this.UpSprite();
@@ -59,6 +59,6 @@ public abstract class Mobs extends Entity {
     }
     
     public void BattleScene(Graphics g, int posY) {
-    	g.drawImage(this.getBattleSprite(), Global.PlayerBattleDistance, posY);
-	}
+        g.drawImage(this.getBattleSprite(), Global.MobsBattleDistance, posY);
+    }
 }

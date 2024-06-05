@@ -22,6 +22,7 @@ public abstract class Player extends Entity{
     
     protected int Orientation;
 	private Animation animation;
+	protected String className;
 
     public Player(String name, int level, Image sprite,Image BattleSprite, Image chibi) {
         super(name, level, sprite,BattleSprite);
@@ -179,5 +180,8 @@ public abstract class Player extends Entity{
 		}
 	}
 	
+	public String getClassName() {
+		return this.className;
+	}
 
 }

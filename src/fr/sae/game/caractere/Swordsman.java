@@ -10,10 +10,12 @@ public class Swordsman extends Player{
 		
 		this.hpMax=120;
 		this.manaMax=40;
-		this.dmg=7;
+		this.dmg=5000;
 		
 		this.hpActuel=120;
 		this.manaActuel=40;
+		
+		this.className = "Swords-Man";
 		
 	}
 
@@ -23,6 +25,5 @@ public class Swordsman extends Player{
 	public double swordHit() {
 		return (this.dmgMultipler(this.dmg)*this.dmg);
 	}
-	
-	
+		
 }

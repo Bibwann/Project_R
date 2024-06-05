@@ -13,14 +13,14 @@ public class Berserker extends Player{
 	public Berserker(String name, int level, Image sprite) throws SlickException {
 		super(name, level, new Image("data/Berserker/Walk.png"), new Image("data/Berserker/Battler.png"), new Image("data/Berserker/Face.png"));
 		
-		this.classname="Berserker";
 
 		this.hpMax=100;
 		this.manaMax=0;
-		this.dmg=5;
+		this.dmg=5000;
 		
 		this.hpActuel=100;
 		this.manaActuel=0;
+		this.className = "Berserker";
 		this.inventory=new ArrayList<>(Arrays.asList(0,1,2));
 		
 		

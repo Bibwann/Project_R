@@ -24,8 +24,10 @@ public class Foret1 extends BasicGameState{
 	
 	Warp Warp1;
 	Warp Warp2;
+	//Warp Warp3;
 	DialogueBox dialogueBoxPanneau; 
     DialogueBox dialogueBoxBranche;
+    DialogueBox dialogueBoxFenetre;
     
 	private DialogueBox tmpDialogbox1= new DialogueBox(new String[] {});
 
@@ -39,6 +41,7 @@ public class Foret1 extends BasicGameState{
 
 		this.Warp1= new Warp(Global.width-10, Global.height-320, 10, 320, 40, 860);
 		this.Warp2= new Warp(860, 0, 530, 10, 1000, 1020);
+		//this.Warp3= new Warp(500, 500, 60, 60, 150, 210);
 
 //-----------------------------------------------------------------------------------------------------------------------
 //Ici se trouve l'horreur des dialogbox --> ces dialogbox servent d'exemples
@@ -55,6 +58,52 @@ public class Foret1 extends BasicGameState{
 			    "\n"
 			});	
 		this.dialogueBoxPanneau.setTriggerZone(Global.width-530,570,66,10);
+
+		
+		
+		//Dialogbox Avec choix multiples
+				this.dialogueBoxFenetre = new DialogueBox(new String[] {
+						"\n "+
+					    "     \n" +
+					    "           Vous distinguez une ombre imposante derrière le rideau"
+			        });
+			    this.dialogueBoxFenetre.setTriggerZone(400, 120, 60, 80);
+			    
+			    this.dialogueBoxFenetre.setChoices(Arrays.asList("Toquer à la fenêtre", "Partir"), choice1 -> {
+		            switch (choice1) {
+			            case 0:
+			            	this.tmpDialogbox1.setActiveTempDialogbox(true);
+			                this.tmpDialogbox1.setMessages(new String[] {"\n"+"\n"+"  L'ombre semble se déplace et se dirige vers l'armoire situé au fond de la piéce"});
+			                //Ajoutez recursivement des choix ici de la meme maniere que moi
+
+			                this.tmpDialogbox1.setChoices(Arrays.asList("Frapper plus fort contre la fenêtre", "Se retourner et partir en courant"), choice2 -> {
+			                    switch (choice2) {
+
+			                        case 0:
+			                        	this.tmpDialogbox1.setActiveTempDialogbox(true);
+			                            this.tmpDialogbox1.setMessages(new String[] {"\n"+"\n"+"      Une voie s'élève derrière la vitre : Cessez Immediatement !! "});
+			                            
+			                            //Permet de dire qu'il s'agissait du dernier choix
+			                            this.tmpDialogbox1.setChoices(Arrays.asList(),null);
+			                            break;
+
+			                        case 1:
+			                        	this.tmpDialogbox1.setActiveTempDialogbox(false);
+
+			                    }
+			                    
+			                });
+			                
+			                break;
+			                
+			            case 1:
+			            	this.tmpDialogbox1.setActiveTempDialogbox(false);
+			            	break;
+
+		            }       
+		     });
+		
+		
 
 
 		//Dialogbox Avec choix multiples
@@ -77,7 +126,7 @@ public class Foret1 extends BasicGameState{
 
 	                        case 0:
 	                        	this.tmpDialogbox1.setActiveTempDialogbox(true);
-	                            this.tmpDialogbox1.setMessages(new String[] {"\n"+"\n"+"           AIE !!!!!!!!!"});
+	                            this.tmpDialogbox1.setMessages(new String[] {"\n"+"\n"+"           Dans les ténèbres de la nuit, les félins planifient notre chute."});
 	                            
 	                            //Permet de dire qu'il s'agissait du dernier choix
 	                            this.tmpDialogbox1.setChoices(Arrays.asList(),null);
@@ -85,7 +134,6 @@ public class Foret1 extends BasicGameState{
 
 	                        case 1:
 	                        	this.tmpDialogbox1.setActiveTempDialogbox(false);
-	                        	break;
 
 	                    }
 	                    
@@ -115,6 +163,7 @@ public class Foret1 extends BasicGameState{
         
         dialogueBoxPanneau.render(g);
         dialogueBoxBranche.render(g);
+        dialogueBoxFenetre.render(g);
 
 
         try {
@@ -128,7 +177,7 @@ public class Foret1 extends BasicGameState{
         
 		this.Warp1.warp(Global.P1, sbg, 15);
 		this.Warp2.warp(Global.P1, sbg, 16);
-
+		//this.Warp3.warp(Global.P1, sbg, 26);//TEST GROTTE TP
         //Obligatoire, premet de rendre a l'ecran la dialogbox temp quand elle est necessaire
         this.tmpDialogbox1.renderTempDialgbox(g);
         
@@ -136,16 +185,18 @@ public class Foret1 extends BasicGameState{
 	//Temp	     
 
 	    //Affiche toutes les collisions de la map et du joueur
-	    if (true) {
+	    if (false) {
 		    g.draw(Global.P1.getHitbox());
 		    
 		    Global.CollisionMapForet1.drawCollisions(g);
 		    
 		    this.dialogueBoxPanneau.draw(g);
 		    this.dialogueBoxBranche.draw(g);
+		    this.dialogueBoxFenetre.draw(g);
 
 		    this.Warp1.draw(g);
 		    this.Warp2.draw(g);
+		    //this.Warp3.draw(g);
 	    	}
 //--------------------------------------------------------------------------------------------------------------------------
 
@@ -166,6 +217,7 @@ public class Foret1 extends BasicGameState{
         
 		//Dialogbox avec input --> avec choix
         this.dialogueBoxBranche.dialogBox(i,gc.getInput());
+        this.dialogueBoxFenetre.dialogBox(i,gc.getInput());
         
         
         //Structure obligatoire qui check l'etat de la dialogbox temp

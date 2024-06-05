@@ -10,7 +10,7 @@ public class Swordsman extends Player{
 		
 		this.hpMax=120;
 		this.manaMax=40;
-		this.dmg=5000;
+		this.dmg=10;
 		
 		this.hpActuel=120;
 		this.manaActuel=40;

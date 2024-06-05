@@ -27,7 +27,7 @@ public class BattleScene extends BasicGameState {
     private boolean playedTurn = true;
     private int P1Potions = 5;
     private int P2Potions = 5;
-    private int EnemiesPotions = 20;
+    private int EnemiesPotions = 7;
     private int hit;
     private int confusedDebuf = 0;
     private String enemyMessage;
@@ -168,7 +168,7 @@ public class BattleScene extends BasicGameState {
     		Global.P2.resetStats();
     		Global.mobs = new Mobs[4];
 //    		this.entities =  new ArrayList<>();
-            sbg.enterState(12);
+            sbg.enterState(Global.actualId);
     	}
     	
     	//Si loose
@@ -382,7 +382,7 @@ public class BattleScene extends BasicGameState {
         			}   
         		case 2: // Passer son tour
         			
-        			this.confusedDebuf += 7;
+        			this.confusedDebuf += 4;
         			
         			this.tmpDialogbox1.setMessages(new String[] { "Vous passez votre tour, \nMais pourquoi ? L'enemi ne comprend pas et semble destabilisé"});
         				

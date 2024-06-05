@@ -11,7 +11,7 @@ public class Mage extends Player{
 
 		this.hpMax=80;
 		this.manaMax=100;
-		this.dmg=8;
+		this.dmg=15;
 		
 		this.hpActuel=80;
 		this.manaActuel=100;

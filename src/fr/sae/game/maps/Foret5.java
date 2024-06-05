@@ -13,6 +13,7 @@ import org.newdawn.slick.state.StateBasedGame;
 import fr.sae.game.DialogueBox;
 import fr.sae.game.Global;
 import fr.sae.game.Warp;
+import fr.sae.mobes.Chaton;
 
 public class Foret5 extends BasicGameState {
 	Warp Warp1;
@@ -163,6 +164,20 @@ public class Foret5 extends BasicGameState {
 		
 		//Structure obligatoire qui check l'etat de la dialogbox temp
         this.tmpDialogbox2.updateTempDialgbox(i, gc);
+        
+      //----------------------------------------------------------------------------------------------------------------------------
+    	//Temp
+    		//Lance un combat de force -- present pour le debug a retirer
+    		if (Global.tmpVarLaunchBattleScene) {
+    			Global.canMoovPlayer=false;
+    			Global.tmpVarLaunchBattleScene=false;
+    			Global.mobs[0]=new Chaton("Chat-Pitaine", 1);
+    			Global.mobs[1]=new Chaton("Chat-Thon", 1);
+    	        sbg.enterState(100);
+
+    		}
+    		
+    //----------------------------------------------------------------------------------------------------------------------------
 	}
 
 	@Override

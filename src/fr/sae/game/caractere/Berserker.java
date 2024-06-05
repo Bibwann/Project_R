@@ -16,7 +16,7 @@ public class Berserker extends Player{
 
 		this.hpMax=100;
 		this.manaMax=0;
-		this.dmg=5000;
+		this.dmg=10;
 		
 		this.hpActuel=100;
 		this.manaActuel=0;

@@ -79,6 +79,8 @@ public class Foret1 extends BasicGameState{
 	                        	this.tmpDialogbox1.setActiveTempDialogbox(true);
 	                            this.tmpDialogbox1.setMessages(new String[] {"\n"+"\n"+"           AIE !!!!!!!!!"});
 	                            
+	                            Global.egg1="Special Thanks: Sarah Barlatier";
+	                            
 	                            //Permet de dire qu'il s'agissait du dernier choix
 	                            this.tmpDialogbox1.setChoices(Arrays.asList(),null);
 	                            break;
@@ -107,6 +109,7 @@ public class Foret1 extends BasicGameState{
 
 	@Override
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
+		sbg.enterState(12);
 
 		Global.actualId = 11;
 		

@@ -14,6 +14,8 @@ import fr.sae.game.maps.Foret4;
 import fr.sae.game.maps.Foret5;
 import fr.sae.game.maps.Foret6;
 import fr.sae.menus.ClassesSelect;
+import fr.sae.menus.Credits;
+import fr.sae.menus.GameOver;
 import fr.sae.menus.MainMenu;
 import fr.sae.menus.OptionMenu;
 import fr.sae.menus.SaveFileSelection;
@@ -38,6 +40,8 @@ public class Main  {
                     this.addState(new OptionMenu(3));
                     this.addState(new SetCharacterName(4));
                     this.addState(new ClassesSelect(5));
+                    this.addState(new GameOver(7));
+                    this.addState(new Credits(8));
 
                     
                     //Cinematiques

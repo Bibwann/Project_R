@@ -3,6 +3,7 @@ package fr.sae.game;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import org.lwjgl.Sys;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
@@ -15,18 +16,17 @@ import org.newdawn.slick.state.StateBasedGame;
 import fr.sae.game.Global;
 import fr.sae.game.caractere.Entity;
 import fr.sae.game.caractere.Mobs;
+import fr.sae.game.caractere.Player;
 import fr.sae.mobes.Chaton;
 
 public class BattleScene extends BasicGameState {
-
     private Mobs[] enemy;
     private int currentTurn=0; // Ajout de la variable currentTurn
-    private DialogueBox dialogueBox; // Ajout de la variable dialogueBox
-    private DialogueBox dialogueBoxTourP1;
-    private DialogueBox dialogueBoxTourP2;
-    private DialogueBox dialogueBoxTourCurrentMobAttaque;
-    private DialogueBox dialogueBoxTourCurrentMobSoin;
-    private DialogueBox tmpDialogbox1= new DialogueBox(new String[] {});
+    
+    private DialogueBox tmpDialogbox1= new DialogueBox(new String[] {"Le combat commence"});
+    private DialogueBox tmpDialogbox2= new DialogueBox(new String[] {});
+
+    
     private String P1Name = "";
     private String P2Name = "";
     private int P1Potions = 5;
@@ -42,142 +42,19 @@ public class BattleScene extends BasicGameState {
 
     public BattleScene(int stateID) {
         this.enemy = Global.mobs;
-        
         this.currentTurn = 0; // Initialisation de currentTurn à 0
-
-        // Initialisation de la DialogueBox
-        this.dialogueBox = new DialogueBox(new String[] {
-            "C'est votre tour. Que voulez-vous faire ?",
-            "C'est le tour de l'ennemi."
-        });
-       
         
-        this.dialogueBoxTourP1 = new DialogueBox(new String[] {
-    			"\n "+
-    					"     \n" +
-    					"           C'est à vous de jouer"
-    	});
-    	this.dialogueBoxTourP1.setChoices(Arrays.asList("Attaquer", "Se soigner"), choice -> {
-            switch (choice) {
-            case 0:
-                // Gérer l'attaque
-            	this.tmpDialogbox1.setActiveTempDialogbox(false);
-    			this.currentTurnIndex = (this.currentTurnIndex + 1 ) % (this.entities.size()); // sert à incrémenter les tours (oui juste ça)
-    			
-    			this.tmpDialogbox1.setChoices(Arrays.asList("bob", "bob mais en mieux"), choice2 -> {
-                    switch (choice2) {
-                        case 0:
-                        	this.tmpDialogbox1.setActiveTempDialogbox(true);
-                        	this.enemy[0].getHit(Global.P1.getDmg());
-                            //this.tmpDialogbox1.setMessages(new String[] {"\n"+"\n"+"           AIE !!!!!!!!!"});
-                            
-                            //Permet de dire qu'il s'agissait du dernier choix
-                            this.tmpDialogbox1.setChoices(Arrays.asList(),null);
-                            
-                            break;
-
-                        case 1:
-                        	this.tmpDialogbox1.setActiveTempDialogbox(false);
-                        	this.enemy[1].getHit(Global.P1.getDmg());
-
-                    }
-    			});
-
-                break;
-            case 1:
-                // Gérer le soin
-            	this.tmpDialogbox1.setActiveTempDialogbox(false);
-    			this.currentTurnIndex = (this.currentTurnIndex + 1 ) % (this.entities.size()); // sert à incrémenter les tours (oui juste ça)
-    			Global.P1.healEntity();
-    			this.P1Potions --;
-
-                break;
-            }
-        	this.tmpDialogbox1.setActiveTempDialogbox(false);
-
-    });
-    	
-    	this.dialogueBoxTourP2 = new DialogueBox(new String[] {
-    			"\n "+
-    					"     \n" +
-    					"           C'est à vous de jouer"
-    	});
-    	this.dialogueBoxTourP2.setChoices(Arrays.asList("Attaquer", "Se soigner"), choice -> {
-            switch (choice) {
-            case 0:
-                // Gérer l'attaque
-            	this.tmpDialogbox1.setActiveTempDialogbox(false);
-    			this.currentTurnIndex = (this.currentTurnIndex + 1 ) % (this.entities.size()); // sert à incrémenter les tours (oui juste ça)
-    			this.tmpDialogbox1.setChoices(Arrays.asList("bob", "bob mais en mieux"), choice2 -> {
-                    switch (choice2) {
-                        case 0:
-                        	this.tmpDialogbox1.setActiveTempDialogbox(true);
-                        	this.enemy[0].getHit(Global.P2.getDmg());
-                            //this.tmpDialogbox1.setMessages(new String[] {"\n"+"\n"+"           AIE !!!!!!!!!"});
-                            
-                            //Permet de dire qu'il s'agissait du dernier choix
-                            this.tmpDialogbox1.setChoices(Arrays.asList(),null);
-                            break;
-
-                        case 1:
-                        	this.tmpDialogbox1.setActiveTempDialogbox(false);
-                        	this.enemy[1].getHit(Global.P2.getDmg());
-                        	break;
-                    }
-    			});
-    			
-                break;
-            case 1:
-                // Gérer le soin
-            	this.tmpDialogbox1.setActiveTempDialogbox(false);
-    			this.currentTurnIndex = (this.currentTurnIndex + 1 ) % (this.entities.size()); // sert à incrémenter les tours (oui juste ça)
-    			Global.P2.healEntity();
-    			this.P2Potions --;
-                break;
-           }
-    });
-    	
-    	this.dialogueBoxTourCurrentMobAttaque= new DialogueBox(new String[] {
-    			"\n "+
-    					"     \n" +
-    					"           Bob attaque"
-    	});
-    		
-    	
-    	this.dialogueBoxTourCurrentMobAttaque.setChoices(Arrays.asList("Continuer"), choice -> {
-            switch (choice) {
-            case 0:
-                // Gérer l'attaque
-            	this.tmpDialogbox1.setActiveTempDialogbox(false);
-    			this.currentTurnIndex = (this.currentTurnIndex + 1 ) % (this.entities.size()); // sert à incrémenter les tours (oui juste ça)
-
-                break;
-        }
-    });
-    	
-    	this.dialogueBoxTourCurrentMobSoin= new DialogueBox(new String[] {
-    		"\n "+
-					"     \n" +
-					"           Bob se soigne"
-    	});
-    	
-    	this.dialogueBoxTourCurrentMobSoin.setChoices(Arrays.asList("Continuer"), choice -> {
-            switch (choice) {
-            case 0:
-                // Gérer l'attaque
-            	this.tmpDialogbox1.setActiveTempDialogbox(false);
-    			this.currentTurnIndex = (this.currentTurnIndex + 1 ) % (this.entities.size()); // sert à incrémenter les tours (oui juste ça)
-
-                break;
-        }
-    });
     	
     }
     
     
     
     public void initializeBattle() {
+
         if(this.entities.isEmpty()) {
+        	
+        	this.tmpDialogbox1.setActiveTempDialogbox(true);
+        	
         	entities.add(Global.P1);
             
             for(int i=0; i < this.enemy.length; i++) {
@@ -188,8 +65,6 @@ public class BattleScene extends BasicGameState {
             		entities.add(this.enemy[i]);
             	}
             }
-            this.P1Name = Global.P1.getName();
-            this.P2Name = Global.P2.getName();   
         }
     }
         
@@ -198,6 +73,8 @@ public class BattleScene extends BasicGameState {
     public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
         // Initialisation des ressources de la scène de combat
     	this.tmpDialogbox1.setTriggerZone(-1, -1, 0, 0);
+    	this.tmpDialogbox2.setTriggerZone(-1, -1, 0, 0);
+
     }
 
     @Override
@@ -207,10 +84,6 @@ public class BattleScene extends BasicGameState {
         
         this.initializeBattle();
         // gère l'affichage de la dialogBox pour l'entité qui joue le tour
-        
-    	//this.dialogueBox.render(g);
-
-        // Dessin des éléments de la scène de combat
 
         // Dessin des joueurs à gauche
     	try {
@@ -263,7 +136,12 @@ public class BattleScene extends BasicGameState {
     	            continue; // Si l'ennemi est null, passer au suivant
     	        }
     	        // Affichage du sprite de l'ennemi
-    	        g.drawImage(this.enemy[i].getSprite(), 550, 200 + i * 100);
+    	        try {
+    	        	this.enemy[i].BattleScene(g, Global.height / this.enemy.length * (i+1));
+    	        }catch(Exception e) {
+    	        	e.getMessage();
+    	        }
+    	        //g.drawImage(this.enemy[i].getSprite(), 550, 200 + i * 100);
     	    }
     	} catch(Exception e) {
     	    //System.out.println(e.getMessage());
@@ -291,57 +169,38 @@ public class BattleScene extends BasicGameState {
     		Global.P1.resetStats();
     		Global.P2.resetStats();
     		Global.mobs = new Mobs[4];
-    		//this.entities =  new ArrayList<>();
+    		this.entities =  new ArrayList<>();
             sbg.enterState(Global.actualId);
     	}
     	
     	//Si loose
-    	if (Global.P1.isDead() && Global.P2.isDead()) {
+    	if (this.isLoose()) {
     		Global.P1.resetStats();
     		Global.P2.resetStats();
     		Global.mobs = new Mobs[4];
-    		//this.entities =  new ArrayList<>();
+    		this.entities =  new ArrayList<>();
             sbg.enterState(Global.actualId);
     	}
-    	if(!isWin() && !(Global.P1.isDead() && Global.P2.isDead())) {    		
+    	
+    	if(!this.isWin() || !this.isLoose()) {    		
     		this.tmpDialogbox1.renderTempDialgbox(g);
-    		this.dialogueBoxTourP1.render(g);
-    		this.dialogueBox.render(g); // Ajout de la variable dialogueBox
-    		this.dialogueBoxTourP1.render(g);
-    		this.dialogueBoxTourP2.render(g);
-    		this.dialogueBoxTourCurrentMobAttaque.render(g);
-    		this.dialogueBoxTourCurrentMobSoin.render(g);
-    		
+    		this.tmpDialogbox1.renderTempDialgbox(g);
+
     		tour(g);
     	}
-    	//this.dialogueBox.renderForceDialogbox(g);
 
     }
 
     @Override
     public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
+
 		Input input =gc.getInput();
 		boolean boolInput =input.isKeyPressed(Global.interract);
-    		
-		if(this.currentTurnIndex == 0) {			
-			this.dialogueBoxTourP1.forceDialogBox(boolInput,gc.getInput());
-			//this.currentTurnIndex = (this.currentTurnIndex + 1 ) % (this.entities.size()-1); // sert à incrémenter les tours (oui juste ça)
 
-		} else if (this.currentTurnIndex == 2) {
-			this.dialogueBoxTourP2.forceDialogBox(boolInput,gc.getInput());
-			//this.currentTurnIndex = (this.currentTurnIndex + 1 ) % (this.entities.size()-1); // mais en ne depassant pas le nombre d'entités -1
-		} else {
-			if(this.entities.get(currentTurnIndex).getHpActuel() < this.entities.get(currentTurnIndex).getHpMax()) {
-				this.dialogueBoxTourCurrentMobSoin.forceDialogBox(boolInput);
-        	} else {
-        		this.dialogueBoxTourCurrentMobAttaque.forceDialogBox(boolInput);
-        	}
-			//this.currentTurnIndex = (this.currentTurnIndex + 1 ) % (this.entities.size()-1); // oui c'est moche
-		}
-    	
     	this.tmpDialogbox1.updateTempDialgbox(boolInput, gc);
-    	Global.updatePlayerMovement(gc.getInput(),Global.CollisionMapForet2,delta);
-		Global.P1.AnimateWhileMoove();
+    	this.tmpDialogbox2.updateTempDialgbox(boolInput,gc);
+
+    	Global.updatePlayerMovement(gc.getInput(),Global.CollisionMapBattlescene,delta);
     	 
     }
     
@@ -353,71 +212,67 @@ public class BattleScene extends BasicGameState {
     	}
     	return true;
     }
+    
+    public boolean isLoose() {
+    	return (Global.P1.isDead() && Global.P2.isDead());
+	}
 
     public int getID() {
         return 100;
     }
     
     public void tour(Graphics g) {
-    	if((this.playedTurn % this.entities.size()) != this.currentTurnIndex) {
-    		if(this.currentTurnIndex == 0) {        	
-    			this.dialogueBoxTourP1.renderForceDialogbox(g);
-    			this.dialogueBoxTourP1.render(g);
-    			this.playedTurn ++;
-    		} else if(this.currentTurnIndex == 2) {        	
-    			this.dialogueBoxTourP2.renderForceDialogbox(g);
-    			this.dialogueBoxTourP2.render(g);
-    			this.playedTurn ++;
-    		} else {
+    					
+    	for(Entity e : this.entities) {
+    		if (e instanceof Player) {
+    			if (e.equals(Global.P1)) {
 
-    			if(this.entities.get(currentTurnIndex).getHpActuel() < this.entities.get(currentTurnIndex).getHpMax()) {
-    				this.dialogueBoxTourCurrentMobSoin.renderForceDialogbox(g);
-    				this.dialogueBoxTourCurrentMobSoin.render(g);
-    			} else {
+    				this.tmpDialogbox1=new DialogueBox(new String[] {
+    						"\n "+
+    							    "     \n" +
+    							    "           Au tour de"+ Global.Player1Classe+" de jouer"
+    					        });
 
-    				int hit = ((Chaton) this.entities.get(currentTurnIndex)).griffesHit();
-    				this.dialogueBoxTourCurrentMobAttaque.renderForceDialogbox(g);
-    				this.dialogueBoxTourCurrentMobAttaque.render(g);
-    				if (!Global.P1.isDead()) { // foutre des dégats au plus faible (oui c'est du harcèlement)
-    					Global.P1.getHit(hit);
-    					//System.out.println( "-"+ hit + " pour P1");
-    					if( Global.P1.isDead()) {
-    						this.dialogueBoxTourCurrentMobAttaque= new DialogueBox(new String[] {
-	    			    			"\n "+
-	    			    					"     \n" +
-	    			    					"           Bob attaque " + Global.P1.getName() +"     \n"+
-	    			    					"            " + Global.P1.getName() + " est mort"
-	    			    	});
-    					} else {    						
-    						this.dialogueBoxTourCurrentMobAttaque= new DialogueBox(new String[] {
-    								"\n "+
-    										"     \n" +
-    										"           Bob attaque " + Global.P1.getName() + "     \n"+
-    										"            " + Global.P1.getName() + "  possède maintenant " + Global.P1.getHpActuel() + " HP"
-    						});
-    					}
-    				} else {
-    					Global.P2.getHit(hit);
-    					//System.out.println( "-"+ hit + " pour P2");
-    					if( Global.P2.isDead()) {
-    						this.dialogueBoxTourCurrentMobAttaque= new DialogueBox(new String[] {
-	    			    			"\n "+
-	    			    					"     \n" +
-	    			    					"           Bob attaque " + Global.P2.getName() +"     \n"+
-	    			    							"            " + Global.P2.getName()+ " est mort"
-	    			    	});
-    					} else {    						
-    						this.dialogueBoxTourCurrentMobAttaque= new DialogueBox(new String[] {
-    								"\n "+
-    										"     \n" +
-    										"           Bob attaque " + Global.P2.getName() +"     \n"+
-    										"            " + Global.P2.getName() + "  possède maintenant " + Global.P2.getHpActuel() + " HP"
-    						});
-    					}
-    				}
+    				this.tmpDialogbox1.setChoices(Arrays.asList("Attaquer", "Se soigner"), choice1 -> {
+    		            switch (choice1) {
+    			            case 0:
+    			                this.tmpDialogbox1.setMessages(new String[] {"\n"+"\n"+"           Aie !"});
+
+    			                this.tmpDialogbox1.setChoices(Arrays.asList("Retaper la branche", "Ne rien faire"), choice2 -> {
+    			                    switch (choice2) {
+
+    			                        case 0:
+    			                            this.tmpDialogbox1.setMessages(new String[] {"\n"+"\n"+"           AIE !!!!!!!!!"});
+    			                            
+    			                            //Permet de dire qu'il s'agissait du dernier choix
+    			                            this.tmpDialogbox1.setChoices(Arrays.asList(),null);
+    			                            break;
+
+    			                        case 1:
+    			                        	break;
+
+    			                    }
+    			                    
+    			                });
+    			                
+    			                break;
+    			                
+    			            case 1:
+    			            	break;
+    		            }       
+    		     });
+
+    			}else {
     				
     			}
+    			
     		}
+    		else if (e instanceof Mobs) {
+    			
+    			
+    		}
+    		
     	}
+
     }
 }

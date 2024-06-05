@@ -61,6 +61,8 @@ public class Foret6 extends BasicGameState {
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
 		Global.updatePlayerMovement(gc.getInput(),Global.CollisionMapForet6,delta);
 		Global.P1.AnimateWhileMoove();
+		sbg.enterState(8);
+
 		
 	}
 

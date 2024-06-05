@@ -30,6 +30,7 @@ public class Foret2 extends BasicGameState{
 	
 	@Override
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
+
 		this.Warp1= new Warp(0, 60, 10, 380, 1860, 160);//G
 		this.Warp2= new Warp(1400, 1070, 380, 10, 1540, 50);//BAS
 		this.Warp3= new Warp(860, 640, 60, 60, 100, 100);//ESCALIER
@@ -40,7 +41,7 @@ public class Foret2 extends BasicGameState{
 
 	@Override
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
-		
+
 		Global.actualId = 12;
 		g.drawImage(new Image("data/maps/Map002.png").getScaledCopy(Global.width, Global.height), 0, 0);
         
@@ -79,6 +80,7 @@ public class Foret2 extends BasicGameState{
 
 	@Override
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
+
 		Global.updatePlayerMovement(gc.getInput(),Global.CollisionMapForet2,delta);
 		Global.P1.AnimateWhileMoove();
 		

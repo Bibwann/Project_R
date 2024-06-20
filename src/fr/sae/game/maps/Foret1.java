@@ -89,7 +89,6 @@ public class Foret1 extends BasicGameState{
 
 			                        case 1:
 			                        	this.tmpDialogbox1.setActiveTempDialogbox(false);
-
 			                    }
 			                    
 			                });
@@ -126,7 +125,9 @@ public class Foret1 extends BasicGameState{
 
 	                        case 0:
 	                        	this.tmpDialogbox1.setActiveTempDialogbox(true);
-	                            this.tmpDialogbox1.setMessages(new String[] {"\n"+"\n"+"           Dans les ténèbres de la nuit, les félins planifient notre chute."});
+	                            this.tmpDialogbox1.setMessages(new String[] {"\n"+"\n"+"           AIEEEE !!!!!"});
+	                            
+	                            Global.egg1="Special Thanks: Sarah Barlatier";
 	                            
 	                            //Permet de dire qu'il s'agissait du dernier choix
 	                            this.tmpDialogbox1.setChoices(Arrays.asList(),null);
@@ -150,12 +151,11 @@ public class Foret1 extends BasicGameState{
 	    
 //-----------------------------------------------------------------------------------------------------------------------
 
-
 	}
 
 	@Override
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
-
+		sbg.enterState(12);
 		Global.actualId = 11;
 		
 		//Fait les rendu des modeles
@@ -218,7 +218,6 @@ public class Foret1 extends BasicGameState{
 		//Dialogbox avec input --> avec choix
         this.dialogueBoxBranche.dialogBox(i,gc.getInput());
         this.dialogueBoxFenetre.dialogBox(i,gc.getInput());
-        
         
         //Structure obligatoire qui check l'etat de la dialogbox temp
         this.tmpDialogbox1.updateTempDialgbox(i, gc);

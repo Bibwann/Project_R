@@ -1,14 +1,21 @@
 package fr.sae.game.cinematiques;
 
+import java.util.Arrays;
+
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.*;
 
+import fr.sae.game.DialogueBox;
 import fr.sae.game.Global;
 
 public class IntroGame extends BasicGameState {
     private Image backgroundImage;
     private float opacity = 0f;
+    
+	DialogueBox dialgoboxLore; 
+
     private boolean fadeInComplete = false;
+    private boolean cinematiqueIsEnded=false;
 
     public IntroGame(int stateID) {
     }
@@ -18,6 +25,19 @@ public class IntroGame extends BasicGameState {
     @Override
     public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
         this.game = sbg;
+        
+        this.dialgoboxLore = new DialogueBox(new String[] {
+				"Hello world"
+			});	
+        this.dialgoboxLore.setChoices(Arrays.asList("Continuer"), choice1 -> {
+            switch (choice1) {
+	            case 0:
+	            	this.cinematiqueIsEnded=true;
+	                break;
+            }       
+     });
+		this.dialgoboxLore.setTriggerZone(-1,-1,0,0);
+
     }
 
     @Override
@@ -30,7 +50,7 @@ public class IntroGame extends BasicGameState {
         Global.P1.getAnimation().stop();
 
 
-        if (fadeInComplete) {
+        if (fadeInComplete && cinematiqueIsEnded) {
             Global.canMoovPlayer=true;
             //Tout interraction necessitant de ne pas donner le controle au player se fait ici --> toutes intro quoi
 
@@ -51,20 +71,29 @@ public class IntroGame extends BasicGameState {
     		game.enterState(11); //      -->	Pour finir l'intro
     		
         }
+        
+        if (fadeInComplete && !cinematiqueIsEnded) {
+        	this.dialgoboxLore.renderForceDialogbox(g);
+        	
+        }
     }
 
     @Override
     public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
-        //if (!fadeInComplete) {
-        //    opacity += 0.001f; // Adjust this value to control the speed of the fade in
-        //    if (opacity > 1f) {
-        //        opacity = 1f;
-        //        fadeInComplete = true;
-        //    }
-        //}
+		boolean i =gc.getInput().isKeyPressed(Global.interract);
+
+        if (!fadeInComplete) {
+            opacity += 0.001f; // Adjust this value to control the speed of the fade in
+            if (opacity > 1f) {
+                opacity = 1f;
+                fadeInComplete = true;
+            }
+            
+        }else if (fadeInComplete && !cinematiqueIsEnded) {
+        	this.dialgoboxLore.forceDialogBox(i, gc.getInput());
+        }
+        
     	
-    	opacity = 1f;
-    	fadeInComplete = true;
     }
 
 

@@ -47,6 +47,7 @@ public class Global {
 	
 	public static boolean canMoovPlayer =true;
 	public static boolean canMoovDialogbox =false;
+
 	//Variable definissant la distance compare au bord gauche de l'ecran qu'auront les joueurs et les mobes en combat
 	public static int PlayerBattleDistance =250;
 	public static int MobsBattleDistance =1450;
@@ -178,7 +179,8 @@ public class Global {
 	
 	public static Mobs[] mobs = new Mobs[4];
 
-	
+	//Special Thanks
+	public static String egg1="";
 	//Collision maps
 	
 	public static Collisions CollisionMapForet1;
@@ -197,6 +199,9 @@ public class Global {
 	public static Collisions CollisionMapUnderground2;
 	public static Collisions CollisionMapUnderground3;
 	public static Collisions CollisionMapChateau1;
+	
+	
+	public static Collisions CollisionMapBattlescene;
 	//Pour verifier si une touche est actuelleemnt pressé
 	public static InputHandler InputHandler;
 	
@@ -263,7 +268,9 @@ public class Global {
 	    	CollisionMapUnderground2=new Collisions();
 	    	CollisionMapUnderground3=new Collisions();
 	    	CollisionMapChateau1=new Collisions();
-
+	    	
+	    	CollisionMapBattlescene=new Collisions();
+	    	
 	    	// Creer les collisions ici
 	    	CollisionsMapForet1();
 	    	CollisionsMapForet2();

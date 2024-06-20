@@ -45,7 +45,7 @@ public abstract class Player extends Entity{
 	}
 
 	private Image getBattleSprite() { //Sprite de combat
-		return this.Battlesprite.getSubImage(0, 0, 48, 64).getFlippedCopy(true, false);	}
+		return this.Battlesprite.getSubImage(0, 0, 48, 64).getFlippedCopy(true, false).getScaledCopy(2.0f);	}
 
     public void setHitbox(Rectangle hitbox) {
         this.hitbox = hitbox;

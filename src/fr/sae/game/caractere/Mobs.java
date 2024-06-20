@@ -30,7 +30,7 @@ public abstract class Mobs extends Entity {
 	}
 	
 	 private Image getBattleSprite() { //Sprite de combat
-        return this.Battlesprite.getSubImage(142, 48, 48, 48).getFlippedCopy(false, false);    
+		 return this.Battlesprite.getSubImage(142, 48, 48, 48).getFlippedCopy(false, false).getScaledCopy(2.0f);
     }
 	
 	public void moveUp(float distance) {
@@ -59,6 +59,6 @@ public abstract class Mobs extends Entity {
     }
     
     public void BattleScene(Graphics g, int posY) {
-        g.drawImage(this.getBattleSprite(), Global.MobsBattleDistance, posY);
-    }
+    	g.drawImage(this.getBattleSprite(), Global.MobsBattleDistance, posY);
+	}
 }

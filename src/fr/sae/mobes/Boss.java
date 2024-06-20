@@ -21,7 +21,7 @@ public final class Boss extends Entity {
     public static synchronized Boss getInstance() throws SlickException {
         if (instance == null) {
         	
-            instance = new Boss("BosseFinal",99,null, new Image("data/Bosse/Sprite.png"));
+            instance = new Boss("Nyan Cat",99,null, new Image("data/Boss/sprite.png"));
         }
         return instance;
     }

@@ -2,6 +2,7 @@ package fr.sae.menus;
 
 import java.awt.Font;
 
+
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -12,6 +13,8 @@ import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
 import fr.sae.game.Global;
+import fr.sae.menus.*;
+
 
 public class GameOver extends BasicGameState {
     private TrueTypeFont titleFont;
@@ -72,10 +75,11 @@ public class GameOver extends BasicGameState {
                 case 0:
                     // Main Menu
                     game.enterState(1);
+                    
                     break;
                 case 1:
                     // Exit
-                	System.exit(0);
+                    System.exit(0);
                     break;
 
             }

@@ -50,7 +50,8 @@ public class Global {
 
 	//Variable definissant la distance compare au bord gauche de l'ecran qu'auront les joueurs et les mobes en combat
 	public static int PlayerBattleDistance =250;
-	public static int MobsBattleDistance =1470;
+	public static int MobsBattleDistance =1450;
+
 
 	//Variables pour les invetaires	
 	public static Map<String, Integer> dictionnaireInventory = new HashMap<String, Integer>() {{
@@ -170,7 +171,7 @@ public class Global {
 
 	public static String Player1Classe;
 	public static String Player2Classe;
-
+	
 	public static String Player1Name="";
 		
 	
@@ -194,6 +195,9 @@ public class Global {
 	public static Collisions CollisionMapForet11;
 	public static Collisions CollisionMapForet12;
 	public static Collisions CollisionMapForet13;
+	public static Collisions CollisionMapUnderground1;
+	public static Collisions CollisionMapUnderground2;
+	public static Collisions CollisionMapUnderground3;
 	public static Collisions CollisionMapChateau1;
 	
 	
@@ -260,6 +264,9 @@ public class Global {
 	    	CollisionMapForet11=new Collisions();
 	    	CollisionMapForet12=new Collisions();
 	    	CollisionMapForet13=new Collisions();
+	    	CollisionMapUnderground1=new Collisions();
+	    	CollisionMapUnderground2=new Collisions();
+	    	CollisionMapUnderground3=new Collisions();
 	    	CollisionMapChateau1=new Collisions();
 	    	
 	    	CollisionMapBattlescene=new Collisions();
@@ -276,6 +283,9 @@ public class Global {
 	    	CollisionsMapForet11();
 	    	CollisionsMapForet12();
 	    	CollisionsMapForet13();
+	    	CollisionMapUnderground1();
+	    	CollisionMapUnderground2();
+	    	CollisionMapUnderground3();
 
 	    	
 		} catch(Exception e){
@@ -368,7 +378,53 @@ public class Global {
 	
 	public static void CollisionsMapForet5() {
 		CollisionMapForet5.addCollidable(new Rectangle(0, 0, 1920, 60));
-		
+		//(longitude, latitude, longueur, hauteur)
+        CollisionMapForet5.addCollidable(new Rectangle(0, 0, 1920, 60));
+        //Part de en haut à gauche et fait toute la ligne du haut 
+        CollisionMapForet5.addCollidable(new Rectangle(0, 60, 1000, 60));
+        //Part de en haut et toute le deuxième ligne et jusu'à la moitié de l'écran
+        CollisionMapForet5.addCollidable(new Rectangle(0, 120, 934, 60));
+        //Part de en haut à gauche et va jusqu'à la moitié de l'écran avec un arbre en moins
+        CollisionMapForet5.addCollidable(new Rectangle(0, 180, 934, 60));
+        //Pars de la gauche et va juqu'à la moitié de
+        CollisionMapForet5.addCollidable(new Rectangle(0, 240, 874, 60));
+        CollisionMapForet5.addCollidable(new Rectangle(0, 300, 120, 60));
+        CollisionMapForet5.addCollidable(new Rectangle(0, 360, 120, 60));
+        CollisionMapForet5.addCollidable(new Rectangle(0, 420, 60, 60));
+        CollisionMapForet5.addCollidable(new Rectangle(0, 480, 60, 70));
+        CollisionMapForet5.addCollidable(new Rectangle(330, 420, 400, 80));
+        CollisionMapForet5.addCollidable(new Rectangle(460, 500, 206, 60));
+        CollisionMapForet5.addCollidable(new Rectangle(200, 300, 660, 120));
+        CollisionMapForet5.addCollidable(new Rectangle(526, 560, 75, 60));
+        CollisionMapForet5.addCollidable(new Rectangle(820, 450, 20, 60));
+        //barrère gauche du haut au milieu de l'écran
+        CollisionMapForet5.addCollidable(new Rectangle(820, 510, 150, 60));
+        //barrières du bas au milieu de l'écran en haut
+        CollisionMapForet5.addCollidable(new Circle(830, 605, 30, 40));
+        //rocher juste en dessous de la barrère coté gauche
+        CollisionMapForet5.addCollidable(new Circle(1225, 605, 30, 40));
+        //rocher au dessus de la barrière coté droit au milieu des autres rocher
+        CollisionMapForet5.addCollidable(new Circle(1290, 540, 30, 40));
+        //rocher à droite à coté de celui qui est au milieu un peu au dessus
+        CollisionMapForet5.addCollidable(new Rectangle(1085, 760, 150, 65));
+        //barrère du bas droite au milieu de l'écran
+        CollisionMapForet5.addCollidable(new Rectangle(1085, 640, 20, 120));
+        //barrière droite et haute au milieu de l'écran
+        CollisionMapForet5.addCollidable(new Circle(1125, 380, 60, 60));
+        //arbre au milieu en haut à droite de l'écran
+        CollisionMapForet5.addCollidable(new Rectangle(1720, 448, 200, 62));
+        //rectangle au milieu de l'écran qui prends 3 arbres à droite de l'écran
+        CollisionMapForet5.addCollidable(new Rectangle(1590, 510, 450, 570));
+        //rectangle en bas à droite qui prend jusqu'au milieu de l'écran
+        CollisionMapForet5.addCollidable(new Rectangle(1460, 570, 130, 510));
+        //rectangle en bas à droite collé au grand rectangle
+        CollisionMapForet5.addCollidable(new Rectangle(1390, 640, 70, 120));
+        CollisionMapForet5.addCollidable(new Rectangle(1325, 760, 135, 500));
+        CollisionMapForet5.addCollidable(new Rectangle(1260, 830, 66, 66));
+        CollisionMapForet5.addCollidable(new Rectangle(1190, 895, 135, 190));
+        CollisionMapForet5.addCollidable(new Rectangle(1125, 955, 65, 125));
+        //BRANCHE
+        CollisionMapForet5.addCollidable(new Rectangle(120, 310, 80, 70));
 	}
 	
 	public static void CollisionsMapForet7() {
@@ -393,6 +449,29 @@ public class Global {
 	
 	public static void CollisionsMapForet12() {
 		
+	}
+	
+public static void CollisionMapUnderground1() {
+		
+	}
+	
+	public static void CollisionMapUnderground2() {
+		
+	}
+	
+	public static void CollisionMapUnderground3() {
+		CollisionMapUnderground3.addCollidable(new Rectangle(0, 0, 395, 160)); //MUR HAUT
+		CollisionMapUnderground3.addCollidable(new Rectangle(860, 0, 330, 160)); //MUR HAUT
+		CollisionMapUnderground3.addCollidable(new Rectangle(1330, 0, width-1330, 160)); //MUR HAUT
+		CollisionMapUnderground3.addCollidable(new Rectangle(925, 160, 70, height-220)); // MUR MILIEU
+		CollisionMapUnderground3.addCollidable(new Rectangle(0, 1020, 395, 60)); // MUR BAS
+		CollisionMapUnderground3.addCollidable(new Rectangle(465, 1020, width-465, 60)); // MUR BAS
+		CollisionMapUnderground3.addCollidable(new Rectangle(395, 0, 465 , 130)); // GRILLE
+		CollisionMapUnderground3.addCollidable(new Rectangle(530, 440, 60 , 60)); // TABLE
+		CollisionMapUnderground3.addCollidable(new Rectangle(590, 450, 60 , 50)); // CHAISE
+		CollisionMapUnderground3.addCollidable(new Rectangle(540, 510, 50 , 50)); // CHAISE
+		CollisionMapUnderground3.addCollidable(new Rectangle(70, 840, 130 , 100)); // CAILLOU
+		CollisionMapUnderground3.addCollidable(new Rectangle(800, 130, 60 , 60)); // SCEAU
 	}
 	
 	public static void CollisionsMapForet13() {

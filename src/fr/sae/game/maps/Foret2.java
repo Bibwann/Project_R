@@ -90,8 +90,8 @@ public class Foret2 extends BasicGameState{
 		if (Global.tmpVarLaunchBattleScene) {
 			Global.canMoovPlayer=false;
 			Global.tmpVarLaunchBattleScene=false;
-			Global.mobs[0]=new Chaton("chaton1", 1, null, null);
-			Global.mobs[1]=new Chaton("chaton2", 1, null, null);
+			Global.mobs[0]=new Chaton("Chat-Pitaine", 1);
+			Global.mobs[1]=new Chaton("Chat-Thon", 1);
 	        sbg.enterState(100);
 
 		}

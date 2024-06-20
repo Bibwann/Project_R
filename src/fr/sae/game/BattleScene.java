@@ -2,8 +2,8 @@ package fr.sae.game;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
-import org.lwjgl.Sys;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
@@ -16,45 +16,37 @@ import org.newdawn.slick.state.StateBasedGame;
 import fr.sae.game.Global;
 import fr.sae.game.caractere.Entity;
 import fr.sae.game.caractere.Mobs;
-import fr.sae.game.caractere.Player;
 import fr.sae.mobes.Chaton;
 
 public class BattleScene extends BasicGameState {
-    private Mobs[] enemy;
-    private int currentTurn=0; // Ajout de la variable currentTurn
-    
-    private DialogueBox tmpDialogbox1= new DialogueBox(new String[] {"Le combat commence"});
-    private DialogueBox tmpDialogbox2= new DialogueBox(new String[] {});
 
-    
-    private String P1Name = "";
-    private String P2Name = "";
+    private Mobs[] enemy;
+  
+    // turn managment
+    private int currentTurnIndex = 0;
+    private boolean playedTurn = true;
     private int P1Potions = 5;
     private int P2Potions = 5;
-    private int playedTurn = 0;
+    private int EnemiesPotions = 7;
+    private int hit;
+    private int confusedDebuf = 0;
+    private String enemyMessage;
+    private List<String> enemyNames = new ArrayList<String>();
+    private List<String> deadEnemyNames = new ArrayList<String>();
     
-    
-    
-    // turn managment
-    private int currentTurnIndex=0;
     protected ArrayList<Entity> entities = new ArrayList<>();
+    
+    private DialogueBox tmpDialogbox1= new DialogueBox(new String[] {});
 
 
     public BattleScene(int stateID) {
-        this.enemy = Global.mobs;
-        this.currentTurn = 0; // Initialisation de currentTurn à 0
-        
-    	
+        this.enemy = Global.mobs;    	
     }
     
     
     
     public void initializeBattle() {
-
         if(this.entities.isEmpty()) {
-        	
-        	this.tmpDialogbox1.setActiveTempDialogbox(true);
-        	
         	entities.add(Global.P1);
             
             for(int i=0; i < this.enemy.length; i++) {
@@ -63,6 +55,8 @@ public class BattleScene extends BasicGameState {
             		i--;
             	} else if(this.enemy[i]!= null) {
             		entities.add(this.enemy[i]);
+            		this.enemyNames.add(this.enemy[i].getName());
+            		System.err.println(this.enemy[i].getName());
             	}
             }
         }
@@ -72,9 +66,7 @@ public class BattleScene extends BasicGameState {
     @Override
     public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
         // Initialisation des ressources de la scène de combat
-    	this.tmpDialogbox1.setTriggerZone(-1, -1, 0, 0);
-    	this.tmpDialogbox2.setTriggerZone(-1, -1, 0, 0);
-
+	    this.tmpDialogbox1.setTriggerZone(-1, -1, 0, 0);
     }
 
     @Override
@@ -84,6 +76,11 @@ public class BattleScene extends BasicGameState {
         
         this.initializeBattle();
         // gère l'affichage de la dialogBox pour l'entité qui joue le tour
+        
+    	//this.dialogueBox.render(g);
+        this.tmpDialogbox1.renderTempDialgbox(g);
+
+        // Dessin des éléments de la scène de combat
 
         // Dessin des joueurs à gauche
     	try {
@@ -107,7 +104,7 @@ public class BattleScene extends BasicGameState {
     	}
 
     	try {
-    	    int player2Y = Global.height / 3 * 2; // Position du joueur 2 sur le deuxième tiers vertical de l'écran
+    	    int player2Y = Global.height / 2 ; // Position du joueur 2 sur le deuxième tiers vertical de l'écran
     	    // Appel de la méthode BattleScene pour le joueur 2
     	    Global.P2.BattleScene(g, player2Y);
     	} catch(Exception e) {
@@ -128,20 +125,21 @@ public class BattleScene extends BasicGameState {
     	
 
 
-        // Dessin des ennemis --> sait pas si ça marche
+        // Dessin des ennemis 
     	try {
     	    // Parcours des ennemis et affichage de leur sprite
     	    for (int i = 0; i < this.enemy.length-1; i++) {
     	        if (this.enemy[i] == null) {
-    	            continue; // Si l'ennemi est null, passer au suivant
+    	        	// Affichage du sprite de l'ennemi
+    	        	continue;
     	        }
-    	        // Affichage du sprite de l'ennemi
     	        try {
-    	        	this.enemy[i].BattleScene(g, Global.height / this.enemy.length * (i+1));
+    	        	this.enemy[i].BattleScene(g, Global.height / (this.enemy.length + 1) * (i+1) + 150);
     	        }catch(Exception e) {
     	        	e.getMessage();
     	        }
-    	        //g.drawImage(this.enemy[i].getSprite(), 550, 200 + i * 100);
+    	        // Affichage du sprite de l'ennemi
+//    	        g.drawImage(this.enemy[i].getSprite(), 550, 200 + i * 100);
     	    }
     	} catch(Exception e) {
     	    //System.out.println(e.getMessage());
@@ -169,43 +167,43 @@ public class BattleScene extends BasicGameState {
     		Global.P1.resetStats();
     		Global.P2.resetStats();
     		Global.mobs = new Mobs[4];
-    		this.entities =  new ArrayList<>();
+//    		this.entities =  new ArrayList<>();
             sbg.enterState(Global.actualId);
     	}
     	
     	//Si loose
-    	if (this.isLoose()) {
+    	if (Global.P1.isDead() && Global.P2.isDead()) {
     		Global.P1.resetStats();
     		Global.P2.resetStats();
     		Global.mobs = new Mobs[4];
-    		this.entities =  new ArrayList<>();
-            sbg.enterState(Global.actualId);
+    		//this.entities =  new ArrayList<>();
+            sbg.enterState(7);
     	}
-    	
-    	if(!this.isWin() || !this.isLoose()) {    		
-    		this.tmpDialogbox1.renderTempDialgbox(g);
-    		this.tmpDialogbox1.renderTempDialgbox(g);
-
-    		tour(g);
-    	}
-
     }
 
     @Override
     public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
-
 		Input input =gc.getInput();
 		boolean boolInput =input.isKeyPressed(Global.interract);
-
-    	this.tmpDialogbox1.updateTempDialgbox(boolInput, gc);
-    	this.tmpDialogbox2.updateTempDialgbox(boolInput,gc);
-
-    	Global.updatePlayerMovement(gc.getInput(),Global.CollisionMapBattlescene,delta);
+    		
+		
+    	Global.updatePlayerMovement(gc.getInput(),Global.CollisionMapForet2,delta);
+		Global.P1.AnimateWhileMoove();
+		
+		if(this.playedTurn && !this.entities.isEmpty() && !this.enemyNames.isEmpty()) {
+			turn();
+		}
+		
+		this.tmpDialogbox1.updateTempDialgbox(boolInput, gc);
+//		if(this.dialogInterract) {
+//			this.init(gc, sbg);
+//		}
+		
     	 
     }
     
     public boolean isWin() {
-    	for (int i = 0; i < this.enemy.length; i++) {
+    	for (int i = 0; i < this.entities.size() - 2; i++) {
     		if (!(enemy[i].isDead())) {
     			return false;
     		}
@@ -213,66 +211,480 @@ public class BattleScene extends BasicGameState {
     	return true;
     }
     
-    public boolean isLoose() {
-    	return (Global.P1.isDead() && Global.P2.isDead());
-	}
+    public void turn() {
+    	this.playedTurn = false;
+    	this.tmpDialogbox1.setActiveTempDialogbox(true);
+    	if(this.currentTurnIndex == 0 && !Global.P1.isDead()) {
+    		// Player 1 turn 
+    			this.tmpDialogbox1.setMessages(new String[] {"C'est au tour de votre " + Global.P1.getClassName() + "\nHP: " + Global.P1.getHpActuel() + "/" + Global.P1.getHpMax()});
+        	
+        	this.tmpDialogbox1.setChoices(Arrays.asList("Attaquer", "Se soigner (" + this.P1Potions + ")", "Passer"), choice -> {
+        		switch (choice) {
+        		case 0: // Attack the enemies
+        			this.hit = Global.P1.getDmg();
+        			
+//        			this.tmpDialogbox1.setActiveTempDialogbox(true);
+        			if(this.deadEnemyNames.size()>0) {
+        				this.tmpDialogbox1.setMessages(new String[] {"Vous préparez votre coup, il est trop tard pour faire machine arrière ! \nQuel enemi allez-vous attaquer maintenant?" + this.deadEnemyNames + " est déjà morts"});
+        			} else if (this.deadEnemyNames.size()>1) {
+        				this.tmpDialogbox1.setMessages(new String[] {"Vous préparez votre coup, il est trop tard pour faire machine arrière ! \nQuel enemi allez-vous attaquer maintenant?" + this.deadEnemyNames + " sont déjà morts"});        				
+        			} else {
+        				this.tmpDialogbox1.setMessages(new String[] {"Vous préparez votre coup, il est trop tard pour faire machine arrière ! \nQuel enemi allez-vous attaquer maintenant?"});
+        			}
+        			
+        			this.tmpDialogbox1.setChoices(this.enemyNames, choice2 -> {
+        				switch (choice2) {
+        				case 0:
+        					this.enemy[0].getHit(hit);
+        					
+//        					this.tmpDialogbox1.setActiveTempDialogbox(true);
+                			if(this.enemy[0].isDead()) {
+                				this.deadEnemyNames.add(this.enemyNames.get(0));
+                				this.tmpDialogbox1.setMessages(new String[] { this.enemyNames.get(0) + " a été vaincu !"});
+                    			
+                    			this.tmpDialogbox1.setChoices(Arrays.asList("Continuer"), choice3 -> {
+                    				switch (choice3) {
+                    				
+                    				case 0:
+                    					this.tmpDialogbox1.setActiveTempDialogbox(false);
+                    	    			this.playedTurn = true;
+                    					break;
+                    				}
+                    				
+                    				});        					
+            					break;
+                			} else {
+                				this.tmpDialogbox1.setMessages(new String[] { this.enemyNames.get(0) + " à reçu " + hit + " dégats !"});
+                    			
+                    			this.tmpDialogbox1.setChoices(Arrays.asList("Continuer"), choice3 -> {
+                    				switch (choice3) {
+                    				
+                    				case 0:
+                    					this.tmpDialogbox1.setActiveTempDialogbox(false);
+                    	    			this.playedTurn = true;
+                    					break;
+                    				}
+                    				
+                    				});        					
+            					break;
+                			}
+        				
+	        			case 1:
+	    					this.enemy[1].getHit(Global.P1.getDmg());
+	    					
+//	    					this.tmpDialogbox1.setActiveTempDialogbox(true);
+	    					if(this.enemy[1].isDead()) {
+	    						this.deadEnemyNames.add(this.enemyNames.get(1));
+                				this.tmpDialogbox1.setMessages(new String[] { this.enemyNames.get(1) + " a été vaincu !"});
+                    			
+                    			this.tmpDialogbox1.setChoices(Arrays.asList("Continuer"), choice3 -> {
+                    				switch (choice3) {
+                    				
+                    				case 0:
+                    					this.tmpDialogbox1.setActiveTempDialogbox(false);
+                    	    			this.playedTurn = true;
+                    					break;
+                    				}
+                    				
+                    				});        					
+            					break;
+                			} else {
+                				this.tmpDialogbox1.setMessages(new String[] { this.enemyNames.get(1) + " à reçu " + hit + " dégats !"});
+                    			
+                    			this.tmpDialogbox1.setChoices(Arrays.asList("Continuer"), choice3 -> {
+                    				switch (choice3) {
+                    				
+                    				case 0:
+                    					this.tmpDialogbox1.setActiveTempDialogbox(false);
+                    	    			this.playedTurn = true;
+                    					break;
+                    				}
+                    				
+                    				});        					
+            					break;
+                			}
+	    				
+	        			case 2:
+
+	        				this.deadEnemyNames.add(this.enemyNames.get(2));
+	    					
+//	    					this.tmpDialogbox1.setActiveTempDialogbox(true);
+                			this.tmpDialogbox1.setMessages(new String[] {this.enemyNames.get(2) + " à reçu " + hit + " dégats !"});
+                			
+                			this.tmpDialogbox1.setChoices(Arrays.asList("Continuer"), choice3 -> {
+                				switch (choice3) {
+                				
+                				case 0:
+//                					this.tmpDialogbox1.setActiveTempDialogbox(false);
+                	    			this.playedTurn = true;
+                					break;
+                				}
+                				
+                				});   
+	    					break;
+        		
+			        	case 3:
+//							this.enemy[3].getHit(Global.P1.getDmg());
+							
+//							this.tmpDialogbox1.setActiveTempDialogbox(true);
+                			this.tmpDialogbox1.setMessages(new String[] {this.enemyNames.get(3) + " à reçu " + hit + " dégats !"});
+                			
+                			this.tmpDialogbox1.setChoices(Arrays.asList("Continuer"), choice3 -> {
+                				switch (choice3) {
+                				
+                				case 0:
+                					this.tmpDialogbox1.setActiveTempDialogbox(false);
+                	    			this.playedTurn = true;
+                					break;
+                				}
+                				
+                				});   
+							break;
+						}
+        			});
+        			break;
+        			
+        		case 1: // Heal the first player
+//        			this.tmpDialogbox1.setActiveTempDialogbox(true);
+        			Global.P1.healEntity();
+        			
+        			if(this.P1Potions == 0) {
+        				this.tmpDialogbox1.setMessages(new String[] { "Vous sentez la dernière goute de potion s'évaporer sur votre langue mais votre état ne s'améliore pas ! \n"
+        						+ "Votre tour est passé, cheh."});
+            			
+            			this.tmpDialogbox1.setChoices(Arrays.asList("Continuer"), choice2 -> {
+            				switch (choice2) {
+            				
+            				case 0:
+            					this.tmpDialogbox1.setActiveTempDialogbox(false);
+            	    			this.playedTurn = true;
+            					break;
+            				}
+            				
+            				});        					
+    					break;
+        			} else {
+        				this.P1Potions --;   
+        				
+        				this.tmpDialogbox1.setMessages(new String[] { "Vous êtes soigné et avez maintenant " + Global.P1.getHpActuel() + " HP !"});
+            			
+            			this.tmpDialogbox1.setChoices(Arrays.asList("Continuer"), choice2 -> {
+            				switch (choice2) {
+            				
+            				case 0:
+            					this.tmpDialogbox1.setActiveTempDialogbox(false);
+            	    			this.playedTurn = true;
+            					break;
+            				}
+            				
+            				});        					
+    					break;
+        			}   
+        		case 2: // Passer son tour
+        			
+        			this.confusedDebuf += 4;
+        			
+        			this.tmpDialogbox1.setMessages(new String[] { "Vous passez votre tour, \nMais pourquoi ? L'enemi ne comprend pas et semble destabilisé"});
+        				
+        			this.tmpDialogbox1.setChoices(Arrays.asList("Continuer"), choice2 -> {
+        				switch (choice2) {
+        				
+        				case 0:
+        					this.tmpDialogbox1.setActiveTempDialogbox(false);
+        	    			this.playedTurn = true;
+        					break;
+        				}
+        				
+        				});        					
+					break;
+        			
+        		}
+        		
+        	});
+    		
+    		
+    		// Increment turn
+    		this.currentTurnIndex ++;
+    	} else if (this.currentTurnIndex == 2 && !Global.P2.isDead()) {
+    		
+    		// Player 2 turn
+    			this.tmpDialogbox1.setMessages(new String[] {"C'est au tour de votre " + Global.P2.getClassName() + "\nHP: " + Global.P2.getHpActuel() + "/" + Global.P2.getHpMax()});
+        	this.tmpDialogbox1.setChoices(Arrays.asList("Attaquer", "Se soigner (" + this.P2Potions + ")", "Passer"), choice -> {
+        		switch (choice) {
+        		case 0: // Attack the enemies
+        			this.hit = Global.P2.getDmg();
+        			
+//        			this.tmpDialogbox1.setActiveTempDialogbox(true);
+        			if(this.deadEnemyNames.size()>0) {
+        				this.tmpDialogbox1.setMessages(new String[] {"Vous préparez votre coup, il est trop tard pour faire machine arrière ! \nQuel enemi allez-vous attaquer maintenant?" + this.deadEnemyNames + " est déjà morts"});
+        			} else if (this.deadEnemyNames.size()>1) {
+        				this.tmpDialogbox1.setMessages(new String[] {"Vous préparez votre coup, il est trop tard pour faire machine arrière ! \nQuel enemi allez-vous attaquer maintenant?" + this.deadEnemyNames + " sont déjà morts"});        				
+        			} else {
+        				this.tmpDialogbox1.setMessages(new String[] {"Vous préparez votre coup, il est trop tard pour faire machine arrière ! \nQuel enemi allez-vous attaquer maintenant?"});
+        			}
+        			
+        			this.tmpDialogbox1.setChoices(this.enemyNames, choice2 -> {
+        				switch (choice2) {
+        				case 0:
+        					this.enemy[0].getHit(this.hit);
+        					
+//        					this.tmpDialogbox1.setActiveTempDialogbox(true);
+                			if(this.enemy[0].isDead()) {
+                				this.deadEnemyNames.add(this.enemyNames.get(0));
+                				this.tmpDialogbox1.setMessages(new String[] { this.enemyNames.get(0) + " a été vaincu !"});
+                    			
+                    			this.tmpDialogbox1.setChoices(Arrays.asList("Continuer"), choice3 -> {
+                    				switch (choice3) {
+                    				
+                    				case 0:
+                    					this.tmpDialogbox1.setActiveTempDialogbox(false);
+                    	    			this.playedTurn = true;
+                    					break;
+                    				}
+                    				
+                    				});        					
+            					break;
+                			} else {
+                				this.tmpDialogbox1.setMessages(new String[] { this.enemyNames.get(0) + " à reçu " + hit + " dégats !"});
+                    			
+                    			this.tmpDialogbox1.setChoices(Arrays.asList("Continuer"), choice3 -> {
+                    				switch (choice3) {
+                    				
+                    				case 0:
+                    					this.tmpDialogbox1.setActiveTempDialogbox(false);
+                    	    			this.playedTurn = true;
+                    					break;
+                    				}
+                    				
+                    				});        					
+            					break;
+                			}
+        				
+	        			case 1:
+	    					this.enemy[1].getHit(this.hit);
+	    					
+//	    					this.tmpDialogbox1.setActiveTempDialogbox(true);
+	    					if(this.enemy[1].isDead()) {
+	    						this.deadEnemyNames.add(this.enemyNames.get(1));
+                				this.tmpDialogbox1.setMessages(new String[] { this.enemyNames.get(1) + " a été vaincu !"});
+                    			
+                    			this.tmpDialogbox1.setChoices(Arrays.asList("Continuer"), choice3 -> {
+                    				switch (choice3) {
+                    				
+                    				case 0:
+                    					this.tmpDialogbox1.setActiveTempDialogbox(false);
+                    	    			this.playedTurn = true;
+                    					break;
+                    				}
+                    				
+                    				});        					
+            					break;
+                			} else {
+                				this.tmpDialogbox1.setMessages(new String[] { this.enemyNames.get(1) + " à reçu " + hit + " dégats !"});
+                    			
+                    			this.tmpDialogbox1.setChoices(Arrays.asList("Continuer"), choice3 -> {
+                    				switch (choice3) {
+                    				
+                    				case 0:
+                    					this.tmpDialogbox1.setActiveTempDialogbox(false);
+                    	    			this.playedTurn = true;
+                    					break;
+                    				}
+                    				
+                    				});        					
+            					break;
+                			}
+	    				
+	        			case 2:
+//	    					this.enemy[2].getHit(Global.P1.getDmg());
+	    					
+//	    					this.tmpDialogbox1.setActiveTempDialogbox(true);
+	        				this.deadEnemyNames.add(this.enemyNames.get(2));
+                			this.tmpDialogbox1.setMessages(new String[] {this.enemyNames.get(2) + " à reçu " + hit + " dégats !"});
+                			
+                			this.tmpDialogbox1.setChoices(Arrays.asList("Continuer"), choice3 -> {
+                				switch (choice3) {
+                				
+                				case 0:
+//                					this.tmpDialogbox1.setActiveTempDialogbox(false);
+                	    			this.playedTurn = true;
+                					break;
+                				}
+                				
+                				});   
+	    					break;
+        		
+			        	case 3:
+//							this.enemy[3].getHit(Global.P1.getDmg());
+							
+//							this.tmpDialogbox1.setActiveTempDialogbox(true);
+			        		this.deadEnemyNames.add(this.enemyNames.get(3));
+                			this.tmpDialogbox1.setMessages(new String[] {this.enemyNames.get(3) + " à reçu " + hit + " dégats !"});
+                			
+                			this.tmpDialogbox1.setChoices(Arrays.asList("Continuer"), choice3 -> {
+                				switch (choice3) {
+                				
+                				case 0:
+                					this.tmpDialogbox1.setActiveTempDialogbox(false);
+                	    			this.playedTurn = true;
+                					break;
+                				}
+                				
+                				});   
+							break;
+						}
+        			});
+        			break;
+        			
+        		case 1: // Heal the second player
+//        			this.tmpDialogbox1.setActiveTempDialogbox(true);
+        			Global.P2.healEntity();
+        			
+        			if(this.P2Potions == 0) {
+        				this.tmpDialogbox1.setMessages(new String[] { "Vous sentez la dernière goute de potion s'évaporer sur votre langue mais votre état ne s'améliore pas ! \n"
+        						+ "Votre tour est passé, cheh."});
+            			
+            			this.tmpDialogbox1.setChoices(Arrays.asList("Continuer"), choice2 -> {
+            				switch (choice2) {
+            				
+            				case 0:
+            					this.tmpDialogbox1.setActiveTempDialogbox(false);
+            	    			this.playedTurn = true;
+            					break;
+            				}
+            				
+            				});        					
+    					break;
+        			} else {
+        				this.P2Potions --;   
+        				
+        				this.tmpDialogbox1.setMessages(new String[] { "Vous êtes soigné et avez maintenant " + Global.P2.getHpActuel() + " HP !"});
+            			
+            			this.tmpDialogbox1.setChoices(Arrays.asList("Continuer"), choice2 -> {
+            				switch (choice2) {
+            				
+            				case 0:
+            					this.tmpDialogbox1.setActiveTempDialogbox(false);
+            	    			this.playedTurn = true;
+            					break;
+            				}
+            				
+            				});        					
+    					break;
+        			}   
+        		case 2: // Passer son tour
+        			
+        			this.confusedDebuf += 7;
+        			
+        			this.tmpDialogbox1.setMessages(new String[] { "Vous passez votre tour, \nMais pourquoi ? L'enemi ne comprend pas et semble destabilisé"});
+        				
+        			this.tmpDialogbox1.setChoices(Arrays.asList("Continuer"), choice2 -> {
+        				switch (choice2) {
+        				
+        				case 0:
+        					this.tmpDialogbox1.setActiveTempDialogbox(false);
+        	    			this.playedTurn = true;
+        					break;
+        				}
+        				
+        				});        					
+					break;
+        			
+        		}
+        		
+        	}); 
+
+    		
+    		
+    		// Increment turn
+//        	this.playedTurn = true;
+    		if(this.currentTurnIndex + 1 == this.entities.size()) {
+    			this.currentTurnIndex = 0;
+    		} else {
+    			this.currentTurnIndex ++;
+    		}
+    	} else if (!this.entities.get(this.currentTurnIndex).isDead()) {
+    		
+//    		this.tmpDialogbox1.setActiveTempDialogbox(true);
+    		
+    		this.enemyMessage = "C'est le tour de ";
+    		
+    		for(int i = 0; i < this.entities.size()-2; i++) {    	
+    			if(this.enemy[i].equals( this.entities.get(this.currentTurnIndex))) {
+    				this.enemyMessage += this.enemyNames.get(i) + "\nHP: " + this.entities.get(this.currentTurnIndex).getHpActuel() + "/" + this.entities.get(this.currentTurnIndex).getHpMax() + "\n\n";
+    			}
+    		}
+    	
+    		// if the enemy has more than half of his hp then it will attack the weakest player
+    		// Basically this is bullying  
+    		
+    		if(this.entities.get(this.currentTurnIndex).getHpActuel() < this.entities.get(this.currentTurnIndex).getHpMax() / 2 && this.EnemiesPotions > 0 ) {
+    			this.entities.get(this.currentTurnIndex).healEntity();
+    			this.EnemiesPotions --;
+    			
+    			this.enemyMessage += "Il décide de se soigner et possède maintenant " + this.entities.get(this.currentTurnIndex).getHpActuel() + " HP !";
+    			
+    			
+    		} else {
+    			hit = this.entities.get(this.currentTurnIndex).getDmg() - this.confusedDebuf;
+    			if((Global.P1.getHpActuel() < Global.P2.getHpActuel() && !Global.P1.isDead()) || Global.P2.isDead()) {
+    				Global.P1.getHit(hit);
+    				this.enemyMessage += "Il attaque votre " + Global.P1.getClassName() + " et lui inflige " + this.hit + " Dégats !\n";
+    				if(Global.P1.isDead()) {
+    					this.enemyMessage += "Ce coup fût fatal !";
+    				} else {
+    					this.enemyMessage += "Il possède maintenant " + Global.P1.getHpActuel() + " HP !";
+    				}
+    			} else {
+    				Global.P2.getHit(hit);
+    				this.enemyMessage += "Il attaque votre " + Global.P2.getClassName() + " et lui inflige " + this.hit + " Dégats !\n";
+    				if(Global.P2.isDead()) {
+    					this.enemyMessage += "Ce coup fût fatal !";
+    				} else {
+    					this.enemyMessage += "Il possède maintenant " + Global.P2.getHpActuel() + " HP !";
+    				}
+    				
+    			}
+    		}
+    			
+    			
+    			
+    			
+        	this.tmpDialogbox1.setMessages(new String[] {this.enemyMessage});       	
+        	this.tmpDialogbox1.setChoices(Arrays.asList("Continuer"), choice2 -> {
+				switch (choice2) {
+				
+				case 0:
+					this.tmpDialogbox1.setActiveTempDialogbox(false);
+					this.playedTurn = true;
+					break;
+				}
+				
+				});      
+    		
+    		// Mob turn
+    		
+    		// Increment turn
+    		if(this.currentTurnIndex + 1 == this.entities.size()) {
+    			this.currentTurnIndex = 0;
+    		} else {
+    			this.currentTurnIndex ++;
+    		}
+    	} else {
+    		
+    		this.playedTurn = true;
+    		if(this.currentTurnIndex + 1 == this.entities.size()) {
+    			this.currentTurnIndex = 0;
+    		} else {
+    			this.currentTurnIndex ++;
+    		}
+    	}
+
+    	
+    }
+    
 
     public int getID() {
         return 100;
-    }
-    
-    public void tour(Graphics g) {
-    					
-    	for(Entity e : this.entities) {
-    		if (e instanceof Player) {
-    			if (e.equals(Global.P1)) {
-
-    				this.tmpDialogbox1=new DialogueBox(new String[] {
-    						"\n "+
-    							    "     \n" +
-    							    "           Au tour de"+ Global.Player1Classe+" de jouer"
-    					        });
-
-    				this.tmpDialogbox1.setChoices(Arrays.asList("Attaquer", "Se soigner"), choice1 -> {
-    		            switch (choice1) {
-    			            case 0:
-    			                this.tmpDialogbox1.setMessages(new String[] {"\n"+"\n"+"           Aie !"});
-
-    			                this.tmpDialogbox1.setChoices(Arrays.asList("Retaper la branche", "Ne rien faire"), choice2 -> {
-    			                    switch (choice2) {
-
-    			                        case 0:
-    			                            this.tmpDialogbox1.setMessages(new String[] {"\n"+"\n"+"           AIE !!!!!!!!!"});
-    			                            
-    			                            //Permet de dire qu'il s'agissait du dernier choix
-    			                            this.tmpDialogbox1.setChoices(Arrays.asList(),null);
-    			                            break;
-
-    			                        case 1:
-    			                        	break;
-
-    			                    }
-    			                    
-    			                });
-    			                
-    			                break;
-    			                
-    			            case 1:
-    			            	break;
-    		            }       
-    		     });
-
-    			}else {
-    				
-    			}
-    			
-    		}
-    		else if (e instanceof Mobs) {
-    			
-    			
-    		}
-    		
-    	}
-
     }
 }

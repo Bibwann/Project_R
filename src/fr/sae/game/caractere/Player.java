@@ -22,6 +22,7 @@ public abstract class Player extends Entity{
     
     protected int Orientation;
 	private Animation animation;
+	protected String className;
 
     public Player(String name, int level, Image sprite,Image BattleSprite, Image chibi) {
         super(name, level, sprite,BattleSprite);
@@ -44,7 +45,7 @@ public abstract class Player extends Entity{
 	}
 
 	private Image getBattleSprite() { //Sprite de combat
-		return this.Battlesprite.getSubImage(0, 0, 48, 64).getFlippedCopy(true, false);	}
+		return this.Battlesprite.getSubImage(0, 0, 48, 64).getFlippedCopy(true, false).getScaledCopy(2.0f);	}
 
     public void setHitbox(Rectangle hitbox) {
         this.hitbox = hitbox;
@@ -179,5 +180,8 @@ public abstract class Player extends Entity{
 		}
 	}
 	
+	public String getClassName() {
+		return this.className;
+	}
 
 }

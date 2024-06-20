@@ -7,7 +7,7 @@ import fr.sae.game.caractere.Mobs;
 
 public class Chaton extends Mobs{
 
-	public Chaton(String name, int level, Image sprite,Image BattleSprite) throws SlickException {
+	public Chaton(String name, int level) throws SlickException {
 		super(name, level, new Image("data/Cats/cat.png"), new Image("data/Cats/cat.png"));
 		
 		

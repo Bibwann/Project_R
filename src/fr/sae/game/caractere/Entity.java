@@ -11,7 +11,6 @@ public abstract class Entity  {
 	protected int dmg;
 	
 	protected String name;
-	protected String classname=null;
 	protected int level;
 	protected Image sprite;
 	protected Image Battlesprite;
@@ -99,14 +98,6 @@ public abstract class Entity  {
 
 	public void setDmg(int dmg) {
 		this.dmg = dmg;
-	}
-
-	public String getClassname() {
-		return classname;
-	}
-
-	public void setClassname(String classname) {
-		this.classname = classname;
 	}
 
 	public Image getBattlesprite() {

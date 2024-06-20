@@ -29,10 +29,35 @@ public abstract class Mobs extends Entity {
 		battleHitbox = battlehitbox;
 	}
 	
-	private Image getBattleSprite() { //Sprite de combat
-		return this.Battlesprite.getSubImage(142, 48, 48, 48).getFlippedCopy(false, false);	
-	}
+	 private Image getBattleSprite() { //Sprite de combat
+		 return this.Battlesprite.getSubImage(142, 48, 48, 48).getFlippedCopy(false, false).getScaledCopy(2.0f);
+    }
 	
+	public void moveUp(float distance) {
+    	//this.UpSprite();
+		battleHitbox.setY(hitbox.getY() - distance * Global.speed); // Réduire la vitesse en ajustant le multiplicateur (ici 0.1f)
+    }
+
+    // Méthode pour déplacer le mob vers le bas
+    public void moveDown(float distance) {
+    	//this.DownSprite();
+        battleHitbox.setY(hitbox.getY() + distance * Global.speed);
+
+    }
+
+    // Méthode pour déplacer le mob vers la gauche
+    public void moveLeft(float distance) {
+    	//this.LeftSprite();
+    	battleHitbox.setX(hitbox.getX() - distance * Global.speed);
+
+    }
+
+    // Méthode pour déplacer le mob vers la droite
+    public void moveRight(float distance) {
+    	//this.RightSprite();
+    	battleHitbox.setX(hitbox.getX() + distance * Global.speed);
+    }
+    
     public void BattleScene(Graphics g, int posY) {
     	g.drawImage(this.getBattleSprite(), Global.MobsBattleDistance, posY);
 	}

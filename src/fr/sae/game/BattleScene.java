@@ -217,7 +217,7 @@ public class BattleScene extends BasicGameState {
     	}
     	return true;
     }
-    
+
     public void turn() {
 
     	this.playedTurn = false;
@@ -304,7 +304,7 @@ public class BattleScene extends BasicGameState {
                     					this.tmpDialogbox1.setActiveTempDialogbox(false);
                     	    			this.playedTurn = true;
                     					break;
-                    				}
+                    					}
                     				
                     				});        					
             					break;
@@ -399,7 +399,7 @@ public class BattleScene extends BasicGameState {
             					this.tmpDialogbox1.setActiveTempDialogbox(false);
             	    			this.playedTurn = true;
             					break;
-            				}
+            					}
             				
             				});        					
     					break;
@@ -425,7 +425,6 @@ public class BattleScene extends BasicGameState {
         		}
         		
         	});
-    		
     		
     		// Increment turn
     		this.currentTurnIndex ++;

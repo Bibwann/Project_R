@@ -159,8 +159,10 @@ public class Foret1 extends BasicGameState{
 		
 		//Fait les rendu des modeles
         g.drawImage(new Image("data/maps/Map001.png").getScaledCopy(Global.width, Global.height), 0, 0);
+        g.drawImage(new Image("data/npc/MageMourant/MageMourant4.png").getSubImage(512-64, 320, 64, 64),598, 475);
         
         dialogueBoxPanneau.render(g);
+        
         dialogueBoxBranche.render(g);
         dialogueBoxFenetre.render(g);
 

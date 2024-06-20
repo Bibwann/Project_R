@@ -28,7 +28,7 @@ public class IntroGame extends BasicGameState {
         
         // Initialize dialogue box with a single message and a continue choice
         this.dialgoboxLore = new DialogueBox(new String[] {
-            "Hello world"
+            "\n\n    JEUNE AVENTURIER, VIENS VERS MOI J'AI A TE PARLER !!!!!"
         });
         this.dialgoboxLore.setChoices(Arrays.asList("Continuer"), choice1 -> {
             switch (choice1) {
@@ -47,7 +47,8 @@ public class IntroGame extends BasicGameState {
 
         // Render background image with fading effect
         g.drawImage(new Image("data/maps/Map001.png").getScaledCopy(Global.width, Global.height), 0, 0, new Color(1f, 1f, 1f, opacity));
-        
+        g.drawImage(new Image("data/npc/MageMourant/MageMourant4.png").getSubImage(512-64, 320, 64, 64),598, 475);
+
         // Render player sprite
         Global.P1.Sprite(g);
         Global.P1.getAnimation().stop();
@@ -55,6 +56,7 @@ public class IntroGame extends BasicGameState {
         // If fade in is complete and cinematic is ended, allow player movement and transition to game state
         if (fadeInComplete && cinematiqueIsEnded) {
             Global.canMoovPlayer = true;
+            Global.SaveGame();
             game.enterState(11); // Enter game state to finish the intro
         }
         

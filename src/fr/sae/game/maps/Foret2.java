@@ -90,14 +90,14 @@ public class Foret2 extends BasicGameState{
 //----------------------------------------------------------------------------------------------------------------------------
 	//Temp
 		//Lance un combat de force -- present pour le debug a retirer
-		if (Global.tmpVarLaunchBattleScene) {
-			Global.canMoovPlayer=false;
-			Global.tmpVarLaunchBattleScene=false;
-			Global.mobs[0]=new Chaton("Chat-Pitaine", 1);
-			Global.mobs[1]=new Chaton("Chat-Thon", 1);
-	        sbg.enterState(100);
+		//if (!Global.tmpVarLaunchBattleScene ) {
+			//Global.canMoovPlayer=false;
+			//Global.tmpVarLaunchBattleScene=false;
+			//Global.mobs[0]=new Chaton("Chat-Pitaine", 1);
+			//Global.mobs[1]=new Chaton("Chat-Thon", 1);
+	        //sbg.enterState(100);
 
-		}
+		//}
 		
 //----------------------------------------------------------------------------------------------------------------------------
 	}

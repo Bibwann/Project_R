@@ -106,4 +106,8 @@ public class Collisions {
             g.draw(collidable);
         }
     }
+    
+    public void deletLastCollidable() { //Delet the last element of collidable arraylist
+    	this.collidables.remove(this.collidables.size()-1);
+    }
 }

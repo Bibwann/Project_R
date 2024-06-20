@@ -19,7 +19,10 @@ import fr.sae.game.caractere.Player;
 import fr.sae.game.caractere.Swordsman;
 import fr.sae.game.maps.Foret1;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -40,11 +43,14 @@ import org.w3c.dom.NodeList;
 
 public class Global {
 	
-//---------------------------------------------------------------------------------------------------------------------
-	//Temp pour la demo
-	public static boolean tmpVarLaunchBattleScene=true;
-//---------------------------------------------------------------------------------------------------------------------
+	//Objects de quetes
+	
+	public static boolean CoeurVaillant=false;
+	
+	//Combats uniques
+	public static boolean Foret6Battle=true;
 
+	//Instances de player
 	public static Player P1 = null;
 	public static Player P2 = null;
 
@@ -64,15 +70,6 @@ public class Global {
 	public static int PlayerBattleDistance =250;
 	public static int MobsBattleDistance =1450;
 
-
-	//Variables pour les invetaires	
-	public static Map<String, Integer> dictionnaireInventory = new HashMap<String, Integer>() {{
-		put("SWORD", 0);
-		put("WAND", 0);
-		put("BOOK", 0);
-		put("TOMAHAWK", 0);
-		put("POTION", 0);
-	}};
 
 	//Variables global d'input
 	
@@ -193,6 +190,11 @@ public class Global {
 
 	//Special Thanks
 	public static String egg1="";
+	
+	//Collisions temporaires
+	
+	public static Collisions TmpCollisionMapForet5;
+
 	//Collision maps
 	
 	public static Collisions CollisionMapForet1;
@@ -272,6 +274,7 @@ public class Global {
 		}
 	}
 	
+
 	private static void Collisions() {
 		//Initialisation des collisions des maps
     	CollisionMapForet1=new Collisions();
@@ -442,6 +445,11 @@ public class Global {
         CollisionMapForet5.addCollidable(new Rectangle(1125, 955, 65, 125));
         //BRANCHE
         CollisionMapForet5.addCollidable(new Rectangle(120, 310, 80, 70));
+        
+        //Collisions temporaires
+        
+        CollisionMapForet5.addCollidable(new Rectangle(990, 580, 70, 70)); 
+
 	}
 	
 	public static void CollisionsMapForet7() {
@@ -560,9 +568,10 @@ public static void CollisionMapUnderground1() {
 
 	//Fonctions de sauvgarde
 	public static void LoadGame() {
-	    File file = new File("data/saves/" + Global.actualfile);
+	    File file = new File(Global.actualfile.toString());
 
 	    Global.Collisions();
+
 	    InputHandler = new InputHandler(200);
 
 	    int classep1Lvl = 1;
@@ -578,8 +587,6 @@ public static void CollisionMapUnderground1() {
 
 	        // Root element "Game"
 	        Element rootElement = doc.getDocumentElement();
-
-	        System.err.println(rootElement.toString());
 
 	        // Load MapID
 	        NodeList mapIdList = rootElement.getElementsByTagName("MapID");
@@ -684,6 +691,14 @@ public static void CollisionMapUnderground1() {
 	                    break;
 	            }
 	        }
+	        
+	     // Load coeurVaillant
+	        NodeList coeurVaillantList = rootElement.getElementsByTagName("coeurVaillant");
+	        if (coeurVaillantList.getLength() > 0) {
+	            Element coeurVaillantElement = (Element) coeurVaillantList.item(0);
+	            boolean CoeurVaillant = Boolean.parseBoolean(coeurVaillantElement.getTextContent());
+	            Global.CoeurVaillant = CoeurVaillant;
+	        }
 
 	        // Example of setting battle hitbox and initiating animation
 	        if (Global.P1 != null) {
@@ -692,6 +707,10 @@ public static void CollisionMapUnderground1() {
 	        }
 	        if (Global.P2 != null) {
 	            P2.setBattlehitbox(new Rectangle(PlayerBattleDistance, height / 3, 32, 48));
+	        }
+	        
+	        if(Global.CoeurVaillant) {
+                Global.CollisionMapForet5.deletLastCollidable();
 	        }
 
 	        System.out.println("Game loaded successfully!");
@@ -702,8 +721,7 @@ public static void CollisionMapUnderground1() {
 	}
 
 	public static void SaveGame() {
-		
-	    File file = new File("data/saves/" + Global.actualfile);
+	    File file = new File(Global.actualfile.toString());
 	    try {
 	        DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
 	        DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
@@ -752,6 +770,11 @@ public static void CollisionMapUnderground1() {
 	        yElement.appendChild(doc.createTextNode(Integer.toString((int) Global.P1.getHitbox().getY()))); // Assuming Global.SpawnY is correct
 	        rootElement.appendChild(yElement);
 
+	        // CoeurVaillant element as boolean
+	        Element coeurVaillantElement = doc.createElement("coeurVaillant");
+	        coeurVaillantElement.appendChild(doc.createTextNode(Boolean.toString(Global.CoeurVaillant)));
+	        rootElement.appendChild(coeurVaillantElement);
+
 	        // Write the content into XML file, overwriting existing content
 	        TransformerFactory transformerFactory = TransformerFactory.newInstance();
 	        Transformer transformer = transformerFactory.newTransformer();
@@ -767,5 +790,33 @@ public static void CollisionMapUnderground1() {
 	        e.printStackTrace();
 	    }
 	}
+
+	
+    public static String readXmlFile(File file) {
+    	try {
+	        // StringBuilder to accumulate the file content
+	        StringBuilder contentBuilder = new StringBuilder();
+	        
+	        // Try-with-resources to ensure BufferedReader is closed automatically
+	        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+	            String currentLine;
+	            
+	            // Read the file line by line
+	            while ((currentLine = br.readLine()) != null) {
+	                // Append each line to the StringBuilder without adding a newline
+	                contentBuilder.append(currentLine.trim());
+	            }
+	        }
+	        
+	        // Convert StringBuilder to String and return it
+	        return contentBuilder.toString();
+	    
+	    }catch(IOException e) {
+	    	e.getMessage();
+	    }
+        // Return "" if file is empty
+    	return "";
+		
+    }
 
 }

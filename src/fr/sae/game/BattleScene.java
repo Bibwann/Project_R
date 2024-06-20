@@ -2,6 +2,7 @@ package fr.sae.game;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 
 import org.newdawn.slick.GameContainer;
@@ -27,11 +28,14 @@ public class BattleScene extends BasicGameState {
     private boolean playedTurn = true;
     private int P1Potions = 5;
     private int P2Potions = 5;
-    private int EnemiesPotions = 7;
+    private int EnemiesPotions = 0;
     private int hit;
     private int confusedDebuf = 0;
     private String enemyMessage;
     private List<String> enemyNames = new ArrayList<String>();
+    private List<String> aliveEnemyNames = new ArrayList<String>();
+
+
     private List<String> deadEnemyNames = new ArrayList<String>();
     
     protected ArrayList<Entity> entities = new ArrayList<>();
@@ -59,6 +63,8 @@ public class BattleScene extends BasicGameState {
             		System.err.println(this.enemy[i].getName());
             	}
             }
+            this.aliveEnemyNames = new ArrayList<>(this.enemyNames); // Copie de enemyNames pour éviter la modification concurrente
+
         }
     }
         
@@ -192,7 +198,7 @@ public class BattleScene extends BasicGameState {
 		
 		if(this.playedTurn && !this.entities.isEmpty() && !this.enemyNames.isEmpty()) {
 			turn();
-		}
+		}			
 		
 		this.tmpDialogbox1.updateTempDialgbox(boolInput, gc);
 //		if(this.dialogInterract) {
@@ -204,7 +210,7 @@ public class BattleScene extends BasicGameState {
     
     public boolean isWin() {
     	for (int i = 0; i < this.entities.size() - 2; i++) {
-    		System.out.println(enemy[i].getName() + ' ' + enemy[i].getHpActuel() + ' ' + enemy[i].isDead());
+    		//System.out.println(enemy[i].getName() + ' ' + enemy[i].getHpActuel() + ' ' + enemy[i].isDead());
     		if (!(enemy[i].isDead())) {
     			return false;
     		}
@@ -213,11 +219,12 @@ public class BattleScene extends BasicGameState {
     }
     
     public void turn() {
+
     	this.playedTurn = false;
     	this.tmpDialogbox1.setActiveTempDialogbox(true);
     	if(this.currentTurnIndex == 0 && !Global.P1.isDead()) {
     		// Player 1 turn 
-    			this.tmpDialogbox1.setMessages(new String[] {"C'est au tour de votre " + Global.P1.getClassName() + "\nHP: " + Global.P1.getHpActuel() + "/" + Global.P1.getHpMax()});
+    		this.tmpDialogbox1.setMessages(new String[] {"C'est au tour de votre " + Global.P1.getClassName() + "\nHP: " + Global.P1.getHpActuel() + "/" + Global.P1.getHpMax()});
         	
         	this.tmpDialogbox1.setChoices(Arrays.asList("Attaquer", "Se soigner (" + this.P1Potions + ")", "Passer"), choice -> {
         		switch (choice) {
@@ -233,14 +240,29 @@ public class BattleScene extends BasicGameState {
         				this.tmpDialogbox1.setMessages(new String[] {"Vous préparez votre coup, il est trop tard pour faire machine arrière ! \nQuel enemi allez-vous attaquer maintenant?"});
         			}
         			
-        			this.tmpDialogbox1.setChoices(this.enemyNames, choice2 -> {
-        				switch (choice2) {
+        			this.tmpDialogbox1.setChoices(this.aliveEnemyNames, choice2 -> {
+        				
+        				for (int i = 0; i < Global.mobs.length; i++) {
+        					if(Global.mobs[i]!=null) {
+
+	        				    if (Global.mobs[i].getName()==choice2.toString()) {
+	        				        choice2 = i;
+	        				        break; 
+	        				    }
+        					}
+        				}
+        				System.out.println(choice2);
+        				
+        				
+        				switch (choice2) {	
         				case 0:
         					this.enemy[0].getHit(this.hit);
         					
 //        					this.tmpDialogbox1.setActiveTempDialogbox(true);
                 			if(this.enemy[0].isDead()) {
                 				this.deadEnemyNames.add(this.enemyNames.get(0));
+	    						this.aliveEnemyNames.remove(this.enemyNames.get(0));
+
                 				this.tmpDialogbox1.setMessages(new String[] { this.enemyNames.get(0) + " a été vaincu !"});
                     			
                     			this.tmpDialogbox1.setChoices(Arrays.asList("Continuer"), choice3 -> {
@@ -276,6 +298,7 @@ public class BattleScene extends BasicGameState {
 //	    					this.tmpDialogbox1.setActiveTempDialogbox(true);
 	    					if(this.enemy[1].isDead()) {
 	    						this.deadEnemyNames.add(this.enemyNames.get(1));
+	    						this.aliveEnemyNames.remove(this.enemyNames.get(1));
                 				this.tmpDialogbox1.setMessages(new String[] { this.enemyNames.get(1) + " a été vaincu !"});
                     			
                     			this.tmpDialogbox1.setChoices(Arrays.asList("Continuer"), choice3 -> {
@@ -308,6 +331,8 @@ public class BattleScene extends BasicGameState {
 	        			case 2:
 
 	        				this.deadEnemyNames.add(this.enemyNames.get(2));
+    						this.aliveEnemyNames.remove(this.enemyNames.get(2));
+
 	    					
 //	    					this.tmpDialogbox1.setActiveTempDialogbox(true);
                 			this.tmpDialogbox1.setMessages(new String[] {this.enemyNames.get(2) + " à reçu " + hit + " dégats !"});
@@ -325,6 +350,8 @@ public class BattleScene extends BasicGameState {
 	    					break;
         		
 			        	case 3:
+			        		this.deadEnemyNames.add(this.enemyNames.get(3));
+    						this.aliveEnemyNames.remove(this.enemyNames.get(3));
 //							this.enemy[3].getHit(Global.P1.getDmg());
 							
 //							this.tmpDialogbox1.setActiveTempDialogbox(true);
@@ -409,7 +436,8 @@ public class BattleScene extends BasicGameState {
     	} else if (this.currentTurnIndex == 2 && !Global.P2.isDead()) {
     		
     		// Player 2 turn
-    			this.tmpDialogbox1.setMessages(new String[] {"C'est au tour de votre " + Global.P2.getClassName() + "\nHP: " + Global.P2.getHpActuel() + "/" + Global.P2.getHpMax()});
+    		
+    		this.tmpDialogbox1.setMessages(new String[] {"C'est au tour de votre " + Global.P2.getClassName() + "\nHP: " + Global.P2.getHpActuel() + "/" + Global.P2.getHpMax()});
         	this.tmpDialogbox1.setChoices(Arrays.asList("Attaquer", "Se soigner (" + this.P2Potions + ")", "Passer"), choice -> {
         		switch (choice) {
         		case 0: // Attack the enemies
@@ -424,7 +452,19 @@ public class BattleScene extends BasicGameState {
         				this.tmpDialogbox1.setMessages(new String[] {"Vous préparez votre coup, il est trop tard pour faire machine arrière ! \nQuel enemi allez-vous attaquer maintenant?"});
         			}
         			
-        			this.tmpDialogbox1.setChoices(this.enemyNames, choice2 -> {
+        			this.tmpDialogbox1.setChoices(this.aliveEnemyNames, choice2 -> {
+
+        				for (int i = 0; i < Global.mobs.length; i++) {
+        					if(Global.mobs[i]!=null) {
+
+	        				    if (Global.mobs[i].getName()==choice2.toString()) {
+	        				        choice2 = i;
+	        				        break; 
+	        				    }
+        					}
+        				}
+        				System.out.println(choice2);
+        				
         				switch (choice2) {
         				case 0:
         					this.enemy[0].getHit(this.hit);
@@ -432,6 +472,8 @@ public class BattleScene extends BasicGameState {
 //        					this.tmpDialogbox1.setActiveTempDialogbox(true);
                 			if(this.enemy[0].isDead()) {
                 				this.deadEnemyNames.add(this.enemyNames.get(0));
+	    						this.aliveEnemyNames.remove(this.enemyNames.get(0));
+
                 				this.tmpDialogbox1.setMessages(new String[] { this.enemyNames.get(0) + " a été vaincu !"});
                     			
                     			this.tmpDialogbox1.setChoices(Arrays.asList("Continuer"), choice3 -> {
@@ -467,6 +509,8 @@ public class BattleScene extends BasicGameState {
 //	    					this.tmpDialogbox1.setActiveTempDialogbox(true);
 	    					if(this.enemy[1].isDead()) {
 	    						this.deadEnemyNames.add(this.enemyNames.get(1));
+	    						this.aliveEnemyNames.remove(this.enemyNames.get(1));
+
                 				this.tmpDialogbox1.setMessages(new String[] { this.enemyNames.get(1) + " a été vaincu !"});
                     			
                     			this.tmpDialogbox1.setChoices(Arrays.asList("Continuer"), choice3 -> {
@@ -501,6 +545,8 @@ public class BattleScene extends BasicGameState {
 	    					
 //	    					this.tmpDialogbox1.setActiveTempDialogbox(true);
 	        				this.deadEnemyNames.add(this.enemyNames.get(2));
+    						this.aliveEnemyNames.remove(this.enemyNames.get(2));
+
                 			this.tmpDialogbox1.setMessages(new String[] {this.enemyNames.get(2) + " à reçu " + hit + " dégats !"});
                 			
                 			this.tmpDialogbox1.setChoices(Arrays.asList("Continuer"), choice3 -> {
@@ -520,6 +566,8 @@ public class BattleScene extends BasicGameState {
 							
 //							this.tmpDialogbox1.setActiveTempDialogbox(true);
 			        		this.deadEnemyNames.add(this.enemyNames.get(3));
+    						this.aliveEnemyNames.remove(this.enemyNames.get(3));
+
                 			this.tmpDialogbox1.setMessages(new String[] {this.enemyNames.get(3) + " à reçu " + hit + " dégats !"});
                 			
                 			this.tmpDialogbox1.setChoices(Arrays.asList("Continuer"), choice3 -> {
@@ -684,6 +732,8 @@ public class BattleScene extends BasicGameState {
     	
     }
     
+              
+
 
     public int getID() {
         return 100;

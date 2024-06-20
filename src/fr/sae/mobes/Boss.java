@@ -2,6 +2,7 @@ package fr.sae.mobes;
 
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.state.StateBasedGame;
 
 import fr.sae.game.caractere.Entity;
 
@@ -27,4 +28,10 @@ public final class Boss extends Entity {
         }
         return instance;
     }
+    
+    public void Dead(StateBasedGame sbg) {
+		if (this.getHpActuel()<1) {
+			sbg.enterState(8);
+		}
+	}
 }

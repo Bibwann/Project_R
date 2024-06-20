@@ -13,6 +13,7 @@ import org.newdawn.slick.state.StateBasedGame;
 import fr.sae.game.DialogueBox;
 import fr.sae.game.Global;
 import fr.sae.game.Warp;
+import fr.sae.mobes.Chaton;
 
 public class Foret6 extends BasicGameState {
 	Warp Warp1;
@@ -78,36 +79,35 @@ public class Foret6 extends BasicGameState {
 	    
 	    
 		//Dialogbox Avec choix multiples
-		this.dialogueBoxPuits = new DialogueBox(new String[] {
-				"\n "+
-			    "     \n" +
-			    "           Vous ne voyez pas le fond du puits"
-	        });
-	    this.dialogueBoxPuits.setTriggerZone(1517, 370, 76, 90);
-	    
-	    this.dialogueBoxPuits.setChoices(Arrays.asList("Sauter", "Crier", "Partir"), choice1 -> {
-            switch (choice1) {
-	            case 1:
-	            	this.tmpDialogbox2.setActiveTempDialogbox(true);
-	                this.tmpDialogbox2.setMessages(new String[] {"\n"+"\n"+"  Votre voie résonne mais cela semble peu profond"});
-	                //Ajoutez recursivement des choix ici de la meme maniere que moi
-	                this.tmpDialogbox2.setChoices(Arrays.asList(),null);
-                    break;
-	                
-	            case 0:
-	            	this.tmpDialogbox2.setActiveTempDialogbox(true);
-	                this.tmpDialogbox2.setMessages(new String[] {"\n"+"\n"+"    tp grotte"});
-	                //Ajoutez recursivement des choix ici de la meme maniere que moi
-	                this.tmpDialogbox2.setChoices(Arrays.asList(),null);
-                    break;
-	                
-	                
-	            case 2:
-	            	this.tmpDialogbox2.setActiveTempDialogbox(false);
-	            	break;
+	  		this.dialogueBoxPuits = new DialogueBox(new String[] {
+	                "Vous ne voyez pas le fond du puits"
+	            });
+	        this.dialogueBoxPuits.setTriggerZone(1517, 370, 76, 90);
 
-            }       
-     });
+	        this.dialogueBoxPuits.setChoices(Arrays.asList("Sauter", "Crier", "Partir"), choice1 -> {
+	            switch (choice1) {
+	                case 1:
+	                    this.tmpDialogbox2.setActiveTempDialogbox(true);
+	                    this.tmpDialogbox2.setMessages(new String[] {"Votre voie résonne mais cela semble peu profond"});
+	                    //Ajoutez recursivement des choix ici de la meme maniere que moi
+	                    this.tmpDialogbox2.setChoices(Arrays.asList(),null);
+	                    break;
+
+	                case 0:
+	                    this.tmpDialogbox2.setActiveTempDialogbox(false);
+	                    Global.P1.getHitbox().setX(150); //coordonnées tp
+	                    Global.P1.getHitbox().setY(210);
+	                    sbg.enterState(26);
+
+	                    break;
+
+
+	                case 2:
+	                    this.tmpDialogbox2.setActiveTempDialogbox(false);
+	                    break;
+
+	            }
+	     });
 	    
 	    
 	    
@@ -148,18 +148,30 @@ public class Foret6 extends BasicGameState {
 	  	    this.dialogueBoxPot.setChoices(Arrays.asList("Fouiller", "Laisser"), choice1 -> {
 	              switch (choice1) {
 	  	            case 0:
+	  	            	if (Global.Foret6Battle) {	
+	  	            		
 	  	            	this.tmpDialogbox2.setActiveTempDialogbox(true);
 	  	                this.tmpDialogbox2.setMessages(new String[] {"\n"+"\n"+"  Un chat se cache dans le sceau"});
 	  	                //Ajoutez recursivement des choix ici de la meme maniere que moi
-	  	              this.tmpDialogbox2.setChoices(Arrays.asList("Carresser le chat", "Partir"), choice2 -> {
+	  	                this.tmpDialogbox2.setChoices(Arrays.asList("Carresser le chat", "Partir"), choice2 -> {
 		                    switch (choice2) {
 
 		                        case 0:
-		                        	this.tmpDialogbox2.setActiveTempDialogbox(true);
-		                            this.tmpDialogbox2.setMessages(new String[] {"\n"+"\n"+"    combat contre le chat ma gueule"});
-		                            
-		                            //Permet de dire qu'il s'agissait du dernier choix
-		                            this.tmpDialogbox2.setChoices(Arrays.asList(),null);
+		                        	this.tmpDialogbox2.setActiveTempDialogbox(false);
+		                        	
+		                    			Global.Foret6Battle=false;
+		                    			Global.canMoovPlayer=false;
+		                    			
+		                				try {
+											Global.mobs[0]=new Chaton("Chat-Pitaine", 1);
+			                				Global.mobs[1]=new Chaton("Chat-Thon", 1);
+
+										} catch (SlickException e) {
+											e.printStackTrace();
+										}
+		                	        	sbg.enterState(100);
+
+		                    		
 		                            break;
 
 		                        case 1:
@@ -168,9 +180,15 @@ public class Foret6 extends BasicGameState {
 		                    }
 		                    
 		                });
-		                
+	  	            	}else {
+		  	            	this.tmpDialogbox2.setActiveTempDialogbox(true);
+		  	                this.tmpDialogbox2.setMessages(new String[] {"\n"+"\n"+"  Il y a un cadavre de chat ..."});
+		  	                //Ajoutez recursivement des choix ici de la meme maniere que moi
+		  	                this.tmpDialogbox2.setChoices(Arrays.asList(),null);
+	  	            	}
+	  	            	
 		                break;
-	  	                
+	  	              
 	  	            case 1:
 	  	            	this.tmpDialogbox2.setActiveTempDialogbox(false);
 	  	            	break;
@@ -211,7 +229,7 @@ public class Foret6 extends BasicGameState {
 
 	                        case 1:
 	                        	this.tmpDialogbox2.setActiveTempDialogbox(false);
-	                        	
+
 	                    }
 	                    
 	                });
@@ -256,7 +274,7 @@ public class Foret6 extends BasicGameState {
 	//Temp	    
 
 	    //Affiche toutes les collisions de la map et du joueur
-	    if (false) {
+	    if (true) {
 		    g.draw(Global.P1.getHitbox());
 		    
 		    Global.CollisionMapForet6.drawCollisions(g);

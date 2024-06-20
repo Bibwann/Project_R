@@ -17,8 +17,8 @@ import fr.sae.mobes.Chaton;
 
 public class Foret5 extends BasicGameState {
 	Warp Warp1;
-	//Warp Warp2;
-	//Warp Warp3;
+	Warp Warp2;
+	Warp Warp3;
 	DialogueBox dialogueBoxArbre;
 	DialogueBox dialogueBoxBranche;
 	 
@@ -30,8 +30,8 @@ public class Foret5 extends BasicGameState {
 	@Override
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
 		this.Warp1= new Warp(0, 560, 10, Global.height-560, 1800, 860);//GAUCHE
-		//this.Warp2= new Warp(1910, 60, 10, 380, 40, 160);//DROITE
-		//this.Warp3= new Warp(0, 1070, 1160, 10, 400, 50);//BAS
+		this.Warp2= new Warp(1910, 60, 10, 380, 40, 160);//DROITE
+		this.Warp3= new Warp(0, 1070, 1160, 10, 400, 50);//BAS
 		
 		//Obligatoire que tmpDialogbox1 aie une triggerzone hors map
 	    this.tmpDialogbox2.setTriggerZone(-1, -1, 0, 0);
@@ -124,8 +124,8 @@ public class Foret5 extends BasicGameState {
         	System.out.print(e);
         }
         this.Warp1.warp(Global.P1, sbg, 11);//GAUCHE
-        //this.Warp2.warp(Global.P1, sbg, 12);//DROITE
-        //this.Warp3.warp(Global.P1, sbg, 17);//BAS
+        this.Warp2.warp(Global.P1, sbg, 12);//DROITE
+        this.Warp3.warp(Global.P1, sbg, 17);//BAS
         
         //Obligatoire, premet de rendre a l'ecran la dialogbox temp quand elle est necessaire
         this.tmpDialogbox2.renderTempDialgbox(g);
@@ -134,13 +134,14 @@ public class Foret5 extends BasicGameState {
 	//Temp	    
 
 	    //Affiche toutes les collisions de la map et du joueur
-	    if (false) {
+	    if (true) {
 		    g.draw(Global.P1.getHitbox());
 		    
 		    Global.CollisionMapForet5.drawCollisions(g);
+		    
 		    this.Warp1.draw(g);
-		    //this.Warp2.draw(g);
-		    //this.Warp3.draw(g);
+		    this.Warp2.draw(g);
+		    this.Warp3.draw(g);
 		    
 		    this.dialogueBoxBranche.draw(g);
 		    this.dialogueBoxArbre.draw(g);
@@ -171,14 +172,14 @@ public class Foret5 extends BasicGameState {
       //----------------------------------------------------------------------------------------------------------------------------
     	//Temp
     		//Lance un combat de force -- present pour le debug a retirer
-    		if (Global.tmpVarLaunchBattleScene) {
-    			Global.canMoovPlayer=false;
-    			Global.tmpVarLaunchBattleScene=false;
-    			Global.mobs[0]=new Chaton("Chat-Pitaine", 1);
-    			Global.mobs[1]=new Chaton("Chat-Thon", 1);
-    	        sbg.enterState(100);
+    		//if (Global.tmpVarLaunchBattleScene) {
+    			//Global.canMoovPlayer=false;
+    			//Global.tmpVarLaunchBattleScene=false;
+    			//Global.mobs[0]=new Chaton("Chat-Pitaine", 1);
+    			//Global.mobs[1]=new Chaton("Chat-Thon", 1);
+    	        //sbg.enterState(100);
 
-    		}
+    		//}
     		
     //----------------------------------------------------------------------------------------------------------------------------
 	}

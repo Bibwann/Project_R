@@ -112,10 +112,6 @@ public class Underground3 extends BasicGameState {
   	            case 2:
   	            	this.tmpDialogbox2.setActiveTempDialogbox(false);
   	            	break;
-  	                
-  	                
-  	            
-  	            	
 
               }       
        });
@@ -131,27 +127,39 @@ public class Underground3 extends BasicGameState {
   	    this.dialogueBoxPot.setChoices(Arrays.asList("Prendre", "Laisser"), choice1 -> {
               switch (choice1) {
   	            case 0:
-  	            	this.tmpDialogbox2.setActiveTempDialogbox(true);
-  	                this.tmpDialogbox2.setMessages(new String[] {"\n"+"\n"+"     Vous tenez un coeur froid dans votre main.\n"+ "\n"+"\n"+"     Etonnament ce coeur bat toujours faiblement."});
-  	                //Ajoutez recursivement des choix ici de la meme maniere que moi
-  	                this.tmpDialogbox2.setChoices(Arrays.asList("Ranger le coeur dans votre sac", "Deposer le coeur dans le sceau"), choice2 -> {
-	                    switch (choice2) {
-
-	                        case 0:
-	                        	this.tmpDialogbox2.setActiveTempDialogbox(true);
-	                            this.tmpDialogbox2.setMessages(new String[] {"\n"+"\n"+"    +1 coeur vaillant dans l'inventaire"});
-	                            
-	                            //Permet de dire qu'il s'agissait du dernier choix
-	                            this.tmpDialogbox2.setChoices(Arrays.asList(),null);
-	                            break;
-
-	                        case 1:
-	                        	this.tmpDialogbox2.setActiveTempDialogbox(false);
-
-	                    }
-	                    
-	                });
-	                
+  	            	if(!Global.CoeurVaillant) {
+	  	            	this.tmpDialogbox2.setActiveTempDialogbox(true);
+	  	                this.tmpDialogbox2.setMessages(new String[] {"\n"+"\n"+"     Vous tenez un coeur froid dans votre main.\n"+ "\n"+"\n"+"     Etonnament ce coeur bat toujours faiblement."});
+	  	                //Ajoutez recursivement des choix ici de la meme maniere que moi
+	  	                this.tmpDialogbox2.setChoices(Arrays.asList("Ranger le coeur dans votre sac", "Deposer le coeur dans le sceau"), choice2 -> {
+		                    switch (choice2) {
+	
+		                        case 0:
+		                        	this.tmpDialogbox2.setActiveTempDialogbox(true);
+		                            this.tmpDialogbox2.setMessages(new String[] {"\n"+"\n"+"    +1 coeur vaillant dans l'inventaire"});
+		                            if (!Global.CoeurVaillant) {
+			                            Global.CollisionMapForet5.deletLastCollidable();
+		                            }
+		                            Global.CoeurVaillant=true;
+	
+		                            
+		                            //Permet de dire qu'il s'agissait du dernier choix
+		                            this.tmpDialogbox2.setChoices(Arrays.asList(),null);
+		                            break;
+	
+		                        case 1:
+		                        	this.tmpDialogbox2.setActiveTempDialogbox(false);
+	
+		                    }
+		                    
+		                });
+  	            	} else {
+  	            		this.tmpDialogbox2.setActiveTempDialogbox(true);
+                        this.tmpDialogbox2.setMessages(new String[] {"\n"+"\n"+"    Ce sceau est vide"});
+                
+                        //Permet de dire qu'il s'agissait du dernier choix
+                        this.tmpDialogbox2.setChoices(Arrays.asList(),null);
+  	            	}
 	                break;
   	                
   	            case 1:

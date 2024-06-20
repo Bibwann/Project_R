@@ -149,7 +149,6 @@ public class Foret1 extends BasicGameState{
             }       
      });
 	    
-//-----------------------------------------------------------------------------------------------------------------------
 
 	}
 
@@ -185,7 +184,7 @@ public class Foret1 extends BasicGameState{
 	//Temp	     
 
 	    //Affiche toutes les collisions de la map et du joueur
-	    if (false) {
+	    if (true) {
 		    g.draw(Global.P1.getHitbox());
 		    
 		    Global.CollisionMapForet1.drawCollisions(g);

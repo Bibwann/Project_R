@@ -232,26 +232,22 @@ public class BattleScene extends BasicGameState {
         			this.hit = Global.P1.getDmg();
         			
 //        			this.tmpDialogbox1.setActiveTempDialogbox(true);
-        			if(this.deadEnemyNames.size()>0) {
-        				this.tmpDialogbox1.setMessages(new String[] {"Vous préparez votre coup, il est trop tard pour faire machine arrière ! \nQuel enemi allez-vous attaquer maintenant?" + this.deadEnemyNames + " est déjà morts"});
-        			} else if (this.deadEnemyNames.size()>1) {
-        				this.tmpDialogbox1.setMessages(new String[] {"Vous préparez votre coup, il est trop tard pour faire machine arrière ! \nQuel enemi allez-vous attaquer maintenant?" + this.deadEnemyNames + " sont déjà morts"});        				
-        			} else {
-        				this.tmpDialogbox1.setMessages(new String[] {"Vous préparez votre coup, il est trop tard pour faire machine arrière ! \nQuel enemi allez-vous attaquer maintenant?"});
-        			}
+        			
+        			this.tmpDialogbox1.setMessages(new String[] {"Vous préparez votre coup, il est trop tard pour faire machine arrière ! \nQuel enemi allez-vous attaquer maintenant?"});
+        			
         			
         			this.tmpDialogbox1.setChoices(this.aliveEnemyNames, choice2 -> {
-        				
+
         				for (int i = 0; i < Global.mobs.length; i++) {
+
         					if(Global.mobs[i]!=null) {
 
-	        				    if (Global.mobs[i].getName()==choice2.toString()) {
+	        				    if (Global.mobs[i].getName()==(this.aliveEnemyNames.get(choice2))) {
 	        				        choice2 = i;
 	        				        break; 
 	        				    }
         					}
         				}
-        				System.out.println(choice2);
         				
         				
         				switch (choice2) {	
@@ -444,26 +440,21 @@ public class BattleScene extends BasicGameState {
         			this.hit = Global.P2.getDmg();
         			
 //        			this.tmpDialogbox1.setActiveTempDialogbox(true);
-        			if(this.deadEnemyNames.size()>0) {
-        				this.tmpDialogbox1.setMessages(new String[] {"Vous préparez votre coup, il est trop tard pour faire machine arrière ! \nQuel enemi allez-vous attaquer maintenant?" + this.deadEnemyNames + " est déjà morts"});
-        			} else if (this.deadEnemyNames.size()>1) {
-        				this.tmpDialogbox1.setMessages(new String[] {"Vous préparez votre coup, il est trop tard pour faire machine arrière ! \nQuel enemi allez-vous attaquer maintenant?" + this.deadEnemyNames + " sont déjà morts"});        				
-        			} else {
-        				this.tmpDialogbox1.setMessages(new String[] {"Vous préparez votre coup, il est trop tard pour faire machine arrière ! \nQuel enemi allez-vous attaquer maintenant?"});
-        			}
+
+        			this.tmpDialogbox1.setMessages(new String[] {"Vous préparez votre coup, il est trop tard pour faire machine arrière ! \nQuel enemi allez-vous attaquer maintenant?"});
+        		
         			
         			this.tmpDialogbox1.setChoices(this.aliveEnemyNames, choice2 -> {
 
         				for (int i = 0; i < Global.mobs.length; i++) {
         					if(Global.mobs[i]!=null) {
 
-	        				    if (Global.mobs[i].getName()==choice2.toString()) {
+	        				    if (Global.mobs[i].getName()==(this.aliveEnemyNames.get(choice2))) {
 	        				        choice2 = i;
 	        				        break; 
 	        				    }
         					}
         				}
-        				System.out.println(choice2);
         				
         				switch (choice2) {
         				case 0:

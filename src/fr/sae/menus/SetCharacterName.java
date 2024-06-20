@@ -10,20 +10,20 @@ public class SetCharacterName extends BasicGameState {
 
     private TrueTypeFont font;
     private String characterName = "";
-    private int maxNameLength = 15; // Increase max name length to 15
+    private int maxNameLength = 15; // Increased max name length to 15 characters
     private Color textColor = Color.white;
     private Color backgroundColor = new Color(0, 0, 0, 200);
     private int arrowPosition = 1;
 
     private String[][] characters = { 
-    	    { " ", "A", "B", "C", "D", "E", "F", "G", "H", " " },
-    	    { "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R" },
-    	    { "S", "T", "U", "V", "W", "X", "Y", "Z", "a", "b" },
-    	    { "c", "d", "e", "f", "g", "h", "i", "j", "k", "l" },
-    	    { "m", "n", "o", "p", "q", "r", "s", "t", "u", "v" },
-    	    { " " ,"w", "x", "y", "z", "0", "1", "2", "3", " " },
-    	    { " ", " ", "4", "5", "6", "7", "8", "9", " ", " " }
-    	};
+        { " ", "A", "B", "C", "D", "E", "F", "G", "H", " " },
+        { "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R" },
+        { "S", "T", "U", "V", "W", "X", "Y", "Z", "a", "b" },
+        { "c", "d", "e", "f", "g", "h", "i", "j", "k", "l" },
+        { "m", "n", "o", "p", "q", "r", "s", "t", "u", "v" },
+        { " " ,"w", "x", "y", "z", "0", "1", "2", "3", " " },
+        { " ", " ", "4", "5", "6", "7", "8", "9", " ", " " }
+    };
     private StateBasedGame game;
 
     public SetCharacterName(int stateID) {
@@ -50,6 +50,7 @@ public class SetCharacterName extends BasicGameState {
         int y = 300;
         int spacing = 60; 
 
+        // Render the on-screen keyboard layout
         for (int i = 0; i < characters.length; i++) {
             int totalWidth = characters[i].length * spacing;
 
@@ -67,6 +68,7 @@ public class SetCharacterName extends BasicGameState {
             }
         }
 
+        // Render instructions for navigation and character selection
         String message = "Use the arrow keys to select a character and press SPACE to add it to your name.";
         int messageWidth = g.getFont().getWidth(message);
         g.drawString(message, (gc.getWidth() - messageWidth) / 2, gc.getHeight() - 50);
@@ -74,7 +76,7 @@ public class SetCharacterName extends BasicGameState {
 
     @Override
     public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
-        
+        // No updates needed in this method for character name input
     }
 
     @Override
@@ -82,13 +84,14 @@ public class SetCharacterName extends BasicGameState {
         int maxPosition = characters.length * 10 - 1;
         int minPosition = 0;
 
+        // Handle character input from keyboard
         if (Character.isLetterOrDigit(c) && characterName.length() < maxNameLength) {
             characterName += c;
         } else if (key == Input.KEY_BACK && characterName.length() > 0) {
             characterName = characterName.substring(0, characterName.length() - 1);
         } else if (key == Input.KEY_ENTER && !characterName.isEmpty()) {
-            Global.Player1Name = characterName;
-            game.enterState(5);
+            Global.Player1Name = characterName; // Set the global player name
+            game.enterState(5); // Transition to another game state (change the number as per your game)
         } else if (key == Input.KEY_LEFT) {
             if (arrowPosition > minPosition && !characters[(arrowPosition - 1) / 10][(arrowPosition - 1) % 10].equals(" ")) {
                 arrowPosition--;
@@ -106,12 +109,12 @@ public class SetCharacterName extends BasicGameState {
                 arrowPosition += 10;
             }
         } else if (key == Input.KEY_SPACE) {
-            characterName += characters[arrowPosition / 10][arrowPosition % 10];
+            characterName += characters[arrowPosition / 10][arrowPosition % 10]; // Append selected character to the name
         }
     }
 
     @Override
     public int getID() {
-        return 4;
+        return 4; // Return the state ID associated with this SetCharacterName state
     }
 }

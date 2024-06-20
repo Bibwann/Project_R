@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+
+<Game>
+    <MapID>11</MapID>
+    <classep1>Mage</classep1>
+    <classep2>Healer</classep2>
+    <classep1LVL>1</classep1LVL>
+    <classep2LVL>1</classep2LVL>
+    <Player1Name>PDPD</Player1Name>
+    <x>407</x>
+    <y>347</y>
+</Game>

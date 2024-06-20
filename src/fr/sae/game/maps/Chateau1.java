@@ -33,8 +33,13 @@ public abstract class Chateau1 extends BasicGameState {
 
 	@Override
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
-		Global.updatePlayerMovement(gc.getInput(),Global.CollisionMapChateau1,delta);
-
+		Input input =gc.getInput();
+		
+		Global.updatePlayerMovement(input, Global.CollisionMapForet1,delta);
+		Global.P1.AnimateWhileMoove();
+		if (gc.getInput().isKeyPressed(Global.pause)) {
+            sbg.enterState(101); // Passer à l'état 101 (menu de pause)
+        }
 	}
 	
 	@Override

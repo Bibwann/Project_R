@@ -15,23 +15,24 @@ import java.util.List;
 import java.util.function.Consumer;
 
 public class DialogueBox {
-    private Rectangle triggerZone;
-    private boolean isActiveTempDialogbox;
-    private String[] messages;
-    private List<String> choices;
-    private List<String> preprocessedLines;
-    private int currentIndex;
-    private boolean visible;
-    private boolean isWaitingForInput;
-    private boolean canOpen;
-    private boolean canBeReuse;
-    private int currentChoice;
-    private Consumer<Integer> choiceCallback;
-    private TrueTypeFont font;
-    private int dialogHeight;
-    private int dialogWidth;
-    private int margin;
+    private Rectangle triggerZone; // Area that triggers the dialogue box
+    private boolean isActiveTempDialogbox; // Indicates if the temporary dialog box is active
+    private String[] messages; // Messages to display in the dialog box
+    private List<String> choices; // List of choices available in the dialog box
+    private List<String> preprocessedLines; // Preprocessed lines of messages
+    private int currentIndex; // Current message index
+    private boolean visible; // Indicates if the dialog box is visible
+    private boolean isWaitingForInput; // Indicates if waiting for user input
+    private boolean canOpen; // Indicates if the dialog box can be opened
+    private boolean canBeReuse; // Indicates if the dialog box can be reused
+    private int currentChoice; // Current selected choice
+    private Consumer<Integer> choiceCallback; // Callback for choice selection
+    private TrueTypeFont font; // Font for the dialog box
+    private int dialogHeight; // Height of the dialog box
+    private int dialogWidth; // Width of the dialog box
+    private int margin; // Margin for the dialog box
 
+    // Constructor to initialize the dialogue box with messages
     public DialogueBox(String[] messages) {
         this.messages = messages;
         this.currentIndex = 0;
@@ -45,7 +46,7 @@ public class DialogueBox {
         this.choiceCallback = null;
         this.isActiveTempDialogbox = false;
 
-        // Initialize the font and dimensions once
+        // Initialize the font and dimensions
         this.margin = 20;
         this.dialogHeight = Global.height / 3;
         this.dialogWidth = Global.width - 2 * margin;
@@ -55,6 +56,7 @@ public class DialogueBox {
         preprocessMessages();
     }
 
+    // Preprocess the messages to fit within the dialog box width
     private void preprocessMessages() {
         this.preprocessedLines = new ArrayList<>();
         for (String message : this.messages) {
@@ -72,6 +74,7 @@ public class DialogueBox {
         }
     }
 
+    // Render the dialog box
     public void render(Graphics g) {
         if (visible) {
             int dialogX = margin;
@@ -111,12 +114,14 @@ public class DialogueBox {
         }
     }
 
+    // Set the choices for the dialog box and a callback for when a choice is made
     public void setChoices(List<String> choices, Consumer<Integer> callback) {
         this.choices = choices;
         this.currentChoice = 0;
         this.choiceCallback = callback;
     }
 
+    // Move to the next message in the dialog box
     public void nextMessage() {
         if (this.currentIndex < this.messages.length - 1) {
             this.currentIndex++;
@@ -129,60 +134,74 @@ public class DialogueBox {
         }
     }
 
+    // Set the visibility of the dialog box
     public void setVisible(boolean visible) {
         this.visible = visible;
         this.isWaitingForInput = true;
     }
 
+    // Check if the dialog box is visible
     public boolean isVisible() {
         return this.visible;
     }
 
+    // Set the trigger zone for the dialog box
     public void setTriggerZone(int x, int y, int width, int height) {
         this.triggerZone = new Rectangle(x, y, width, height);
     }
 
+    // Check if the player is in the trigger zone
     public boolean triggerZone(Rectangle player) {
         return this.triggerZone.intersects(player);
     }
 
+    // Overload to check if the player object is in the trigger zone
     public boolean triggerZone(Player p) {
         return this.triggerZone(p.getHitbox());
     }
 
+    // Get the trigger zone
     public Rectangle gettriggerZone() {
         return this.triggerZone;
     }
 
+    // Invert the canBeReuse flag
     public void invertCanBeReuse() {
         this.canBeReuse = !this.canBeReuse;
     }
 
+    // Get the messages of the dialog box
     public String[] getMessages() {
         return messages;
     }
 
+    // Get the choices of the dialog box
     public List<String> getChoices() {
         return choices;
     }
 
+    // Set the choices of the dialog box
     public void setChoices(List<String> choices) {
         this.choices = choices;
     }
 
+    // Set the messages of the dialog box and preprocess them
     public void setMessages(String[] messages) {
         this.messages = messages;
         preprocessMessages();
     }
 
+    // Check if the temporary dialog box is active
     public boolean isActiveTempDialogbox() {
         return isActiveTempDialogbox;
     }
 
+    // Set the active state of the temporary dialog box
     public void setActiveTempDialogbox(boolean isTempDialogbox) {
         this.isActiveTempDialogbox = isTempDialogbox;
     }
 
+    // Handle the dialog box interaction
     public void dialogBox(boolean isKeyPressed) {
         if (this.visible && this.isWaitingForInput && isKeyPressed) {
             if (this.currentIndex < this.messages.length - 1) {
@@ -204,6 +223,7 @@ public class DialogueBox {
         }
     }
 
+    // Handle the dialog box interaction with input for choices
     public void dialogBox(boolean isKeyPressed, Input input) {
         if (this.visible && this.isWaitingForInput) {
             if (isKeyPressed) {
@@ -242,16 +262,19 @@ public class DialogueBox {
         }
     }
 
+    // Render the temporary dialog box
     public void renderTempDialgbox(Graphics g) {
         if (this.getMessages().length != 0) {
             this.render(g);
         }
     }
 
+    // Forcefully render the dialog box
     public void renderForceDialogbox(Graphics g) {
         this.render(g);
     }
 
+    // Forcefully handle the dialog box interaction
     public void forceDialogBox(boolean isKeyPressed) {
         if (this.visible && this.isWaitingForInput && isKeyPressed) {
             if (this.currentIndex < this.messages.length - 1) {
@@ -273,6 +296,7 @@ public class DialogueBox {
         }
     }
 
+    // Forcefully handle the dialog box interaction with input for choices
     public void forceDialogBox(boolean isKeyPressed, Input input) {
         if (this.visible && this.isWaitingForInput) {
             if (isKeyPressed) {
@@ -311,6 +335,7 @@ public class DialogueBox {
         }
     }
 
+    // Update the temporary dialog box
     public void updateTempDialgbox(boolean i, GameContainer gc) {
         if (this.getChoices().isEmpty()) {
             this.dialogBox(i);
@@ -319,6 +344,7 @@ public class DialogueBox {
         }
     }
 
+    // Draw the trigger zone for debugging purposes
     public void draw(Graphics g) {
         g.setColor(Color.green);
         g.drawRect(this.triggerZone.getX(), this.triggerZone.getY(), this.triggerZone.getWidth(), this.triggerZone.getHeight());

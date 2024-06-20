@@ -227,7 +227,6 @@ public class Foret6 extends BasicGameState {
 	}
 	@Override
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
-		sbg.enterState(8);
 		Global.actualId = 16;
 		
 		g.drawImage(new Image("data/maps/Map006.png").getScaledCopy(Global.width, Global.height), 0, 0);
@@ -278,9 +277,13 @@ public class Foret6 extends BasicGameState {
 
 	@Override
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
+
 		Input input =gc.getInput();
 		
 		Global.updatePlayerMovement(input,Global.CollisionMapForet6,delta);
+		if (gc.getInput().isKeyPressed(Global.pause)) {
+            sbg.enterState(101); // Passer à l'état 101 (menu de pause)
+        }
 		Global.P1.AnimateWhileMoove();
 
 		

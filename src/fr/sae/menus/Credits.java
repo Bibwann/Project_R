@@ -24,25 +24,31 @@ public class Credits extends BasicGameState {
     @Override
     public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
         this.game = sbg;
+        
+        // Initialize fonts for rendering text
         Font font = new Font("Verdana", Font.BOLD, 32);
         titleFont = new TrueTypeFont(font, true);
+
         font = new Font("Verdana", Font.PLAIN, 24);
         creditsFont = new TrueTypeFont(font, true);
     }
 
     @Override
     public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
+        // Set color and font for rendering title
         g.setColor(Color.white);
         g.setFont(titleFont);
         g.drawString("Credits", (gc.getWidth() - titleFont.getWidth("Credits")) / 2, gc.getHeight()*1/8);
 
+        // Array of credits to display
         String[] credits = {
             "Game Design: Thomas Ponsoda",
             "Programming: Nieto Bastien, Federico Mantovani, Clement Dupouy-Paulin",
             "Music: Thomas Ponsoda",
-            Global.egg1
+            Global.egg1 // Assuming Global.egg1 is a string containing an additional credit
         };
 
+        // Render each credit line
         for (int i = 0; i < credits.length; i++) {
             String credit = credits[i];
             int x = (gc.getWidth() - creditsFont.getWidth(credit)) / 2;
@@ -55,10 +61,12 @@ public class Credits extends BasicGameState {
 
     @Override
     public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
+        // Update method not used in this context
     }
 
     @Override
     public void keyPressed(int key, char c) {
+        // Enter key press to return to the main menu state (stateID = 1)
         if (key == Input.KEY_ENTER) {
             game.enterState(1);
         }
@@ -66,6 +74,6 @@ public class Credits extends BasicGameState {
 
     @Override
     public int getID() {
-        return 8;
+        return 8; // Return the state ID of this state
     }
 }

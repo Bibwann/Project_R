@@ -80,9 +80,9 @@ public class Underground3 extends BasicGameState {
 
 	                        case 1:
 	                        	this.tmpDialogbox2.setActiveTempDialogbox(false);
-	                        	
+
 	                    }
-	                    
+
 	                });
   	              break;
   	          case 1:
@@ -119,9 +119,7 @@ public class Underground3 extends BasicGameState {
 
               }       
        });
-	    
-	    
-	    
+
 	    //Dialogbox Avec choix multiples
   		this.dialogueBoxPot = new DialogueBox(new String[] {
   				"\n "+
@@ -217,6 +215,9 @@ public class Underground3 extends BasicGameState {
 		Input input =gc.getInput();
 		
 		Global.updatePlayerMovement(gc.getInput(),Global.CollisionMapUnderground3,delta);
+		if (gc.getInput().isKeyPressed(Global.pause)) {
+            sbg.enterState(101); // Passer à l'état 101 (menu de pause)
+        }
 		Global.P1.AnimateWhileMoove();
 		
 		//Structure obligatoire pour les dialogbox sinon ca marche po jsp pk

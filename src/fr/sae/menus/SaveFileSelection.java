@@ -27,6 +27,7 @@ public class SaveFileSelection extends BasicGameState {
         Font awtFont = new Font("Verdana", Font.BOLD, 40); // Increase the font size
         font = new TrueTypeFont(awtFont, true);
 
+        // Load existing save file names from the "data/saves" directory
         File folder = new File("data/saves");
         File[] files = folder.listFiles();
 
@@ -77,7 +78,7 @@ public class SaveFileSelection extends BasicGameState {
 
     @Override
     public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
-        
+        // No updates needed in this method for save file selection
     }
 
     @Override
@@ -92,14 +93,16 @@ public class SaveFileSelection extends BasicGameState {
                 File newSaveFile = new File("data/saves/" + saveFiles[arrowPosition] + ".xml");
                 try {
                     newSaveFile.createNewFile();
+                    Global.actualfile = newSaveFile; // Set the global actual file reference
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                game.enterState(4);
+                game.enterState(4); // Transition to another game state (change the number as per your game)
             } else {
-                // Load the selected save file --> a ecrire plus tard
-            	
-                game.enterState(4);
+                // Load the selected save file
+                Global.actualfile = new File("data/saves/" + saveFiles[arrowPosition] + ".xml");
+                Global.LoadGame(); // Load game state from the selected file (to be implemented)
+                game.enterState(Global.actualId); // Transition to the loaded game state
             }
         } else if (key == Input.KEY_UP) {
             if (arrowPosition > minPosition) {
@@ -114,6 +117,6 @@ public class SaveFileSelection extends BasicGameState {
 
     @Override
     public int getID() {
-        return 2;
+        return 2; // Return the state ID associated with this SaveFileSelection state
     }
 }

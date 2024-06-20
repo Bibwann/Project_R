@@ -204,6 +204,7 @@ public class BattleScene extends BasicGameState {
     
     public boolean isWin() {
     	for (int i = 0; i < this.entities.size() - 2; i++) {
+    		System.out.println(enemy[i].getName() + ' ' + enemy[i].getHpActuel() + ' ' + enemy[i].isDead());
     		if (!(enemy[i].isDead())) {
     			return false;
     		}
@@ -235,7 +236,7 @@ public class BattleScene extends BasicGameState {
         			this.tmpDialogbox1.setChoices(this.enemyNames, choice2 -> {
         				switch (choice2) {
         				case 0:
-        					this.enemy[0].getHit(hit);
+        					this.enemy[0].getHit(this.hit);
         					
 //        					this.tmpDialogbox1.setActiveTempDialogbox(true);
                 			if(this.enemy[0].isDead()) {

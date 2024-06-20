@@ -18,6 +18,7 @@ import fr.sae.menus.Credits;
 import fr.sae.menus.GameOver;
 import fr.sae.menus.MainMenu;
 import fr.sae.menus.OptionMenu;
+import fr.sae.menus.PauseMenu;
 import fr.sae.menus.SaveFileSelection;
 import fr.sae.menus.SetCharacterName;
 
@@ -42,7 +43,6 @@ public class Main  {
                     this.addState(new ClassesSelect(5));
                     this.addState(new GameOver(7));
                     this.addState(new Credits(8));
-
                     
                     //Cinematiques
                     this.addState(new IntroGame(6));
@@ -63,7 +63,10 @@ public class Main  {
                     this.addState(new Foret3(51));
 
                   //Battle scene
-                  this.addState(new BattleScene(100));                  
+                  this.addState(new BattleScene(100));    
+                  //Pause
+                  this.addState(new PauseMenu(101));                  
+
                   
 
                 }

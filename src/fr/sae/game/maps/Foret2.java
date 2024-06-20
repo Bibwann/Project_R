@@ -82,6 +82,9 @@ public class Foret2 extends BasicGameState{
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
 
 		Global.updatePlayerMovement(gc.getInput(),Global.CollisionMapForet2,delta);
+		if (gc.getInput().isKeyPressed(Global.pause)) {
+            sbg.enterState(101); // Passer à l'état 101 (menu de pause)
+        }
 		Global.P1.AnimateWhileMoove();
 		
 //----------------------------------------------------------------------------------------------------------------------------

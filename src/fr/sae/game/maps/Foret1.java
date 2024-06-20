@@ -155,7 +155,7 @@ public class Foret1 extends BasicGameState{
 
 	@Override
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
-		sbg.enterState(12);
+		//sbg.enterState(12);
 		Global.actualId = 11;
 		
 		//Fait les rendu des modeles
@@ -169,7 +169,7 @@ public class Foret1 extends BasicGameState{
         try {
 	    	Global.P1.Sprite(g);
 	    	Global.P1.getAnimation().stop();
-	    	
+
         }catch(Exception e) {	
         	e.getMessage();
         	System.out.print(e);
@@ -208,6 +208,10 @@ public class Foret1 extends BasicGameState{
 		
 		Global.updatePlayerMovement(input, Global.CollisionMapForet1,delta);
 		Global.P1.AnimateWhileMoove();
+		if (gc.getInput().isKeyPressed(Global.pause)) {
+            sbg.enterState(101); // Passer à l'état 101 (menu de pause)
+        }
+		
 		
 		//Structure obligatoire pour les dialogbox sinon ca marche po jsp pk
 		boolean i =input.isKeyPressed(Global.interract);

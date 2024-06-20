@@ -8,12 +8,14 @@ import fr.sae.game.Global;
 
 public class ClassesSelect extends BasicGameState {
     private TrueTypeFont font, titleFont, menuFont;
-    private String firstClass="";
-    private String secondClass="";
-    private String[] descriptions = {"Un guerrier robuste spécialisé dans le combat au corps à corps.",
-            "Un combattant impitoyable qui excelle dans la force brute et l'attaque à deux mains.",
-            "Un soigneur compétent qui utilise la magie pour restaurer la santé des alliés.",
-            "Un lanceur de sorts puissant capable de manipuler les éléments pour infliger des dégâts magiques."};
+    private String firstClass = "";
+    private String secondClass = "";
+    private String[] descriptions = {
+        "Un guerrier robuste spécialisé dans le combat au corps à corps.",
+        "Un combattant impitoyable qui excelle dans la force brute et l'attaque à deux mains.",
+        "Un soigneur compétent qui utilise la magie pour restaurer la santé des alliés.",
+        "Un lanceur de sorts puissant capable de manipuler les éléments pour infliger des dégâts magiques."
+    };
 
     private String[] classes = {"Swordman", "Berserker", "Healer", "Mage"};
     private int selectedItemIndex = 0;
@@ -30,24 +32,29 @@ public class ClassesSelect extends BasicGameState {
     public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
         this.game = sbg;
         
+        // Initialize fonts for rendering text
         Font awtFont = new Font("Verdana", Font.BOLD, 24);
         font = new TrueTypeFont(awtFont, true);
 
         Font awtTitleFont = new Font("Verdana", Font.BOLD, 36);
         titleFont = new TrueTypeFont(awtTitleFont, true);
+
         Font awtMenuFont = new Font("Verdana", Font.PLAIN, 24);
         menuFont = new TrueTypeFont(awtMenuFont, true);
     }
 
     @Override
     public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
+        // Set background color
         g.setColor(Color.black);
         g.fillRect(0, 0, gc.getWidth(), gc.getHeight());
 
+        // Render title
         g.setFont(titleFont);
         g.setColor(Color.green);
         g.drawString("SELECT YOUR CLASS", (gc.getWidth() - titleFont.getWidth("SELECT YOUR CLASS")) / 2, gc.getHeight()*1/10);
 
+        // Render menu items
         g.setFont(menuFont);
         int y = gc.getHeight()*1/3;
         for (int i = 0; i < classes.length; i++) {
@@ -63,10 +70,12 @@ public class ClassesSelect extends BasicGameState {
             y += 50;
         }
 
+        // Render selected classes
         g.setColor(Color.white);
         g.drawString("Première classe : " + firstClass, 50, 50);
         g.drawString("Deuxième classe : " + secondClass, 50, 80);
 
+        // Render confirmation options if visible
         if (isConfirmationVisible) {
             String confirmOption = "Confirmer";
             String cancelOption = "Annuler";
@@ -93,8 +102,8 @@ public class ClassesSelect extends BasicGameState {
             }
         }
 
+        // Render description if confirmation is not visible
         if (!isConfirmationVisible) {
-            g.setColor(Color.white);
             String descriptionTitle = "Description :";
             String description = descriptions[selectedItemIndex];
             int descriptionTitleX = (gc.getWidth() - menuFont.getWidth(descriptionTitle)) / 2;
@@ -107,16 +116,19 @@ public class ClassesSelect extends BasicGameState {
 
     @Override
     public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
+        // Update method not used in this context
     }
 
     @Override
     public void keyPressed(int key, char c) {
         if (!isConfirmationVisible) {
+            // Handle key presses when confirmation is not visible
             if (key == Input.KEY_UP) {
                 selectedItemIndex = (selectedItemIndex - 1 + classes.length) % classes.length;
             } else if (key == Input.KEY_DOWN) {
                 selectedItemIndex = (selectedItemIndex + 1) % classes.length;
             } else if (key == Input.KEY_ENTER) {
+                // Select first or second class based on user input
                 if (!isFirstClassSelected) {
                     firstClass = classes[selectedItemIndex];
                     isFirstClassSelected = true;
@@ -128,18 +140,22 @@ public class ClassesSelect extends BasicGameState {
                 }
             }
         } else {
+            // Handle key presses when confirmation is visible
             if (key == Input.KEY_ENTER) {
-                if (isConfirmSelected) {                    
-                    Global.Player1Classe=firstClass;
-                    Global.Player2Classe=secondClass;
-                    game.enterState(6);
+                if (isConfirmSelected) {
+                    // Confirm selection and transition to next game state
+                    Global.Player1Classe = firstClass;
+                    Global.Player2Classe = secondClass;
+                    game.enterState(6); // Enter the game state
                 } else {
+                    // Cancel selection and reset
                     isFirstClassSelected = false;
                     firstClass = "";
                     secondClass = "";
                     isConfirmationVisible = false;
                 }
             } else if (key == Input.KEY_LEFT || key == Input.KEY_RIGHT) {
+                // Toggle between confirmation options
                 isConfirmSelected = !isConfirmSelected;
             }
         }
@@ -147,6 +163,6 @@ public class ClassesSelect extends BasicGameState {
 
     @Override
     public int getID() {
-        return 5;
+        return 5; // Return the state ID of this state
     }
 }

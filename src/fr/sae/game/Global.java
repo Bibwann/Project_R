@@ -25,6 +25,18 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
+
 
 public class Global {
 	
@@ -37,7 +49,7 @@ public class Global {
 	public static Player P2 = null;
 
 	public static float speed =0.2f; //Vitesse du Player
-	public static int actualId = 10;
+	public static int actualId = 11;
 	
 	//Coordonee de spawn du Player 1 ( le tout premier spawn)
 	public static int SpawnX =375;
@@ -251,47 +263,52 @@ public class Global {
 		    
 	    	P1.Animation();
 	    	
-	    	//Initialisation des collisions des maps
-	    	CollisionMapForet1=new Collisions();
-	    	CollisionMapForet2=new Collisions();
-	    	CollisionMapForet3=new Collisions();
-	    	CollisionMapForet5=new Collisions();
-	    	CollisionMapForet6=new Collisions();
-	    	CollisionMapForet7=new Collisions();
-	    	CollisionMapForet8=new Collisions();
-	    	CollisionMapForet9=new Collisions();
-	    	CollisionMapForet10=new Collisions();
-	    	CollisionMapForet11=new Collisions();
-	    	CollisionMapForet12=new Collisions();
-	    	CollisionMapForet13=new Collisions();
-	    	CollisionMapUnderground1=new Collisions();
-	    	CollisionMapUnderground2=new Collisions();
-	    	CollisionMapUnderground3=new Collisions();
-	    	CollisionMapChateau1=new Collisions();
-	    	
-	    	CollisionMapBattlescene=new Collisions();
-	    	
-	    	// Creer les collisions ici
-	    	CollisionsMapForet1();
-	    	CollisionsMapForet2();
-	    	CollisionsMapForet5();
-	    	CollisionsMapForet6();
-	    	CollisionsMapForet7();
-	    	CollisionsMapForet8();
-	    	CollisionsMapForet9();
-	    	CollisionsMapForet10();
-	    	CollisionsMapForet11();
-	    	CollisionsMapForet12();
-	    	CollisionsMapForet13();
-	    	CollisionMapUnderground1();
-	    	CollisionMapUnderground2();
-	    	CollisionMapUnderground3();
+	    	Global.Collisions();
 
 	    	
 		} catch(Exception e){
 			e.getMessage(); //Affiche le message d'erreur en cas ou l'initialisation du project mne marche pas correctement ducoup c'est une ligne importante en cas de debug
 			System.out.println("Erreur dans le global sur la fonction initialize");
 		}
+	}
+	
+	private static void Collisions() {
+		//Initialisation des collisions des maps
+    	CollisionMapForet1=new Collisions();
+    	CollisionMapForet2=new Collisions();
+    	CollisionMapForet3=new Collisions();
+    	CollisionMapForet5=new Collisions();
+    	CollisionMapForet6=new Collisions();
+    	CollisionMapForet7=new Collisions();
+    	CollisionMapForet8=new Collisions();
+    	CollisionMapForet9=new Collisions();
+    	CollisionMapForet10=new Collisions();
+    	CollisionMapForet11=new Collisions();
+    	CollisionMapForet12=new Collisions();
+    	CollisionMapForet13=new Collisions();
+    	CollisionMapUnderground1=new Collisions();
+    	CollisionMapUnderground2=new Collisions();
+    	CollisionMapUnderground3=new Collisions();
+    	CollisionMapChateau1=new Collisions();
+    	
+    	CollisionMapBattlescene=new Collisions();
+    	
+    	// Creer les collisions ici
+    	CollisionsMapForet1();
+    	CollisionsMapForet2();
+    	CollisionsMapForet5();
+    	CollisionsMapForet6();
+    	CollisionsMapForet7();
+    	CollisionsMapForet8();
+    	CollisionsMapForet9();
+    	CollisionsMapForet10();
+    	CollisionsMapForet11();
+    	CollisionsMapForet12();
+    	CollisionsMapForet13();
+    	CollisionMapUnderground1();
+    	CollisionMapUnderground2();
+    	CollisionMapUnderground3();
+
 	}
 
 	public static void CollisionsMapForet1() {
@@ -528,16 +545,227 @@ public static void CollisionMapUnderground1() {
 	//Variables necessaire au lore ( genre pour definir les evenements et leurs ordonances) 
 	//D'ailleur ces variables permetteront de sauvgarder la partie
 	
+	
+	//Sur quelle save est on
+	public static File actualfile;
+	
+	
 	//Variables a sauvgarder ( rien ne doit etre instancié, il ne doit y avoir que de simples variables )
-	
 	public static int actualGameState;
+	public static int X;
+	public static int Y;
+
+
 	
+
 	//Fonctions de sauvgarde
-	public static void LoadGame(File file) {
-		
+	public static void LoadGame() {
+	    File file = new File("data/saves/" + Global.actualfile);
+
+	    Global.Collisions();
+	    InputHandler = new InputHandler(200);
+
+	    int classep1Lvl = 1;
+	    int classep2Lvl = 1;
+
+	    try {
+	        DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
+	        DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
+	        Document doc = docBuilder.parse(file);
+
+	        // Normalize the XML structure
+	        doc.getDocumentElement().normalize();
+
+	        // Root element "Game"
+	        Element rootElement = doc.getDocumentElement();
+
+	        System.err.println(rootElement.toString());
+
+	        // Load MapID
+	        NodeList mapIdList = rootElement.getElementsByTagName("MapID");
+	        if (mapIdList.getLength() > 0) {
+	            Element mapIdElement = (Element) mapIdList.item(0);
+	            int mapId = Integer.parseInt(mapIdElement.getTextContent());
+	            Global.actualId = mapId;
+	        }
+
+	        // Example of loading classep1 (assuming it's an identifier or attribute)
+	        NodeList classep1List = rootElement.getElementsByTagName("classep1");
+	        if (classep1List.getLength() > 0) {
+	            Element classep1Element = (Element) classep1List.item(0);
+	            String classep1 = classep1Element.getTextContent();
+	            Global.Player1Classe = classep1; // Update Global.Player1Classe with the loaded value
+	        }
+
+	        // Example of loading classep2 (assuming it's an identifier or attribute)
+	        NodeList classep2List = rootElement.getElementsByTagName("classep2");
+	        if (classep2List.getLength() > 0) {
+	            Element classep2Element = (Element) classep2List.item(0);
+	            String classep2 = classep2Element.getTextContent();
+	            Global.Player2Classe = classep2; // Update Global.Player2Classe with the loaded value
+	        }
+
+	        // Example of loading level for Global.P1
+	        NodeList classep1LvlList = rootElement.getElementsByTagName("classep1LVL");
+	        if (classep1LvlList.getLength() > 0) {
+	            Element classep1LvlElement = (Element) classep1LvlList.item(0);
+	            classep1Lvl = Integer.parseInt(classep1LvlElement.getTextContent());
+	            // Assuming Global.P1 has a method to set its level
+	        }
+
+	        // Example of loading level for Global.P2
+	        NodeList classep2LvlList = rootElement.getElementsByTagName("classep2LVL");
+	        if (classep2LvlList.getLength() > 0) {
+	            Element classep2LvlElement = (Element) classep2LvlList.item(0);
+	            classep2Lvl = Integer.parseInt(classep2LvlElement.getTextContent());
+	            // Assuming Global.P2 has a method to set its level
+	        }
+
+	        // Load Player1Name
+	        NodeList player1NameList = rootElement.getElementsByTagName("Player1Name");
+	        if (player1NameList.getLength() > 0) {
+	            Element player1NameElement = (Element) player1NameList.item(0);
+	            String player1Name = player1NameElement.getTextContent();
+	            Global.Player1Name = player1Name; // Update Global.Player1Name with the loaded value
+	        }
+
+	        // Initialize P1 if not already initialized
+	        if (Global.P1 == null) {
+	            switch (Global.Player1Classe) {
+	                case "Swordman":
+	                    P1 = new Swordsman(Global.Player1Name, classep1Lvl); 
+	                    break;
+	                case "Berserker":
+	                    P1 = new Berserker(Global.Player1Name, classep1Lvl, null); 
+	                    break;
+	                case "Healer":
+	                    P1 = new Healer(Global.Player1Name, classep1Lvl, null); 
+	                    break;
+	                case "Mage":
+	                    P1 = new Mage(Global.Player1Name, classep1Lvl, null);
+	                    break;
+	            }
+	        }
+
+	        // Load X (formerly SpawnX)
+	        NodeList xList = rootElement.getElementsByTagName("x");
+	        if (xList.getLength() > 0) {
+	            Element xElement = (Element) xList.item(0);
+	            int x = Integer.parseInt(xElement.getTextContent());
+	            if (Global.P1 != null) {
+	                Global.P1.getHitbox().setX(x); // Assuming Global.P1 is correctly initialized and has a method to set X coordinate
+	            }
+	        }
+
+	        // Load Y (formerly SpawnY)
+	        NodeList yList = rootElement.getElementsByTagName("y");
+	        if (yList.getLength() > 0) {
+	            Element yElement = (Element) yList.item(0);
+	            int y = Integer.parseInt(yElement.getTextContent());
+	            if (Global.P1 != null) {
+	                Global.P1.getHitbox().setY(y); // Assuming Global.P1 is correctly initialized and has a method to set Y coordinate
+	            }
+	        }
+
+	        // Initialize P2 if not already initialized
+	        if (Global.P2 == null) {
+	            switch (Global.Player2Classe) {
+	                case "Swordman":
+	                    P2 = new Swordsman("Swordsman", classep2Lvl); // Replace "Swordsman" with actual player name if needed
+	                    break;
+	                case "Berserker":
+	                    P2 = new Berserker("Berserker", classep2Lvl, null); // Replace "Berserker" with actual player name if needed
+	                    break;
+	                case "Healer":
+	                    P2 = new Healer("Healer", classep2Lvl, null); // Replace "Healer" with actual player name if needed
+	                    break;
+	                case "Mage":
+	                    P2 = new Mage("Mage", classep2Lvl, null); // Replace "Mage" with actual player name if needed
+	                    break;
+	            }
+	        }
+
+	        // Example of setting battle hitbox and initiating animation
+	        if (Global.P1 != null) {
+	            P1.setBattlehitbox(new Rectangle(PlayerBattleDistance, height / 3, 32, 48));
+	            P1.Animation(); // Assuming Animation() is a method to initiate animation for P1
+	        }
+	        if (Global.P2 != null) {
+	            P2.setBattlehitbox(new Rectangle(PlayerBattleDistance, height / 3, 32, 48));
+	        }
+
+	        System.out.println("Game loaded successfully!");
+
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
 	}
-	
-	public static void SaveGame(File file) {
+
+	public static void SaveGame() {
 		
+	    File file = new File("data/saves/" + Global.actualfile);
+	    try {
+	        DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
+	        DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
+	        Document doc = docBuilder.newDocument();
+
+	        // Root element
+	        Element rootElement = doc.createElement("Game");
+	        doc.appendChild(rootElement);
+
+	        // Map ID element
+	        Element mapIdElement = doc.createElement("MapID");
+	        mapIdElement.appendChild(doc.createTextNode(Integer.toString(Global.actualId)));
+	        rootElement.appendChild(mapIdElement);
+
+	        // Example of saving classep1 and classep2 (assuming these are attributes or identifiers)
+	        Element classep1Element = doc.createElement("classep1");
+	        classep1Element.appendChild(doc.createTextNode(Global.Player1Classe)); // Replace with actual attribute or identifier for player1
+	        rootElement.appendChild(classep1Element);
+
+	        Element classep2Element = doc.createElement("classep2");
+	        classep2Element.appendChild(doc.createTextNode(Global.Player2Classe)); // Replace with actual attribute or identifier for player2
+	        rootElement.appendChild(classep2Element);
+
+	        // Example of saving level for Global.P1 with element name classep1LVL
+	        Element classep1Lvl = doc.createElement("classep1LVL");
+	        classep1Lvl.appendChild(doc.createTextNode(Integer.toString(Global.P1.getLevel()))); // Replace with actual method or attribute to get level for player1
+	        rootElement.appendChild(classep1Lvl);
+
+	        // Example of saving level for Global.P2 with element name classep2LVL
+	        Element classep2Lvl = doc.createElement("classep2LVL");
+	        classep2Lvl.appendChild(doc.createTextNode(Integer.toString(Global.P2.getLevel()))); // Replace with actual method or attribute to get level for player2
+	        rootElement.appendChild(classep2Lvl);
+
+	        // Save Player1Name
+	        Element player1NameElement = doc.createElement("Player1Name");
+	        player1NameElement.appendChild(doc.createTextNode(Global.Player1Name)); // Replace with actual value of Player1Name
+	        rootElement.appendChild(player1NameElement);
+
+	        // X element (formerly SpawnX)
+	        Element xElement = doc.createElement("x");
+	        xElement.appendChild(doc.createTextNode(Integer.toString((int) Global.P1.getHitbox().getX()))); // Assuming Global.X is correct
+	        rootElement.appendChild(xElement);
+
+	        // Y element (formerly SpawnY)
+	        Element yElement = doc.createElement("y");
+	        yElement.appendChild(doc.createTextNode(Integer.toString((int) Global.P1.getHitbox().getY()))); // Assuming Global.SpawnY is correct
+	        rootElement.appendChild(yElement);
+
+	        // Write the content into XML file, overwriting existing content
+	        TransformerFactory transformerFactory = TransformerFactory.newInstance();
+	        Transformer transformer = transformerFactory.newTransformer();
+	        transformer.setOutputProperty(javax.xml.transform.OutputKeys.INDENT, "yes"); // Optional: prettify output
+	        DOMSource source = new DOMSource(doc);
+	        StreamResult result = new StreamResult(file);
+
+	        transformer.transform(source, result);
+
+	        System.out.println("Game saved!");
+
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
 	}
+
 }

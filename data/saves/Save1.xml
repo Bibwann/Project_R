@@ -2,14 +2,14 @@
 <Game>
     <MapID>16</MapID>
     <classep1>Swordman</classep1>
-    <classep2>Berserker</classep2>
+    <classep2>Healer</classep2>
     <classep1LVL>1</classep1LVL>
     <classep2LVL>1</classep2LVL>
-    <Player1Name>3toto</Player1Name>
-    <x>1316</x>
-    <y>257</y>
+    <Player1Name>toto</Player1Name>
+    <x>1333</x>
+    <y>288</y>
     <coeurVaillant>false</coeurVaillant>
     <LeveledUpForet5>false</LeveledUpForet5>
-    <Foret6Battle>false</Foret6Battle>
+    <Foret6Battle>true</Foret6Battle>
     <Foret5Battle>true</Foret5Battle>
 </Game>

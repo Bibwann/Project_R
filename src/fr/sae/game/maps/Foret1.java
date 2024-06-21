@@ -28,6 +28,7 @@ public class Foret1 extends BasicGameState{
 	DialogueBox dialogueBoxPanneau; 
     DialogueBox dialogueBoxBranche;
     DialogueBox dialogueBoxFenetre;
+    DialogueBox dialogueBoxMage;
     
 	private DialogueBox tmpDialogbox1= new DialogueBox(new String[] {});
 
@@ -54,12 +55,21 @@ public class Foret1 extends BasicGameState{
 			    "  |  \n",
 			    "\n" +
 			    "\n" +
-			    " -- -- >       Chateau\n"+
+			    " -- -- >       Château Ensolleilé\n"+
 			    "\n"
 			});	
 		this.dialogueBoxPanneau.setTriggerZone(Global.width-530,570,66,10);
 
-		
+		//Dialogbox sans choix du mage
+				this.dialogueBoxMage = new DialogueBox(new String[] {
+						"Arghhh... Je mes forces me quitter peu a peu... \n"+
+				"Je vous en conjure, aidez moi et apportez ce précieux objet aux membres de la famil-le royale qui resiste encore dans le Château Ensolleilé... \n"+
+								"\n"+
+				"Vous obtenez un paquet étrange \n"+
+								"\n"+
+				"Merci... Jeune aventurier... Je peux partir l'esprit serein..."
+					});	
+				this.dialogueBoxMage.setTriggerZone(580,505,70,40);
 		
 		//Dialogbox Avec choix multiples
 				this.dialogueBoxFenetre = new DialogueBox(new String[] {
@@ -162,7 +172,7 @@ public class Foret1 extends BasicGameState{
         g.drawImage(new Image("data/npc/MageMourant/MageMourant4.png").getSubImage(512-64, 320, 64, 64),598, 475);
         
         dialogueBoxPanneau.render(g);
-        
+        dialogueBoxMage.render(g);
         dialogueBoxBranche.render(g);
         dialogueBoxFenetre.render(g);
 
@@ -190,7 +200,7 @@ public class Foret1 extends BasicGameState{
 		    g.draw(Global.P1.getHitbox());
 		    
 		    Global.CollisionMapForet1.drawCollisions(g);
-		    
+		    this.dialogueBoxMage.draw(g);
 		    this.dialogueBoxPanneau.draw(g);
 		    this.dialogueBoxBranche.draw(g);
 		    this.dialogueBoxFenetre.draw(g);
@@ -219,7 +229,7 @@ public class Foret1 extends BasicGameState{
 		
 		//Dialogbox sans input --> sans choix
         this.dialogueBoxPanneau.dialogBox(i);
-        
+        this.dialogueBoxMage.dialogBox(i);
 		//Dialogbox avec input --> avec choix
         this.dialogueBoxBranche.dialogBox(i,gc.getInput());
         this.dialogueBoxFenetre.dialogBox(i,gc.getInput());

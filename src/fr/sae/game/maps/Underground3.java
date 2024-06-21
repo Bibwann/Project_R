@@ -15,7 +15,7 @@ import fr.sae.game.Global;
 import fr.sae.game.Warp;
 
 public class Underground3 extends BasicGameState {
-	//Warp Warp1;
+	Warp Warp1;
 	Warp Warp2;
 	DialogueBox dialogueBoxPot;
 	DialogueBox dialogueBoxGrille;
@@ -29,7 +29,7 @@ public class Underground3 extends BasicGameState {
 
 	@Override
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
-		//this.Warp1= new Warp(860, 1070, 470, 10, 1100, 50);
+		this.Warp1= new Warp(860, 1070, 470, 10, 1100, 50);
 		this.Warp2= new Warp(140, 130, 50, 40, 350, 240);
 		
 		//Obligatoire que tmpDialogbox1 aie une triggerzone hors map
@@ -136,7 +136,7 @@ public class Underground3 extends BasicGameState {
 	
 		                        case 0:
 		                        	this.tmpDialogbox2.setActiveTempDialogbox(true);
-		                            this.tmpDialogbox2.setMessages(new String[] {"\n"+"\n"+"    +1 coeur vaillant dans l'inventaire"});
+		                            this.tmpDialogbox2.setMessages(new String[] {"\n"+"\n"+"    Vous obtenez un coeur vaillant et vous sentez plus sûr de vous"});
 		                            if (!Global.CoeurVaillant) {
 			                            Global.CollisionMapForet5.deletLastCollidable();
 		                            }
@@ -177,7 +177,7 @@ public class Underground3 extends BasicGameState {
 	
 	@Override
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
-		
+		Global.actualId = 26;
 		g.drawImage(new Image("data/maps/Map016.png").getScaledCopy(Global.width, Global.height), 0, 0);
         
 		dialogueBoxPot.render(g);
@@ -193,7 +193,7 @@ public class Underground3 extends BasicGameState {
         	e.getMessage();
         	System.out.print(e);
         }
-        //this.Warp1.warp(Global.P1, sbg, 11);
+        this.Warp1.warp(Global.P1, sbg, 11);
         this.Warp2.warp(Global.P1, sbg, 16);//GROTTE SORTIE
       //Obligatoire, premet de rendre a l'ecran la dialogbox temp quand elle est necessaire
         this.tmpDialogbox2.renderTempDialgbox(g);
@@ -202,7 +202,7 @@ public class Underground3 extends BasicGameState {
 	//Temp	    
 
 	    //Affiche toutes les collisions de la map et du joueur
-	    if (false) {
+	    if (true) {
 		    g.draw(Global.P1.getHitbox());
 		    
 		    Global.CollisionMapUnderground3.drawCollisions(g);
@@ -212,7 +212,7 @@ public class Underground3 extends BasicGameState {
 		    this.dialogueBoxPelle.draw(g);
 		    this.dialogueBoxSquelette.draw(g);
 		    
-		    //this.Warp1.draw(g);
+		    this.Warp1.draw(g);
 		    this.Warp2.draw(g);
 	    	}
 //--------------------------------------------------------------------------------------------------------------------------

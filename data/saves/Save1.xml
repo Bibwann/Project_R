@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <Game>
-    <MapID>11</MapID>
+    <MapID>12</MapID>
     <classep1>Swordman</classep1>
     <classep2>Berserker</classep2>
     <classep1LVL>1</classep1LVL>
     <classep2LVL>1</classep2LVL>
-    <Player1Name>3</Player1Name>
-    <x>598</x>
-    <y>475</y>
-    <coeurVaillant>false</coeurVaillant>
+    <Player1Name>s</Player1Name>
+    <x>920</x>
+    <y>40</y>
+    <coeurVaillant>true</coeurVaillant>
 </Game>

@@ -25,6 +25,7 @@ public class Foret6 extends BasicGameState {
 	DialogueBox dialogueBoxTombe;
 	DialogueBox dialogueBoxTombe2;
 	DialogueBox dialogueBoxTombe3;
+	DialogueBox dialogueBoxTombe4;
 	
 	private DialogueBox tmpDialogbox2= new DialogueBox(new String[] {});
 	
@@ -40,11 +41,11 @@ public class Foret6 extends BasicGameState {
 	    this.tmpDialogbox2.setTriggerZone(-1, -1, 0, 0);
 	
 	    
-	  //Dialogbox sans choix du panneau
+	  //Dialogbox sans choix de la tombe
 	  		this.dialogueBoxTombe = new DialogueBox(new String[] {
 	  				"\n "+
 	  					    "     \n" +
-	  					    "                           Ici repo.. Clem..t le bar..deur\n"+
+	  					    "                           Ici repo.. Ma..us le bar..deur\n"+
 	  					    " \n " +
 	  					    " \n " +
 	  					    "                                        5521 - 5567"
@@ -52,24 +53,24 @@ public class Foret6 extends BasicGameState {
 	  			});	
 	  		this.dialogueBoxTombe.setTriggerZone(930,190,66,20);
 	    
-	  	//Dialogbox sans choix du panneau
+	  	//Dialogbox sans choix de la tombe
 	  		this.dialogueBoxTombe2 = new DialogueBox(new String[] {
 	  				"\n "+
 	  					    "     \n" +
-	  					    "                           Ici repose Matthieu l'alchimiste\n"+
+	  					    "                           Ici re.... Sar.. la foug..re ah.ha..\n"+
 	  					    " \n " +
 	  					    " \n " +
-	  					    "                                        5534 - 5580"
+	  					    "                                        5567 - 56.."
 	  					    
 	  			});	
 	  		this.dialogueBoxTombe2.setTriggerZone(270,510,60,10);
 	    
 	  		
-	  	//Dialogbox sans choix du panneau
+	  	//Dialogbox sans choix de la tombe
 	  		this.dialogueBoxTombe3 = new DialogueBox(new String[] {
 	  				"\n "+
 	  					    "     \n" +
-	  					    "                           Ici r..ose Ri...o le bo.l..se\n"+
+	  					    "                           Ici r..ose Lem..ne le boss\n"+
 	  					    " \n " +
 	  					    " \n " +
 	  					    "                                       54.. - .550"
@@ -77,6 +78,17 @@ public class Foret6 extends BasicGameState {
 	  			});	
 	  		this.dialogueBoxTombe3.setTriggerZone(400,250,66,20);
 	    
+	  	//Dialogbox sans choix de la tombe
+	  		this.dialogueBoxTombe4= new DialogueBox(new String[] {
+	  				"\n "+
+	  					    "     \n" +
+	  					    "                           Ici repose Matthieu l'alch...ste\n"+
+	  					    " \n " +
+	  					    " \n " +
+	  					    "                                        5534 - 5580"
+	  					    
+	  			});	
+	  		this.dialogueBoxTombe4.setTriggerZone(535,570,60,10);
 	    
 		//Dialogbox Avec choix multiples
 	  		this.dialogueBoxPuits = new DialogueBox(new String[] {
@@ -221,7 +233,7 @@ public class Foret6 extends BasicGameState {
 
 	                        case 0:
 	                        	this.tmpDialogbox2.setActiveTempDialogbox(true);
-	                            this.tmpDialogbox2.setMessages(new String[] {"\n"+"\n"+"           Nos anciens amis à fourrure ont dévoilé leurs crocs."});
+	                            this.tmpDialogbox2.setMessages(new String[] {"\n"+"\n"+"           AIEEEE !!!!!"});
 	                            
 	                            //Permet de dire qu'il s'agissait du dernier choix
 	                            this.tmpDialogbox2.setChoices(Arrays.asList(),null);
@@ -255,6 +267,7 @@ public class Foret6 extends BasicGameState {
 		dialogueBoxTombe.render(g);
 		dialogueBoxTombe2.render(g);
 		dialogueBoxTombe3.render(g);
+		dialogueBoxTombe4.render(g);
 		
         try {
 	    	Global.P1.Sprite(g);
@@ -286,6 +299,7 @@ public class Foret6 extends BasicGameState {
 		    this.dialogueBoxTombe.draw(g);
 		    this.dialogueBoxTombe2.draw(g);
 		    this.dialogueBoxTombe3.draw(g);
+		    this.dialogueBoxTombe3.draw(g);
 		    
 		    this.Warp1.draw(g);
 		    this.Warp2.draw(g);
@@ -313,6 +327,7 @@ public class Foret6 extends BasicGameState {
         this.dialogueBoxTombe.dialogBox(i);
         this.dialogueBoxTombe2.dialogBox(i);
         this.dialogueBoxTombe3.dialogBox(i);
+        this.dialogueBoxTombe4.dialogBox(i);
         
 		//Dialogbox avec input --> avec choix
         this.dialogueBoxBranche.dialogBox(i,gc.getInput());

@@ -52,6 +52,8 @@ public class BattleScene extends BasicGameState {
     public void initializeBattle() {
         if(this.entities.isEmpty()) {
         	entities.add(Global.P1);
+            this.enemy = Global.mobs;    	
+
             
             for(int i=0; i < this.enemy.length; i++) {
             	if(i == 1 && this.entities.indexOf(Global.P2) == -1) {
@@ -135,12 +137,17 @@ public class BattleScene extends BasicGameState {
     	try {
     	    // Parcours des ennemis et affichage de leur sprite
     	    for (int i = 0; i < this.enemy.length-1; i++) {
+    	    	if(i<2) {
+    	    		Global.MobsBattleDistance=1450;
+    	    	}else {
+    	    		Global.MobsBattleDistance=1600;
+    	    	}
     	        if (this.enemy[i] == null) {
-    	        	// Affichage du sprite de l'ennemi
     	        	continue;
-    	        }
+    	        }	
+    	        
     	        try {
-    	        	this.enemy[i].BattleScene(g, Global.height / (this.enemy.length + 1) * (i+1) + 150);
+    	        	this.enemy[i].BattleScene(g, Global.height / (this.enemy.length + 1) * ((i+1)%2) + 300);
     	        }catch(Exception e) {
     	        	e.getMessage();
     	        }
@@ -169,20 +176,59 @@ public class BattleScene extends BasicGameState {
     	
     	//Si win 
     	if (this.isWin()) {
+    		Global.mobs= new Mobs[3];  
+
     		Global.canMoovPlayer=true;
+            Global.P1.levelUp();
+            Global.P2.levelUp();
+
     		Global.P1.resetStats();
     		Global.P2.resetStats();
-    		Global.mobs = new Mobs[4];
+    		    		  
+    	    this.currentTurnIndex = 0;
+    	    this.playedTurn = true;
+    	    this.P1Potions = 5;
+    	    this.P2Potions = 5;
+    	    this.EnemiesPotions = 0;
+    	    this.confusedDebuf = 0;
+    	    this.deadEnemyNames= new ArrayList<String>();
+    	    this.enemyNames = new ArrayList<String>();
+    	    this.aliveEnemyNames = new ArrayList<String>();
+
+    	    this.deadEnemyNames = new ArrayList<String>();
+    	    this.entities = new ArrayList<>();
+    	    this.tmpDialogbox1= new DialogueBox(new String[] {});
+    		
+
 //    		this.entities =  new ArrayList<>();
             sbg.enterState(Global.actualId);
     	}
     	
     	//Si loose
     	if (Global.P1.isDead() && Global.P2.isDead()) {
+    		Global.mobs= new Mobs[3];  
+
+    		Global.canMoovPlayer=true;
+            Global.P1.levelUp();
+            Global.P2.levelUp();
+
     		Global.P1.resetStats();
     		Global.P2.resetStats();
-    		Global.mobs = new Mobs[4];
-    		//this.entities =  new ArrayList<>();
+    		    		  
+    	    this.currentTurnIndex = 0;
+    	    this.playedTurn = true;
+    	    this.P1Potions = 5;
+    	    this.P2Potions = 5;
+    	    this.EnemiesPotions = 0;
+    	    this.confusedDebuf = 0;
+    	    this.deadEnemyNames= new ArrayList<String>();
+    	    this.enemyNames = new ArrayList<String>();
+    	    this.aliveEnemyNames = new ArrayList<String>();
+
+    	    this.deadEnemyNames = new ArrayList<String>();
+    	    this.entities = new ArrayList<>();
+    	    this.tmpDialogbox1= new DialogueBox(new String[] {});
+
             sbg.enterState(7);
     	}
     }
@@ -360,18 +406,17 @@ public class BattleScene extends BasicGameState {
                     				});        					
             					break;
                 			}
-                				
                 		
         		
 			        	case 3:
-this.enemy[2].getHit(this.hit);
+			        		this.enemy[3].getHit(this.hit);
         					
 //        					this.tmpDialogbox1.setActiveTempDialogbox(true);
-                			if(this.enemy[2].isDead()) {
-                				this.deadEnemyNames.add(this.enemyNames.get(2));
-	    						this.aliveEnemyNames.remove(this.enemyNames.get(2));
+                			if(this.enemy[3].isDead()) {
+                				this.deadEnemyNames.add(this.enemyNames.get(3));
+	    						this.aliveEnemyNames.remove(this.enemyNames.get(3));
 
-                				this.tmpDialogbox1.setMessages(new String[] { this.enemyNames.get(2) + " a été vaincu !"});
+                				this.tmpDialogbox1.setMessages(new String[] { this.enemyNames.get(3) + " a été vaincu !"});
                     			
                     			this.tmpDialogbox1.setChoices(Arrays.asList("Continuer"), choice3 -> {
                     				switch (choice3) {
@@ -385,7 +430,7 @@ this.enemy[2].getHit(this.hit);
                     				});        					
             					break;
                 			} else {
-                				this.tmpDialogbox1.setMessages(new String[] { this.enemyNames.get(2) + " à reçu " + hit + " dégats !"});
+                				this.tmpDialogbox1.setMessages(new String[] { this.enemyNames.get(3) + " à reçu " + hit + " dégats !"});
                     			
                     			this.tmpDialogbox1.setChoices(Arrays.asList("Continuer"), choice3 -> {
                     				switch (choice3) {
@@ -566,34 +611,14 @@ this.enemy[2].getHit(this.hit);
                 			}
 	    				
 	        			case 2:
-//	    					this.enemy[2].getHit(Global.P1.getDmg());
-	    					
-//	    					this.tmpDialogbox1.setActiveTempDialogbox(true);
-	        				this.deadEnemyNames.add(this.enemyNames.get(2));
+	        				this.enemy[2].getHit(this.hit);
+    					
+//    					this.tmpDialogbox1.setActiveTempDialogbox(true);
+            			if(this.enemy[2].isDead()) {
+            				this.deadEnemyNames.add(this.enemyNames.get(2));
     						this.aliveEnemyNames.remove(this.enemyNames.get(2));
 
-                			this.tmpDialogbox1.setMessages(new String[] {this.enemyNames.get(2) + " à reçu " + hit + " dégats !"});
-                			
-                			this.tmpDialogbox1.setChoices(Arrays.asList("Continuer"), choice3 -> {
-                				switch (choice3) {
-                				
-                				case 0:
-//                					this.tmpDialogbox1.setActiveTempDialogbox(false);
-                	    			this.playedTurn = true;
-                					break;
-                				}
-                				
-                				});   
-	    					break;
-        		
-			        	case 3:
-//							this.enemy[3].getHit(Global.P1.getDmg());
-							
-//							this.tmpDialogbox1.setActiveTempDialogbox(true);
-			        		this.deadEnemyNames.add(this.enemyNames.get(3));
-    						this.aliveEnemyNames.remove(this.enemyNames.get(3));
-
-                			this.tmpDialogbox1.setMessages(new String[] {this.enemyNames.get(3) + " à reçu " + hit + " dégats !"});
+            				this.tmpDialogbox1.setMessages(new String[] { this.enemyNames.get(2) + " a été vaincu !"});
                 			
                 			this.tmpDialogbox1.setChoices(Arrays.asList("Continuer"), choice3 -> {
                 				switch (choice3) {
@@ -604,8 +629,60 @@ this.enemy[2].getHit(this.hit);
                 					break;
                 				}
                 				
-                				});   
-							break;
+                				});        					
+        					break;
+            			} else {
+            				this.tmpDialogbox1.setMessages(new String[] { this.enemyNames.get(2) + " à reçu " + hit + " dégats !"});
+                			
+                			this.tmpDialogbox1.setChoices(Arrays.asList("Continuer"), choice3 -> {
+                				switch (choice3) {
+                				
+                				case 0:
+                					this.tmpDialogbox1.setActiveTempDialogbox(false);
+                	    			this.playedTurn = true;
+                					break;
+                				}
+                				
+                				});        					
+        					break;
+            			}
+        		
+			        	case 3:
+			        		this.enemy[3].getHit(this.hit);
+    					
+//    					this.tmpDialogbox1.setActiveTempDialogbox(true);
+            			if(this.enemy[3].isDead()) {
+            				this.deadEnemyNames.add(this.enemyNames.get(3));
+    						this.aliveEnemyNames.remove(this.enemyNames.get(3));
+
+            				this.tmpDialogbox1.setMessages(new String[] { this.enemyNames.get(3) + " a été vaincu !"});
+                			
+                			this.tmpDialogbox1.setChoices(Arrays.asList("Continuer"), choice3 -> {
+                				switch (choice3) {
+                				
+                				case 0:
+                					this.tmpDialogbox1.setActiveTempDialogbox(false);
+                	    			this.playedTurn = true;
+                					break;
+                				}
+                				
+                				});        					
+        					break;
+            			} else {
+            				this.tmpDialogbox1.setMessages(new String[] { this.enemyNames.get(3) + " à reçu " + hit + " dégats !"});
+                			
+                			this.tmpDialogbox1.setChoices(Arrays.asList("Continuer"), choice3 -> {
+                				switch (choice3) {
+                				
+                				case 0:
+                					this.tmpDialogbox1.setActiveTempDialogbox(false);
+                	    			this.playedTurn = true;
+                					break;
+                				}
+                				
+                				});        					
+        					break;
+            			}
 						}
         			});
         			break;

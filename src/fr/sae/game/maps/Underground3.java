@@ -13,6 +13,7 @@ import org.newdawn.slick.state.StateBasedGame;
 import fr.sae.game.DialogueBox;
 import fr.sae.game.Global;
 import fr.sae.game.Warp;
+import fr.sae.mobes.Chaton;
 
 public class Underground3 extends BasicGameState {
 	Warp Warp1;
@@ -23,6 +24,7 @@ public class Underground3 extends BasicGameState {
 	DialogueBox dialogueBoxSquelette;
 	
 	private DialogueBox tmpDialogbox2= new DialogueBox(new String[] {});
+	private DialogueBox dialgoboxLore;
 	
 	public Underground3(int stateID) {
 	}
@@ -35,6 +37,40 @@ public class Underground3 extends BasicGameState {
 		//Obligatoire que tmpDialogbox1 aie une triggerzone hors map
 	    this.tmpDialogbox2.setTriggerZone(-1, -1, 0, 0);
 	    
+	    //Lore
+	    this.dialgoboxLore = new DialogueBox(new String[] {
+	            "\n\n    Un chat vous attaque subitement !"
+	        });
+	    
+	    this.dialgoboxLore.setChoices(Arrays.asList("Continuer"), choice1 -> {
+            switch (choice1) {
+	            case 0:	            
+	            		
+	                //Ajoutez recursivement des choix ici de la meme maniere que moi
+
+	                        	this.tmpDialogbox2.setActiveTempDialogbox(false);
+	                				Global.Underground3Battle=false;
+
+	                    			Global.canMoovPlayer=false;
+	                    			
+	                				try {
+										Global.mobs[0]=new Chaton("Chat-Tastrophe", 1);
+
+	                					//Global.mobs[0]= Boss.getInstance();
+									} catch (SlickException e) {
+										e.printStackTrace();
+									}
+	                	        	sbg.enterState(100);
+	                    		
+	                            break;
+
+	                        case 1:
+	                        	this.tmpDialogbox2.setActiveTempDialogbox(false);
+
+	                    }
+  
+     });
+     
 	    
 	  //Dialogbox sans choix du panneau
   		this.dialogueBoxPelle = new DialogueBox(new String[] {
@@ -150,6 +186,7 @@ public class Underground3 extends BasicGameState {
 		                        case 1:
 		                        	this.tmpDialogbox2.setActiveTempDialogbox(false);
 	
+		                        	
 		                    }
 		                    
 		                });
@@ -185,6 +222,9 @@ public class Underground3 extends BasicGameState {
 		dialogueBoxPelle.render(g);
 		dialogueBoxSquelette.render(g);
 		
+		if (Global.Underground3Battle) {
+            this.dialgoboxLore.renderForceDialogbox(g);
+        }
         try {
 	    	Global.P1.Sprite(g);
 	    	Global.P1.getAnimation().stop();
@@ -231,6 +271,10 @@ public class Underground3 extends BasicGameState {
 		//Structure obligatoire pour les dialogbox sinon ca marche po jsp pk
 		boolean i =input.isKeyPressed(Global.interract);
 		
+		if(Global.Underground3Battle) {
+            this.dialgoboxLore.forceDialogBox(i, gc.getInput());
+
+		}
 		//Dialogbox sans input --> sans choix
         this.dialogueBoxPelle.dialogBox(i);
         this.dialogueBoxSquelette.dialogBox(i);

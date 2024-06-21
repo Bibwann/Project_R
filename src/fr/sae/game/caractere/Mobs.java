@@ -35,7 +35,7 @@ public abstract class Mobs extends Entity {
 		 if (this instanceof Boss){
 			 return this.Battlesprite.getFlippedCopy(true, false).getScaledCopy(1.0f);
 		 }
-		return this.Battlesprite.getSubImage(142, 48, 48, 48).getFlippedCopy(true, false).getScaledCopy(2.0f);
+		return this.Battlesprite.getSubImage(142, 48, 48, 48).getFlippedCopy(false, false).getScaledCopy(2.0f);
 		 
 	}
 	

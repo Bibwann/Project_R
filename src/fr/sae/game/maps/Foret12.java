@@ -51,6 +51,7 @@ public class Foret12 extends BasicGameState {
 		    Global.CollisionMapForet12.drawCollisions(g);
 		    this.Warp1.draw(g);
 		    
+		    
 	    	}
 //--------------------------------------------------------------------------------------------------------------------------
 	}

@@ -43,8 +43,9 @@ import org.w3c.dom.NodeList;
 
 public class Global {
 	
+	 
 	//Objects de quetes
-	
+	 
 	public static boolean CoeurVaillant=false;
 	public static boolean LeveledUpForet5=false;
 
@@ -52,6 +53,8 @@ public class Global {
 	//Combats uniques
 	public static boolean Foret6Battle=true;
 	public static boolean Foret5Battle=true;
+	public static boolean Foret7Battle=true;
+	public static boolean Underground3Battle=true;
 
 
 	//Instances de player
@@ -190,7 +193,7 @@ public class Global {
 	
 	//Mobs --> Definisez tous les mobes ici 
 	
-	public static Mobs[] mobs = new Mobs[4];
+	public static Mobs[] mobs = new Mobs[3];
 
 	//Special Thanks
 	public static String egg1="";
@@ -763,6 +766,13 @@ public static void CollisionMapUnderground1() {
 	            Global.LeveledUpForet5 = LeveledUpForet5;
 	        }
 
+	     // Load Foret6Battle
+	        NodeList foret7BattleList = rootElement.getElementsByTagName("Foret7Battle");
+	        if (foret7BattleList.getLength() > 0) {
+	            Element foret7BattleElement = (Element) foret7BattleList.item(0);
+	            boolean Foret7Battle = Boolean.parseBoolean(foret7BattleElement.getTextContent());
+	            Global.Foret7Battle = Foret7Battle;
+	        }
 	        // Load Foret6Battle
 	        NodeList foret6BattleList = rootElement.getElementsByTagName("Foret6Battle");
 	        if (foret6BattleList.getLength() > 0) {
@@ -860,6 +870,11 @@ public static void CollisionMapUnderground1() {
 	        leveledUpForet5Element.appendChild(doc.createTextNode(Boolean.toString(Global.LeveledUpForet5)));
 	        rootElement.appendChild(leveledUpForet5Element);
 
+	     // Save Foret7Battle
+	        Element foret7BattleElement = doc.createElement("Foret7Battle");
+	        foret7BattleElement.appendChild(doc.createTextNode(Boolean.toString(Global.Foret7Battle)));
+	        rootElement.appendChild(foret7BattleElement);
+	        
 	        // Save Foret6Battle
 	        Element foret6BattleElement = doc.createElement("Foret6Battle");
 	        foret6BattleElement.appendChild(doc.createTextNode(Boolean.toString(Global.Foret6Battle)));

@@ -216,12 +216,14 @@ public class Foret1 extends BasicGameState{
 	@Override
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
 		Input input =gc.getInput();
+		System.err.println(Global.Foret5Battle+" "+Global.Foret6Battle+" " + Global.Foret7Battle+" "+Global.Underground3Battle);
 		
 		Global.updatePlayerMovement(input, Global.CollisionMapForet1,delta);
 		Global.P1.AnimateWhileMoove();
 		if (gc.getInput().isKeyPressed(Global.pause)) {
             sbg.enterState(101); // Passer à l'état 101 (menu de pause)
         }
+		
 		
 		
 		//Structure obligatoire pour les dialogbox sinon ca marche po jsp pk

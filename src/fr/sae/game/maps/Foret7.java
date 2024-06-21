@@ -36,7 +36,7 @@ public class Foret7 extends BasicGameState {
 			    "     \n" +
 			    "           Un chat vous agresse brutalement"
 	        });
-	    this.dialogueBoxCbt.setTriggerZone(200,200, 200, 200);
+	    this.dialogueBoxCbt.setTriggerZone(0,630, 1000, 800);
 	    
 	    this.dialogueBoxCbt.setChoices(Arrays.asList("Continuer"), choice1 -> {
             switch (choice1) {
@@ -44,7 +44,7 @@ public class Foret7 extends BasicGameState {
 	        	    this.dialogueBoxCbt.setTriggerZone(-1, -1, 0, 0);
 
                 	this.tmpDialogbox1.setActiveTempDialogbox(false);
-
+                	Global.Foret7Battle=false;
   	                Global.canMoovPlayer=false;
       			
   	                try {
@@ -73,7 +73,8 @@ public class Foret7 extends BasicGameState {
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
 		Global.actualId = 17;
 		g.drawImage(new Image("data/maps/Map007.png").getScaledCopy(Global.width, Global.height), 0, 0);
-        
+        g.drawImage(new Image("data/chest/chest.png").getSubImage(0, 0, 48, 48),400, 900);
+
         try {
 	    	Global.P1.Sprite(g);
 	    	Global.P1.getAnimation().stop();
@@ -83,19 +84,24 @@ public class Foret7 extends BasicGameState {
         	System.out.print(e);
         }
         
-        dialogueBoxCbt.render(g);
-
+        if(Global.Foret7Battle) {
+        	dialogueBoxCbt.render(g);
+        }
         this.Warp1.warp(Global.P1, sbg, 13);
         this.Warp2.warp(Global.P1, sbg, 13);
         this.Warp3.warp(Global.P1, sbg, 15);
        
+        
 
 //--------------------------------------------------------------------------------------------------------------------------
 	//Temp	    
 
 	    //Affiche toutes les collisions de la map et du joueur
 	    if (true) {
-		    this.dialogueBoxCbt.draw(g);
+	    	
+	    	if(Global.Foret7Battle) {
+			    this.dialogueBoxCbt.draw(g);
+	        }
 
 		    g.draw(Global.P1.getHitbox());
 		    
@@ -120,8 +126,10 @@ public class Foret7 extends BasicGameState {
             sbg.enterState(101); // Passer à l'état 101 (menu de pause)
         }
 
-        this.dialogueBoxCbt.dialogBox(i,gc.getInput());
-		
+		if(Global.Foret7Battle) {
+
+			this.dialogueBoxCbt.dialogBox(i,gc.getInput());
+		}
 	}
 
 	@Override

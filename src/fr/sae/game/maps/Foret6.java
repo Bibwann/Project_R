@@ -162,6 +162,7 @@ public class Foret6 extends BasicGameState {
 	              switch (choice1) {
 	  	            case 0:
 	  	            	if (Global.Foret6Battle) {	
+	  	            
 	  	            		
 	  	            	this.tmpDialogbox2.setActiveTempDialogbox(true);
 	  	                this.tmpDialogbox2.setMessages(new String[] {"\n"+"\n"+"  Un chat se cache dans le sceau"});
@@ -170,22 +171,24 @@ public class Foret6 extends BasicGameState {
 		                    switch (choice2) {
 
 		                        case 0:
+		                        	this.tmpDialogbox2.setActiveTempDialogbox(true);
+
 		                        	this.tmpDialogbox2.setActiveTempDialogbox(false);
 		                        	
-		                    			Global.Foret6Battle=false;
 		                    			Global.canMoovPlayer=false;
 		                    			
 		                				try {
-											//Global.mobs[0]=new Chaton("Chat-Pitaine", 1);
-			                				//Global.mobs[1]=new Chaton("Chat-Thon", 1);
+											Global.mobs[0]=new Chaton("Chat-Pitaine", 1);
+			                				Global.mobs[1]=new Chaton("Chat-Thon", 1);
 
-		                					Global.mobs[0]= Boss.getInstance();
+		                					//Global.mobs[0]= Boss.getInstance();
 										} catch (SlickException e) {
 											e.printStackTrace();
 										}
 		                	        	sbg.enterState(100);
 
-		                    		
+		                    			Global.Foret6Battle=false;
+
 		                            break;
 
 		                        case 1:
@@ -194,6 +197,7 @@ public class Foret6 extends BasicGameState {
 		                    }
 		                    
 		                });
+	  	                
 	  	            	}else {
 		  	            	this.tmpDialogbox2.setActiveTempDialogbox(true);
 		  	                this.tmpDialogbox2.setMessages(new String[] {"\n"+"\n"+"  Il y a un cadavre de chat ..."});

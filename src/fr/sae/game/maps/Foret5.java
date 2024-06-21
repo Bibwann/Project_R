@@ -44,16 +44,15 @@ public class Foret5 extends BasicGameState {
   						"Attention !! \n"+
   						"Vous vous dirigez vers la dangereuse Lorêt Luminara et vous n'êtes pas assez fort  pour que je vous laisse passer.\n"+
   						"Revenez quand vous serez plus puissant."
-  					    
+  					
+  						
   			});	
   		this.dialogueBoxGuts.setTriggerZone(961,579,110,110);
 	    
   		//Dialogbox sans choix garde foret
 	    
   		this.dialogueBoxGuts2 = new DialogueBox(new String[] {
-  						"Attention !! \n"+
-  						"Vous vous dirigez vers la dangereuse Lorêt Luminara et vous n'êtes pas assez fort  pour que je vous laisse passer.\n"+
-  						"Revenez quand vous serez plus puissant."
+  						"Vous etez assez robuste pour aller deforailler des chats"
   					    
   			});	
   		this.dialogueBoxGuts2.setTriggerZone(-1,-1,0,0);
@@ -83,6 +82,7 @@ public class Foret5 extends BasicGameState {
 							Global.mobs[1]=new Chaton("Chat-Fé-Mal", 1);
 							Global.mobs[2]=new Chaton("Chat-kra", 1);
 
+
 	
 	
 	  	                	} catch (SlickException e) {
@@ -96,6 +96,8 @@ public class Foret5 extends BasicGameState {
   	            		this.tmpDialogbox2.setActiveTempDialogbox(true);
 	  	                this.tmpDialogbox2.setMessages(new String[] {"Vous avez trouvé une potion de force : +1 Niveau"});
 	  	                Global.P1.levelUp();
+	  	                Global.P2.levelUp();
+
 	  	                
 	  	                this.tmpDialogbox2.setChoices(Arrays.asList(),null);
   	            	} else {
@@ -244,7 +246,7 @@ public class Foret5 extends BasicGameState {
 	if (Global.CoeurVaillant) {
 		 
 		this.dialogueBoxGuts.setTriggerZone(-1, -1, 0, 0);
-		this.dialogueBoxGuts.setTriggerZone(961,579,110,110);
+		this.dialogueBoxGuts2.setTriggerZone(961,579,110,110);
 	}
 	
 	}

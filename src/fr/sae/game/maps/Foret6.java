@@ -13,6 +13,7 @@ import org.newdawn.slick.state.StateBasedGame;
 import fr.sae.game.DialogueBox;
 import fr.sae.game.Global;
 import fr.sae.game.Warp;
+import fr.sae.mobes.Boss;
 import fr.sae.mobes.Chaton;
 
 public class Foret6 extends BasicGameState {
@@ -175,9 +176,10 @@ public class Foret6 extends BasicGameState {
 		                    			Global.canMoovPlayer=false;
 		                    			
 		                				try {
-											Global.mobs[0]=new Chaton("Chat-Pitaine", 1);
-			                				Global.mobs[1]=new Chaton("Chat-Thon", 1);
+											//Global.mobs[0]=new Chaton("Chat-Pitaine", 1);
+			                				//Global.mobs[1]=new Chaton("Chat-Thon", 1);
 
+		                					Global.mobs[0]= Boss.getInstance();
 										} catch (SlickException e) {
 											e.printStackTrace();
 										}

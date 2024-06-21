@@ -191,7 +191,6 @@ public class BattleScene extends BasicGameState {
     public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
 		Input input =gc.getInput();
 		boolean boolInput =input.isKeyPressed(Global.interract);
-    		
 		
     	Global.updatePlayerMovement(gc.getInput(),Global.CollisionMapForet2,delta);
 		Global.P1.AnimateWhileMoove();
@@ -326,44 +325,80 @@ public class BattleScene extends BasicGameState {
 	    				
 	        			case 2:
 
-	        				this.deadEnemyNames.add(this.enemyNames.get(2));
-    						this.aliveEnemyNames.remove(this.enemyNames.get(2));
+	        				this.enemy[2].getHit(this.hit);
+        					
+//        					this.tmpDialogbox1.setActiveTempDialogbox(true);
+                			if(this.enemy[2].isDead()) {
+                				this.deadEnemyNames.add(this.enemyNames.get(2));
+	    						this.aliveEnemyNames.remove(this.enemyNames.get(2));
 
-	    					
-//	    					this.tmpDialogbox1.setActiveTempDialogbox(true);
-                			this.tmpDialogbox1.setMessages(new String[] {this.enemyNames.get(2) + " à reçu " + hit + " dégats !"});
-                			
-                			this.tmpDialogbox1.setChoices(Arrays.asList("Continuer"), choice3 -> {
-                				switch (choice3) {
+                				this.tmpDialogbox1.setMessages(new String[] { this.enemyNames.get(2) + " a été vaincu !"});
+                    			
+                    			this.tmpDialogbox1.setChoices(Arrays.asList("Continuer"), choice3 -> {
+                    				switch (choice3) {
+                    				
+                    				case 0:
+                    					this.tmpDialogbox1.setActiveTempDialogbox(false);
+                    	    			this.playedTurn = true;
+                    					break;
+                    				}
+                    				
+                    				});        					
+            					break;
+                			} else {
+                				this.tmpDialogbox1.setMessages(new String[] { this.enemyNames.get(2) + " à reçu " + hit + " dégats !"});
+                    			
+                    			this.tmpDialogbox1.setChoices(Arrays.asList("Continuer"), choice3 -> {
+                    				switch (choice3) {
+                    				
+                    				case 0:
+                    					this.tmpDialogbox1.setActiveTempDialogbox(false);
+                    	    			this.playedTurn = true;
+                    					break;
+                    				}
+                    				
+                    				});        					
+            					break;
+                			}
                 				
-                				case 0:
-//                					this.tmpDialogbox1.setActiveTempDialogbox(false);
-                	    			this.playedTurn = true;
-                					break;
-                				}
-                				
-                				});   
-	    					break;
+                		
         		
 			        	case 3:
-			        		this.deadEnemyNames.add(this.enemyNames.get(3));
-    						this.aliveEnemyNames.remove(this.enemyNames.get(3));
-//							this.enemy[3].getHit(Global.P1.getDmg());
-							
-//							this.tmpDialogbox1.setActiveTempDialogbox(true);
-                			this.tmpDialogbox1.setMessages(new String[] {this.enemyNames.get(3) + " à reçu " + hit + " dégats !"});
-                			
-                			this.tmpDialogbox1.setChoices(Arrays.asList("Continuer"), choice3 -> {
-                				switch (choice3) {
-                				
-                				case 0:
-                					this.tmpDialogbox1.setActiveTempDialogbox(false);
-                	    			this.playedTurn = true;
-                					break;
-                				}
-                				
-                				});   
-							break;
+this.enemy[2].getHit(this.hit);
+        					
+//        					this.tmpDialogbox1.setActiveTempDialogbox(true);
+                			if(this.enemy[2].isDead()) {
+                				this.deadEnemyNames.add(this.enemyNames.get(2));
+	    						this.aliveEnemyNames.remove(this.enemyNames.get(2));
+
+                				this.tmpDialogbox1.setMessages(new String[] { this.enemyNames.get(2) + " a été vaincu !"});
+                    			
+                    			this.tmpDialogbox1.setChoices(Arrays.asList("Continuer"), choice3 -> {
+                    				switch (choice3) {
+                    				
+                    				case 0:
+                    					this.tmpDialogbox1.setActiveTempDialogbox(false);
+                    	    			this.playedTurn = true;
+                    					break;
+                    				}
+                    				
+                    				});        					
+            					break;
+                			} else {
+                				this.tmpDialogbox1.setMessages(new String[] { this.enemyNames.get(2) + " à reçu " + hit + " dégats !"});
+                    			
+                    			this.tmpDialogbox1.setChoices(Arrays.asList("Continuer"), choice3 -> {
+                    				switch (choice3) {
+                    				
+                    				case 0:
+                    					this.tmpDialogbox1.setActiveTempDialogbox(false);
+                    	    			this.playedTurn = true;
+                    					break;
+                    				}
+                    				
+                    				});        					
+            					break;
+                			}
 						}
         			});
         			break;

@@ -2,9 +2,11 @@ package fr.sae.game.caractere;
 
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
+import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Rectangle;
 
 import fr.sae.game.Global;
+import fr.sae.mobes.Boss;
 
 public abstract class Mobs extends Entity {
 	
@@ -29,9 +31,13 @@ public abstract class Mobs extends Entity {
 		battleHitbox = battlehitbox;
 	}
 	
-	 private Image getBattleSprite() { //Sprite de combat
-		 return this.Battlesprite.getSubImage(142, 48, 48, 48).getFlippedCopy(false, false).getScaledCopy(2.0f);
-    }
+	 private Image getBattleSprite() throws SlickException { //Sprite de combat
+		 if (this instanceof Boss){
+			 return this.Battlesprite.getFlippedCopy(true, false).getScaledCopy(1.0f);
+		 }
+		return this.Battlesprite.getSubImage(142, 48, 48, 48).getFlippedCopy(true, false).getScaledCopy(2.0f);
+		 
+	}
 	
 	public void moveUp(float distance) {
     	//this.UpSprite();
@@ -58,7 +64,7 @@ public abstract class Mobs extends Entity {
     	battleHitbox.setX(hitbox.getX() + distance * Global.speed);
     }
     
-    public void BattleScene(Graphics g, int posY) {
+    public void BattleScene(Graphics g, int posY) throws SlickException {
     	g.drawImage(this.getBattleSprite(), Global.MobsBattleDistance, posY);
 	}
 }

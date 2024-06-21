@@ -19,6 +19,7 @@ public class Foret4 extends BasicGameState {
 	Warp Warp5;
 	Warp Warp6;
 	Warp Warp7;
+	
 	public Foret4(int stateID) {
 	}
 
@@ -32,6 +33,7 @@ public class Foret4 extends BasicGameState {
 		this.Warp5= new Warp(1910, 500, 10, 180, 50, 560);//D
 		this.Warp6= new Warp(535, 200, 60, 45, 100, 100);//GROTTE
 		this.Warp7= new Warp(135, 905, 60, 45, 100, 100);//GROTTE
+		
 	}
 
 	@Override

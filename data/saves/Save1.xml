@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <Game>
-    <MapID>16</MapID>
+    <MapID>12</MapID>
+
     <classep1>Swordman</classep1>
     <classep2>Healer</classep2>
     <classep1LVL>1</classep1LVL>

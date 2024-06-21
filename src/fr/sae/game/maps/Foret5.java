@@ -21,7 +21,9 @@ public class Foret5 extends BasicGameState {
 	Warp Warp3;
 	DialogueBox dialogueBoxArbre;
 	DialogueBox dialogueBoxBranche;
-	 
+	DialogueBox dialogueBoxGuts;
+	DialogueBox dialogueBoxGuts2;
+	
 	private DialogueBox tmpDialogbox2= new DialogueBox(new String[] {});
 	
 	public Foret5(int stateID) {
@@ -36,7 +38,27 @@ public class Foret5 extends BasicGameState {
 		//Obligatoire que tmpDialogbox1 aie une triggerzone hors map
 	    this.tmpDialogbox2.setTriggerZone(-1, -1, 0, 0);
 	    
-	   
+	  //Dialogbox sans choix garde foret
+	    
+  		this.dialogueBoxGuts = new DialogueBox(new String[] {
+  						"Attention !! \n"+
+  						"Vous vous dirigez vers la dangereuse Lorêt Luminara et vous n'êtes pas assez fort  pour que je vous laisse passer.\n"+
+  						"Revenez quand vous serez plus puissant."
+  					    
+  			});	
+  		this.dialogueBoxGuts.setTriggerZone(961,579,110,110);
+	    
+  		//Dialogbox sans choix garde foret
+	    
+  		this.dialogueBoxGuts2 = new DialogueBox(new String[] {
+  						"Attention !! \n"+
+  						"Vous vous dirigez vers la dangereuse Lorêt Luminara et vous n'êtes pas assez fort  pour que je vous laisse passer.\n"+
+  						"Revenez quand vous serez plus puissant."
+  					    
+  			});	
+  		this.dialogueBoxGuts2.setTriggerZone(-1,-1,0,0);
+	    
+  		
 	  //Dialogbox Avec choix multiples
   		this.dialogueBoxArbre = new DialogueBox(new String[] {
   				"\n "+
@@ -112,7 +134,7 @@ public class Foret5 extends BasicGameState {
 
 	  	                        case 0:
 	  	                        	this.tmpDialogbox2.setActiveTempDialogbox(true);
-	  	                            this.tmpDialogbox2.setMessages(new String[] {"\n"+"\n"+"       Le ronronnement est devenu un murmure de vengeance."});
+	  	                            this.tmpDialogbox2.setMessages(new String[] {"\n"+"\n"+"           AIEEEE !!!!!"});
 	  	                            
 	  	                            //Permet de dire qu'il s'agissait du dernier choix
 	  	                            this.tmpDialogbox2.setChoices(Arrays.asList(),null);
@@ -142,8 +164,11 @@ public class Foret5 extends BasicGameState {
 		Global.actualId = 15;
 		
 		g.drawImage(new Image("data/maps/Map005.png").getScaledCopy(Global.width, Global.height), 0, 0);
+		g.drawImage(new Image("data/npc/Guts/GardeNoir3.png").getSubImage(0, 0, 48, 48),954, 570);
 		dialogueBoxBranche.render(g);
 		dialogueBoxArbre.render(g);
+		dialogueBoxGuts.render(g);
+		dialogueBoxGuts2.render(g);
 		
         try {
 	    	Global.P1.Sprite(g);
@@ -166,7 +191,6 @@ public class Foret5 extends BasicGameState {
 	    //Affiche toutes les collisions de la map et du joueur
 	    if (true) {
 		    g.draw(Global.P1.getHitbox());
-		    
 		    Global.CollisionMapForet5.drawCollisions(g);
 		    
 		    this.Warp1.draw(g);
@@ -175,6 +199,8 @@ public class Foret5 extends BasicGameState {
 		    
 		    this.dialogueBoxBranche.draw(g);
 		    this.dialogueBoxArbre.draw(g);
+		    this.dialogueBoxGuts.draw(g);
+		    this.dialogueBoxGuts2.draw(g);
 	    	}
 //--------------------------------------------------------------------------------------------------------------------------
 	}
@@ -192,6 +218,9 @@ public class Foret5 extends BasicGameState {
 		//Structure obligatoire pour les dialogbox sinon ca marche po jsp pk
 		boolean i =input.isKeyPressed(Global.interract);
 				
+		//Dialogbox sans input --> sans choix
+        this.dialogueBoxGuts.dialogBox(i);
+        this.dialogueBoxGuts2.dialogBox(i);
 		//Dialogbox avec input --> avec choix
 		this.dialogueBoxBranche.dialogBox(i,gc.getInput());
 		this.dialogueBoxArbre.dialogBox(i,gc.getInput());
@@ -212,6 +241,12 @@ public class Foret5 extends BasicGameState {
     		//}
     		
     //----------------------------------------------------------------------------------------------------------------------------
+	if (Global.CoeurVaillant) {
+		 
+		this.dialogueBoxGuts.setTriggerZone(-1, -1, 0, 0);
+		this.dialogueBoxGuts.setTriggerZone(961,579,110,110);
+	}
+	
 	}
 
 	@Override

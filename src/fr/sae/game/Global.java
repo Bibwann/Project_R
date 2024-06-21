@@ -578,7 +578,6 @@ public static void CollisionMapUnderground1() {
 		
 	}
 	
-	
 	public static void switchModeControles() { //Fonction  propre permettant de savoir si on est en dialoge ou en deplacmeent libre
 		canMoovPlayer=!canMoovPlayer;
 		canMoovDialogbox=!canMoovDialogbox;
@@ -891,7 +890,7 @@ public static void CollisionMapUnderground1() {
 	        // Write the content into XML file, overwriting existing content
 	        TransformerFactory transformerFactory = TransformerFactory.newInstance();
 	        Transformer transformer = transformerFactory.newTransformer();
-	        transformer.setOutputProperty(javax.xml.transform.OutputKeys.INDENT, "yes"); // Optional: prettify output
+	        transformer.setOutputProperty(javax.xml.transform.OutputKeys.INDENT, "yes");
 	        DOMSource source = new DOMSource(doc);
 	        StreamResult result = new StreamResult(file);
 
@@ -903,8 +902,6 @@ public static void CollisionMapUnderground1() {
 	        e.printStackTrace();
 	    }
 	}
-
-
 	
     public static String readXmlFile(File file) {
     	try {

@@ -1,5 +1,7 @@
 package fr.sae.game.maps;
 
+import java.util.Arrays;
+
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
@@ -8,13 +10,18 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
+import fr.sae.game.DialogueBox;
 import fr.sae.game.Global;
 import fr.sae.game.Warp;
+import fr.sae.mobes.Chaton;
 
 public class Foret7 extends BasicGameState {
 	Warp Warp1;
 	Warp Warp2;
 	Warp Warp3;
+	private DialogueBox dialogueBoxCbt;
+	private DialogueBox tmpDialogbox1= new DialogueBox(new String[] {});
+	
 	public Foret7(int stateID) {
 	}
 
@@ -23,6 +30,42 @@ public class Foret7 extends BasicGameState {
 		this.Warp1= new Warp(1910, 0, 10, 70, 50, 60);//D
 		this.Warp2= new Warp(1910, 840, 10, 130, 50, 900);//D
 		this.Warp3= new Warp(0, 0, 1160, 10, 400, 1020);//HAUT
+		
+		this.dialogueBoxCbt = new DialogueBox(new String[] {
+				"\n "+
+			    "     \n" +
+			    "           Un chat vous agresse brutalement"
+	        });
+	    this.dialogueBoxCbt.setTriggerZone(200,200, 200, 200);
+	    
+	    this.dialogueBoxCbt.setChoices(Arrays.asList("Continuer"), choice1 -> {
+            switch (choice1) {
+	            case 0:
+	        	    this.dialogueBoxCbt.setTriggerZone(-1, -1, 0, 0);
+
+                	this.tmpDialogbox1.setActiveTempDialogbox(false);
+
+  	                Global.canMoovPlayer=false;
+      			
+  	                try {
+						Global.mobs[0]=new Chaton("Chat-Rmeur", 2);
+						Global.mobs[1]=new Chaton("Chat-Cale", 2);
+
+
+  	                	} catch (SlickException e) {
+  	                		e.printStackTrace();
+  	                	}
+  	                sbg.enterState(100);
+
+	                
+	                break;
+	                
+	            case 1:
+	            	this.tmpDialogbox1.setActiveTempDialogbox(false);
+	            	break;
+
+            }       
+     });
 	}
 
 	
@@ -39,6 +82,9 @@ public class Foret7 extends BasicGameState {
         	e.getMessage();
         	System.out.print(e);
         }
+        
+        dialogueBoxCbt.render(g);
+
         this.Warp1.warp(Global.P1, sbg, 13);
         this.Warp2.warp(Global.P1, sbg, 13);
         this.Warp3.warp(Global.P1, sbg, 15);
@@ -49,6 +95,8 @@ public class Foret7 extends BasicGameState {
 
 	    //Affiche toutes les collisions de la map et du joueur
 	    if (true) {
+		    this.dialogueBoxCbt.draw(g);
+
 		    g.draw(Global.P1.getHitbox());
 		    
 		    Global.CollisionMapForet7.drawCollisions(g);
@@ -61,11 +109,18 @@ public class Foret7 extends BasicGameState {
 
 	@Override
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
+		Global.actualId=17;
+		//Global.updatePlayerMovement(gc.getInput(),Global.CollisionMapForet7,delta);
 		Global.updatePlayerMovement(gc.getInput(),Global.CollisionMapForet7,delta);
+		
+		Input input =gc.getInput();
+		boolean i =input.isKeyPressed(Global.interract);
+		
 		if (gc.getInput().isKeyPressed(Global.pause)) {
             sbg.enterState(101); // Passer à l'état 101 (menu de pause)
         }
-		Global.P1.AnimateWhileMoove();
+
+        this.dialogueBoxCbt.dialogBox(i,gc.getInput());
 		
 	}
 

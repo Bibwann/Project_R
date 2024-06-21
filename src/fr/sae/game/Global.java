@@ -46,9 +46,13 @@ public class Global {
 	//Objects de quetes
 	
 	public static boolean CoeurVaillant=false;
+	public static boolean LeveledUpForet5=false;
+
 	
 	//Combats uniques
 	public static boolean Foret6Battle=true;
+	public static boolean Foret5Battle=true;
+
 
 	//Instances de player
 	public static Player P1 = null;
@@ -453,7 +457,78 @@ public class Global {
 	}
 	
 	public static void CollisionsMapForet7() {
+		CollisionMapForet7.addCollidable(new Circle(70, 180, 50, 50));
+		CollisionMapForet7.addCollidable(new Circle(130, 240, 50, 50));
+		CollisionMapForet7.addCollidable(new Circle(200, 310, 50, 50));
+		CollisionMapForet7.addCollidable(new Circle(330, 310, 50, 50));
+		CollisionMapForet7.addCollidable(new Circle(400, 240, 50, 50));
+		CollisionMapForet7.addCollidable(new Circle(460, 310, 50, 50));
+		CollisionMapForet7.addCollidable(new Circle(530, 380, 50, 50));
+		CollisionMapForet7.addCollidable(new Circle(470, 440, 50, 50));
+		CollisionMapForet7.addCollidable(new Circle(410, 510, 50, 50));
+		CollisionMapForet7.addCollidable(new Circle(400, 640, 50, 50));
+		CollisionMapForet7.addCollidable(new Circle(400, 640, 50, 50));
 		
+		CollisionMapForet7.addCollidable(new Circle(360, 570, 50, 50));
+		
+		CollisionMapForet7.addCollidable(new Circle(340, 700, 50, 50));
+		CollisionMapForet7.addCollidable(new Circle(230, 820, 50, 50));
+		CollisionMapForet7.addCollidable(new Circle(270, 760, 50, 50));
+
+		CollisionMapForet7.addCollidable(new Circle(270, 890, 50, 50));
+
+		CollisionMapForet7.addCollidable(new Circle(260, 360, 50, 50));
+		CollisionMapForet7.addCollidable(new Circle(270, 1000, 50, 50));
+		CollisionMapForet7.addCollidable(new Circle(320, 1060, 50, 50));
+		
+		CollisionMapForet7.addCollidable(new Circle(600, 1060, 50, 50));
+		CollisionMapForet7.addCollidable(new Circle(460, 1060, 50, 50));
+
+		CollisionMapForet7.addCollidable(new Circle(720, 1060, 50, 50));
+		
+		CollisionMapForet7.addCollidable(new Circle(790, 1000, 50, 50));
+		CollisionMapForet7.addCollidable(new Circle(860, 950, 50, 50));
+		CollisionMapForet7.addCollidable(new Circle(860, 820, 50, 50));
+		CollisionMapForet7.addCollidable(new Circle(860, 700, 50, 50));
+		CollisionMapForet7.addCollidable(new Circle(790, 630, 50, 50));
+		CollisionMapForet7.addCollidable(new Circle(720, 570, 50, 50));
+		CollisionMapForet7.addCollidable(new Circle(790, 500, 50, 50));
+		CollisionMapForet7.addCollidable(new Circle(790, 380, 50, 50));
+		CollisionMapForet7.addCollidable(new Circle(790, 250, 50, 50));
+		CollisionMapForet7.addCollidable(new Circle(860, 180, 50, 50));
+		CollisionMapForet7.addCollidable(new Circle(990, 180, 50, 50));
+		CollisionMapForet7.addCollidable(new Circle(990, 180, 50, 50));
+		CollisionMapForet7.addCollidable(new Circle(920, 230, 50, 50));
+		
+		CollisionMapForet7.addCollidable(new Circle(1060, 120, 50, 50));
+		CollisionMapForet7.addCollidable(new Circle(1120, 50, 50, 50));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	}
 	
 	public static void CollisionsMapForet8() {
@@ -596,36 +671,34 @@ public static void CollisionMapUnderground1() {
 	            Global.actualId = mapId;
 	        }
 
-	        // Example of loading classep1 (assuming it's an identifier or attribute)
+	        // Load classep1
 	        NodeList classep1List = rootElement.getElementsByTagName("classep1");
 	        if (classep1List.getLength() > 0) {
 	            Element classep1Element = (Element) classep1List.item(0);
 	            String classep1 = classep1Element.getTextContent();
-	            Global.Player1Classe = classep1; // Update Global.Player1Classe with the loaded value
+	            Global.Player1Classe = classep1;
 	        }
 
-	        // Example of loading classep2 (assuming it's an identifier or attribute)
+	        // Load classep2
 	        NodeList classep2List = rootElement.getElementsByTagName("classep2");
 	        if (classep2List.getLength() > 0) {
 	            Element classep2Element = (Element) classep2List.item(0);
 	            String classep2 = classep2Element.getTextContent();
-	            Global.Player2Classe = classep2; // Update Global.Player2Classe with the loaded value
+	            Global.Player2Classe = classep2;
 	        }
 
-	        // Example of loading level for Global.P1
+	        // Load level for Global.P1
 	        NodeList classep1LvlList = rootElement.getElementsByTagName("classep1LVL");
 	        if (classep1LvlList.getLength() > 0) {
 	            Element classep1LvlElement = (Element) classep1LvlList.item(0);
 	            classep1Lvl = Integer.parseInt(classep1LvlElement.getTextContent());
-	            // Assuming Global.P1 has a method to set its level
 	        }
 
-	        // Example of loading level for Global.P2
+	        // Load level for Global.P2
 	        NodeList classep2LvlList = rootElement.getElementsByTagName("classep2LVL");
 	        if (classep2LvlList.getLength() > 0) {
 	            Element classep2LvlElement = (Element) classep2LvlList.item(0);
 	            classep2Lvl = Integer.parseInt(classep2LvlElement.getTextContent());
-	            // Assuming Global.P2 has a method to set its level
 	        }
 
 	        // Load Player1Name
@@ -633,20 +706,20 @@ public static void CollisionMapUnderground1() {
 	        if (player1NameList.getLength() > 0) {
 	            Element player1NameElement = (Element) player1NameList.item(0);
 	            String player1Name = player1NameElement.getTextContent();
-	            Global.Player1Name = player1Name; // Update Global.Player1Name with the loaded value
+	            Global.Player1Name = player1Name;
 	        }
 
 	        // Initialize P1 if not already initialized
 	        if (Global.P1 == null) {
 	            switch (Global.Player1Classe) {
 	                case "Swordman":
-	                    P1 = new Swordsman(Global.Player1Name, classep1Lvl); 
+	                    P1 = new Swordsman(Global.Player1Name, classep1Lvl);
 	                    break;
 	                case "Berserker":
-	                    P1 = new Berserker(Global.Player1Name, classep1Lvl, null); 
+	                    P1 = new Berserker(Global.Player1Name, classep1Lvl, null);
 	                    break;
 	                case "Healer":
-	                    P1 = new Healer(Global.Player1Name, classep1Lvl, null); 
+	                    P1 = new Healer(Global.Player1Name, classep1Lvl, null);
 	                    break;
 	                case "Mage":
 	                    P1 = new Mage(Global.Player1Name, classep1Lvl, null);
@@ -654,23 +727,23 @@ public static void CollisionMapUnderground1() {
 	            }
 	        }
 
-	        // Load X (formerly SpawnX)
+	        // Load X coordinate
 	        NodeList xList = rootElement.getElementsByTagName("x");
 	        if (xList.getLength() > 0) {
 	            Element xElement = (Element) xList.item(0);
 	            int x = Integer.parseInt(xElement.getTextContent());
 	            if (Global.P1 != null) {
-	                Global.P1.getHitbox().setX(x); // Assuming Global.P1 is correctly initialized and has a method to set X coordinate
+	                Global.P1.getHitbox().setX(x);
 	            }
 	        }
 
-	        // Load Y (formerly SpawnY)
+	        // Load Y coordinate
 	        NodeList yList = rootElement.getElementsByTagName("y");
 	        if (yList.getLength() > 0) {
 	            Element yElement = (Element) yList.item(0);
 	            int y = Integer.parseInt(yElement.getTextContent());
 	            if (Global.P1 != null) {
-	                Global.P1.getHitbox().setY(y); // Assuming Global.P1 is correctly initialized and has a method to set Y coordinate
+	                Global.P1.getHitbox().setY(y);
 	            }
 	        }
 
@@ -678,21 +751,21 @@ public static void CollisionMapUnderground1() {
 	        if (Global.P2 == null) {
 	            switch (Global.Player2Classe) {
 	                case "Swordman":
-	                    P2 = new Swordsman("Swordsman", classep2Lvl); // Replace "Swordsman" with actual player name if needed
+	                    P2 = new Swordsman("Swordsman", classep2Lvl);
 	                    break;
 	                case "Berserker":
-	                    P2 = new Berserker("Berserker", classep2Lvl, null); // Replace "Berserker" with actual player name if needed
+	                    P2 = new Berserker("Berserker", classep2Lvl, null);
 	                    break;
 	                case "Healer":
-	                    P2 = new Healer("Healer", classep2Lvl, null); // Replace "Healer" with actual player name if needed
+	                    P2 = new Healer("Healer", classep2Lvl, null);
 	                    break;
 	                case "Mage":
-	                    P2 = new Mage("Mage", classep2Lvl, null); // Replace "Mage" with actual player name if needed
+	                    P2 = new Mage("Mage", classep2Lvl, null);
 	                    break;
 	            }
 	        }
-	        
-	     // Load coeurVaillant
+
+	        // Load coeurVaillant
 	        NodeList coeurVaillantList = rootElement.getElementsByTagName("coeurVaillant");
 	        if (coeurVaillantList.getLength() > 0) {
 	            Element coeurVaillantElement = (Element) coeurVaillantList.item(0);
@@ -700,17 +773,41 @@ public static void CollisionMapUnderground1() {
 	            Global.CoeurVaillant = CoeurVaillant;
 	        }
 
+	        // Load LeveledUpForet5
+	        NodeList leveledUpForet5List = rootElement.getElementsByTagName("LeveledUpForet5");
+	        if (leveledUpForet5List.getLength() > 0) {
+	            Element leveledUpForet5Element = (Element) leveledUpForet5List.item(0);
+	            boolean LeveledUpForet5 = Boolean.parseBoolean(leveledUpForet5Element.getTextContent());
+	            Global.LeveledUpForet5 = LeveledUpForet5;
+	        }
+
+	        // Load Foret6Battle
+	        NodeList foret6BattleList = rootElement.getElementsByTagName("Foret6Battle");
+	        if (foret6BattleList.getLength() > 0) {
+	            Element foret6BattleElement = (Element) foret6BattleList.item(0);
+	            boolean Foret6Battle = Boolean.parseBoolean(foret6BattleElement.getTextContent());
+	            Global.Foret6Battle = Foret6Battle;
+	        }
+
+	        // Load Foret5Battle
+	        NodeList foret5BattleList = rootElement.getElementsByTagName("Foret5Battle");
+	        if (foret5BattleList.getLength() > 0) {
+	            Element foret5BattleElement = (Element) foret5BattleList.item(0);
+	            boolean Foret5Battle = Boolean.parseBoolean(foret5BattleElement.getTextContent());
+	            Global.Foret5Battle = Foret5Battle;
+	        }
+
 	        // Example of setting battle hitbox and initiating animation
 	        if (Global.P1 != null) {
 	            P1.setBattlehitbox(new Rectangle(PlayerBattleDistance, height / 3, 32, 48));
-	            P1.Animation(); // Assuming Animation() is a method to initiate animation for P1
+	            P1.Animation();
 	        }
 	        if (Global.P2 != null) {
 	            P2.setBattlehitbox(new Rectangle(PlayerBattleDistance, height / 3, 32, 48));
 	        }
-	        
-	        if(Global.CoeurVaillant) {
-                Global.CollisionMapForet5.deletLastCollidable();
+
+	        if (Global.CoeurVaillant) {
+	            Global.CollisionMapForet5.deletLastCollidable();
 	        }
 
 	        System.out.println("Game loaded successfully!");
@@ -736,44 +833,60 @@ public static void CollisionMapUnderground1() {
 	        mapIdElement.appendChild(doc.createTextNode(Integer.toString(Global.actualId)));
 	        rootElement.appendChild(mapIdElement);
 
-	        // Example of saving classep1 and classep2 (assuming these are attributes or identifiers)
+	        // Save classep1
 	        Element classep1Element = doc.createElement("classep1");
-	        classep1Element.appendChild(doc.createTextNode(Global.Player1Classe)); // Replace with actual attribute or identifier for player1
+	        classep1Element.appendChild(doc.createTextNode(Global.Player1Classe));
 	        rootElement.appendChild(classep1Element);
 
+	        // Save classep2
 	        Element classep2Element = doc.createElement("classep2");
-	        classep2Element.appendChild(doc.createTextNode(Global.Player2Classe)); // Replace with actual attribute or identifier for player2
+	        classep2Element.appendChild(doc.createTextNode(Global.Player2Classe));
 	        rootElement.appendChild(classep2Element);
 
-	        // Example of saving level for Global.P1 with element name classep1LVL
+	        // Save level for Global.P1
 	        Element classep1Lvl = doc.createElement("classep1LVL");
-	        classep1Lvl.appendChild(doc.createTextNode(Integer.toString(Global.P1.getLevel()))); // Replace with actual method or attribute to get level for player1
+	        classep1Lvl.appendChild(doc.createTextNode(Integer.toString(Global.P1.getLevel())));
 	        rootElement.appendChild(classep1Lvl);
 
-	        // Example of saving level for Global.P2 with element name classep2LVL
+	        // Save level for Global.P2
 	        Element classep2Lvl = doc.createElement("classep2LVL");
-	        classep2Lvl.appendChild(doc.createTextNode(Integer.toString(Global.P2.getLevel()))); // Replace with actual method or attribute to get level for player2
+	        classep2Lvl.appendChild(doc.createTextNode(Integer.toString(Global.P2.getLevel())));
 	        rootElement.appendChild(classep2Lvl);
 
 	        // Save Player1Name
 	        Element player1NameElement = doc.createElement("Player1Name");
-	        player1NameElement.appendChild(doc.createTextNode(Global.Player1Name)); // Replace with actual value of Player1Name
+	        player1NameElement.appendChild(doc.createTextNode(Global.Player1Name));
 	        rootElement.appendChild(player1NameElement);
 
-	        // X element (formerly SpawnX)
+	        // Save X coordinate
 	        Element xElement = doc.createElement("x");
-	        xElement.appendChild(doc.createTextNode(Integer.toString((int) Global.P1.getHitbox().getX()))); // Assuming Global.X is correct
+	        xElement.appendChild(doc.createTextNode(Integer.toString((int) Global.P1.getHitbox().getX())));
 	        rootElement.appendChild(xElement);
 
-	        // Y element (formerly SpawnY)
+	        // Save Y coordinate
 	        Element yElement = doc.createElement("y");
-	        yElement.appendChild(doc.createTextNode(Integer.toString((int) Global.P1.getHitbox().getY()))); // Assuming Global.SpawnY is correct
+	        yElement.appendChild(doc.createTextNode(Integer.toString((int) Global.P1.getHitbox().getY())));
 	        rootElement.appendChild(yElement);
 
-	        // CoeurVaillant element as boolean
+	        // Save coeurVaillant
 	        Element coeurVaillantElement = doc.createElement("coeurVaillant");
 	        coeurVaillantElement.appendChild(doc.createTextNode(Boolean.toString(Global.CoeurVaillant)));
 	        rootElement.appendChild(coeurVaillantElement);
+
+	        // Save LeveledUpForet5
+	        Element leveledUpForet5Element = doc.createElement("LeveledUpForet5");
+	        leveledUpForet5Element.appendChild(doc.createTextNode(Boolean.toString(Global.LeveledUpForet5)));
+	        rootElement.appendChild(leveledUpForet5Element);
+
+	        // Save Foret6Battle
+	        Element foret6BattleElement = doc.createElement("Foret6Battle");
+	        foret6BattleElement.appendChild(doc.createTextNode(Boolean.toString(Global.Foret6Battle)));
+	        rootElement.appendChild(foret6BattleElement);
+
+	        // Save Foret5Battle
+	        Element foret5BattleElement = doc.createElement("Foret5Battle");
+	        foret5BattleElement.appendChild(doc.createTextNode(Boolean.toString(Global.Foret5Battle)));
+	        rootElement.appendChild(foret5BattleElement);
 
 	        // Write the content into XML file, overwriting existing content
 	        TransformerFactory transformerFactory = TransformerFactory.newInstance();
@@ -790,6 +903,7 @@ public static void CollisionMapUnderground1() {
 	        e.printStackTrace();
 	    }
 	}
+
 
 	
     public static String readXmlFile(File file) {

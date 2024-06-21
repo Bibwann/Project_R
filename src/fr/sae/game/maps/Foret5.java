@@ -48,10 +48,40 @@ public class Foret5 extends BasicGameState {
   	    this.dialogueBoxArbre.setChoices(Arrays.asList("Grimper", "Continuer votre chemin"), choice1 -> {
               switch (choice1) {
   	            case 0:
-  	            	this.tmpDialogbox2.setActiveTempDialogbox(true);
-  	                this.tmpDialogbox2.setMessages(new String[] {"Alors que vous grimpez dans l'arbre, un chat sauvage surgit des branches supérieur et vous attaque !"});
-  	                //Ajoutez recursivement des choix ici de la meme maniere que moi
-  	                this.tmpDialogbox2.setChoices(Arrays.asList(),null);
+  	            	if (Global.Foret5Battle) {
+	  	            	this.tmpDialogbox2.setActiveTempDialogbox(true);
+	  	                this.tmpDialogbox2.setMessages(new String[] {"Alors que vous grimpez dans l'arbre, un chat sauvage surgit des branches supérieur et vous attaque !"});
+                    	this.tmpDialogbox2.setActiveTempDialogbox(false);
+
+	  	                Global.Foret5Battle=false;
+	  	                Global.canMoovPlayer=false;
+	      			
+	  	                try {
+							Global.mobs[0]=new Chaton("Chat-Cre-Bleu", 3);
+							Global.mobs[1]=new Chaton("Chat-Fé-Mal", 1);
+							Global.mobs[2]=new Chaton("Chat-kra", 1);
+
+	
+	
+	  	                	} catch (SlickException e) {
+	  	                		e.printStackTrace();
+	  	                	}
+	  	                sbg.enterState(100);
+	
+	  	                //Ajoutez recursivement des choix ici de la meme maniere que moi
+	  	                this.tmpDialogbox2.setChoices(Arrays.asList(),null);
+  	            	}else if (Global.LeveledUpForet5 && Global.Foret5Battle){
+  	            		this.tmpDialogbox2.setActiveTempDialogbox(true);
+	  	                this.tmpDialogbox2.setMessages(new String[] {"Vous avez trouvé une potion de force : +1 Niveau"});
+	  	                Global.P1.levelUp();
+	  	                
+	  	                this.tmpDialogbox2.setChoices(Arrays.asList(),null);
+  	            	} else {
+  	            		
+  	            		this.tmpDialogbox2.setActiveTempDialogbox(true);
+	  	                this.tmpDialogbox2.setMessages(new String[] {"Cet arbre est vide"});
+	  	                this.tmpDialogbox2.setChoices(Arrays.asList(),null);
+  	            	}
                       break;
   	                
   	          case 1:

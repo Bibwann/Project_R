@@ -89,6 +89,7 @@ public class GameOver extends BasicGameState {
                     Global.Player2Classe = null;
                     Global.Player1Name = "";
                     Global.egg1 = "";
+                    Global.canMoovPlayer=true;
 
                     // Enter the main menu state (stateID = 1)
                     game.enterState(1);

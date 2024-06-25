@@ -47,10 +47,6 @@ public abstract class Entity {
         this.sprite = sprite;
     }
 
-    // Method to calculate damage considering spell damage and entity level
-    public int dmgMultipler(int spellDmg) {
-        return (spellDmg * (1 + (this.level)));
-    }
 
     // Method to check if the entity is dead
     public boolean isDead() {

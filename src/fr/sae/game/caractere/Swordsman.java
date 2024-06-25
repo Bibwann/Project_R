@@ -21,9 +21,6 @@ public class Swordsman extends Player {
 
     // Spells and abilities specific to the Swordsman can be defined here
     
-    // Method representing a sword attack
-    public double swordHit() {
-        return (this.dmgMultipler(this.dmg) * this.dmg);
-    }
+
         
 }

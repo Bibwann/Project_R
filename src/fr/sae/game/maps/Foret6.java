@@ -293,7 +293,7 @@ public class Foret6 extends BasicGameState {
 	//Temp	    
 
 	    //Affiche toutes les collisions de la map et du joueur
-	    if (true) {
+	    if (Global.AfficherToutesLesCollisions) {
 		    g.draw(Global.P1.getHitbox());
 		    
 		    Global.CollisionMapForet6.drawCollisions(g);
@@ -318,11 +318,13 @@ public class Foret6 extends BasicGameState {
 
 		Input input =gc.getInput();
 		
-		Global.updatePlayerMovement(input,Global.CollisionMapForet6,delta);
+		Global.updatePlayerMovement(input,Global.CollisionMapForet6,delta,sbg);
 		if (gc.getInput().isKeyPressed(Global.pause)) {
             sbg.enterState(101); // Passer à l'état 101 (menu de pause)
         }
 		Global.P1.AnimateWhileMoove();
+		Global.P1.cannotRandomBattle();
+
 
 		
 		//Structure obligatoire pour les dialogbox sinon ca marche po jsp pk

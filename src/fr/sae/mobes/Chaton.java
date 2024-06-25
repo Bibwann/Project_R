@@ -11,17 +11,13 @@ public class Chaton extends Mobs {
         super(name, level, new Image("data/Cats/cat.png"), new Image("data/Cats/cat.png"));
 
         // Set specific attributes for Chaton
-        this.hpMax = 30; // Maximum hit points
+        this.hpMax = (int) (40*(level*1.1)); // Maximum hit points
         this.manaMax = 0; // Maximum mana points (assuming cats don't use mana)
-        this.dmg = 20; // Damage points
+        this.dmg = (int) (20*(level*1.1)); // Damage points
 
-        this.hpActual = 30; // Current hit points initialized to maximum
+        this.hpActual = 40; // Current hit points initialized to maximum
         this.manaActual = 0; // Current mana points initialized (assuming not used)
     }
 
-    // Method to calculate damage using griffes (claws)
-    public int griffesHit() {
-        return (this.dmgMultipler(this.dmg) * this.dmg); // Calculate damage based on multiplier
-    }
 }
 

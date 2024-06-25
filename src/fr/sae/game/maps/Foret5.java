@@ -191,7 +191,7 @@ public class Foret5 extends BasicGameState {
 	//Temp	    
 
 	    //Affiche toutes les collisions de la map et du joueur
-	    if (true) {
+	    if (Global.AfficherToutesLesCollisions) {
 		    g.draw(Global.P1.getHitbox());
 		    Global.CollisionMapForet5.drawCollisions(g);
 		    
@@ -211,11 +211,13 @@ public class Foret5 extends BasicGameState {
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
 		Input input =gc.getInput();
 		
-		Global.updatePlayerMovement(gc.getInput(),Global.CollisionMapForet5,delta);
+		Global.updatePlayerMovement(gc.getInput(),Global.CollisionMapForet5,delta,sbg);
 		if (gc.getInput().isKeyPressed(Global.pause)) {
             sbg.enterState(101); // Passer à l'état 101 (menu de pause)
         }
 		Global.P1.AnimateWhileMoove();
+		Global.P1.cannotRandomBattle();
+
 
 		//Structure obligatoire pour les dialogbox sinon ca marche po jsp pk
 		boolean i =input.isKeyPressed(Global.interract);

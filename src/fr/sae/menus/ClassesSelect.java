@@ -11,10 +11,10 @@ public class ClassesSelect extends BasicGameState {
     private String firstClass = "";
     private String secondClass = "";
     private String[] descriptions = {
-        "Un guerrier robuste spécialisé dans le combat au corps à corps.",
-        "Un combattant impitoyable qui excelle dans la force brute et l'attaque à deux mains.",
-        "Un soigneur compétent qui utilise la magie pour restaurer la santé des alliés.",
-        "Un lanceur de sorts puissant capable de manipuler les éléments pour infliger des dégâts magiques."
+            "Une guerrière excellente dans tous les arts, forte et robuste, elle saura faire face à toutes les situations.",
+            "Un combattant impitoyable qui n'a pas peur de se prendre des coups pour affaiblir l'ennemi. Plus il s'approche de la mort, plus sa force augmente.",
+            "Une alchimiste, mais pas n'importe qui, une des plus grandes alchimistes qui saura sans mal redonner de la force à ses alliés.",
+            "Un redoutable grand-père armé de sa canne à l'allure chétive, mais sous cette faible apparence se trouve un grand mage."
     };
 
     private String[] classes = {"Swordman", "Berserker", "Healer", "Mage"};
@@ -41,6 +41,7 @@ public class ClassesSelect extends BasicGameState {
 
         Font awtMenuFont = new Font("Verdana", Font.PLAIN, 24);
         menuFont = new TrueTypeFont(awtMenuFont, true);
+        
     }
 
     @Override
@@ -52,11 +53,11 @@ public class ClassesSelect extends BasicGameState {
         // Render title
         g.setFont(titleFont);
         g.setColor(Color.green);
-        g.drawString("SELECT YOUR CLASS", (gc.getWidth() - titleFont.getWidth("SELECT YOUR CLASS")) / 2, gc.getHeight()*1/10);
+        g.drawString("SELECT YOUR CLASS", (gc.getWidth() - titleFont.getWidth("SELECT YOUR CLASS")) / 2, gc.getHeight() * 1/10);
 
         // Render menu items
         g.setFont(menuFont);
-        int y = gc.getHeight()*1/3;
+        int y = gc.getHeight() * 1/3;
         for (int i = 0; i < classes.length; i++) {
             int x = (gc.getWidth() - menuFont.getWidth(classes[i])) / 2;
             if (i == selectedItemIndex) {
@@ -74,6 +75,10 @@ public class ClassesSelect extends BasicGameState {
         g.setColor(Color.white);
         g.drawString("Première classe : " + firstClass, 50, 50);
         g.drawString("Deuxième classe : " + secondClass, 50, 80);
+
+        // Render instructions on the right side
+        g.drawString("Utilisez les flèches directionnelles pour naviguer.", gc.getWidth() - menuFont.getWidth("Utilisez les flèches directionnelles pour naviguer.") - 50, 50);
+        g.drawString("Appuyez sur Entrée pour valider.", gc.getWidth() - menuFont.getWidth("Appuyez sur Entrée pour valider.") - 50, 80);
 
         // Render confirmation options if visible
         if (isConfirmationVisible) {

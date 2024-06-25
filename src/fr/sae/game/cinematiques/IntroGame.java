@@ -71,7 +71,7 @@ public class IntroGame extends BasicGameState {
 
         // Perform fading in effect until opacity reaches 1
         if (!fadeInComplete) {
-            opacity += 0.001f; // Adjust this value to control the speed of the fade in
+            opacity += 0.01f; // Adjust this value to control the speed of the fade in
             if (opacity > 1f) {
                 opacity = 1f;
                 fadeInComplete = true;

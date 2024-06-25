@@ -26,18 +26,19 @@ public final class Boss extends Mobs {
     public static synchronized Boss getInstance() throws SlickException {
         if (instance == null) {
             // Create a new instance if it doesn't exist yet
-            instance = new Boss("Nyan Cat", 99, new Image("data/Boss/sprite.png"), new Image("data/Boss/sprite.png"));
+            instance = new Boss("Nyan Cat", 0, new Image("data/Boss/sprite.png"), new Image("data/Boss/sprite.png"));
         }
         return instance;
     }
-    
+
     public void Dead(StateBasedGame sbg) {
 		if (this.getHpActuel()<1) {
 			sbg.enterState(8);
 		}
 	}
     
-    private Image getBattleSprite() { //Battle sprite
+    @SuppressWarnings("unused")
+	private Image getBattleSprite() { //Battle sprite
 		 return this.Battlesprite.getFlippedCopy(true, false).getScaledCopy(1.0f);
    }
 }

@@ -89,6 +89,12 @@ public class OptionMenu extends BasicGameState {
         }
 
         g.drawString(exitOption, x, yExit);
+
+        // Render instructions on the right side
+        g.setFont(menuFont);
+        g.setColor(Color.white);
+        g.drawString("Utilisez les flèches directionnelles pour naviguer.", gc.getWidth() - menuFont.getWidth("Utilisez les flèches directionnelles pour naviguer.") - 50, 50);
+        g.drawString("Appuyez sur Entrée pour valider.", gc.getWidth() - menuFont.getWidth("Appuyez sur Entrée pour valider.") - 50, 80);
     }
 
     @Override

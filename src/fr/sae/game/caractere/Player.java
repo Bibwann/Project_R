@@ -18,12 +18,14 @@ public abstract class Player extends Entity {
     protected Rectangle Battlehitbox; // Hitbox specific to battle scenes
 
     protected int experienceBarrActu = 0;  // Current experience points
-    protected int experienceBarrLvlUp = 1000;  // Experience points needed for level up
+    protected int experienceBarrLvlUp = 100;  // Experience points needed for level up
 
     protected int Orientation;    // Orientation of the player
     private Animation animation;  // Animation object for player's movements
     protected String className;  // Class name of the player
 
+    public boolean RandomBattle=false;
+    
     public Player(String name, int level, Image sprite, Image BattleSprite, Image chibi) {
         super(name, level, sprite, BattleSprite);
         
@@ -54,8 +56,8 @@ public abstract class Player extends Entity {
     // Method to level up the player
     public void levelUp() {
         this.level += 1;
-        this.hpMax += 10;
-        this.dmg *= 1.1;
+        this.hpMax *= 1.2;
+        this.dmg *= 1.2;
         this.experienceBarrActu = 0;
         this.experienceBarrLvlUp *= 1.1;
     }
@@ -185,5 +187,29 @@ public abstract class Player extends Entity {
     public String getClassName() {
         return this.className;
     }
+    
+    public void canRandomBattle() {
+    	this.RandomBattle=true;
+    }
+    
+    public void cannotRandomBattle() {
+    	this.RandomBattle=false;
+    }
 
+	public  boolean getRandomBattle() {
+		return this.RandomBattle;
+	}
+	
+	public int takeXp(int xp) {
+		
+		int nbLevelWin=(this.experienceBarrActu+xp)/this.experienceBarrLvlUp; //Division euclidienne
+		this.experienceBarrActu=(this.experienceBarrActu+xp)%this.experienceBarrLvlUp; //Modulo
+		
+		for(int i=0;i<nbLevelWin;i++) {
+			this.levelUp();
+		}
+		
+		return nbLevelWin;
+	}
+	
 }

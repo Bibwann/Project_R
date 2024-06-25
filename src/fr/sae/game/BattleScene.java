@@ -206,7 +206,7 @@ public class BattleScene extends BasicGameState {
 		Input input =gc.getInput();
 		boolean boolInput =input.isKeyPressed(Global.interract);
 		
-    	Global.updatePlayerMovement(gc.getInput(),Global.CollisionMapForet2,delta);
+    	Global.updatePlayerMovement(gc.getInput(),Global.CollisionMapForet2,delta,sbg);
 		Global.P1.AnimateWhileMoove();
 		
 		if(this.playedTurn && !this.entities.isEmpty() && !this.enemyNames.isEmpty()) {

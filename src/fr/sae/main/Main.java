@@ -86,10 +86,9 @@ public class Main  {
                   this.addState(new BattleScene(100));    
                   //Pause
                   this.addState(new PauseMenu(101));                  
-
-                  
-
+  
                 }
+
             });
             
             app.setShowFPS(true); //Affichage des fps en haut a gauche --> ptetre mettre un option pour l'activer serai stylé
@@ -98,9 +97,12 @@ public class Main  {
             Global.height= app.getScreenHeight();
             
             app.setDisplayMode(1920, 1080, true); // --> true = Pleine ecran / false = Fenetré 
+
             //app.setDisplayMode(Global.width, Global.height, true); ---> Pourrais generer des bug ( ecran auto adapatif )
             //app.setDisplayMode(800, 600, false);
-            
+
+            app.setTargetFrameRate(60); // Limiter à 60 FPS
+
             app.setIcons(new String[] {"data/ico.png"});
             app.start(); 
             

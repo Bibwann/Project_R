@@ -97,7 +97,7 @@ public class Foret7 extends BasicGameState {
 	//Temp	    
 
 	    //Affiche toutes les collisions de la map et du joueur
-	    if (true) {
+	    if (Global.AfficherToutesLesCollisions) {
 	    	
 	    	if(Global.Foret7Battle) {
 			    this.dialogueBoxCbt.draw(g);
@@ -117,8 +117,11 @@ public class Foret7 extends BasicGameState {
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
 		Global.actualId=17;
 		//Global.updatePlayerMovement(gc.getInput(),Global.CollisionMapForet7,delta);
-		Global.updatePlayerMovement(gc.getInput(),Global.CollisionMapForet7,delta);
-		
+		Global.updatePlayerMovement(gc.getInput(),Global.CollisionMapForet7,delta,sbg);
+		Global.P1.AnimateWhileMoove();
+		Global.P1.canRandomBattle();
+
+
 		Input input =gc.getInput();
 		boolean i =input.isKeyPressed(Global.interract);
 		

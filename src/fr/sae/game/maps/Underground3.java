@@ -242,7 +242,7 @@ public class Underground3 extends BasicGameState {
 	//Temp	    
 
 	    //Affiche toutes les collisions de la map et du joueur
-	    if (true) {
+	    if (Global.AfficherToutesLesCollisions) {
 		    g.draw(Global.P1.getHitbox());
 		    
 		    Global.CollisionMapUnderground3.drawCollisions(g);
@@ -262,7 +262,7 @@ public class Underground3 extends BasicGameState {
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
 		Input input =gc.getInput();
 		
-		Global.updatePlayerMovement(gc.getInput(),Global.CollisionMapUnderground3,delta);
+		Global.updatePlayerMovement(gc.getInput(),Global.CollisionMapUnderground3,delta,sbg);
 		if (gc.getInput().isKeyPressed(Global.pause)) {
             sbg.enterState(101); // Passer à l'état 101 (menu de pause)
         }

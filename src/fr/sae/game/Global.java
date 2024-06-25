@@ -5,13 +5,16 @@ import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Circle;
 import org.newdawn.slick.geom.Rectangle;
+import org.newdawn.slick.state.StateBasedGame;
 
 import fr.sae.game.caractere.Berserker;
+import fr.sae.game.caractere.Entity;
 import fr.sae.game.caractere.Healer;
 import fr.sae.game.caractere.Mage;
 import fr.sae.game.caractere.Mobs;
 import fr.sae.game.caractere.Player;
 import fr.sae.game.caractere.Swordsman;
+import fr.sae.mobes.Chaton;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -19,6 +22,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -33,6 +37,8 @@ import org.w3c.dom.NodeList;
 
 public class Global {
 	
+	//Rien a foutre
+	public static boolean AfficherToutesLesCollisions=true;
 	 
 	//Objects de quetes
 	 
@@ -79,7 +85,6 @@ public class Global {
 	public static int interract =Input.KEY_SPACE;
 	
 	//Hashmap permettant le changement de touches proprement
-
 
     public static Map<Integer, String> reversedInputs = new HashMap<Integer, String>() {
         private static final long serialVersionUID = 1L;
@@ -378,8 +383,12 @@ public class Global {
         CollisionMapForet5.addCollidable(new Rectangle(200, 300, 660, 120));
         CollisionMapForet5.addCollidable(new Rectangle(526, 560, 75, 60));
         CollisionMapForet5.addCollidable(new Rectangle(820, 450, 20, 60));
+        
+        //correction bug collision ( le truc moche tout seul)
+        CollisionMapForet5.addCollidable(new Rectangle(820 , 430, 20, 20));
+
         //barrère gauche du haut au milieu de l'écran
-        CollisionMapForet5.addCollidable(new Rectangle(820, 510, 150, 60));
+        CollisionMapForet5.addCollidable(new Rectangle(820 , 510, 150, 60));
         //barrières du bas au milieu de l'écran en haut
         CollisionMapForet5.addCollidable(new Circle(830, 605, 30, 40));
         //rocher juste en dessous de la barrère coté gauche
@@ -537,8 +546,24 @@ public class Global {
 	    CollisionMapForet12.addCollidable(new Circle(660, 380,65, 30)); 
 	    CollisionMapForet12.addCollidable(new Circle(1260, 380,65, 30)); 
 	    CollisionMapForet12.addCollidable(new Circle(1790, 380,65, 30)); 
+	    
+	    //Tonneaux gauche 
+	    CollisionMapForet12.addCollidable(new Rectangle(270,380,260, 130)); 
+	    
+	    //Tonneaux droite 
+	    CollisionMapForet12.addCollidable(new Rectangle(1390,380,260, 130)); 
+	    
+	    //Arbre en bas a gauche
+	    CollisionMapForet12.addCollidable(new Rectangle(0,1080-250,180, 250)); 
 
+	    //Arbre en bas a droite
+	    CollisionMapForet12.addCollidable(new Rectangle(1920-190,1080-190,190, 190)); 
 
+	    //Panneau
+	    CollisionMapForet12.addCollidable(new Rectangle(1065,990-40,60, 50)); 
+
+	    //Branche
+	    CollisionMapForet12.addCollidable(new Rectangle(1920-80,0,80, 60)); 
 
 	}
 	
@@ -578,7 +603,7 @@ public class Global {
 	}
 	
 		//A voir avec les animations 
-	public static void updatePlayerMovement(Input input, Collisions c, int delta) { //Fonction qui gere le deplacement du joueur P1
+	public static void updatePlayerMovement(Input input, Collisions c, int delta,StateBasedGame sbg) throws SlickException { //Fonction qui gere le deplacement du joueur P1
 	    	if (P1 != null && canMoovPlayer) {
 		        boolean isleft = input.isKeyDown(left);
 		        boolean isright = input.isKeyDown(right);
@@ -587,36 +612,82 @@ public class Global {
 
 		        if (isleft) {
 		        	InputHandler.keyPressed();
-		            if (!c.willCollideWithMap(Global.P1.getHitbox(),-1,0)) {
+		            if (!c.willCollideWithMap(Global.P1.getHitbox(),-3,0)) {
 		            	Global.P1.LeftSprite();
 		                P1.moveLeft(1,delta);
+		                
+		                if(P1.getRandomBattle()) {
+		                	if (getRandomNumber(1, 6094)== 1) {
+		                		launchRandomBattle(sbg);
+		                	}
+		                }
+		                
 		            }
+		            
 		        } else if (isright) {
 		        	InputHandler.keyPressed();
 		        	Global.P1.RightSprite();
-		            if (!c.willCollideWithMap(Global.P1.getHitbox(),1,0)) {
+		            if (!c.willCollideWithMap(Global.P1.getHitbox(),3,0)) {
 		                P1.moveRight(1,delta);
+		                
+		                if(P1.getRandomBattle()) {
+		                	if (getRandomNumber(1, 6094)== 1) {
+		                		launchRandomBattle(sbg);
+		                	}
+		                }
 
 		            }
 		        } else if (isup) {
 		        	InputHandler.keyPressed();
 		        	Global.P1.UpSprite();
-		            if (!c.willCollideWithMap(Global.P1.getHitbox(),0,-1)) {
+		            if (!c.willCollideWithMap(Global.P1.getHitbox(),0,-3)) {
 		                P1.moveUp(1,delta);
+		                
+		                if(P1.getRandomBattle()) {
+		                	if (getRandomNumber(1, 6094)== 1) {
+		                		launchRandomBattle(sbg);
+		                	}
+		                }
 
 		            }
 		        } else if (isdown) {
 		        	InputHandler.keyPressed();
 		        	Global.P1.DownSprite();
-		            if (!c.willCollideWithMap(Global.P1.getHitbox(),0,1)) {
+		            if (!c.willCollideWithMap(Global.P1.getHitbox(),0,3)) {
 		                P1.moveDown(1,delta);
+		                
+		                if(P1.getRandomBattle()) {
+		                	if (getRandomNumber(1, 6094)== 1) {
+		                		launchRandomBattle(sbg);
+		                	}
+		                }
 		            }
-		         
 		        }
 		        
 		    }
 	    	
 	    }
+	
+	  public static void launchRandomBattle(StateBasedGame sbg) throws SlickException {
+	        // Désactiver le mouvement du joueur
+		  
+	        Global.canMoovPlayer = false;
+
+	        // Générer un nombre aléatoire de mobs entre 1 et 4
+	        int numberOfMobs = getRandomNumber(1,2);
+
+	        // Boucle pour initialiser chaque mob avec un niveau et un nom aléatoire
+	        for (int i = 0; i < numberOfMobs; i++) {
+	            String name = "chaton" + (i + 1);
+	            int level = getRandomNumber(1,2);
+	            Global.mobs[i] = new Chaton(name, level);
+	        }
+
+	        // Entrer dans l'état de combat (ID 100)
+	        sbg.enterState(100);
+	    }
+
+
 
 	//Variables necessaire au lore ( genre pour definir les evenements et leurs ordonances) 
 	//D'ailleur ces variables permetteront de sauvgarder la partie
@@ -631,8 +702,14 @@ public class Global {
 	public static int X;
 	public static int Y;
 
-
-	
+	public static int getRandomNumber(int min, int max) {
+	     if (min > max) {
+	         throw new IllegalArgumentException("min doit être inférieur ou égal à max");
+	     }
+	        
+	     Random random = new Random();
+	     return random.nextInt((max - min) + 1) + min;
+	 }
 
 	//Fonctions de sauvgarde
 	public static void LoadGame() {
@@ -878,7 +955,7 @@ public class Global {
 	        leveledUpForet5Element.appendChild(doc.createTextNode(Boolean.toString(Global.LeveledUpForet5)));
 	        rootElement.appendChild(leveledUpForet5Element);
 
-	     // Save Foret7Battle
+	        // Save Foret7Battle
 	        Element foret7BattleElement = doc.createElement("Foret7Battle");
 	        foret7BattleElement.appendChild(doc.createTextNode(Boolean.toString(Global.Foret7Battle)));
 	        rootElement.appendChild(foret7BattleElement);

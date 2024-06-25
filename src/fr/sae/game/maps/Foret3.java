@@ -31,7 +31,7 @@ public class Foret3 extends BasicGameState {
 		this.Warp1= new Warp(1330, 0, 450, 10, 1540, 1020);//H
 		this.Warp2= new Warp(220, 1070, 110, 10, 280, 50);//BAS
 		this.Warp3= new Warp(1000, 1070, 110, 10, 1060, 50);//BAS
-		this.Warp4= new Warp(0, 0, 10, 170, 1870, 60);//G
+		this.Warp4= new Warp(0, 0, 10, 170, 1870, 20);//G
 		this.Warp5= new Warp(0, 830, 10, 180, 1870, 900);//G
 		this.Warp6= new Warp(1910, 60, 10, 370, 50, 120);//D
 		this.Warp7= new Warp(1910, 750, 10, 240, 50, 810);//D

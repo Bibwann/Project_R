@@ -474,7 +474,7 @@ public class Global {
         //BRANCHE
         CollisionMapForet5.addCollidable(new Rectangle(120, 310, 80, 70));
         //collisions Guts
-        CollisionMapForet5.addCollidable(new Rectangle(961, 582, 40, 30));
+        CollisionMapForet5.addCollidable(new Rectangle(960, 582, 40, 30));
         
         //Collisions temporaires
         
@@ -535,99 +535,107 @@ public class Global {
 	
 	public static void CollisionsMapForet7() {
 		
-		//Acces par le haut a gauche
-	        CollisionMapForet7.addCollidable(new Circle(70, 180, 50, 50));
-	        CollisionMapForet7.addCollidable(new Circle(130, 240, 50, 50));
-	        CollisionMapForet7.addCollidable(new Circle(200, 310, 50, 50));
-	        CollisionMapForet7.addCollidable(new Circle(330, 310, 50, 50));
-	        CollisionMapForet7.addCollidable(new Circle(400, 240, 50, 50));
-	        CollisionMapForet7.addCollidable(new Circle(460, 310, 50, 50));
-	        CollisionMapForet7.addCollidable(new Circle(530, 380, 50, 50));
-	        CollisionMapForet7.addCollidable(new Circle(470, 440, 50, 50));
-	        CollisionMapForet7.addCollidable(new Circle(410, 510, 50, 50));
-	        CollisionMapForet7.addCollidable(new Circle(400, 640, 50, 50));
-	        CollisionMapForet7.addCollidable(new Circle(400, 640, 50, 50));
+		// Ajout des collidables avec transformations
+        CollisionMapForet7.addCollidable(new Circle(70, 180, 50, 50));
+        CollisionMapForet7.addCollidable(new Circle(130, 240, 50, 50));
+        CollisionMapForet7.addCollidable(new Circle(200, 310, 50, 50));
+        CollisionMapForet7.addCollidable(new Circle(330, 310, 50, 50));
+        CollisionMapForet7.addCollidable(new Circle(400, 240, 50, 50));
+        CollisionMapForet7.addCollidable(new Circle(460, 310, 50, 50));
+        CollisionMapForet7.addCollidable(new Circle(530, 380, 50, 50));
+        CollisionMapForet7.addCollidable(new Circle(470, 440, 50, 50));
+        CollisionMapForet7.addCollidable(new Circle(410, 510, 50, 50));
+        CollisionMapForet7.addCollidable(new Circle(400, 640, 50, 50));
+        CollisionMapForet7.addCollidable(new Circle(400, 640, 50, 50));
 
-	        CollisionMapForet7.addCollidable(new Circle(360, 570, 50, 50));
+        CollisionMapForet7.addCollidable(new Circle(360, 570, 50, 50));
 
-	        CollisionMapForet7.addCollidable(new Circle(340, 700, 50, 50));
-	        CollisionMapForet7.addCollidable(new Circle(230, 820, 50, 50));
-	        CollisionMapForet7.addCollidable(new Circle(270, 760, 50, 50));
+        CollisionMapForet7.addCollidable(new Circle(340, 700, 50, 50));
+        CollisionMapForet7.addCollidable(new Circle(230, 820, 50, 50));
+        CollisionMapForet7.addCollidable(new Circle(270, 760, 50, 50));
 
-	        CollisionMapForet7.addCollidable(new Circle(270, 890, 50, 50));
+        CollisionMapForet7.addCollidable(new Circle(270, 890, 50, 50));
 
-	        CollisionMapForet7.addCollidable(new Circle(260, 360, 50, 50));
-	        CollisionMapForet7.addCollidable(new Circle(270, 1000, 50, 50));
-	        CollisionMapForet7.addCollidable(new Circle(320, 1060, 50, 50));
+        CollisionMapForet7.addCollidable(new Circle(260, 360, 50, 50));
+        CollisionMapForet7.addCollidable(new Circle(270, 1000, 50, 50));
+        CollisionMapForet7.addCollidable(new Circle(320, 1060, 50, 50));
 
-	        CollisionMapForet7.addCollidable(new Circle(600, 1060, 50, 50));
-	        CollisionMapForet7.addCollidable(new Circle(460, 1060, 50, 50));
+        CollisionMapForet7.addCollidable(new Circle(600, 1060, 50, 50));
+        CollisionMapForet7.addCollidable(new Circle(460, 1060, 50, 50));
 
-	        CollisionMapForet7.addCollidable(new Circle(720, 1060, 50, 50));
+        CollisionMapForet7.addCollidable(new Circle(720, 1060, 50, 50));
 
-	        CollisionMapForet7.addCollidable(new Circle(790, 1000, 50, 50));
-	        CollisionMapForet7.addCollidable(new Circle(860, 950, 50, 50));
-	        CollisionMapForet7.addCollidable(new Circle(860, 820, 50, 50));
-	        CollisionMapForet7.addCollidable(new Circle(860, 700, 50, 50));
-	        CollisionMapForet7.addCollidable(new Circle(790, 630, 50, 50));
-	        CollisionMapForet7.addCollidable(new Circle(720, 570, 50, 50));
-	        CollisionMapForet7.addCollidable(new Circle(790, 500, 50, 50));
-	        CollisionMapForet7.addCollidable(new Circle(790, 380, 50, 50));
-	        CollisionMapForet7.addCollidable(new Circle(790, 250, 50, 50));
-	        CollisionMapForet7.addCollidable(new Circle(860, 180, 50, 50));
-	        CollisionMapForet7.addCollidable(new Circle(990, 180, 50, 50));
-	        CollisionMapForet7.addCollidable(new Circle(990, 180, 50, 50));
-	        CollisionMapForet7.addCollidable(new Circle(920, 230, 50, 50));
+        CollisionMapForet7.addCollidable(new Circle(790, 1000, 50, 50));
+        CollisionMapForet7.addCollidable(new Circle(860, 950, 50, 50));
+        CollisionMapForet7.addCollidable(new Circle(860, 820, 50, 50));
+        CollisionMapForet7.addCollidable(new Circle(860, 700, 50, 50));
+        CollisionMapForet7.addCollidable(new Circle(790, 630, 50, 50));
+        CollisionMapForet7.addCollidable(new Circle(720, 570, 50, 50));
+        CollisionMapForet7.addCollidable(new Circle(790, 500, 50, 50));
+        CollisionMapForet7.addCollidable(new Circle(790, 380, 50, 50));
+        CollisionMapForet7.addCollidable(new Circle(790, 250, 50, 50));
+        CollisionMapForet7.addCollidable(new Circle(860, 180, 50, 50));
+        CollisionMapForet7.addCollidable(new Circle(990, 180, 50, 50));
+        CollisionMapForet7.addCollidable(new Circle(990, 180, 50, 50));
+        CollisionMapForet7.addCollidable(new Circle(920, 230, 50, 50));
 
-	        CollisionMapForet7.addCollidable(new Circle(1060, 120, 50, 50));
-	        CollisionMapForet7.addCollidable(new Circle(1120, 50, 50, 50));
-	        
-	        CollisionMapForet7.addCollidable(new Circle(1120, 50, 50, 50));
+        CollisionMapForet7.addCollidable(new Circle(1060, 120, 50, 50));
+        CollisionMapForet7.addCollidable(new Circle(1120, 50, 50, 50));
 
-	        //Acces par le haut a droite
+        // Acces par le haut a droite
+        CollisionMapForet7.addCollidable(
+                new Rectangle(1385, 50, 60, 800)
+                        .transform(Transform.createRotateTransform((float) Math.toRadians(45), 1415 , 75)));
+        CollisionMapForet7.addCollidable(
+                new Rectangle(1610, 200, 280, 470)
+                        .transform(Transform.createRotateTransform((float) Math.toRadians(45), 1910 , 420)));
+        CollisionMapForet7.addCollidable(
+                new Rectangle(1360, -140, 220, 200)
+                        .transform(Transform.createRotateTransform((float) Math.toRadians(45), 1400, 140)));
 
-	        CollisionMapForet7.addCollidable(new Rectangle(1385, 50, 60, 800).transform(
-	        		Transform.createRotateTransform((float) Math.toRadians(45), 1385 + 30, 50 + 25)));
-	        CollisionMapForet7.addCollidable(new Rectangle(1610, 200, 280, 470).transform(
-	        		Transform.createRotateTransform((float) Math.toRadians(45), 1610+300, 420)));
-	        CollisionMapForet7.addCollidable(new Rectangle(1360, -140, 220, 200).transform(
-	        		Transform.createRotateTransform((float) Math.toRadians(45), 1400, 140)));
-	        
-	        CollisionMapForet7.addCollidable(new Circle(1520, 310, 50, 50));
-	        CollisionMapForet7.addCollidable(new Circle(1390, 310, 50, 50));
-	        CollisionMapForet7.addCollidable(new Circle(1330, 380, 60, 50));
-	        
-	        CollisionMapForet7.addCollidable(new Circle(1060, 510, 60, 50));
-	        CollisionMapForet7.addCollidable(new Circle(1120, 570, 60, 50));
-	        CollisionMapForet7.addCollidable(new Circle(1200, 640, 60, 50));
-	        CollisionMapForet7.addCollidable(new Circle(1255, 570, 60, 50));
-	        CollisionMapForet7.addCollidable(new Circle(1320, 500, 60, 50));
-	        CollisionMapForet7.addCollidable(new Circle(1320, 630, 60, 50));
-	        
-	        //Acces pour en bas
-	        CollisionMapForet7.addCollidable(new Circle(1380, 690, 60, 50));
-	        CollisionMapForet7.addCollidable(new Circle(1450, 630, 60, 50));
-	        CollisionMapForet7.addCollidable(new Circle(1520, 570, 60, 50));
-	        CollisionMapForet7.addCollidable(new Circle(1520, 440, 60, 50));
-	        
-	        CollisionMapForet7.addCollidable(new Rectangle(1570, -800, 201, 450).transform(
-	        		Transform.createRotateTransform((float) Math.toRadians(45), 200, 140)));
+        CollisionMapForet7.addCollidable(new Circle(1520, 310, 50, 50));
+        CollisionMapForet7.addCollidable(new Circle(1390, 310, 50, 50));
+        CollisionMapForet7.addCollidable(new Circle(1330, 380, 60, 50));
 
-	        CollisionMapForet7.addCollidable(new Circle(1785, 820, 60, 50));
-	        CollisionMapForet7.addCollidable(new Circle(1850, 760, 60, 50));
+        CollisionMapForet7.addCollidable(new Circle(1060, 510, 60, 50));
+        CollisionMapForet7.addCollidable(new Circle(1120, 570, 60, 50));
+        CollisionMapForet7.addCollidable(new Circle(1200, 640, 60, 50));
+        CollisionMapForet7.addCollidable(new Circle(1255, 570, 60, 50));
+        CollisionMapForet7.addCollidable(new Circle(1320, 500, 60, 50));
+        CollisionMapForet7.addCollidable(new Circle(1320, 630, 60, 50));
 
-	        CollisionMapForet7.addCollidable(new Circle(1055, 620, 60, 50));
-	        CollisionMapForet7.addCollidable(new Circle(1055, 760, 60, 50));
-	        CollisionMapForet7.addCollidable(new Circle(1120, 820, 60, 50));
-	        CollisionMapForet7.addCollidable(new Circle(1255, 820, 60, 50));
-	        CollisionMapForet7.addCollidable(new Circle(1320, 880, 60, 50));
-	        CollisionMapForet7.addCollidable(new Circle(1255, 820, 60, 50));
-	        CollisionMapForet7.addCollidable(new Circle(1390, 940, 60, 50));
-	        CollisionMapForet7.addCollidable(new Circle(1520, 950, 60, 50));
-	        
-	        CollisionMapForet7.addCollidable(new Circle(1580, 1020, 60, 50));
-	        CollisionMapForet7.addCollidable(new Circle(1720, 1020, 60, 50));
-	        CollisionMapForet7.addCollidable(new Circle(1845, 1020, 60, 50));
+        // Acces pour en bas
+        CollisionMapForet7.addCollidable(new Circle(1380, 690, 60, 50));
+        CollisionMapForet7.addCollidable(new Circle(1450, 630, 60, 50));
+        CollisionMapForet7.addCollidable(new Circle(1520, 570, 60, 50));
+        CollisionMapForet7.addCollidable(new Circle(1520, 440, 60, 50));
+
+        CollisionMapForet7.addCollidable(
+                new Rectangle(1570, -800, 201, 450)
+                        .transform(Transform.createRotateTransform((float) Math.toRadians(45), 200, 140)));
+
+        CollisionMapForet7.addCollidable(new Circle(1785, 820, 60, 50));
+        CollisionMapForet7.addCollidable(new Circle(1850, 760, 60, 50));
+
+        CollisionMapForet7.addCollidable(new Circle(1055, 620, 60, 50));
+        CollisionMapForet7.addCollidable(new Circle(1055, 760, 60, 50));
+        CollisionMapForet7.addCollidable(new Circle(1120, 820, 60, 50));
+        CollisionMapForet7.addCollidable(new Circle(1255, 820, 60, 50));
+        CollisionMapForet7.addCollidable(new Circle(1320, 880, 60, 50));
+        CollisionMapForet7.addCollidable(new Circle(1255, 820, 60, 50));
+        CollisionMapForet7.addCollidable(new Circle(1390, 940, 60, 50));
+        CollisionMapForet7.addCollidable(new Circle(1520, 950, 60, 50));
+
+        CollisionMapForet7.addCollidable(new Circle(1580, 1020, 60, 50));
+        CollisionMapForet7.addCollidable(new Circle(1720, 1020, 60, 50));
+        CollisionMapForet7.addCollidable(new Circle(1845, 1020, 60, 50));
+
+        
+        //Branche
+        CollisionMapForet7.addCollidable(new Rectangle(470, 520, 50, 50));
+        
+        //Coffre
+        CollisionMapForet7.addCollidable(new Rectangle(405, 910, 38, 35));
 
 	}
 	
@@ -636,7 +644,32 @@ public class Global {
 	}
 	
 	public static void CollisionsMapForet9() {
-		
+		//Le haut
+        CollisionMapForet9.addCollidable(new Rectangle(0, 0, 1920, 180));
+		//Le bas
+        CollisionMapForet9.addCollidable(new Rectangle(0, 1080-180, 1920, 180));
+		//La droite
+        CollisionMapForet9.addCollidable(new Rectangle(1920-180, 0, 180, 1080));
+        
+        //Tonneaux
+        CollisionMapForet9.addCollidable(new Rectangle(670, 260, 450, 180));
+        
+        CollisionMapForet9.addCollidable(new Rectangle(670, 260+180, 50, 60));
+        CollisionMapForet9.addCollidable(new Rectangle(670+450-50, 260+180, 50, 60));
+        
+        //Tipie
+        CollisionMapForet9.addCollidable(new Rectangle(800, 260+180, 270, 120));
+
+        //Bord gauche
+        CollisionMapForet9.addCollidable(new Circle(-240, -60, 600, 50));
+        CollisionMapForet9.addCollidable(new Circle(-260, 1080+100, 600, 50));
+
+
+
+        
+        
+
+
 	}
 	
 	public static void CollisionsMapForet10() {

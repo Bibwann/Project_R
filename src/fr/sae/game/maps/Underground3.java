@@ -185,8 +185,7 @@ public class Underground3 extends BasicGameState {
 	
 		                        case 1:
 		                        	this.tmpDialogbox2.setActiveTempDialogbox(false);
-	
-		                        	
+
 		                    }
 		                    
 		                });
@@ -202,10 +201,6 @@ public class Underground3 extends BasicGameState {
   	            case 1:
   	            	this.tmpDialogbox2.setActiveTempDialogbox(false);
   	            	break;
-  	                
-  	                
-  	            
-  	            	
 
               }       
        });

@@ -56,8 +56,7 @@ public abstract class Player extends Entity {
         this.level += 1;
         this.hpMax += 10;
         this.dmg *= 1.1;
-        this.experienceBarrActu = 0;
-        this.experienceBarrLvlUp *= 1.1;
+        this.healAmount += 5;
     }
 
     // Getter for current experience points

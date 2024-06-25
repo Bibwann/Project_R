@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <Game>
-    <MapID>22</MapID>
-    <classep1>Berserker</classep1>
-    <classep2>Mage</classep2>
+    <MapID>16</MapID>
+    <classep1>Swordman</classep1>
+    <classep2>Berserker</classep2>
     <classep1LVL>1</classep1LVL>
     <classep2LVL>1</classep2LVL>
-    <Player1Name>totovaauxtoilet</Player1Name>
-    <x>945</x>
-    <y>974</y>
+    <Player1Name>fede</Player1Name>
+    <x>1548</x>
+    <y>448</y>
     <coeurVaillant>true</coeurVaillant>
     <LeveledUpForet5>false</LeveledUpForet5>
     <Foret7Battle>true</Foret7Battle>

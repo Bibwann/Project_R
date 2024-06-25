@@ -27,7 +27,6 @@ public class BattleScene extends BasicGameState {
     // Combat Variables 
     private int hit;
     private int confusedDebuf = 0;
-    private int earnedXP = 0;
     private String enemyMessage;
     private List<String> enemyNames = new ArrayList<String>();
     private List<String> aliveEnemyNames = new ArrayList<String>();
@@ -35,6 +34,9 @@ public class BattleScene extends BasicGameState {
     protected ArrayList<Entity> entities = new ArrayList<>();
     private DialogueBox tmpDialogbox1= new DialogueBox(new String[] {});
 
+    // XP Variables
+    private int earnedXP = 0;
+    private boolean XPupdated = false;
 
     // Getting enemies
     public BattleScene(int stateID) {
@@ -153,12 +155,14 @@ public class BattleScene extends BasicGameState {
 
     		Global.canMoovPlayer=true;
 
+    		if(this.XPupdated == false) {    			
+    			Global.P1.takeXp(this.earnedXP);
+    			Global.P2.takeXp(this.earnedXP);
+    			this.XPupdated = true;
+    		}
+    		
     		Global.P1.resetStats();
     		Global.P2.resetStats();
-    		
-    		Global.P1.takeXp(this.earnedXP);
-    		Global.P2.takeXp(this.earnedXP);
-    		
     		    		  
     	    this.currentTurnIndex = 0;
     	    this.playedTurn = true;
@@ -168,22 +172,25 @@ public class BattleScene extends BasicGameState {
     	    this.aliveEnemyNames = new ArrayList<String>();
     	    this.deadEnemyNames = new ArrayList<String>();
     	    
-    	    this.tmpDialogbox1.setMessages(new String[] { "Vous avez gagné le combat ! Vous pouvez maintenant continuer votre aventure"});
+    	    this.tmpDialogbox1.setMessages(new String[] { "Vous avez gagné le combat ! Vous pouvez maintenant continuer votre aventure\n\n" +
+    	    		"Vous avez gagné " + this.earnedXP + " points d\'XP !      " + "Vos personnages sont de niveau " + Global.P1.getLevel() + "\n\n" + 
+					Global.P1.getClassName() + "                                       " + Global.P2.getClassName() + "\n" +
+					"HP : " + Global.P1.getHpMax() + " hp                                      " + Global.P2.getHpMax() + " hp\n"+
+					"Dégats : " + Global.P1.getHpMax() + " dégats                              " + Global.P2.getHpMax() + " dégats\n"+
+					"Efficacité des potions : " + Global.P1.getHealAmount() + " hp                   " + Global.P2.getHealAmount() + " hp\n"});
 			
-			this.tmpDialogbox1.setChoices(Arrays.asList("Continuer"), choice2 -> {
-				switch (choice2) {
+			this.tmpDialogbox1.setChoices(Arrays.asList("Continuer"), choice -> {
+				switch (choice) {
 				
 				case 0:
 					this.tmpDialogbox1.setActiveTempDialogbox(false);
 					this.entities = new ArrayList<>();
 		    	    this.tmpDialogbox1= new DialogueBox(new String[] {});
+		    	    this.XPupdated = false;
 					sbg.enterState(Global.actualId);
 					break;
 					}
-				//case 0:
-				//	this.tmpDialogbox1.setMessages(new String[] { "Vous avez gagné "});
-					//break;
-				//	}
+
 				
 				});
     	}
@@ -408,6 +415,7 @@ public class BattleScene extends BasicGameState {
 	            				
 	            				});        					
 	    					break;
+	        			
 	        			} else {
 	        				Global.P1.removePotion();
 	        				Global.P1.healEntity(Global.P1.getHealAmount());
@@ -428,16 +436,16 @@ public class BattleScene extends BasicGameState {
 	        			}
         			} else {
         				this.tmpDialogbox1.setMessages(new String[] {"Décidez qui vous voulez soigner !"});
-        				this.tmpDialogbox1.setChoices(Arrays.asList(Global.P1.getClassName(), Global.P2.getClassName()), choice3 -> {
-        					switch (choice3) {
+        				this.tmpDialogbox1.setChoices(Arrays.asList(Global.P1.getClassName(), Global.P2.getClassName()), choice2 -> {
+        					switch (choice2) {
         					
         					case 0:
         						if(!Global.P1.hasPotions()) {
         	        				this.tmpDialogbox1.setMessages(new String[] { "Vous voyez votre stock de potion vide alors que vous essayez d'aider votre camarade mais son état ne s'améliore pas ! \n"
         	        						+ "Votre tour est passé."});
         	            			
-        	            			this.tmpDialogbox1.setChoices(Arrays.asList("Continuer"), choice4 -> {
-        	            				switch (choice4) {
+        	            			this.tmpDialogbox1.setChoices(Arrays.asList("Continuer"), choice3 -> {
+        	            				switch (choice3) {
         	            				
         	            				case 0:
         	            					this.tmpDialogbox1.setActiveTempDialogbox(false);
@@ -502,6 +510,7 @@ public class BattleScene extends BasicGameState {
         					
         				});
         			}
+        			break;
         		case 2: // Skip turn
         			
         			if(this.confusedDebuf < 15) {
@@ -776,6 +785,7 @@ public class BattleScene extends BasicGameState {
         					
         				});
         			}
+        			break;
         		case 2: // Skip turn
         			
         			if(this.confusedDebuf < 15) {

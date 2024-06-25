@@ -9,7 +9,6 @@ import fr.sae.game.DialogueBox;
 import fr.sae.game.Global;
 
 public class IntroGame extends BasicGameState {
-    private Image backgroundImage;
     private float opacity = 0f;
     
     DialogueBox dialgoboxLore; 

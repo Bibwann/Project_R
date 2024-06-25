@@ -1,15 +1,10 @@
 package fr.sae.game;
 
-import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Image;
+
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Circle;
-import org.newdawn.slick.geom.Point;
-import org.newdawn.slick.geom.Polygon;
 import org.newdawn.slick.geom.Rectangle;
-import org.newdawn.slick.state.BasicGameState;
 
 import fr.sae.game.caractere.Berserker;
 import fr.sae.game.caractere.Healer;
@@ -17,22 +12,17 @@ import fr.sae.game.caractere.Mage;
 import fr.sae.game.caractere.Mobs;
 import fr.sae.game.caractere.Player;
 import fr.sae.game.caractere.Swordsman;
-import fr.sae.game.maps.Foret1;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
@@ -296,6 +286,7 @@ public class Global {
     	CollisionMapForet11=new Collisions();
     	CollisionMapForet12=new Collisions();
     	CollisionMapForet13=new Collisions();
+    	
     	CollisionMapUnderground1=new Collisions();
     	CollisionMapUnderground2=new Collisions();
     	CollisionMapUnderground3=new Collisions();
@@ -315,6 +306,7 @@ public class Global {
     	CollisionsMapForet11();
     	CollisionsMapForet12();
     	CollisionsMapForet13();
+    	
     	CollisionMapUnderground1();
     	CollisionMapUnderground2();
     	CollisionMapUnderground3();
@@ -353,59 +345,15 @@ public class Global {
 
 	}
 	
-	
-	public static void CollisionsMapForet6() {
-		//HAUT GAUCHE
-    	CollisionMapForet6.addCollidable(new Rectangle(0, 0, 1920, 130)); 
-    	CollisionMapForet6.addCollidable(new Rectangle(0, 130, 330, 320)); 
-    	CollisionMapForet6.addCollidable(new Rectangle(0, 450, 200, height-450));
-    	//GAUCHE
-    	CollisionMapForet6.addCollidable(new Rectangle(200, 570, 70, height-570)); 
-    	CollisionMapForet6.addCollidable(new Rectangle(270, 630, 60, height-630));
-    	CollisionMapForet6.addCollidable(new Rectangle(330, 570, 70, height-570));
-    	//TONNEAU
-    	CollisionMapForet6.addCollidable(new Rectangle(400, 830, 60, height-830));
-    	//BAS GAUCHE
-    	CollisionMapForet6.addCollidable(new Rectangle(460, 750, 270, height-750));
-    	CollisionMapForet6.addCollidable(new Rectangle(730, 830, 60, height-830));
-    	CollisionMapForet6.addCollidable(new Rectangle(790, 960, 70, height-960));
-    	//DROITE
-    	CollisionMapForet6.addCollidable(new Rectangle(1270, 130, width-1270, 60));
-    	CollisionMapForet6.addCollidable(new Rectangle(1450, 190, width-1450, 60));
-    	CollisionMapForet6.addCollidable(new Rectangle(1590, 250, width-1590, 70));
-    	CollisionMapForet6.addCollidable(new Rectangle(1660, 320, 60, 60));
-    	CollisionMapForet6.addCollidable(new Rectangle(1720, 380, width-1720, height-370));
-    	CollisionMapForet6.addCollidable(new Rectangle(1660, 510, 60, height-510));
-    	CollisionMapForet6.addCollidable(new Rectangle(1590, 630, 60, height-630));
-    	CollisionMapForet6.addCollidable(new Rectangle(1530, 760, 60, 60));
-    	CollisionMapForet6.addCollidable(new Rectangle(1390, 820, 140, height-820));
-    	CollisionMapForet6.addCollidable(new Rectangle(1330, 950, 60, height-950));
-    	//POT
-    	CollisionMapForet6.addCollidable(new Rectangle(1595, 320, 60, 65));
-    	CollisionMapForet6.addCollidable(new Rectangle(1330, 190, 60, 67));
-    	//PUIT
-    	CollisionMapForet6.addCollidable(new Rectangle(1527, 380, 60, 68));
-    	//TOMBES
-    	CollisionMapForet6.addCollidable(new Rectangle(270, 450, 60, 60)); 
-    	CollisionMapForet6.addCollidable(new Rectangle(400, 130, 60, 130));
-    	CollisionMapForet6.addCollidable(new Rectangle(400, 310, 60, 260));
-    	CollisionMapForet6.addCollidable(new Rectangle(530, 130, 60, 440));
-    	CollisionMapForet6.addCollidable(new Rectangle(670, 130, 60, 250));
-    	CollisionMapForet6.addCollidable(new Rectangle(800, 130, 60, 440));
-    	CollisionMapForet6.addCollidable(new Rectangle(930, 130, 120, 70));
-    	CollisionMapForet6.addCollidable(new Rectangle(670, 440, 60, 130));
-    	CollisionMapForet6.addCollidable(new Rectangle(930, 450, 120, 60));
-    	CollisionMapForet6.addCollidable(new Rectangle(930, 380, 60, 70));
-    	CollisionMapForet6.addCollidable(new Rectangle(930, 250, 120, 130));
-    	//BARRIERES
-    	CollisionMapForet6.addCollidable(new Rectangle(400, 630, 650, 70));
-    	CollisionMapForet6.addCollidable(new Rectangle(1010, 570, 40, 60));
-    	//BRANCHES
-    	CollisionMapForet6.addCollidable(new Rectangle(995, 690, 60, 70));
-    	
+	public static void CollisionsMapForet2() {
+
 	}
 	
-	public static void CollisionsMapForet2() {
+	public static void CollisionsMapForet3() {
+
+	}
+	
+	public static void CollisionsMapForet4() {
 
 	}
 	
@@ -465,6 +413,57 @@ public class Global {
         
         CollisionMapForet5.addCollidable(new Rectangle(990, 580, 70, 70)); 
 
+	}
+	
+	public static void CollisionsMapForet6() {
+		//HAUT GAUCHE
+    	CollisionMapForet6.addCollidable(new Rectangle(0, 0, 1920, 130)); 
+    	CollisionMapForet6.addCollidable(new Rectangle(0, 130, 330, 320)); 
+    	CollisionMapForet6.addCollidable(new Rectangle(0, 450, 200, height-450));
+    	//GAUCHE
+    	CollisionMapForet6.addCollidable(new Rectangle(200, 570, 70, height-570)); 
+    	CollisionMapForet6.addCollidable(new Rectangle(270, 630, 60, height-630));
+    	CollisionMapForet6.addCollidable(new Rectangle(330, 570, 70, height-570));
+    	//TONNEAU
+    	CollisionMapForet6.addCollidable(new Rectangle(400, 830, 60, height-830));
+    	//BAS GAUCHE
+    	CollisionMapForet6.addCollidable(new Rectangle(460, 750, 270, height-750));
+    	CollisionMapForet6.addCollidable(new Rectangle(730, 830, 60, height-830));
+    	CollisionMapForet6.addCollidable(new Rectangle(790, 960, 70, height-960));
+    	//DROITE
+    	CollisionMapForet6.addCollidable(new Rectangle(1270, 130, width-1270, 60));
+    	CollisionMapForet6.addCollidable(new Rectangle(1450, 190, width-1450, 60));
+    	CollisionMapForet6.addCollidable(new Rectangle(1590, 250, width-1590, 70));
+    	CollisionMapForet6.addCollidable(new Rectangle(1660, 320, 60, 60));
+    	CollisionMapForet6.addCollidable(new Rectangle(1720, 380, width-1720, height-370));
+    	CollisionMapForet6.addCollidable(new Rectangle(1660, 510, 60, height-510));
+    	CollisionMapForet6.addCollidable(new Rectangle(1590, 630, 60, height-630));
+    	CollisionMapForet6.addCollidable(new Rectangle(1530, 760, 60, 60));
+    	CollisionMapForet6.addCollidable(new Rectangle(1390, 820, 140, height-820));
+    	CollisionMapForet6.addCollidable(new Rectangle(1330, 950, 60, height-950));
+    	//POT
+    	CollisionMapForet6.addCollidable(new Rectangle(1595, 320, 60, 65));
+    	CollisionMapForet6.addCollidable(new Rectangle(1330, 190, 60, 67));
+    	//PUIT
+    	CollisionMapForet6.addCollidable(new Rectangle(1527, 380, 60, 68));
+    	//TOMBES
+    	CollisionMapForet6.addCollidable(new Rectangle(270, 450, 60, 60)); 
+    	CollisionMapForet6.addCollidable(new Rectangle(400, 130, 60, 130));
+    	CollisionMapForet6.addCollidable(new Rectangle(400, 310, 60, 260));
+    	CollisionMapForet6.addCollidable(new Rectangle(530, 130, 60, 440));
+    	CollisionMapForet6.addCollidable(new Rectangle(670, 130, 60, 250));
+    	CollisionMapForet6.addCollidable(new Rectangle(800, 130, 60, 440));
+    	CollisionMapForet6.addCollidable(new Rectangle(930, 130, 120, 70));
+    	CollisionMapForet6.addCollidable(new Rectangle(670, 440, 60, 130));
+    	CollisionMapForet6.addCollidable(new Rectangle(930, 450, 120, 60));
+    	CollisionMapForet6.addCollidable(new Rectangle(930, 380, 60, 70));
+    	CollisionMapForet6.addCollidable(new Rectangle(930, 250, 120, 130));
+    	//BARRIERES
+    	CollisionMapForet6.addCollidable(new Rectangle(400, 630, 650, 70));
+    	CollisionMapForet6.addCollidable(new Rectangle(1010, 570, 40, 60));
+    	//BRANCHES
+    	CollisionMapForet6.addCollidable(new Rectangle(995, 690, 60, 70));
+    	
 	}
 	
 	public static void CollisionsMapForet7() {
@@ -532,12 +531,24 @@ public class Global {
 	}
 	
 	public static void CollisionsMapForet12() {
-		
+		//Chateau
+	    CollisionMapForet12.addCollidable(new Rectangle(70, 0,1780, 380)); 
+	    CollisionMapForet12.addCollidable(new Circle(130, 380,65, 30)); 
+	    CollisionMapForet12.addCollidable(new Circle(660, 380,65, 30)); 
+	    CollisionMapForet12.addCollidable(new Circle(1260, 380,65, 30)); 
+	    CollisionMapForet12.addCollidable(new Circle(1790, 380,65, 30)); 
+
+
+
 	}
 	
-public static void CollisionMapUnderground1() {
+	public static void CollisionsMapForet13() {
 		
 	}
+		
+	public static void CollisionMapUnderground1() {
+			
+		}
 	
 	public static void CollisionMapUnderground2() {
 		
@@ -560,9 +571,6 @@ public static void CollisionMapUnderground1() {
 		CollisionMapUnderground3.addCollidable(new Circle(556, 663, 30 , 40)); // rocher
 	}
 	
-	public static void CollisionsMapForet13() {
-		
-	}
 	
 	public static void switchModeControles() { //Fonction  propre permettant de savoir si on est en dialoge ou en deplacmeent libre
 		canMoovPlayer=!canMoovPlayer;

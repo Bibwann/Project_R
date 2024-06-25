@@ -14,7 +14,6 @@ import fr.sae.menus.MainMenu;
 import fr.sae.menus.OptionMenu;
 import fr.sae.menus.SetCharacterName;
 
-
 public abstract class Chateau1 extends BasicGameState {
 	
 	public Chateau1(int stateID) {

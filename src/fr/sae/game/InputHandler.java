@@ -1,9 +1,9 @@
 package fr.sae.game;
 
-import org.newdawn.slick.Input;
 
 public class InputHandler { // Class to determine if a key is pressed or not
-    private boolean keyPressed; // Flag to indicate if a key is currently pressed
+    @SuppressWarnings("unused")
+	private boolean keyPressed; // Flag to indicate if a key is currently pressed
     
     private long time; // Time when the key was last pressed or released
     private long delta; // Time difference between current time and last key event

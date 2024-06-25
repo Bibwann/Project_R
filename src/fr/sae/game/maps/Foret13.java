@@ -37,6 +37,7 @@ public class Foret13 extends BasicGameState {
         	e.getMessage();
         	System.out.print(e);
         }
+        
         this.Warp1.warp(Global.P1, sbg, 11);
         this.Warp2.warp(Global.P1, sbg, 16);
        
@@ -49,6 +50,7 @@ public class Foret13 extends BasicGameState {
 		    g.draw(Global.P1.getHitbox());
 		    
 		    Global.CollisionMapForet13.drawCollisions(g);
+		    
 		    this.Warp1.draw(g);
 		    this.Warp2.draw(g);
 	    	}
@@ -57,6 +59,7 @@ public class Foret13 extends BasicGameState {
 
 	@Override
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
+		
 		Global.updatePlayerMovement(gc.getInput(),Global.CollisionMapForet13,delta);
 		if (gc.getInput().isKeyPressed(Global.pause)) {
             sbg.enterState(101); // Passer à l'état 101 (menu de pause)

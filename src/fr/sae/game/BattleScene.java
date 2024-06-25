@@ -2,7 +2,6 @@ package fr.sae.game;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Iterator;
 import java.util.List;
 
 import org.newdawn.slick.GameContainer;
@@ -14,10 +13,8 @@ import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.Shape;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
-import fr.sae.game.Global;
 import fr.sae.game.caractere.Entity;
 import fr.sae.game.caractere.Mobs;
-import fr.sae.mobes.Chaton;
 
 public class BattleScene extends BasicGameState {
 

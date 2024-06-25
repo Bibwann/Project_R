@@ -24,11 +24,6 @@ public class BattleScene extends BasicGameState {
     private int currentTurnIndex = 0;
     private boolean playedTurn = true;
     
-    // Potions
-    private int P1Potions = 5;
-    private int P2Potions = 5;
-    private int EnemiesPotions = 0;
-    
     // Combat Variables 
     private int hit;
     private int confusedDebuf = 0;
@@ -156,9 +151,6 @@ public class BattleScene extends BasicGameState {
     		    		  
     	    this.currentTurnIndex = 0;
     	    this.playedTurn = true;
-    	    this.P1Potions = 5;
-    	    this.P2Potions = 5;
-    	    this.EnemiesPotions = 0;
     	    this.confusedDebuf = 0;
     	    this.deadEnemyNames= new ArrayList<String>();
     	    this.enemyNames = new ArrayList<String>();
@@ -185,9 +177,6 @@ public class BattleScene extends BasicGameState {
     		    		  
     	    this.currentTurnIndex = 0;
     	    this.playedTurn = true;
-    	    this.P1Potions = 5;
-    	    this.P2Potions = 5;
-    	    this.EnemiesPotions = 0;
     	    this.confusedDebuf = 0;
     	    this.deadEnemyNames= new ArrayList<String>();
     	    this.enemyNames = new ArrayList<String>();
@@ -233,7 +222,7 @@ public class BattleScene extends BasicGameState {
     		// Player 1 turn 
     		this.tmpDialogbox1.setMessages(new String[] {"C'est au tour de votre " + Global.P1.getClassName() + "\nHP: " + Global.P1.getHpActuel() + "/" + Global.P1.getHpMax()});
         	
-        	this.tmpDialogbox1.setChoices(Arrays.asList("Attaquer", "Se soigner (" + this.P1Potions + ")", "Passer"), choice -> {
+        	this.tmpDialogbox1.setChoices(Arrays.asList("Attaquer", "Se soigner (" + Global.P1.getPotions() + ")", "Passer"), choice -> {
         		switch (choice) {
         		case 0: // Attack the enemies
         			this.hit = Global.P1.getDmg();
@@ -404,44 +393,123 @@ public class BattleScene extends BasicGameState {
         			});
         			break;
         			
-        		case 1: // Heal the first player
-        			Global.P1.healEntity();
-        			
-        			if(this.P1Potions == 0) {
-        				this.tmpDialogbox1.setMessages(new String[] { "Vous sentez la dernière goute de potion s'évaporer sur votre langue mais votre état ne s'améliore pas ! \n"
-        						+ "Votre tour est passé, cheh."});
-            			
-            			this.tmpDialogbox1.setChoices(Arrays.asList("Continuer"), choice2 -> {
-            				switch (choice2) {
-            				
-            				case 0:
-            					this.tmpDialogbox1.setActiveTempDialogbox(false);
-            	    			this.playedTurn = true;
-            					break;
-            				}
-            				
-            				});        					
-    					break;
+        		case 1: // Heal system for the first player 
+        			if(Global.P1.getClassName() != "Healer") {
+	        			
+	        			if(!Global.P1.hasPotions()) {
+	        				this.tmpDialogbox1.setMessages(new String[] { "Vous sentez la dernière goute de potion s'évaporer sur votre langue mais votre état ne s'améliore pas ! \n"
+	        						+ "Votre tour est passé."});
+	            			
+	            			this.tmpDialogbox1.setChoices(Arrays.asList("Continuer"), choice2 -> {
+	            				switch (choice2) {
+	            				
+	            				case 0:
+	            					this.tmpDialogbox1.setActiveTempDialogbox(false);
+	            	    			this.playedTurn = true;
+	            					break;
+	            				}
+	            				
+	            				});        					
+	    					break;
+	        			} else {
+	        				Global.P1.removePotion();
+	        				Global.P1.healEntity(Global.P1.getHealAmount());
+	        				
+	        				this.tmpDialogbox1.setMessages(new String[] { "Vous êtes soigné et vous avez maintenant " + Global.P1.getHpActuel() + " HP !"});
+	            			
+	            			this.tmpDialogbox1.setChoices(Arrays.asList("Continuer"), choice2 -> {
+	            				switch (choice2) {
+	            				
+	            				case 0:
+	            					this.tmpDialogbox1.setActiveTempDialogbox(false);
+	            	    			this.playedTurn = true;
+	            					break;
+	            					}
+	            				
+	            				});        					
+	    					break;
+	        			}
         			} else {
-        				this.P1Potions --;   
-        				
-        				this.tmpDialogbox1.setMessages(new String[] { "Vous êtes soigné et avez maintenant " + Global.P1.getHpActuel() + " HP !"});
-            			
-            			this.tmpDialogbox1.setChoices(Arrays.asList("Continuer"), choice2 -> {
-            				switch (choice2) {
-            				
-            				case 0:
-            					this.tmpDialogbox1.setActiveTempDialogbox(false);
-            	    			this.playedTurn = true;
-            					break;
-            					}
-            				
-            				});        					
-    					break;
-        			}   
+        				this.tmpDialogbox1.setMessages(new String[] {"Décidez qui vous voulez soigner !"});
+        				this.tmpDialogbox1.setChoices(Arrays.asList(Global.P1.getClassName(), Global.P2.getClassName()), choice3 -> {
+        					switch (choice3) {
+        					
+        					case 0:
+        						if(!Global.P1.hasPotions()) {
+        	        				this.tmpDialogbox1.setMessages(new String[] { "Vous voyez votre stock de potion vide alors que vous essayez d'aider votre camarade mais son état ne s'améliore pas ! \n"
+        	        						+ "Votre tour est passé."});
+        	            			
+        	            			this.tmpDialogbox1.setChoices(Arrays.asList("Continuer"), choice4 -> {
+        	            				switch (choice4) {
+        	            				
+        	            				case 0:
+        	            					this.tmpDialogbox1.setActiveTempDialogbox(false);
+        	            	    			this.playedTurn = true;
+        	            					break;
+        	            				}
+        	            				
+        	            				});        					
+        	        			} else {
+        	        				Global.P1.removePotion();
+        	        				Global.P1.healEntity(Global.P1.getHealAmount());
+        	        				
+        	        				this.tmpDialogbox1.setMessages(new String[] { "Vous êtes soigné et vous avez maintenant " + Global.P1.getHpActuel() + " HP !"});
+        	            			
+        	            			this.tmpDialogbox1.setChoices(Arrays.asList("Continuer"), choice4 -> {
+        	            				switch (choice4) {
+        	            				
+        	            				case 0:
+        	            					this.tmpDialogbox1.setActiveTempDialogbox(false);
+        	            	    			this.playedTurn = true;
+        	            					break;
+        	            					}
+        	            				
+        	            				});        					
+        	        			}
+        						break;
+        						
+        					case 1:
+        						if(!Global.P1.hasPotions()) {
+        	        				this.tmpDialogbox1.setMessages(new String[] { "Vous sentez la dernière goute de potion s'évaporer sur votre langue mais votre état ne s'améliore pas ! \n"
+        	        						+ "Votre tour est passé."});
+        	            			
+        	            			this.tmpDialogbox1.setChoices(Arrays.asList("Continuer"), choice4 -> {
+        	            				switch (choice4) {
+        	            				
+        	            				case 0:
+        	            					this.tmpDialogbox1.setActiveTempDialogbox(false);
+        	            	    			this.playedTurn = true;
+        	            					break;
+        	            				}
+        	            				
+        	            				});        					
+        	        			} else {
+        	        				Global.P1.removePotion();
+        	        				Global.P2.healEntity(Global.P1.getHealAmount());
+        	        				
+        	        				this.tmpDialogbox1.setMessages(new String[] { "Vous avez soigné votre allié et il a maintenant " + Global.P2.getHpActuel() + " HP !"});
+        	            			
+        	            			this.tmpDialogbox1.setChoices(Arrays.asList("Continuer"), choice4 -> {
+        	            				switch (choice4) {
+        	            				
+        	            				case 0:
+        	            					this.tmpDialogbox1.setActiveTempDialogbox(false);
+        	            	    			this.playedTurn = true;
+        	            					break;
+        	            					}
+        	            				
+        	            				});        					
+        	        			}
+        						break;
+        					}
+        					
+        				});
+        			}
         		case 2: // Skip turn
         			
-        			this.confusedDebuf += 4;
+        			if(this.confusedDebuf < 15) {
+        				this.confusedDebuf += 5;
+        			}
         			
         			this.tmpDialogbox1.setMessages(new String[] { "Vous passez votre tour, \nMais pourquoi ? L'enemi ne comprend pas et semble destabilisé"});
         				
@@ -468,7 +536,7 @@ public class BattleScene extends BasicGameState {
     		// Player 2 turn
     		
     		this.tmpDialogbox1.setMessages(new String[] {"C'est au tour de votre " + Global.P2.getClassName() + "\nHP: " + Global.P2.getHpActuel() + "/" + Global.P2.getHpMax()});
-        	this.tmpDialogbox1.setChoices(Arrays.asList("Attaquer", "Se soigner (" + this.P2Potions + ")", "Passer"), choice -> {
+        	this.tmpDialogbox1.setChoices(Arrays.asList("Attaquer", "Se soigner (" + Global.P2.getPotions() + ")", "Passer"), choice -> {
         		switch (choice) {
         		case 0: // Attack the enemies
         			this.hit = Global.P2.getDmg();
@@ -635,44 +703,123 @@ public class BattleScene extends BasicGameState {
         			});
         			break;
         			
-        		case 1: // Heal the second player
-        			Global.P2.healEntity();
-        			
-        			if(this.P2Potions == 0) {
-        				this.tmpDialogbox1.setMessages(new String[] { "Vous sentez la dernière goute de potion s'évaporer sur votre langue mais votre état ne s'améliore pas ! \n"
-        						+ "Votre tour est passé, cheh."});
-            			
-            			this.tmpDialogbox1.setChoices(Arrays.asList("Continuer"), choice2 -> {
-            				switch (choice2) {
-            				
-            				case 0:
-            					this.tmpDialogbox1.setActiveTempDialogbox(false);
-            	    			this.playedTurn = true;
-            					break;
-            				}
-            				
-            				});        					
-    					break;
+        		case 1: // Heal system for the second player 
+        			if(Global.P2.getClassName() != "Healer") {
+	        			
+	        			if(!Global.P2.hasPotions()) {
+	        				this.tmpDialogbox1.setMessages(new String[] { "Vous sentez la dernière goute de potion s'évaporer sur votre langue mais votre état ne s'améliore pas ! \n"
+	        						+ "Votre tour est passé."});
+	            			
+	            			this.tmpDialogbox1.setChoices(Arrays.asList("Continuer"), choice2 -> {
+	            				switch (choice2) {
+	            				
+	            				case 0:
+	            					this.tmpDialogbox1.setActiveTempDialogbox(false);
+	            	    			this.playedTurn = true;
+	            					break;
+	            				}
+	            				
+	            				});        					
+	    					break;
+	        			} else {
+	        				Global.P2.removePotion();
+	        				Global.P2.healEntity(Global.P2.getHealAmount());
+	        				
+	        				this.tmpDialogbox1.setMessages(new String[] { "Vous êtes soigné et vous avez maintenant " + Global.P2.getHpActuel() + " HP !"});
+	            			
+	            			this.tmpDialogbox1.setChoices(Arrays.asList("Continuer"), choice2 -> {
+	            				switch (choice2) {
+	            				
+	            				case 0:
+	            					this.tmpDialogbox1.setActiveTempDialogbox(false);
+	            	    			this.playedTurn = true;
+	            					break;
+	            					}
+	            				
+	            				});        					
+	    					break;
+	        			}
         			} else {
-        				this.P2Potions --;   
-        				
-        				this.tmpDialogbox1.setMessages(new String[] { "Vous êtes soigné et avez maintenant " + Global.P2.getHpActuel() + " HP !"});
-            			
-            			this.tmpDialogbox1.setChoices(Arrays.asList("Continuer"), choice2 -> {
-            				switch (choice2) {
-            				
-            				case 0:
-            					this.tmpDialogbox1.setActiveTempDialogbox(false);
-            	    			this.playedTurn = true;
-            					break;
-            				}
-            				
-            				});        					
-    					break;
-        			}   
+        				this.tmpDialogbox1.setMessages(new String[] {"Décidez qui vous voulez soigner !"});
+        				this.tmpDialogbox1.setChoices(Arrays.asList(Global.P1.getClassName(), Global.P2.getClassName()), choice3 -> {
+        					switch (choice3) {
+        					
+        					case 0:
+        						if(!Global.P2.hasPotions()) {
+        	        				this.tmpDialogbox1.setMessages(new String[] { "Vous voyez votre stock de potion vide alors que vous essayez d'aider votre camarade mais son état ne s'améliore pas ! \n"
+        	        						+ "Votre tour est passé."});
+        	            			
+        	            			this.tmpDialogbox1.setChoices(Arrays.asList("Continuer"), choice4 -> {
+        	            				switch (choice4) {
+        	            				
+        	            				case 0:
+        	            					this.tmpDialogbox1.setActiveTempDialogbox(false);
+        	            	    			this.playedTurn = true;
+        	            					break;
+        	            				}
+        	            				
+        	            				});        					
+        	        			} else {
+        	        				Global.P2.removePotion();
+        	        				Global.P2.healEntity(Global.P1.getHealAmount());
+        	        				
+        	        				this.tmpDialogbox1.setMessages(new String[] { "Vous avez soigné votre allié et il a maintenant  " + Global.P1.getHpActuel() + " HP !"});
+        	            			
+        	            			this.tmpDialogbox1.setChoices(Arrays.asList("Continuer"), choice4 -> {
+        	            				switch (choice4) {
+        	            				
+        	            				case 0:
+        	            					this.tmpDialogbox1.setActiveTempDialogbox(false);
+        	            	    			this.playedTurn = true;
+        	            					break;
+        	            					}
+        	            				
+        	            				});        					
+        	        			}
+        						break;
+        						
+        					case 1:
+        						if(!Global.P2.hasPotions()) {
+        	        				this.tmpDialogbox1.setMessages(new String[] { "Vous sentez la dernière goute de potion s'évaporer sur votre langue mais votre état ne s'améliore pas ! \n"
+        	        						+ "Votre tour est passé."});
+        	            			
+        	            			this.tmpDialogbox1.setChoices(Arrays.asList("Continuer"), choice4 -> {
+        	            				switch (choice4) {
+        	            				
+        	            				case 0:
+        	            					this.tmpDialogbox1.setActiveTempDialogbox(false);
+        	            	    			this.playedTurn = true;
+        	            					break;
+        	            				}
+        	            				
+        	            				});        					
+        	        			} else {
+        	        				Global.P2.removePotion();
+        	        				Global.P2.healEntity(Global.P1.getHealAmount());
+        	        				
+        	        				this.tmpDialogbox1.setMessages(new String[] { "Vous êtes soigné et avez maintenant " + Global.P2.getHpActuel() + " HP !"});
+        	            			
+        	            			this.tmpDialogbox1.setChoices(Arrays.asList("Continuer"), choice4 -> {
+        	            				switch (choice4) {
+        	            				
+        	            				case 0:
+        	            					this.tmpDialogbox1.setActiveTempDialogbox(false);
+        	            	    			this.playedTurn = true;
+        	            					break;
+        	            					}
+        	            				
+        	            				});        					
+        	        			}
+        						break;
+        					}
+        					
+        				});
+        			}
         		case 2: // Skip turn
         			
-        			this.confusedDebuf += 7;
+        			if(this.confusedDebuf < 15) {
+        				this.confusedDebuf += 5;
+        			}
         			
         			this.tmpDialogbox1.setMessages(new String[] { "Vous passez votre tour, \nMais pourquoi ? L'enemi ne comprend pas et semble destabilisé"});
         				
@@ -714,9 +861,9 @@ public class BattleScene extends BasicGameState {
     	
     		// if the enemy has more than half of his hp then it will attack the weakest player
     		
-    		if(this.entities.get(this.currentTurnIndex).getHpActuel() < this.entities.get(this.currentTurnIndex).getHpMax() / 2 && this.EnemiesPotions > 0 ) {
-    			this.entities.get(this.currentTurnIndex).healEntity();
-    			this.EnemiesPotions --;
+    		if(this.entities.get(this.currentTurnIndex).getHpActuel() < this.entities.get(this.currentTurnIndex).getHpMax() / 2 && this.entities.get(this.currentTurnIndex).hasPotions()) {
+    			this.entities.get(this.currentTurnIndex).healEntity(this.entities.get(this.currentTurnIndex).getHealAmount());
+    			this.entities.get(this.currentTurnIndex).removePotion();
     			
     			this.enemyMessage += "Il décide de se soigner et possède maintenant " + this.entities.get(this.currentTurnIndex).getHpActuel() + " HP !";
     			

@@ -118,6 +118,9 @@ public class Foret7 extends BasicGameState {
 		Global.actualId=17;
 		//Global.updatePlayerMovement(gc.getInput(),Global.CollisionMapForet7,delta);
 		Global.updatePlayerMovement(gc.getInput(),Global.CollisionMapForet7,delta,sbg);
+		
+		//Global.updatePlayerMovement(gc.getInput(),Global.CollisionMapVide,delta,sbg);
+
 		Global.P1.AnimateWhileMoove();
 		Global.P1.canRandomBattle();
 

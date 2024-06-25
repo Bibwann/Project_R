@@ -5,6 +5,7 @@ import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Circle;
 import org.newdawn.slick.geom.Rectangle;
+import org.newdawn.slick.geom.Transform;
 import org.newdawn.slick.state.StateBasedGame;
 
 import fr.sae.game.caractere.Berserker;
@@ -216,6 +217,9 @@ public class Global {
 	public static Collisions CollisionMapUnderground3;
 	public static Collisions CollisionMapChateau1;
 	
+	public static Collisions CollisionMapVide;
+
+	
 	
 	public static Collisions CollisionMapBattlescene;
 	//Pour verifier si une touche est actuelleemnt pressé
@@ -315,6 +319,9 @@ public class Global {
     	CollisionMapUnderground1();
     	CollisionMapUnderground2();
     	CollisionMapUnderground3();
+    	
+    	CollisionsMapVide();
+
 
 	}
 
@@ -351,7 +358,58 @@ public class Global {
 	}
 	
 	public static void CollisionsMapForet2() {
+		//Haut
+		CollisionMapForet2.addCollidable(new Rectangle(0, 0, 860, 50));
+		CollisionMapForet2.addCollidable(new Rectangle(1060, 0, 1920-1060, 50));
+		
+		//Foret a gauche
+		CollisionMapForet2.addCollidable(new Rectangle(0, 450, 130, 1080-450));
+		CollisionMapForet2.addCollidable(new Rectangle(130, 570, 65, 1080-570));
+		CollisionMapForet2.addCollidable(new Rectangle(195, 700, 65, 1080-700));
+		CollisionMapForet2.addCollidable(new Rectangle(260, 760, 65, 175));
+		
+		//Arbres du bas
+		CollisionMapForet2.addCollidable(new Circle(240, 1040, 90));
 
+		CollisionMapForet2.addCollidable(new Circle(320, 1080, 60));
+		CollisionMapForet2.addCollidable(new Circle(600, 1080, 60));
+		CollisionMapForet2.addCollidable(new Circle(790, 1080, 60));
+		CollisionMapForet2.addCollidable(new Circle(1130, 1080, 60));
+		CollisionMapForet2.addCollidable(new Circle(1860, 1080, 60));
+
+		CollisionMapForet2.addCollidable(new Circle(460, 1020, 60));
+		CollisionMapForet2.addCollidable(new Circle(930, 1020, 60));
+		CollisionMapForet2.addCollidable(new Circle(1330, 1020, 60));
+
+		//Arbres solitaire au dessus a droite du groupe
+		CollisionMapForet2.addCollidable(new Circle(1260, 510, 60));
+
+		//Groupe d'arbres
+		CollisionMapForet2.addCollidable(new Circle(990, 760, 60));
+		CollisionMapForet2.addCollidable(new Circle(990, 630, 60));
+		CollisionMapForet2.addCollidable(new Circle(990, 510, 60));
+		
+		CollisionMapForet2.addCollidable(new Circle(860, 510, 60));
+
+		CollisionMapForet2.addCollidable(new Circle(730, 510, 60));
+		CollisionMapForet2.addCollidable(new Circle(730, 630, 60));
+		CollisionMapForet2.addCollidable(new Circle(730, 760, 60));
+
+		//Panneau
+		CollisionMapForet2.addCollidable(new Rectangle(1000, 140, 60, 40));
+
+		//Branche
+		CollisionMapForet2.addCollidable(new Rectangle(1395, 265, 60, 50));
+
+		//Droite
+		CollisionMapForet2.addCollidable(new Rectangle(1460, 50, 1920-1460, 60));
+		CollisionMapForet2.addCollidable(new Rectangle(1790, 110, 1920-1790, 60));
+		CollisionMapForet2.addCollidable(new Rectangle(1855, 170, 1920-1855, 1080-170));
+
+		//Caisses
+		CollisionMapForet2.addCollidable(new Rectangle(1790, 250, 1920-1790, 380));
+		CollisionMapForet2.addCollidable(new Rectangle(1525, 255, 130, 380));
+		
 	}
 	
 	public static void CollisionsMapForet3() {
@@ -476,6 +534,8 @@ public class Global {
 	}
 	
 	public static void CollisionsMapForet7() {
+		
+		//Acces par le haut a gauche
 	        CollisionMapForet7.addCollidable(new Circle(70, 180, 50, 50));
 	        CollisionMapForet7.addCollidable(new Circle(130, 240, 50, 50));
 	        CollisionMapForet7.addCollidable(new Circle(200, 310, 50, 50));
@@ -521,6 +581,15 @@ public class Global {
 
 	        CollisionMapForet7.addCollidable(new Circle(1060, 120, 50, 50));
 	        CollisionMapForet7.addCollidable(new Circle(1120, 50, 50, 50));
+	        
+	        CollisionMapForet7.addCollidable(new Circle(1120, 50, 50, 50));
+
+	        //Acces par le haut a droite
+
+	        CollisionMapForet7.addCollidable(new Rectangle(1385, 50, 60, 800).transform(Transform.createRotateTransform((float) Math.toRadians(45), 1385 + 30, 50 + 25)));
+	        CollisionMapForet7.addCollidable(new Rectangle(1610, 200, 180, 400).transform(Transform.createRotateTransform((float) Math.toRadians(45), 1610+300, 420)));
+
+
 	}
 	
 	public static void CollisionsMapForet8() {
@@ -595,6 +664,11 @@ public class Global {
 		CollisionMapUnderground3.addCollidable(new Rectangle(665, 895, 130 , 60)); // TONNEAU
 		CollisionMapUnderground3.addCollidable(new Circle(556, 663, 30 , 40)); // rocher
 	}
+	
+	public static void CollisionsMapVide() {
+		
+	}
+	
 	
 	
 	public static void switchModeControles() { //Fonction  propre permettant de savoir si on est en dialoge ou en deplacmeent libre

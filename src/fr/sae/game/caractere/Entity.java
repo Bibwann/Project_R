@@ -95,6 +95,10 @@ public abstract class Entity {
 
     // Getter and setter for damage
     public int getDmg() {
+    	if (this instanceof Berserker) {
+    	       Berserker berserker = (Berserker) this;
+    	       return  (Integer) berserker.passif(dmg); // Utilise le multiplicateur de dégâts spécifique à Berserker
+    	   }
         return dmg;
     }
 

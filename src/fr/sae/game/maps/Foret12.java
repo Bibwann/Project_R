@@ -23,7 +23,6 @@ public class Foret12 extends BasicGameState {
 		
 	}
 
-	
 	@Override
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
 		Global.actualId = 22;
@@ -38,8 +37,7 @@ public class Foret12 extends BasicGameState {
         	System.out.print(e);
         }
         this.Warp1.warp(Global.P1, sbg, 12);
-        
-       
+
 
 //--------------------------------------------------------------------------------------------------------------------------
 	//Temp	    
@@ -50,8 +48,7 @@ public class Foret12 extends BasicGameState {
 		    
 		    Global.CollisionMapForet12.drawCollisions(g);
 		    this.Warp1.draw(g);
-		    
-		    
+		       
 	    	}
 //--------------------------------------------------------------------------------------------------------------------------
 	}
@@ -63,7 +60,7 @@ public class Foret12 extends BasicGameState {
             sbg.enterState(101); // Passer à l'état 101 (menu de pause)
         }
 		Global.P1.AnimateWhileMoove();
-		
+
 	}
 
 	@Override

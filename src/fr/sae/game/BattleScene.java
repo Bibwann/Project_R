@@ -27,6 +27,7 @@ public class BattleScene extends BasicGameState {
     // Combat Variables 
     private int hit;
     private int confusedDebuf = 0;
+    private int earnedXP = 0;
     private String enemyMessage;
     private List<String> enemyNames = new ArrayList<String>();
     private List<String> aliveEnemyNames = new ArrayList<String>();
@@ -142,15 +143,22 @@ public class BattleScene extends BasicGameState {
     	    }
     	}
     	 
-    	if (this.isWin()) {     					
+    	if (this.isWin()) {
+    		for(int i=0; i < this.enemy.length; i++) {
+    			if (this.enemy[i] != null) {    				
+    				this.earnedXP = (int) (500 * (1.0 + this.enemy[i].getLevel()/10f));
+    			}
+    		}
     		Global.mobs= new Mobs[3];  
 
     		Global.canMoovPlayer=true;
-            Global.P1.levelUp();
-            Global.P2.levelUp();
 
     		Global.P1.resetStats();
     		Global.P2.resetStats();
+    		
+    		Global.P1.takeXp(this.earnedXP);
+    		Global.P2.takeXp(this.earnedXP);
+    		
     		    		  
     	    this.currentTurnIndex = 0;
     	    this.playedTurn = true;
@@ -172,6 +180,10 @@ public class BattleScene extends BasicGameState {
 					sbg.enterState(Global.actualId);
 					break;
 					}
+				//case 0:
+				//	this.tmpDialogbox1.setMessages(new String[] { "Vous avez gagné "});
+					//break;
+				//	}
 				
 				});
     	}
@@ -195,7 +207,7 @@ public class BattleScene extends BasicGameState {
     	    this.aliveEnemyNames = new ArrayList<String>();
     	    this.deadEnemyNames = new ArrayList<String>();
     	    
-    	    this.tmpDialogbox1.setMessages(new String[] { "Vous avez gagné le combat ! Vous pouvez maintenant continuer votre aventure"});
+    	    this.tmpDialogbox1.setMessages(new String[] { "Vous avez perdu le combat ! Tous vos personnages sont morts !"});
 			
 			this.tmpDialogbox1.setChoices(Arrays.asList("Continuer"), choice2 -> {
 				switch (choice2) {

@@ -185,5 +185,18 @@ public abstract class Player extends Entity {
     public String getClassName() {
         return this.className;
     }
+    
+    public int takeXp(int xp) {
+
+        int nbLevelWin=(this.experienceBarrActu+xp)/this.experienceBarrLvlUp; //Division euclidienne
+        this.experienceBarrActu=(this.experienceBarrActu+xp)%this.experienceBarrLvlUp; //Modulo
+
+        for(int i=0;i<nbLevelWin;i++) {
+            this.levelUp();
+        }
+
+        return nbLevelWin;
+    } 
+
 
 }

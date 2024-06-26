@@ -18,7 +18,7 @@ public abstract class Player extends Entity {
     protected Rectangle Battlehitbox; // Hitbox specific to battle scenes
 
     protected int experienceBarrActu = 0;  // Current experience points
-    protected int experienceBarrLvlUp = 100;  // Experience points needed for level up
+    protected int experienceBarrLvlUp = 1000;  // Experience points needed for level up
 
     protected int Orientation;    // Orientation of the player
     private Animation animation;  // Animation object for player's movements
@@ -55,11 +55,11 @@ public abstract class Player extends Entity {
     
     // Method to level up the player
     public void levelUp() {
-        this.level += 1;
-        this.hpMax *= 1.2;
+        this.level += 1;        this.hpMax *= 1.2;
         this.dmg *= 1.2;
         this.experienceBarrActu = 0;
         this.experienceBarrLvlUp *= 1.1;
+        this.healAmount += 5;
     }
 
     // Getter for current experience points
@@ -195,7 +195,6 @@ public abstract class Player extends Entity {
     public void cannotRandomBattle() {
     	this.RandomBattle=false;
     }
-
 	public  boolean getRandomBattle() {
 		return this.RandomBattle;
 	}

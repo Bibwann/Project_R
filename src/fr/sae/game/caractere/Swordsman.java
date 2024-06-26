@@ -17,6 +17,10 @@ public class Swordsman extends Player {
         this.manaActual = 40;  // Current mana points
         
         this.className = "Swords-Man";  // Class name
+        
+        this.maxPotions = 5;
+        this.potions = 5;
+        this.healAmount = 30;
     }
 
     // Spells and abilities specific to the Swordsman can be defined here

@@ -39,7 +39,7 @@ import org.w3c.dom.NodeList;
 public class Global {
 	
 	//Rien a foutre
-	public static boolean AfficherToutesLesCollisions=true;
+	public static boolean AfficherToutesLesCollisions=false;
 	 
 	//Objects de quetes
 	 
@@ -758,7 +758,7 @@ public class Global {
 		        boolean isright = input.isKeyDown(right);
 		        boolean isup = input.isKeyDown(up);
 		        boolean isdown = input.isKeyDown(down);
-
+		        int chance = 100;
 		        if (isleft) {
 		        	InputHandler.keyPressed();
 		            if (!c.willCollideWithMap(Global.P1.getHitbox(),-3,0)) {
@@ -766,7 +766,7 @@ public class Global {
 		                P1.moveLeft(1,delta);
 		                
 		                if(P1.getRandomBattle()) {
-		                	if (getRandomNumber(1, 6094)== 1) {
+		                	if (getRandomNumber(1, chance)== 1) {
 		                		launchRandomBattle(sbg);
 		                	}
 		                }
@@ -780,7 +780,7 @@ public class Global {
 		                P1.moveRight(1,delta);
 		                
 		                if(P1.getRandomBattle()) {
-		                	if (getRandomNumber(1, 6094)== 1) {
+		                	if (getRandomNumber(1, chance)== 1) {
 		                		launchRandomBattle(sbg);
 		                	}
 		                }
@@ -793,7 +793,7 @@ public class Global {
 		                P1.moveUp(1,delta);
 		                
 		                if(P1.getRandomBattle()) {
-		                	if (getRandomNumber(1, 6094)== 1) {
+		                	if (getRandomNumber(1, chance)== 1) {
 		                		launchRandomBattle(sbg);
 		                	}
 		                }
@@ -806,7 +806,7 @@ public class Global {
 		                P1.moveDown(1,delta);
 		                
 		                if(P1.getRandomBattle()) {
-		                	if (getRandomNumber(1, 6094)== 1) {
+		                	if (getRandomNumber(1, chance)== 1) {
 		                		launchRandomBattle(sbg);
 		                	}
 		                }

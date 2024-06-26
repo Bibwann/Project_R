@@ -17,6 +17,10 @@ public class Chaton extends Mobs {
 
         this.hpActual = 40; // Current hit points initialized to maximum
         this.manaActual = 0; // Current mana points initialized (assuming not used)
+        
+        this.maxPotions = 2;
+        this.potions = 2;
+        this.healAmount = 7;
     }
 
 }

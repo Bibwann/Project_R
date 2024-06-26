@@ -66,7 +66,6 @@ public class Foret11 extends BasicGameState {
 		Global.P1.AnimateWhileMoove();
 		Global.P1.canRandomBattle();
 
-		
 	}
 
 	@Override

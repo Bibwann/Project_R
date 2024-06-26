@@ -830,7 +830,64 @@ public class Global {
 	}
 	
 	public static void CollisionsMapForet11() {
-		
+		//Arbres random gauche
+        CollisionMapForet11.addCollidable(new Circle(330, 450, 60, 50));
+        CollisionMapForet11.addCollidable(new Circle(460, 580, 60, 50));
+        CollisionMapForet11.addCollidable(new Circle(660, 450, 60, 50));
+        CollisionMapForet11.addCollidable(new Circle(530, 320, 60, 50));
+        CollisionMapForet11.addCollidable(new Circle(530, 130, 60, 50));
+        CollisionMapForet11.addCollidable(new Circle(330, 190, 60, 50));
+        CollisionMapForet11.addCollidable(new Circle(200, 890, 60, 50));
+
+
+		//Arbres random gauche
+        CollisionMapForet11.addCollidable(new Circle(1060, 760, 60, 50));
+        CollisionMapForet11.addCollidable(new Circle(1320, 630, 60, 50));
+        CollisionMapForet11.addCollidable(new Circle(1455, 570, 60, 50));
+        CollisionMapForet11.addCollidable(new Circle(1655, 500, 60, 50));
+        CollisionMapForet11.addCollidable(new Circle(1460, 380, 60, 50));
+        CollisionMapForet11.addCollidable(new Circle(1190, 320, 60, 50));
+        CollisionMapForet11.addCollidable(new Circle(1320, 190, 60, 50));
+        CollisionMapForet11.addCollidable(new Circle(1520, 190, 60, 50));
+
+        //Branche
+	    CollisionMapForet11.addCollidable(new Rectangle(1000,520,60, 40)); 
+
+	    //Bord gauche haut
+	    CollisionMapForet11.addCollidable(new Rectangle(0,0,190, 400)); 
+        CollisionMapForet11.addCollidable(new Circle(130, 440, 60, 50));
+        CollisionMapForet11.addCollidable(new Circle(60, 510, 60, 50));
+        
+	    //Bord gauche bas
+        CollisionMapForet11.addCollidable(new Circle(0, 770, 60, 50));
+        CollisionMapForet11.addCollidable(new Circle(0, 900, 60, 50));
+        CollisionMapForet11.addCollidable(new Circle(60, 950, 60, 50));
+        CollisionMapForet11.addCollidable(new Circle(60, 1080, 60, 50));
+        
+	    //Bord bas --> droite
+
+        CollisionMapForet11.addCollidable(new Circle(260, 1080, 60, 50));
+        CollisionMapForet11.addCollidable(new Circle(390, 1080, 60, 50));
+        CollisionMapForet11.addCollidable(new Circle(520, 1080, 60, 50));
+        CollisionMapForet11.addCollidable(new Circle(600, 1020, 60, 50));
+	    CollisionMapForet11.addCollidable(new Rectangle(600,960,1000, 20)); 
+	    
+        CollisionMapForet11.addCollidable(new Circle(1380, 890, 60, 50));
+        CollisionMapForet11.addCollidable(new Circle(1520, 890, 60, 50));
+        CollisionMapForet11.addCollidable(new Circle(1590, 820, 60, 50));
+        CollisionMapForet11.addCollidable(new Circle(1720, 820, 60, 50));
+        CollisionMapForet11.addCollidable(new Circle(1720, 700, 60, 50));
+        CollisionMapForet11.addCollidable(new Circle(1790, 630, 60, 50));
+        CollisionMapForet11.addCollidable(new Circle(1850, 570, 60, 50));
+        CollisionMapForet11.addCollidable(new Circle(1850, 440, 60, 50));
+        CollisionMapForet11.addCollidable(new Circle(1780, 370, 60, 50));
+        CollisionMapForet11.addCollidable(new Circle(1720, 320, 60, 50));
+        CollisionMapForet11.addCollidable(new Circle(1720, 190, 60, 50));
+        CollisionMapForet11.addCollidable(new Circle(1780, 130, 60, 50));
+        CollisionMapForet11.addCollidable(new Circle(1780, 0, 60, 50));
+
+
+
 	}
 	
 	public static void CollisionsMapForet12() {
@@ -858,6 +915,9 @@ public class Global {
 
 	    //Branche
 	    CollisionMapForet12.addCollidable(new Rectangle(1920-80,0,80, 60)); 
+	    
+	    //Statue
+	    CollisionMapForet12.addCollidable(new Rectangle(805,380,45, 65)); 
 
 	}
 	
@@ -906,7 +966,7 @@ public class Global {
 		        boolean isright = input.isKeyDown(right);
 		        boolean isup = input.isKeyDown(up);
 		        boolean isdown = input.isKeyDown(down);
-		        int chance = 100;
+		        int chance = 400;
 		        if (isleft) {
 		        	InputHandler.keyPressed();
 		            if (!c.willCollideWithMap(Global.P1.getHitbox(),-3,0)) {

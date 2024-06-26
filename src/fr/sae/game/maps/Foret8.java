@@ -64,7 +64,7 @@ public class Foret8 extends BasicGameState {
 		Global.P1.AnimateWhileMoove();
 		Global.P1.canRandomBattle();
 
-		
+
 	}
 
 	@Override

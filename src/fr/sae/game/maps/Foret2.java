@@ -32,12 +32,12 @@ public class Foret2 extends BasicGameState{
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
 
 		this.Warp1= new Warp(0, 60, 10, 380, 1860, 160);//G
-		this.Warp2= new Warp(1400, 1070, 380, 10, 1540, 50);//BAS
-		this.Warp3= new Warp(860, 640, 60, 60, 100, 100);//ESCALIER
-		this.Warp4= new Warp(1720, 320, 60, 60, 100, 100);//GROTTE
-		this.Warp5= new Warp(980, 1070, 80, 10, 930, 50);//BAS
-		this.Warp6= new Warp(650, 1070, 75, 10, 670, 50);//BAS
-		this.Warp7= new Warp(870, 0, 190, 10, 945, 1020);//haut
+        this.Warp2= new Warp(1400, 1070, 380, 10, 1540, 40);//BAS
+        this.Warp3= new Warp(860, 640, 60, 60, 210, 210);//GROTTE
+        this.Warp4= new Warp(1720, 320, 60, 60, 1100, 950);//ESCALIER
+        this.Warp5= new Warp(980, 1070, 80, 10, 900, 40);//BAS
+        this.Warp6= new Warp(650, 1070, 75, 10, 670, 40);//BAS
+        this.Warp7= new Warp(870, 0, 190, 10, 945, 1020);//haut
 	}
 
 	@Override
@@ -56,8 +56,8 @@ public class Foret2 extends BasicGameState{
         }
         this.Warp1.warp(Global.P1, sbg, 15);
         this.Warp2.warp(Global.P1, sbg, 13);
-        this.Warp3.warp(Global.P1, sbg, 12);
-        this.Warp4.warp(Global.P1, sbg, 12);
+        this.Warp3.warp(Global.P1, sbg, 25);
+        this.Warp4.warp(Global.P1, sbg, 24);
         this.Warp5.warp(Global.P1, sbg, 13);
         this.Warp6.warp(Global.P1, sbg, 13);
         this.Warp7.warp(Global.P1, sbg, 22);

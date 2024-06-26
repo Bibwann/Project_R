@@ -376,6 +376,8 @@ public class Global {
 		CollisionMapForet2.addCollidable(new Circle(790, 1080, 60));
 		CollisionMapForet2.addCollidable(new Circle(1130, 1080, 60));
 		CollisionMapForet2.addCollidable(new Circle(1860, 1080, 60));
+		CollisionMapForet2.addCollidable(new Circle(1860, 890, 60));
+
 
 		CollisionMapForet2.addCollidable(new Circle(460, 1020, 60));
 		CollisionMapForet2.addCollidable(new Circle(930, 1020, 60));
@@ -394,6 +396,7 @@ public class Global {
 		CollisionMapForet2.addCollidable(new Circle(730, 510, 60));
 		CollisionMapForet2.addCollidable(new Circle(730, 630, 60));
 		CollisionMapForet2.addCollidable(new Circle(730, 760, 60));
+		
 
 		//Panneau
 		CollisionMapForet2.addCollidable(new Rectangle(1000, 140, 60, 40));
@@ -409,7 +412,7 @@ public class Global {
 		//Caisses
 		CollisionMapForet2.addCollidable(new Rectangle(1790, 250, 1920-1790, 380));
 		CollisionMapForet2.addCollidable(new Rectangle(1525, 255, 130, 380));
-		
+
 	}
 	
 	public static void CollisionsMapForet3() {
@@ -664,16 +667,16 @@ public class Global {
         CollisionMapForet9.addCollidable(new Circle(-240, -60, 600, 50));
         CollisionMapForet9.addCollidable(new Circle(-260, 1080+100, 600, 50));
 
-
-
-        
-        
-
-
 	}
 	
 	public static void CollisionsMapForet10() {
-		
+		//Haut
+        CollisionMapForet10.addCollidable(new Rectangle(0, 0, 1920, 60));
+        
+        //Bas
+        CollisionMapForet10.addCollidable(new Rectangle(0, 1080-130, 1920, 130));
+
+
 	}
 	
 	public static void CollisionsMapForet11() {

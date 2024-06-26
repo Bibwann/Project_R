@@ -16,6 +16,10 @@ public class Mage extends Player {
         this.hpActual = 80;    // Current health points
         this.manaActual = 100; // Current mana points
         this.className = "Mage";  // Class name
+        
+        this.maxPotions = 7;
+        this.potions = 7;
+        this.healAmount = 20;
     }
 
     // Spells and abilities specific to the Mage can be defined here

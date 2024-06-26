@@ -9,13 +9,17 @@ public class Healer extends Player {
         super(name, level, new Image("data/Healer/Walk.png"), new Image("data/Healer/Battler.png"), new Image("data/Healer/Face.png"));
         
         // Initialize specific attributes for the Healer class
-        this.hpMax = 80;       // Maximum health points
+        this.hpMax = 70;       // Maximum health points
         this.manaMax = 100;    // Maximum mana points
         this.dmg = 2;          // Base damage
         
         this.hpActual = 80;    // Current health points
         this.manaActual = 20;  // Current mana points
         this.className = "Healer";  // Class name
+        
+        this.maxPotions = 15;
+        this.potions = 15;
+        this.healAmount = 100;
     }
 
     // Spells and abilities specific to the Healer can be defined here

@@ -100,6 +100,8 @@ public class Foret3 extends BasicGameState {
 		Global.P1.AnimateWhileMoove();
 		Global.P1.canRandomBattle();
 
+		Global.P1.cannotRandomBattle();
+
 
 	}
 

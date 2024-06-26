@@ -66,7 +66,7 @@ public class Foret4 extends BasicGameState {
 	    if (Global.AfficherToutesLesCollisions) {
 		    g.draw(Global.P1.getHitbox());
 		    
-		    Global.CollisionMapForet3.drawCollisions(g);
+		    Global.CollisionMapForet4.drawCollisions(g);
 		    this.Warp1.draw(g);
 		    this.Warp2.draw(g);
 		    this.Warp3.draw(g);
@@ -81,7 +81,7 @@ public class Foret4 extends BasicGameState {
 	
 	@Override
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
-		Global.updatePlayerMovement(gc.getInput(),Global.CollisionMapForet3,delta,sbg);
+		Global.updatePlayerMovement(gc.getInput(),Global.CollisionMapForet4,delta,sbg);
 		if (gc.getInput().isKeyPressed(Global.pause)) {
             sbg.enterState(101); // Passer à l'état 101 (menu de pause)
         }

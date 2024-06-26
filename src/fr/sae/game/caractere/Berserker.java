@@ -28,9 +28,8 @@ public class Berserker extends Player {
     }
     
     // Berserker's passive ability: increases damage based on missing health percentage
-    protected int passif(int damage) {
-        // Berserker's passive ability: deals increased damage based on missing health percentage
-        return damage * (1 - (this.hpActual / this.hpMax));
+    public int passif(int damage) {
+        return (int)( damage * (1 - (this.hpActual / this.hpMax)));
     }
     
     // Attack method for the Berserker, applying the passive effect

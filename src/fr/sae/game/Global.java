@@ -39,7 +39,7 @@ import org.w3c.dom.NodeList;
 public class Global {
 	
 	//Rien a foutre
-	public static boolean AfficherToutesLesCollisions=false;
+	public static boolean AfficherToutesLesCollisions=true;
 	 
 	//Objects de quetes
 	 
@@ -203,6 +203,7 @@ public class Global {
 	public static Collisions CollisionMapForet1;
 	public static Collisions CollisionMapForet2;
 	public static Collisions CollisionMapForet3;
+	public static Collisions CollisionMapForet4;
 	public static Collisions CollisionMapForet5;
 	public static Collisions CollisionMapForet6;
 	public static Collisions CollisionMapForet7;
@@ -217,7 +218,7 @@ public class Global {
 	public static Collisions CollisionMapUnderground3;
 	public static Collisions CollisionMapChateau1;
 	
-	public static Collisions CollisionMapVide;
+	public static Collisions CollisionsMapVide;
 
 	
 	
@@ -286,6 +287,7 @@ public class Global {
     	CollisionMapForet1=new Collisions();
     	CollisionMapForet2=new Collisions();
     	CollisionMapForet3=new Collisions();
+    	CollisionMapForet4=new Collisions();
     	CollisionMapForet5=new Collisions();
     	CollisionMapForet6=new Collisions();
     	CollisionMapForet7=new Collisions();
@@ -303,9 +305,14 @@ public class Global {
     	
     	CollisionMapBattlescene=new Collisions();
     	
+    	CollisionsMapVide = new Collisions();
+
+    	
     	// Creer les collisions ici
     	CollisionsMapForet1();
     	CollisionsMapForet2();
+    	CollisionsMapForet3();
+    	CollisionsMapForet4();
     	CollisionsMapForet5();
     	CollisionsMapForet6();
     	CollisionsMapForet7();
@@ -314,7 +321,6 @@ public class Global {
     	CollisionsMapForet10();
     	CollisionsMapForet11();
     	CollisionsMapForet12();
-    	CollisionsMapForet13();
     	
     	CollisionMapUnderground1();
     	CollisionMapUnderground2();
@@ -416,6 +422,112 @@ public class Global {
 	}
 	
 	public static void CollisionsMapForet3() {
+		
+		//Arbres solitaires
+		CollisionMapForet3.addCollidable(new Circle(730, 190, 60, 50));
+		CollisionMapForet3.addCollidable(new Circle(860, 190, 60, 50));
+		CollisionMapForet3.addCollidable(new Circle(990, 120, 60, 50));
+		CollisionMapForet3.addCollidable(new Circle(1120, 320, 60, 50));
+		CollisionMapForet3.addCollidable(new Circle(1320, 320, 60, 50));
+		CollisionMapForet3.addCollidable(new Circle(1320, 190, 60, 50));
+		CollisionMapForet3.addCollidable(new Circle(1320, 320, 60, 50));
+		CollisionMapForet3.addCollidable(new Circle(1455, 260, 60, 50));
+		CollisionMapForet3.addCollidable(new Circle(1190, 190, 60, 50));
+		CollisionMapForet3.addCollidable(new Circle(1320, 320, 60, 50));
+		CollisionMapForet3.addCollidable(new Circle(1130, 0, 60, 50));
+		CollisionMapForet3.addCollidable(new Circle(790, 0, 60, 50));
+		CollisionMapForet3.addCollidable(new Circle(590, 130, 60, 50));
+		CollisionMapForet3.addCollidable(new Circle(590, 130, 60, 50));
+		CollisionMapForet3.addCollidable(new Circle(400, 0, 110, 50));
+		CollisionMapForet3.addCollidable(new Circle(1260, 60, 60, 50));
+		CollisionMapForet3.addCollidable(new Circle(585, 0, 60, 50));
+		CollisionMapForet3.addCollidable(new Circle(260, 60, 60, 50));
+		CollisionMapForet3.addCollidable(new Circle(125, 0, 60, 50));
+		CollisionMapForet3.addCollidable(new Circle(60, 190, 60, 50));
+		CollisionMapForet3.addCollidable(new Circle(60, 315, 60, 50));
+		CollisionMapForet3.addCollidable(new Circle(200, 315, 60, 50));
+		CollisionMapForet3.addCollidable(new Circle(400, 315, 60, 50));
+		CollisionMapForet3.addCollidable(new Circle(400, 190, 60, 50));
+		CollisionMapForet3.addCollidable(new Circle(1790, 320, 60, 50));
+		CollisionMapForet3.addCollidable(new Circle(1790, 130, 60, 50));
+		CollisionMapForet3.addCollidable(new Circle(1850, 0, 60, 50));
+		CollisionMapForet3.addCollidable(new Circle(1255, 890, 60, 50));
+		CollisionMapForet3.addCollidable(new Circle(1060, 830, 60, 50));
+
+		//Branche
+		CollisionMapForet3.addCollidable(new Rectangle(1125, 640, 60, 50));
+
+		//Ammat d'arbres a droite en bas
+		CollisionMapForet3.addCollidable(new Circle(40, 615, 180, 50));
+		CollisionMapForet3.addCollidable(new Circle(200, 640, 60, 50));
+		CollisionMapForet3.addCollidable(new Circle(190, 500, 60, 50));
+		CollisionMapForet3.addCollidable(new Circle(125, 440, 60, 50));
+
+		//Arbres du bas
+		CollisionMapForet3.addCollidable(new Circle(460, 1080, 110, 50));
+		CollisionMapForet3.addCollidable(new Circle(660, 1080, 60, 50));
+		CollisionMapForet3.addCollidable(new Circle(1190, 1080, 60, 50));
+		CollisionMapForet3.addCollidable(new Rectangle(1210, 1080-125, 1920-1120, 125	));
+
+		//Ammat de droite
+
+		CollisionMapForet3.addCollidable(new Circle(1720, 700, 60, 50));
+		CollisionMapForet3.addCollidable(new Circle(1850, 700, 60, 50));
+		CollisionMapForet3.addCollidable(new Circle(1720, 570, 60, 50));
+		CollisionMapForet3.addCollidable(new Circle(1720, 440, 60, 50));
+		CollisionMapForet3.addCollidable(new Circle(1850, 440, 60, 50));
+		
+		//Ammat du centre
+		
+		CollisionMapForet3.addCollidable(new Circle(1450, 700, 60, 50));
+		CollisionMapForet3.addCollidable(new Circle(1450, 570, 60, 50));
+		CollisionMapForet3.addCollidable(new Circle(1450, 440, 60, 50));
+		CollisionMapForet3.addCollidable(new Circle(1320, 700, 60, 50));
+		CollisionMapForet3.addCollidable(new Circle(1320, 440, 60, 50));
+		CollisionMapForet3.addCollidable(new Circle(1320, 570, 60, 50));
+		CollisionMapForet3.addCollidable(new Circle(1250, 500, 60, 50));
+		CollisionMapForet3.addCollidable(new Circle(1120, 500, 60, 50));
+		
+		CollisionMapForet3.addCollidable(new Circle(1055, 570, 60, 50));
+		CollisionMapForet3.addCollidable(new Circle(1055, 700, 60, 50));
+		
+		CollisionMapForet3.addCollidable(new Circle(930, 700, 60, 50));
+		CollisionMapForet3.addCollidable(new Circle(930, 440, 60, 50));
+
+		CollisionMapForet3.addCollidable(new Circle(860, 630, 60, 50));
+		CollisionMapForet3.addCollidable(new Circle(790, 570, 60, 50));
+		CollisionMapForet3.addCollidable(new Circle(790, 450, 60, 50));
+		
+		CollisionMapForet3.addCollidable(new Circle(990, 380, 60, 50));
+
+		//	Ammat du bas gauche
+		
+		CollisionMapForet3.addCollidable(new Circle(930, 1020, 110, 50));
+		CollisionMapForet3.addCollidable(new Circle(800, 1080, 60, 50));
+
+		//Ammat du bas a gauche
+		
+		CollisionMapForet3.addCollidable(new Circle(790, 830, 60, 50));
+		CollisionMapForet3.addCollidable(new Circle(730, 890, 60, 50));
+		CollisionMapForet3.addCollidable(new Circle(590, 890, 60, 50));
+		CollisionMapForet3.addCollidable(new Circle(320, 890, 60, 50));
+		CollisionMapForet3.addCollidable(new Circle(390, 830, 60, 50));
+		CollisionMapForet3.addCollidable(new Circle(530, 830, 60, 50));
+		CollisionMapForet3.addCollidable(new Circle(320, 890, 60, 50));
+		CollisionMapForet3.addCollidable(new Circle(260,950 , 60, 50));
+		CollisionMapForet3.addCollidable(new Circle(130, 1020, 110, 50));
+		CollisionMapForet3.addCollidable(new Circle(260, 820, 60, 50));
+		CollisionMapForet3.addCollidable(new Circle(260, 820, 60, 50));
+		CollisionMapForet3.addCollidable(new Circle(330, 760, 60, 50));
+		CollisionMapForet3.addCollidable(new Circle(390, 440, 60, 50));
+
+		CollisionMapForet3.addCollidable(new Rectangle(340, 400+10, 310, 400-10));
+		
+		CollisionMapForet3.addCollidable(new Circle(590, 380, 60, 50));
+		CollisionMapForet3.addCollidable(new Circle(660, 690, 60, 50));
+		CollisionMapForet3.addCollidable(new Circle(720, 760, 60, 50));
+
+		CollisionMapForet3.addCollidable(new Circle(530, 450, 60, 50));
 
 	}
 	
@@ -676,6 +788,44 @@ public class Global {
         //Bas
         CollisionMapForet10.addCollidable(new Rectangle(0, 1080-130, 1920, 130));
 
+        //Arbres du centre
+        CollisionMapForet10.addCollidable(new Circle(460, 510, 60, 50));
+        CollisionMapForet10.addCollidable(new Circle(590, 630, 60, 50));
+        CollisionMapForet10.addCollidable(new Circle(720, 760, 60, 50));
+        CollisionMapForet10.addCollidable(new Circle(850, 820, 60, 50));
+        CollisionMapForet10.addCollidable(new Circle(980, 760, 60, 50));
+        CollisionMapForet10.addCollidable(new Circle(1120, 630, 60, 50));
+        CollisionMapForet10.addCollidable(new Circle(1260, 510, 60, 50));
+        CollisionMapForet10.addCollidable(new Circle(1120, 380, 60, 50));
+        CollisionMapForet10.addCollidable(new Circle(980, 250, 60, 50));
+        CollisionMapForet10.addCollidable(new Circle(850, 190, 60, 50));
+        CollisionMapForet10.addCollidable(new Circle(720, 250, 60, 50));
+        CollisionMapForet10.addCollidable(new Circle(590, 380, 60, 50));
+
+        //Branche
+	    CollisionMapForet10.addCollidable(new Rectangle(930,515,60, 40)); 
+
+	    //Epouventaille
+	    CollisionMapForet10.addCollidable(new Rectangle(805,390,40, 40)); 
+	    
+	    //Foret gauche
+		CollisionMapForet10.addCollidable(new Circle(65, 500, 110, 50));
+		CollisionMapForet10.addCollidable(new Circle(65, 630, 110, 50));
+		
+		//Arbres droite
+        CollisionMapForet10.addCollidable(new Circle(1790, 130, 60, 50));
+        CollisionMapForet10.addCollidable(new Circle(1790, 260, 60, 50));
+        CollisionMapForet10.addCollidable(new Circle(1790, 380, 60, 50));
+        CollisionMapForet10.addCollidable(new Circle(1790, 820, 60, 50));
+        CollisionMapForet10.addCollidable(new Circle(1790, 950, 60, 50));
+
+        CollisionMapForet10.addCollidable(new Circle(1850, 450, 60, 50));
+        CollisionMapForet10.addCollidable(new Circle(1850, 760, 60, 50));
+        
+        CollisionMapForet10.addCollidable(new Circle(1920, 690, 60, 50));
+
+
+
 
 	}
 	
@@ -711,13 +861,11 @@ public class Global {
 
 	}
 	
-	public static void CollisionsMapForet13() {
-		//Mape inexistante
-	}
+
 		
 	public static void CollisionMapUnderground1() {
 			
-		}
+	}
 	
 	public static void CollisionMapUnderground2() {
 		

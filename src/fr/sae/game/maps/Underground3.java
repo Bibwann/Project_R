@@ -18,6 +18,7 @@ import fr.sae.mobes.Chaton;
 public class Underground3 extends BasicGameState {
 	Warp Warp1;
 	Warp Warp2;
+	Warp Warp3;
 	DialogueBox dialogueBoxPot;
 	DialogueBox dialogueBoxGrille;
 	DialogueBox dialogueBoxPelle;
@@ -31,8 +32,9 @@ public class Underground3 extends BasicGameState {
 
 	@Override
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
-		this.Warp1= new Warp(860, 1070, 470, 10, 1100, 50);
-		this.Warp2= new Warp(140, 130, 50, 40, 350, 240);
+		this.Warp1= new Warp(1190, 120, 120, 10, 240, 1020);//HAUT
+		this.Warp2= new Warp(140, 130, 50, 40, 350, 240);//CORDE
+		this.Warp3= new Warp(990, 890, 70, 70, 550, 250);//ESCALIER
 		
 		//Obligatoire que tmpDialogbox1 aie une triggerzone hors map
 	    this.tmpDialogbox2.setTriggerZone(-1, -1, 0, 0);
@@ -233,8 +235,9 @@ public class Underground3 extends BasicGameState {
         	e.getMessage();
         	System.out.print(e);
         }
-        this.Warp1.warp(Global.P1, sbg, 11);
+        this.Warp1.warp(Global.P1, sbg, 24);
         this.Warp2.warp(Global.P1, sbg, 16);//GROTTE SORTIE
+        this.Warp3.warp(Global.P1, sbg, 14);//GROTTE SORTIE 2
       //Obligatoire, premet de rendre a l'ecran la dialogbox temp quand elle est necessaire
         this.tmpDialogbox2.renderTempDialgbox(g);
 
@@ -254,6 +257,7 @@ public class Underground3 extends BasicGameState {
 		    
 		    this.Warp1.draw(g);
 		    this.Warp2.draw(g);
+		    this.Warp3.draw(g);
 	    	}
 //--------------------------------------------------------------------------------------------------------------------------
 	}

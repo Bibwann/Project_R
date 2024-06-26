@@ -293,7 +293,7 @@ public class Foret6 extends BasicGameState {
 	//Temp	    
 
 	    //Affiche toutes les collisions de la map et du joueur
-	    if (true) {
+	    if (false) {
 		    g.draw(Global.P1.getHitbox());
 		    
 		    Global.CollisionMapForet6.drawCollisions(g);

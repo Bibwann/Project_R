@@ -37,7 +37,7 @@ public class Foret3 extends BasicGameState {
 		this.Warp7= new Warp(1910, 750, 10, 240, 50, 810);//D
 		this.Warp8= new Warp(880, 0, 260, 10, 1000, 1020);//H
 		this.Warp9= new Warp(650, 0, 75, 10, 670, 1020);//H
-		this.Warp10= new Warp(130, 210, 65, 40, 100, 100);//GROTTE
+		this.Warp10= new Warp(130, 210, 65, 40, 420, 210);//GROTTE
 	}
 
 	@Override
@@ -65,7 +65,7 @@ public class Foret3 extends BasicGameState {
         this.Warp7.warp(Global.P1, sbg, 20);//D
         this.Warp8.warp(Global.P1, sbg, 12);
         this.Warp9.warp(Global.P1, sbg, 12);
-        this.Warp10.warp(Global.P1, sbg, 13);
+        this.Warp10.warp(Global.P1, sbg, 24);
         
 
 //--------------------------------------------------------------------------------------------------------------------------

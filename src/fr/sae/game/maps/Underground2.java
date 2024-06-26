@@ -14,20 +14,22 @@ import fr.sae.game.Warp;
 public class Underground2 extends BasicGameState {
 	Warp Warp1;
 	Warp Warp2;
+	Warp Warp3;
 	public Underground2(int stateID) {
 	}
 
 	@Override
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
-		this.Warp1= new Warp(860, 1070, 470, 10, 1100, 50);
-		this.Warp2= new Warp(330, 130, 60, 60, 1100, 600);
+		this.Warp1= new Warp(1610, 1070, 120, 10, 1670, 150);
+		this.Warp2= new Warp(210, 130, 50, 40, 890, 750);
+		this.Warp3= new Warp(1860, 130, 50, 40, 150, 85);
 	}
 
 	
 	@Override
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
 		Global.actualId = 25;
-		g.drawImage(new Image("data/maps/Map006.png").getScaledCopy(Global.width, Global.height), 0, 0);
+		g.drawImage(new Image("data/maps/Map015.png").getScaledCopy(Global.width, Global.height), 0, 0);
         
         try {
 	    	Global.P1.Sprite(g);
@@ -37,8 +39,9 @@ public class Underground2 extends BasicGameState {
         	e.getMessage();
         	System.out.print(e);
         }
-        this.Warp1.warp(Global.P1, sbg, 11);
-        this.Warp2.warp(Global.P1, sbg, 16);
+        this.Warp1.warp(Global.P1, sbg, 24);// BAS
+        this.Warp2.warp(Global.P1, sbg, 12);// ECHELLE
+        this.Warp3.warp(Global.P1, sbg, 14);// ECHELLE DROITE
        
 
 //--------------------------------------------------------------------------------------------------------------------------
@@ -48,16 +51,17 @@ public class Underground2 extends BasicGameState {
 	    if (true) {
 		    g.draw(Global.P1.getHitbox());
 		    
-		    Global.CollisionMapForet6.drawCollisions(g);
+		    Global.CollisionMapUnderground2.drawCollisions(g);
 		    this.Warp1.draw(g);
 		    this.Warp2.draw(g);
+		    this.Warp3.draw(g);
 	    	}
 //--------------------------------------------------------------------------------------------------------------------------
 	}
 
 	@Override
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
-		Global.updatePlayerMovement(gc.getInput(),Global.CollisionMapForet6,delta);
+		Global.updatePlayerMovement(gc.getInput(),Global.CollisionMapUnderground2,delta);
 		if (gc.getInput().isKeyPressed(Global.pause)) {
             sbg.enterState(101); // Passer à l'état 101 (menu de pause)
         }

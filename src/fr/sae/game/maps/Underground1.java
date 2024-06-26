@@ -14,20 +14,24 @@ import fr.sae.game.Warp;
 public class Underground1 extends BasicGameState {
 	Warp Warp1;
 	Warp Warp2;
+	Warp Warp3;
+	Warp Warp4;
 	public Underground1(int stateID) {
 	}
 
 
 	@Override
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
-		this.Warp1= new Warp(860, 1070, 470, 10, 1100, 50);
-		this.Warp2= new Warp(330, 130, 60, 60, 1100, 600);
+		this.Warp1= new Warp(1600, 100, 120, 30, 1640,1020);
+		this.Warp2= new Warp(390, 100, 60, 60, 1100, 600);
+		this.Warp3= new Warp(200, 1070, 120, 10, 1210, 180);
+		this.Warp4= new Warp(1000, 960, 60, 60, 1680, 320);
 	}
 
 	@Override
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
-		
-		g.drawImage(new Image("data/maps/Map006.png").getScaledCopy(Global.width, Global.height), 0, 0);
+		Global.actualId = 24;
+		g.drawImage(new Image("data/maps/Map014.png").getScaledCopy(Global.width, Global.height), 0, 0);
         
         try {
 	    	Global.P1.Sprite(g);
@@ -37,9 +41,10 @@ public class Underground1 extends BasicGameState {
         	e.getMessage();
         	System.out.print(e);
         }
-        this.Warp1.warp(Global.P1, sbg, 11);
-        this.Warp2.warp(Global.P1, sbg, 16);
-       
+        this.Warp1.warp(Global.P1, sbg, 25);//HAUT
+        this.Warp2.warp(Global.P1, sbg, 13);//ECHELLE
+        this.Warp3.warp(Global.P1, sbg, 26);//BAS
+        this.Warp4.warp(Global.P1, sbg, 12);//ESCALIER
 
 //--------------------------------------------------------------------------------------------------------------------------
 	//Temp	    
@@ -48,16 +53,18 @@ public class Underground1 extends BasicGameState {
 	    if (true) {
 		    g.draw(Global.P1.getHitbox());
 		    
-		    Global.CollisionMapForet6.drawCollisions(g);
+		    Global.CollisionMapUnderground1.drawCollisions(g);
 		    this.Warp1.draw(g);
 		    this.Warp2.draw(g);
+		    this.Warp3.draw(g);
+		    this.Warp4.draw(g);
 	    	}
 //--------------------------------------------------------------------------------------------------------------------------
 	}
 
 	@Override
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
-		Global.updatePlayerMovement(gc.getInput(),Global.CollisionMapForet6,delta);
+		Global.updatePlayerMovement(gc.getInput(),Global.CollisionMapUnderground1,delta);
 		if (gc.getInput().isKeyPressed(Global.pause)) {
             sbg.enterState(101); // Passer à l'état 101 (menu de pause)
         }

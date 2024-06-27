@@ -52,31 +52,28 @@ public class Foret1 extends BasicGameState{
 		this.dialogueBoxPanneau = new DialogueBox(new String[] {
 				"\n" +
 			    "  ^  \n" +
-			    "  |         Cimetierre\n" +
+			    "  |         Cimetière\n" +
 			    "  |  \n",
 			    "\n" +
 			    "\n" +
-			    " -- -- >       Château Ensolleilé\n"+
+			    " -- -- >       Château Ensoleillé\n"+
 			    "\n"
 			});	
 		this.dialogueBoxPanneau.setTriggerZone(Global.width-530,570,66,10);
 
 		//Dialogbox sans choix du mage
 				this.dialogueBoxMage = new DialogueBox(new String[] {
-						"Arghhh... Je mes forces me quitter peu a peu... \n"+
-				"Je vous en conjure, aidez moi et apportez ce précieux objet aux membres de la famil-le royale qui resiste encore dans le Château Ensolleilé... \n"+
+						"Je suis gravement blessé... Je ne vais pas pouvoir accomplir ma mission !\n"+
 								"\n"+
-				"Vous obtenez un paquet étrange \n"+
+				"Amenez ce précieux objet au seigneur du château Ensoleillé et aidez ce monde à être sauvé ! \n"+
 								"\n"+
-				"Merci... Jeune aventurier... Je peux partir l'esprit serein..."
+				"Le mage mourant vous a confié : Objet emballé"
 					});	
 				this.dialogueBoxMage.setTriggerZone(580,505,70,40);
 		
 		//Dialogbox Avec choix multiples
 				this.dialogueBoxFenetre = new DialogueBox(new String[] {
-						"\n "+
-					    "     \n" +
-					    "           Vous distinguez une ombre imposante derrière le rideau"
+						"Vous distinguez une ombre imposante derrière le rideau"
 			        });
 			    this.dialogueBoxFenetre.setTriggerZone(400, 120, 60, 80);
 			    
@@ -84,7 +81,7 @@ public class Foret1 extends BasicGameState{
 		            switch (choice1) {
 			            case 0:
 			            	this.tmpDialogbox1.setActiveTempDialogbox(true);
-			                this.tmpDialogbox1.setMessages(new String[] {"\n"+"\n"+"  L'ombre semble se déplace et se dirige vers l'armoire situé au fond de la piéce"});
+			                this.tmpDialogbox1.setMessages(new String[] {"L'ombre semble se déplacer et se dirige vers l'armoire située au fond de la pièce."});
 			                //Ajoutez recursivement des choix ici de la meme maniere que moi
 
 			                this.tmpDialogbox1.setChoices(Arrays.asList("Frapper plus fort contre la fenêtre", "Se retourner et partir en courant"), choice2 -> {
@@ -92,7 +89,7 @@ public class Foret1 extends BasicGameState{
 
 			                        case 0:
 			                        	this.tmpDialogbox1.setActiveTempDialogbox(true);
-			                            this.tmpDialogbox1.setMessages(new String[] {"\n"+"\n"+"      Une voie s'élève derrière la vitre : Cessez Immediatement !! "});
+			                            this.tmpDialogbox1.setMessages(new String[] {"Une voix s'élève derrière la vitre : Cessez immédiatement !!"});
 			                            
 			                            //Permet de dire qu'il s'agissait du dernier choix
 			                            this.tmpDialogbox1.setChoices(Arrays.asList(),null);
@@ -118,9 +115,7 @@ public class Foret1 extends BasicGameState{
 
 		//Dialogbox Avec choix multiples
 		this.dialogueBoxBranche = new DialogueBox(new String[] {
-				"\n "+
-			    "     \n" +
-			    "           Ceci est une branche"
+				"Ceci est une branche"
 	        });
 	    this.dialogueBoxBranche.setTriggerZone(718, 440, 86, 80);
 	    
@@ -128,7 +123,7 @@ public class Foret1 extends BasicGameState{
             switch (choice1) {
 	            case 0:
 	            	this.tmpDialogbox1.setActiveTempDialogbox(true);
-	                this.tmpDialogbox1.setMessages(new String[] {"\n"+"\n"+"           Aie !"});
+	                this.tmpDialogbox1.setMessages(new String[] {"Aie !"});
 	                //Ajoutez recursivement des choix ici de la meme maniere que moi
 
 	                this.tmpDialogbox1.setChoices(Arrays.asList("Retaper la branche", "Ne rien faire"), choice2 -> {
@@ -136,7 +131,7 @@ public class Foret1 extends BasicGameState{
 
 	                        case 0:
 	                        	this.tmpDialogbox1.setActiveTempDialogbox(true);
-	                            this.tmpDialogbox1.setMessages(new String[] {"\n"+"\n"+"           AIEEEE !!!!!"});
+	                            this.tmpDialogbox1.setMessages(new String[] {"AIEEEE !!!!!"});
 	                            
 	                            Global.egg1="Special Thanks: Sarah Barlatier";
 	                            

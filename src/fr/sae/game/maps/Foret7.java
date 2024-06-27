@@ -20,6 +20,9 @@ public class Foret7 extends BasicGameState {
 	Warp Warp2;
 	Warp Warp3;
 	private DialogueBox dialogueBoxCbt;
+	private DialogueBox dialogueBoxchest;
+	private DialogueBox dialogueBoxchest2;
+	private DialogueBox dialogueBoxBranche;
 	private DialogueBox tmpDialogbox1= new DialogueBox(new String[] {});
 	
 	public Foret7(int stateID) {
@@ -32,9 +35,7 @@ public class Foret7 extends BasicGameState {
 		this.Warp3= new Warp(0, 0, 1160, 10, 400, 1020);//HAUT
 		
 		this.dialogueBoxCbt = new DialogueBox(new String[] {
-				"\n "+
-			    "     \n" +
-			    "           Un chat vous agresse brutalement"
+				"La gourmandise est un péché qui mène à la mort."
 	        });
 	    this.dialogueBoxCbt.setTriggerZone(0,630, 1000, 800);
 	    
@@ -66,6 +67,60 @@ public class Foret7 extends BasicGameState {
 
             }       
      });
+	    if (Global.Chest1Map7) {
+	    this.dialogueBoxchest = new DialogueBox(new String[] {
+				"Vous obtenez : un vieux parchemin déchiré."+"\n"+"Le vieux parchemin déchiré est illisible..."
+			});	
+		this.dialogueBoxchest.setTriggerZone(800,800,70,40);
+		Global.Chest1Map7=false;
+	    }
+	    
+		if (Global.Chest2Map7) {
+		this.dialogueBoxchest2 = new DialogueBox(new String[] {
+				"Vous obtenez : un vieux parchemin déchiré."+"\n"+"Le vieux parchemin déchiré est illisible..."
+			});	
+		this.dialogueBoxchest2.setTriggerZone(580,505,70,40);
+		Global.Chest2Map7=false;
+		}
+		
+		this.dialogueBoxBranche = new DialogueBox(new String[] {
+  				"Ceci est une branche"
+  	        });
+  	    this.dialogueBoxBranche.setTriggerZone(120, 310, 80, 90);
+  	    
+  	    this.dialogueBoxBranche.setChoices(Arrays.asList("Taper la branche", "Ne rien faire"), choice1 -> {
+              switch (choice1) {
+  	            case 0:
+  	            	this.tmpDialogbox1.setActiveTempDialogbox(true);
+  	                this.tmpDialogbox1.setMessages(new String[] {"Aie !"});
+  	                //Ajoutez recursivement des choix ici de la meme maniere que moi
+
+  	                this.tmpDialogbox1.setChoices(Arrays.asList("Retaper la branche", "Ne rien faire"), choice2 -> {
+  	                    switch (choice2) {
+
+  	                        case 0:
+  	                        	this.tmpDialogbox1.setActiveTempDialogbox(true);
+  	                            this.tmpDialogbox1.setMessages(new String[] {"AIEEEE !!!!!"});
+  	                            
+  	                            //Permet de dire qu'il s'agissait du dernier choix
+  	                            this.tmpDialogbox1.setChoices(Arrays.asList(),null);
+  	                            break;
+
+  	                        case 1:
+  	                        	this.tmpDialogbox1.setActiveTempDialogbox(false);
+  	                        	
+  	                    }
+  	                    
+  	                });
+  	                break;
+  	                
+  	                
+  	            case 1:
+  	            	this.tmpDialogbox1.setActiveTempDialogbox(false);
+  	            	break;
+
+              }       
+       });
 	}
 
 	
@@ -88,6 +143,9 @@ public class Foret7 extends BasicGameState {
         if(Global.Foret7Battle) {
         	dialogueBoxCbt.render(g);
         }
+        dialogueBoxchest.render(g);
+        dialogueBoxchest2.render(g);
+        dialogueBoxBranche.render(g);
         this.Warp1.warp(Global.P1, sbg, 13);
         this.Warp2.warp(Global.P1, sbg, 13);
         this.Warp3.warp(Global.P1, sbg, 15);
@@ -102,6 +160,7 @@ public class Foret7 extends BasicGameState {
 	    	
 	    	if(Global.Foret7Battle) {
 			    this.dialogueBoxCbt.draw(g);
+			   
 	        }
 
 		    g.draw(Global.P1.getHitbox());
@@ -110,6 +169,10 @@ public class Foret7 extends BasicGameState {
 		    this.Warp1.draw(g);
 		    this.Warp2.draw(g);
 		    this.Warp3.draw(g);
+		    this.dialogueBoxchest.draw(g);
+		    this.dialogueBoxchest2.draw(g);
+		    this.dialogueBoxBranche.draw(g);
+		    this.tmpDialogbox1.renderTempDialgbox(g);
 	    	}
 //--------------------------------------------------------------------------------------------------------------------------
 	}
@@ -120,7 +183,7 @@ public class Foret7 extends BasicGameState {
 		//Global.updatePlayerMovement(gc.getInput(),Global.CollisionMapForet7,delta);
 		Global.updatePlayerMovement(gc.getInput(),Global.CollisionMapForet7,delta,sbg);
 		
-		//Global.updatePlayerMovement(gc.getInput(),Global.CollisionMapVide,delta,sbg);
+		Global.updatePlayerMovement(gc.getInput(),Global.CollisionsMapVide,delta,sbg);
 
 		Global.P1.AnimateWhileMoove();
 		Global.P1.canRandomBattle();
@@ -128,6 +191,9 @@ public class Foret7 extends BasicGameState {
 
 		Input input =gc.getInput();
 		boolean i =input.isKeyPressed(Global.interract);
+		
+		
+		
 		
 		if (gc.getInput().isKeyPressed(Global.pause)) {
             sbg.enterState(101); // Passer à l'état 101 (menu de pause)
@@ -137,6 +203,11 @@ public class Foret7 extends BasicGameState {
 
 			this.dialogueBoxCbt.dialogBox(i,gc.getInput());
 		}
+		
+		this.dialogueBoxchest.dialogBox(i);
+		this.dialogueBoxchest2.dialogBox(i);
+		this.dialogueBoxBranche.dialogBox(i,gc.getInput());
+		this.tmpDialogbox1.updateTempDialgbox(i, gc);
 	}
 
 	@Override

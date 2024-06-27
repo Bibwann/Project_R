@@ -46,6 +46,10 @@ public class Global {
 	public static boolean CoeurVaillant=false;
 	public static boolean LeveledUpForet5=false;
 
+	// COFFRE 
+	public static boolean Chest1Map7=true;
+	public static boolean Chest2Map7=true;
+	
 	
 	//Combats uniques
 	public static boolean Foret6Battle=true;

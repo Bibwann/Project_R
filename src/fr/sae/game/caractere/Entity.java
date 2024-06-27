@@ -102,7 +102,7 @@ public abstract class Entity {
 
     // Getter and setter for damage
     public int getDmg() {
-        return this.passif(dmg);
+        return dmg;
     }
 
     public void setDmg(int dmg) {
@@ -147,8 +147,5 @@ public abstract class Entity {
     	return this.potions > 0;
     }
     
-    public int passif(int dmg) {
-		return dmg;
-	}
     
 }

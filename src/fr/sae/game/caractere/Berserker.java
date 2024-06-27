@@ -15,7 +15,7 @@ public class Berserker extends Player {
         // Initialize basic attributes for the Berserker
         this.hpMax = 100;  // Maximum health points
         this.manaMax = 0;   // Maximum mana points (Berserkers have no mana)
-        this.dmg = 10;      // Base damage
+        this.dmg = 12;      // Base damage
 
         this.hpActual = 100;   // Current health points
         this.manaActual = 0;   // Current mana points
@@ -27,13 +27,11 @@ public class Berserker extends Player {
 
     }
     
-    // Berserker's passive ability: increases damage based on missing health percentage
-    public int passif(int damage) {
-        return (int)( damage * (1 - (this.hpActual / this.hpMax)));
-    }
+    @Override
+    public int getDmg() {
+    	  double hpPercentage = (double) hpActual / hpMax;
+    	  double damageMultiplier = 2 - hpPercentage; // Exemple : si 50% HP, multiplier = 1.5
+    	  return (int) (this.dmg * damageMultiplier);    }
+
     
-    // Attack method for the Berserker, applying the passive effect
-    public void hit(Entity entity, int damage) {
-        entity.getHit(passif(damage));
-    }
 }

@@ -197,6 +197,9 @@ public class Global {
 
 	//Special Thanks
 	public static String egg1="";
+	//Fede
+	public static String egg2="data/Cats/cat.png";
+
 	
 	//Collisions temporaires
 	
@@ -281,11 +284,10 @@ public class Global {
 	    	
 		} catch(Exception e){
 			e.getMessage(); //Affiche le message d'erreur en cas ou l'initialisation du project mne marche pas correctement ducoup c'est une ligne importante en cas de debug
-			System.out.println("Erreur dans le global sur la fonction initialize");
+			System.err.println("Erreur dans le global sur la fonction initialize");
 		}
 	}
 	
-
 	private static void Collisions() {
 		//Initialisation des collisions des maps
     	CollisionMapForet1=new Collisions();
@@ -366,7 +368,6 @@ public class Global {
     	CollisionMapForet1.addCollidable(new Rectangle(596,505,66,30)); 
 
 	}
-	
 	public static void CollisionsMapForet2() {
 		//Haut
 		CollisionMapForet2.addCollidable(new Rectangle(0, 0, 1920, 50));
@@ -424,7 +425,6 @@ public class Global {
 		CollisionMapForet2.addCollidable(new Rectangle(1525, 255, 130, 380));
 
 	}
-	
 	public static void CollisionsMapForet3() {
 		
 		//Arbres solitaires
@@ -539,7 +539,6 @@ public class Global {
 		CollisionMapForet3.addCollidable(new Circle(530, 450, 60, 50));
 
 	}
-	
 	public static void CollisionsMapForet4() {
 		
 		//Sortie de la grotte (confiné)
@@ -695,7 +694,6 @@ public class Global {
 		CollisionMapForet4.addCollidable(new Circle(1920, 440, 60, 50));
 
 	}
-	
 	public static void CollisionsMapForet5() {
 		CollisionMapForet5.addCollidable(new Rectangle(0, 0, 1920, 60));
 		//(longitude, latitude, longueur, hauteur)
@@ -757,7 +755,6 @@ public class Global {
         CollisionMapForet5.addCollidable(new Rectangle(990, 580, 70, 70)); 
 
 	}
-	
 	public static void CollisionsMapForet6() {
 		//HAUT GAUCHE
     	CollisionMapForet6.addCollidable(new Rectangle(0, 0, 1920, 130)); 
@@ -808,7 +805,6 @@ public class Global {
     	CollisionMapForet6.addCollidable(new Rectangle(995, 690, 60, 70));
     	
 	}
-	
 	public static void CollisionsMapForet7() {
 		
 		// Ajout des collidables avec transformations
@@ -914,7 +910,6 @@ public class Global {
         CollisionMapForet7.addCollidable(new Rectangle(405, 910, 38, 35));
 
 	}
-	
 	public static void CollisionsMapForet8() {
 		//Le couloir chelou
 		
@@ -990,24 +985,7 @@ public class Global {
         CollisionMapForet8.addCollidable(new Rectangle(470, 580, 60, 120));
         CollisionMapForet8.addCollidable(new Rectangle(670, 580, 60, 120));
         CollisionMapForet8.addCollidable(new Rectangle(540, 770, 60, 120));
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 	}
-	
 	public static void CollisionsMapForet9() {
 		//Le haut
         CollisionMapForet9.addCollidable(new Rectangle(0, 0, 1920, 180));
@@ -1030,7 +1008,6 @@ public class Global {
         CollisionMapForet9.addCollidable(new Circle(-260, 1080+100, 600, 50));
 
 	}
-	
 	public static void CollisionsMapForet10() {
 		//Haut
         CollisionMapForet10.addCollidable(new Rectangle(0, 0, 1920, 60));
@@ -1083,11 +1060,7 @@ public class Global {
         
         CollisionMapForet10.addCollidable(new Circle(1920, 690, 60, 50));
 
-
-
-
 	}
-	
 	public static void CollisionsMapForet11() {
 		//Arbres random gauche
         CollisionMapForet11.addCollidable(new Circle(330, 450, 60, 50));
@@ -1144,11 +1117,7 @@ public class Global {
         CollisionMapForet11.addCollidable(new Circle(1720, 190, 60, 50));
         CollisionMapForet11.addCollidable(new Circle(1780, 130, 60, 50));
         CollisionMapForet11.addCollidable(new Circle(1780, 0, 60, 50));
-
-
-
 	}
-	
 	public static void CollisionsMapForet12() {
 		//Chateau
 	    CollisionMapForet12.addCollidable(new Rectangle(70, 0,1780, 380)); 
@@ -1179,18 +1148,69 @@ public class Global {
 	    CollisionMapForet12.addCollidable(new Rectangle(805,380,45, 65)); 
 
 	}
-	
 
-		
 	public static void CollisionMapUnderground1() {
-			
+		//Mur du haut
+		CollisionMapUnderground1.addCollidable(new Rectangle(0, 0, 1590, 150));
+		CollisionMapUnderground1.addCollidable(new Rectangle(1720, 0, 1920-1720, 150));
+		
+		//Tombes
+		CollisionMapUnderground1.addCollidable(new Rectangle(140, 260, 55, 120)); 
+		CollisionMapUnderground1.addCollidable(new Rectangle(730, 260, 55, 120)); 
+		CollisionMapUnderground1.addCollidable(new Rectangle(730, 520, 55, 120)); 
+		CollisionMapUnderground1.addCollidable(new Rectangle(140, 520, 55, 120)); 
+
+		//Mur du centre
+		CollisionMapUnderground1.addCollidable(new Rectangle(930, 150, 60, 1080-120)); 
+
+		//Mur du bas
+		CollisionMapUnderground1.addCollidable(new Rectangle(0, 1080-60, 200, 60));
+		CollisionMapUnderground1.addCollidable(new Rectangle(330, 1080-60, 1920-330, 1080-200));
+
+		//Rochets
+		
+		CollisionMapUnderground1.addCollidable(new Circle(360, 290,30, 50)); 
+		CollisionMapUnderground1.addCollidable(new Circle(690, 920,30, 50)); 
+		CollisionMapUnderground1.addCollidable(new Circle(1290, 540,30, 50)); 
+		CollisionMapUnderground1.addCollidable(new Circle(1690, 410,30, 50)); 
+
+	    //Dinazor
+		CollisionMapUnderground1.addCollidable(new Circle(1330, 760,60, 50)); 
+
 	}
-	
 	public static void CollisionMapUnderground2() {
 		
+		//Mur du haut
+		CollisionMapUnderground2.addCollidable(new Rectangle(0, 0, 1920, 150));
+		
+		//mUR DU BAS
+		CollisionMapUnderground2.addCollidable(new Rectangle(0, 1080-60, 1590, 60));
+		CollisionMapUnderground2.addCollidable(new Rectangle(1720, 1080-60, 1920-1720, 60));
+
+		//Mirroir
+		CollisionMapUnderground2.addCollidable(new Rectangle(1060, 150, 60, 20));
+
+		//Stele
+		CollisionMapUnderground2.addCollidable(new Rectangle(1560, 150, 120, 40));
+		
+		//Tonneaux
+		CollisionMapUnderground2.addCollidable(new Rectangle(540, 200, 180, 120));
+
+		//Rochet
+		CollisionMapUnderground2.addCollidable(new Circle(560, 860,30, 50)); 
+		
+		//Squelette
+		CollisionMapUnderground2.addCollidable(new Circle(960, 860,30, 50)); 
+		
+		//Table
+		CollisionMapUnderground2.addCollidable(new Rectangle(130, 570, 130, 60));
+		
+		//tombe ouverte
+		CollisionMapUnderground2.addCollidable(new Rectangle(860, 190, 60, 130));
+
 	}
-	
 	public static void CollisionMapUnderground3() {
+
 		CollisionMapUnderground3.addCollidable(new Rectangle(0, 0, 395, 160)); //MUR HAUT
 		CollisionMapUnderground3.addCollidable(new Rectangle(860, 0, 330, 160)); //MUR HAUT
 		CollisionMapUnderground3.addCollidable(new Rectangle(1330, 0, width-1330, 160)); //MUR HAUT
@@ -1212,7 +1232,6 @@ public class Global {
 	}
 	
 	
-	
 	public static void switchModeControles() { //Fonction  propre permettant de savoir si on est en dialoge ou en deplacmeent libre
 		canMoovPlayer=!canMoovPlayer;
 		canMoovDialogbox=!canMoovDialogbox;
@@ -1225,7 +1244,7 @@ public class Global {
 		        boolean isright = input.isKeyDown(right);
 		        boolean isup = input.isKeyDown(up);
 		        boolean isdown = input.isKeyDown(down);
-		        int chance = 40000000	;
+		        int chance = 400	;
 		        if (isleft) {
 		        	InputHandler.keyPressed();
 		            if (!c.willCollideWithMap(Global.P1.getHitbox(),-3,0)) {
@@ -1290,11 +1309,11 @@ public class Global {
 	        Global.canMoovPlayer = false;
 
 	        // Générer un nombre aléatoire de mobs entre 1 et 4
-	        int numberOfMobs = getRandomNumber(1,2);
+	        int numberOfMobs = getRandomNumber(1,Global.P1.getLevel());
 
 	        // Boucle pour initialiser chaque mob avec un niveau et un nom aléatoire
 	        for (int i = 0; i < numberOfMobs; i++) {
-	            String name = "chaton" + (i + 1);
+	            String name = "Chaton " + (i + 1);
 	            int level = getRandomNumber(1,2);
 	            Global.mobs[i] = new Chaton(name, level);
 	        }

@@ -541,6 +541,158 @@ public class Global {
 	}
 	
 	public static void CollisionsMapForet4() {
+		
+		//Sortie de la grotte (confiné)
+		CollisionMapForet4.addCollidable(
+                new Rectangle(760, 50, 60, 800)
+                        .transform(Transform.createRotateTransform((float) Math.toRadians(45), 1200 , 75)));
+		
+		CollisionMapForet4.addCollidable(
+                new Rectangle(855, 50, 60, 400)
+                        .transform(Transform.createRotateTransform((float) Math.toRadians(45), 750 , 75)));
+		
+		CollisionMapForet4.addCollidable(
+                new Rectangle(600, 50, 400, 60)
+                        .transform(Transform.createRotateTransform((float) Math.toRadians(45), 580 , 75)));
+		
+		CollisionMapForet4.addCollidable(
+                new Rectangle(540, 50, 400, 60)
+                        .transform(Transform.createRotateTransform((float) Math.toRadians(45), 260 , 75)));
+		
+        //Tonneau de la sortie de la grotte
+		CollisionMapForet4.addCollidable(new Circle(630, 290, 30, 50));
+
+        //Tonneaux tout a droite
+		CollisionMapForet4.addCollidable(new Circle(1760, 100, 30, 50));
+		CollisionMapForet4.addCollidable(new Circle(1760, 160, 30, 50));
+
+		//Branche
+	    CollisionMapForet4.addCollidable(new Rectangle(1065,450,60, 40)); 
+	    
+	    //Ammat bad gauche + millieu
+	    CollisionMapForet4.addCollidable(
+                new Rectangle(300, 50, 60, 800)
+                        .transform(Transform.createRotateTransform((float) Math.toRadians(45), 900 , 75)));
+	    
+		CollisionMapForet4.addCollidable(
+                new Rectangle(0, 50, 480, 60)
+                        .transform(Transform.createRotateTransform((float) Math.toRadians(45), -130 , 75)));
+		
+		CollisionMapForet4.addCollidable(
+                new Rectangle(210, 50, 480, 60)
+                        .transform(Transform.createRotateTransform((float) Math.toRadians(45), 60 , 75)));
+		
+		CollisionMapForet4.addCollidable(new Circle(190, 180, 60, 50));
+		CollisionMapForet4.addCollidable(new Circle(260, 120, 60, 50));
+		CollisionMapForet4.addCollidable(new Circle(400, 120, 60, 50));
+		CollisionMapForet4.addCollidable(new Circle(400, 0, 60, 50));
+		CollisionMapForet4.addCollidable(new Circle(260, 510, 60, 50));
+		CollisionMapForet4.addCollidable(new Circle(260, 630, 60, 50));
+		CollisionMapForet4.addCollidable(new Circle(330, 690, 60, 50));
+		CollisionMapForet4.addCollidable(new Circle(200, 690, 60, 50));
+		CollisionMapForet4.addCollidable(new Circle(130, 760, 60, 50));
+		CollisionMapForet4.addCollidable(new Circle(60, 820, 60, 50));
+		CollisionMapForet4.addCollidable(new Circle(60, 950, 60, 50));
+		CollisionMapForet4.addCollidable(new Circle(130, 1010, 60, 50));
+		
+		CollisionMapForet4.addCollidable(new Circle(400, 890, 60, 50));
+		CollisionMapForet4.addCollidable(new Circle(330, 960, 60, 50));
+		CollisionMapForet4.addCollidable(new Circle(280, 1010, 60, 50));
+		CollisionMapForet4.addCollidable(new Circle(460, 960, 60, 50));
+		CollisionMapForet4.addCollidable(new Circle(520, 1010, 60, 50));
+		CollisionMapForet4.addCollidable(new Circle(590, 1080, 60, 50));
+		
+		CollisionMapForet4.addCollidable(new Circle(400+530, 890, 60, 50));
+		CollisionMapForet4.addCollidable(new Circle(330+530, 960, 60, 50));
+		CollisionMapForet4.addCollidable(new Circle(280+530, 1010, 60, 50));
+		CollisionMapForet4.addCollidable(new Circle(460+530, 960, 60, 50));
+		CollisionMapForet4.addCollidable(new Circle(520+530, 1010, 60, 50));
+		CollisionMapForet4.addCollidable(new Circle(590+530, 1080, 60, 50));
+
+		CollisionMapForet4.addCollidable(new Circle(200, 1080, 60, 50));
+		CollisionMapForet4.addCollidable(new Circle(730, 1080, 60, 50));
+
+		CollisionMapForet4.addCollidable(new Circle(930, 0, 60, 50));
+		CollisionMapForet4.addCollidable(new Circle(930, 120, 60, 50));
+
+		CollisionMapForet4.addCollidable(new Circle(930, 260, 60, 50));
+		CollisionMapForet4.addCollidable(new Circle(990, 320, 60, 50));
+		CollisionMapForet4.addCollidable(new Circle(1050, 380, 60, 50));
+		CollisionMapForet4.addCollidable(new Circle(990, 440, 60, 50));
+		CollisionMapForet4.addCollidable(new Circle(1050, 380, 60, 50));
+		CollisionMapForet4.addCollidable(new Circle(930, 500, 60, 50));
+		CollisionMapForet4.addCollidable(new Circle(930, 640, 60, 50));
+		CollisionMapForet4.addCollidable(new Circle(860, 690, 60, 50));
+		CollisionMapForet4.addCollidable(new Circle(720, 830, 60, 50));
+		CollisionMapForet4.addCollidable(new Circle(790, 760, 60, 50));
+		CollisionMapForet4.addCollidable(new Circle(660, 880, 60, 50));
+		CollisionMapForet4.addCollidable(new Circle(590, 820, 60, 50));
+		
+		CollisionMapForet4.addCollidable(new Circle(530, 760, 60, 50));
+		CollisionMapForet4.addCollidable(new Circle(530, 630, 60, 50));
+		CollisionMapForet4.addCollidable(new Circle(450, 560, 60, 50));
+
+		//Ammat haut droite 
+		CollisionMapForet4.addCollidable(new Circle(1190, 0, 60, 50));
+		CollisionMapForet4.addCollidable(new Circle(1190, 130, 60, 50));
+		CollisionMapForet4.addCollidable(new Circle(1260, 180, 60, 50));
+		CollisionMapForet4.addCollidable(new Circle(1320, 250, 60, 50));
+		CollisionMapForet4.addCollidable(new Circle(1380, 180, 60, 50));
+		CollisionMapForet4.addCollidable(new Circle(1450, 130, 60, 50));
+		CollisionMapForet4.addCollidable(new Circle(1530, 60, 60, 50));
+		
+		CollisionMapForet4.addCollidable(new Circle(1590, 0, 60, 50));
+		CollisionMapForet4.addCollidable(new Circle(1720, 0, 60, 50));
+		CollisionMapForet4.addCollidable(new Circle(1590, 250, 60, 50));
+		CollisionMapForet4.addCollidable(new Circle(1720, 250, 60, 50));
+		
+		CollisionMapForet4.addCollidable(new Circle(1380+10, 180+260, 60, 50));
+		CollisionMapForet4.addCollidable(new Circle(1450+10, 130+250, 60, 50));
+		CollisionMapForet4.addCollidable(new Circle(1530, 60+250, 60, 50));
+
+		CollisionMapForet4.addCollidable(
+                new Rectangle(1300, 50, 480, 60)
+                        .transform(Transform.createRotateTransform((float) Math.toRadians(45), 350 , 75)));
+		
+		CollisionMapForet4.addCollidable(
+                new Rectangle(1300, 50, 60, -300)
+                        .transform(Transform.createRotateTransform((float) Math.toRadians(45), 350 , 75)));
+		
+		CollisionMapForet4.addCollidable(new Circle(1060, 770, 60, 50));
+		CollisionMapForet4.addCollidable(new Circle(1260, 570, 60, 50));
+		CollisionMapForet4.addCollidable(new Circle(1320, 640, 60, 50));
+		CollisionMapForet4.addCollidable(new Circle(1320, 750, 60, 50));
+		CollisionMapForet4.addCollidable(new Circle(1380, 820, 60, 50));
+		CollisionMapForet4.addCollidable(new Circle(1450, 890, 60, 50));
+		CollisionMapForet4.addCollidable(new Circle(1520, 950, 60, 50));
+		CollisionMapForet4.addCollidable(new Circle(1520, 1080, 60, 50));
+		
+		
+		//Ammat bas droite 
+
+		CollisionMapForet4.addCollidable(new Circle(1720, 1020, 60, 50));
+		CollisionMapForet4.addCollidable(new Circle(1720, 880, 60, 50));
+		CollisionMapForet4.addCollidable(new Circle(1720, 760, 60, 50));
+
+		CollisionMapForet4.addCollidable(new Circle(1660, 830, 60, 50));
+
+		CollisionMapForet4.addCollidable(new Circle(1790, 700, 60, 50));
+		CollisionMapForet4.addCollidable(new Circle(1920, 700, 60, 50));
+
+		//Ammat droite mid
+		
+		CollisionMapForet4.addCollidable(new Circle(1520, 700, 60, 50));
+		
+		CollisionMapForet4.addCollidable(
+                new Rectangle(1860, 50, -300, 60)
+                        .transform(Transform.createRotateTransform((float) Math.toRadians(45), 1000 , 75)));
+
+		CollisionMapForet4.addCollidable(
+                new Rectangle(1860, 50, -60, -300)
+                        .transform(Transform.createRotateTransform((float) Math.toRadians(45), 1000 , 75)));
+		
+		CollisionMapForet4.addCollidable(new Circle(1790, 440, 60, 50));
+		CollisionMapForet4.addCollidable(new Circle(1920, 440, 60, 50));
 
 	}
 	
@@ -1073,7 +1225,7 @@ public class Global {
 		        boolean isright = input.isKeyDown(right);
 		        boolean isup = input.isKeyDown(up);
 		        boolean isdown = input.isKeyDown(down);
-		        int chance = 40000000;
+		        int chance = 40000000	;
 		        if (isleft) {
 		        	InputHandler.keyPressed();
 		            if (!c.willCollideWithMap(Global.P1.getHitbox(),-3,0)) {

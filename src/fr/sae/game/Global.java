@@ -1305,13 +1305,18 @@ public class Global {
 	        Global.canMoovPlayer = false;
 
 	        // Générer un nombre aléatoire de mobs entre 1 et 4
-	        int numberOfMobs = getRandomNumber(1,Global.P1.getLevel());
+	        int numberOfMobs = getRandomNumber(1,3);
 
 	        // Boucle pour initialiser chaque mob avec un niveau et un nom aléatoire
 	        for (int i = 0; i < numberOfMobs; i++) {
 	            String name = "Chaton " + (i + 1);
-	            int level = getRandomNumber(1,2);
-	            Global.mobs[i] = new Chaton(name, level);
+	            int level;
+	            if(Global.P1.getLevel() < 3) {
+	            	level = getRandomNumber(1,3);
+	            } else {	            	
+	            	level = getRandomNumber(Global.P1.getLevel()-1, Global.P1.getLevel() + 1);
+	            }
+	            Global.mobs[i] = new Chaton(name, level); 
 	        }
 
 	        // Entrer dans l'état de combat (ID 100)
@@ -1414,16 +1419,16 @@ public class Global {
 	        if (Global.P1 == null) {
 	            switch (Global.Player1Classe) {
 	                case "Swordman":
-	                    P1 = new Swordsman(Global.Player1Name, classep1Lvl);
+	                    P1 = new Swordsman(Global.Player1Name, 1);
 	                    break;
 	                case "Berserker":
-	                    P1 = new Berserker(Global.Player1Name, classep1Lvl, null);
+	                    P1 = new Berserker(Global.Player1Name, 1, null);
 	                    break;
 	                case "Healer":
-	                    P1 = new Healer(Global.Player1Name, classep1Lvl, null);
+	                    P1 = new Healer(Global.Player1Name, 1, null);
 	                    break;
 	                case "Mage":
-	                    P1 = new Mage(Global.Player1Name, classep1Lvl, null);
+	                    P1 = new Mage(Global.Player1Name, 1, null);
 	                    break;
 	            }
 	        }
@@ -1452,16 +1457,16 @@ public class Global {
 	        if (Global.P2 == null) {
 	            switch (Global.Player2Classe) {
 	                case "Swordman":
-	                    P2 = new Swordsman("Swordsman", classep2Lvl);
+	                    P2 = new Swordsman("Swordsman", 1);
 	                    break;
 	                case "Berserker":
-	                    P2 = new Berserker("Berserker", classep2Lvl, null);
+	                    P2 = new Berserker("Berserker", 1, null);
 	                    break;
 	                case "Healer":
-	                    P2 = new Healer("Healer", classep2Lvl, null);
+	                    P2 = new Healer("Healer", 1, null);
 	                    break;
 	                case "Mage":
-	                    P2 = new Mage("Mage", classep2Lvl, null);
+	                    P2 = new Mage("Mage", 1, null);
 	                    break;
 	            }
 	        }
@@ -1518,6 +1523,8 @@ public class Global {
 	            Global.CollisionMapForet5.deletLastCollidable();
 	        }
 
+	        Global.P1.loadLevel(classep1Lvl);
+	        Global.P2.loadLevel(classep2Lvl);
 	        System.out.println("Game loaded successfully!");
 
 	    } catch (Exception e) {

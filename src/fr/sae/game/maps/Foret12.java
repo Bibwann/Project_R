@@ -36,7 +36,7 @@ public class Foret12 extends BasicGameState {
         	e.getMessage();
         	System.out.print(e);
         }
-        this.Warp1.warp(Global.P1, sbg, 12);
+        this.Warp1.warp(Global.P1, sbg, 21);
 
 
 //--------------------------------------------------------------------------------------------------------------------------

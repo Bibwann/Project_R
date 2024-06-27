@@ -72,6 +72,7 @@ public class Foret7 extends BasicGameState {
 	@Override
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
 		Global.actualId = 17;
+		
 		g.drawImage(new Image("data/maps/Map007.png").getScaledCopy(Global.width, Global.height), 0, 0);
         g.drawImage(new Image("data/chest/chest.png").getSubImage(0, 0, 48, 48),400, 900);
 

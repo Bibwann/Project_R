@@ -365,8 +365,8 @@ public class Global {
 	
 	public static void CollisionsMapForet2() {
 		//Haut
-		CollisionMapForet2.addCollidable(new Rectangle(0, 0, 860, 50));
-		CollisionMapForet2.addCollidable(new Rectangle(1060, 0, 1920-1060, 50));
+		CollisionMapForet2.addCollidable(new Rectangle(0, 0, 1920, 50));
+		//CollisionMapForet2.addCollidable(new Rectangle(1060, 0, 1920-1060, 50));
 		
 		//Foret a gauche
 		CollisionMapForet2.addCollidable(new Rectangle(0, 450, 130, 1080-450));
@@ -1034,6 +1034,15 @@ public class Global {
         //Bas
         CollisionMapForet10.addCollidable(new Rectangle(0, 1080-130, 1920, 130));
 
+        // EASTER EGG
+        CollisionMapForet10.addCollidable(new Rectangle(500, 400, 60, 60));
+        CollisionMapForet10.addCollidable(new Rectangle(500, 560, 60, 60));
+        CollisionMapForet10.addCollidable(new Rectangle(640, 680, 60, 60));
+        CollisionMapForet10.addCollidable(new Rectangle(640, 280, 60, 60));
+        CollisionMapForet10.addCollidable(new Rectangle(1032, 670, 60, 60));
+        CollisionMapForet10.addCollidable(new Rectangle(1148, 550, 60, 60));
+        CollisionMapForet10.addCollidable(new Rectangle(1160, 429, 60, 60));
+        
         //Arbres du centre
         CollisionMapForet10.addCollidable(new Circle(460, 510, 60, 50));
         CollisionMapForet10.addCollidable(new Circle(590, 630, 60, 50));

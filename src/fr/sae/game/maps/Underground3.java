@@ -19,7 +19,6 @@ public class Underground3 extends BasicGameState {
 	Warp Warp1;
 	Warp Warp2;
 	Warp Warp3;
-
 	DialogueBox dialogueBoxPot;
 	DialogueBox dialogueBoxGrille;
 	DialogueBox dialogueBoxPelle;
@@ -254,7 +253,6 @@ public class Underground3 extends BasicGameState {
 		    this.Warp1.draw(g);
 		    this.Warp2.draw(g);
 		    this.Warp3.draw(g);
-
 	    	}
 //--------------------------------------------------------------------------------------------------------------------------
 	}

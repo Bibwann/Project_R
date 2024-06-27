@@ -15,15 +15,16 @@ public class Underground2 extends BasicGameState {
 	Warp Warp1;
 	Warp Warp2;
 	Warp Warp3;
-
 	public Underground2(int stateID) {
 	}
 
 	@Override
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
 		this.Warp1= new Warp(1610, 1070, 120, 10, 1670, 150);
-        this.Warp2= new Warp(210, 130, 50, 40, 890, 750);
-        this.Warp3= new Warp(1860, 130, 50, 40, 150, 85);
+		this.Warp2= new Warp(210, 130, 50, 40, 890, 750);
+		this.Warp3= new Warp(1860, 130, 50, 40, 140, 100);
+
+
 	}
 
 	
@@ -42,7 +43,8 @@ public class Underground2 extends BasicGameState {
         }
         this.Warp1.warp(Global.P1, sbg, 24);// BAS
         this.Warp2.warp(Global.P1, sbg, 12);// ECHELLE
-        this.Warp3.warp(Global.P1, sbg, 14);// ECHELLE DROITE
+        
+        this.Warp3.warp(Global.P1, sbg, 13);// ECHELLE DROITE
        
 
 //--------------------------------------------------------------------------------------------------------------------------
@@ -56,7 +58,6 @@ public class Underground2 extends BasicGameState {
 		    this.Warp1.draw(g);
 		    this.Warp2.draw(g);
 		    this.Warp3.draw(g);
-
 	    	}
 //--------------------------------------------------------------------------------------------------------------------------
 	}

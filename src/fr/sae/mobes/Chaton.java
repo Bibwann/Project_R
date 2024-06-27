@@ -3,12 +3,13 @@ package fr.sae.mobes;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
+import fr.sae.game.Global;
 import fr.sae.game.caractere.Mobs;
 
 public class Chaton extends Mobs {
 
     public Chaton(String name, int level) throws SlickException {
-        super(name, level, new Image("data/Cats/cat.png"), new Image("data/Cats/cat.png"));
+        super(name, level, new Image(Global.egg2), new Image(Global.egg2));
 
         // Set specific attributes for Chaton
         this.hpMax = (int) (40*(level*1.1)); // Maximum hit points

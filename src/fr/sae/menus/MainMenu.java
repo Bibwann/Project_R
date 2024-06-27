@@ -67,6 +67,12 @@ public class MainMenu extends BasicGameState {
             g.setFont(menuFont);
             g.drawString(menuItem, x, y);
         }
+
+        // Render instructions on the right side
+        g.setFont(menuFont);
+        g.setColor(Color.white);
+        g.drawString("Utilisez les flèches directionnelles pour naviguer.", Global.width - menuFont.getWidth("Utilisez les flèches directionnelles pour naviguer.") - 50, 50);
+        g.drawString("Appuyez sur Entrée pour valider.", Global.width - menuFont.getWidth("Appuyez sur Entrée pour valider.") - 50, 80);
     }
 
     @Override

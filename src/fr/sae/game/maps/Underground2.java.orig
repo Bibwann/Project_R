@@ -11,28 +11,29 @@ import org.newdawn.slick.state.StateBasedGame;
 import fr.sae.game.Global;
 import fr.sae.game.Warp;
 
-public class Underground1 extends BasicGameState {
+public class Underground2 extends BasicGameState {
 	Warp Warp1;
 	Warp Warp2;
 	Warp Warp3;
-	Warp Warp4;
-	public Underground1(int stateID) {
-	}
 
+	public Underground2(int stateID) {
+	}
 
 	@Override
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
-		this.Warp1= new Warp(1600, 100, 120, 30, 1640,1020);
-		this.Warp2= new Warp(390, 100, 60, 60, 150, 850);
-		
-		this.Warp3= new Warp(200, 1070, 120, 10, 1210, 180);
-		this.Warp4= new Warp(1000, 960, 60, 60, 1680, 320);
+		this.Warp1= new Warp(1610, 1070, 120, 10, 1670, 150);
+
+		this.Warp2= new Warp(210, 130, 50, 40, 890, 750);
+		this.Warp3= new Warp(1860, 130, 50, 40, 140, 100);
+
+
 	}
 
+	
 	@Override
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
-		Global.actualId = 24;
-		g.drawImage(new Image("data/maps/Map014.png").getScaledCopy(Global.width, Global.height), 0, 0);
+		Global.actualId = 25;
+		g.drawImage(new Image("data/maps/Map015.png").getScaledCopy(Global.width, Global.height), 0, 0);
         
         try {
 	    	Global.P1.Sprite(g);
@@ -42,10 +43,11 @@ public class Underground1 extends BasicGameState {
         	e.getMessage();
         	System.out.print(e);
         }
-        this.Warp1.warp(Global.P1, sbg, 25);//HAUT
-        this.Warp2.warp(Global.P1, sbg, 14);//ECHELLE
-        this.Warp3.warp(Global.P1, sbg, 26);//BAS
-        this.Warp4.warp(Global.P1, sbg, 12);//ESCALIER
+        this.Warp1.warp(Global.P1, sbg, 24);// BAS
+        this.Warp2.warp(Global.P1, sbg, 12);// ECHELLE
+        
+        this.Warp3.warp(Global.P1, sbg, 13);// ECHELLE DROITE
+       
 
 //--------------------------------------------------------------------------------------------------------------------------
 	//Temp	    
@@ -54,19 +56,22 @@ public class Underground1 extends BasicGameState {
 	    if (Global.AfficherToutesLesCollisions) {
 		    g.draw(Global.P1.getHitbox());
 		    
-		    Global.CollisionMapUnderground1.drawCollisions(g);
+		    Global.CollisionMapUnderground2.drawCollisions(g);
 		    this.Warp1.draw(g);
 		    this.Warp2.draw(g);
 		    this.Warp3.draw(g);
-		    this.Warp4.draw(g);
+
 	    	}
 //--------------------------------------------------------------------------------------------------------------------------
 	}
 
 	@Override
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
+
 		
-		Global.updatePlayerMovement(gc.getInput(),Global.CollisionMapUnderground1,delta,sbg);
+
+		Global.updatePlayerMovement(gc.getInput(),Global.CollisionMapUnderground2,delta,sbg);
+
 		if (gc.getInput().isKeyPressed(Global.pause)) {
             sbg.enterState(101); // Passer à l'état 101 (menu de pause)
         }
@@ -76,7 +81,7 @@ public class Underground1 extends BasicGameState {
 
 	@Override
 	public int getID() {
-		return 24;
+		return 25;
 	}
 
 }

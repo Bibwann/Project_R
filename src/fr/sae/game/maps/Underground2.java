@@ -22,7 +22,9 @@ public class Underground2 extends BasicGameState {
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
 		this.Warp1= new Warp(1610, 1070, 120, 10, 1670, 150);
 		this.Warp2= new Warp(210, 130, 50, 40, 890, 750);
-		this.Warp3= new Warp(1860, 130, 50, 40, 150, 85);
+		this.Warp3= new Warp(1860, 130, 50, 40, 140, 100);
+
+
 	}
 
 	
@@ -41,14 +43,15 @@ public class Underground2 extends BasicGameState {
         }
         this.Warp1.warp(Global.P1, sbg, 24);// BAS
         this.Warp2.warp(Global.P1, sbg, 12);// ECHELLE
-        this.Warp3.warp(Global.P1, sbg, 14);// ECHELLE DROITE
+        
+        this.Warp3.warp(Global.P1, sbg, 13);// ECHELLE DROITE
        
 
 //--------------------------------------------------------------------------------------------------------------------------
 	//Temp	    
 
 	    //Affiche toutes les collisions de la map et du joueur
-	    if (true) {
+	    if (Global.AfficherToutesLesCollisions) {
 		    g.draw(Global.P1.getHitbox());
 		    
 		    Global.CollisionMapUnderground2.drawCollisions(g);
@@ -61,7 +64,7 @@ public class Underground2 extends BasicGameState {
 
 	@Override
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
-		Global.updatePlayerMovement(gc.getInput(),Global.CollisionMapUnderground2,delta);
+		Global.updatePlayerMovement(gc.getInput(),Global.CollisionMapUnderground2,delta,sbg);
 		if (gc.getInput().isKeyPressed(Global.pause)) {
             sbg.enterState(101); // Passer à l'état 101 (menu de pause)
         }

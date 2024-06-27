@@ -46,7 +46,7 @@ public class Foret13 extends BasicGameState {
 	//Temp	    
 
 	    //Affiche toutes les collisions de la map et du joueur
-	    if (true) {
+	    if (Global.AfficherToutesLesCollisions) {
 		    g.draw(Global.P1.getHitbox());
 		    
 		    Global.CollisionMapForet13.drawCollisions(g);
@@ -60,7 +60,7 @@ public class Foret13 extends BasicGameState {
 	@Override
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
 		
-		Global.updatePlayerMovement(gc.getInput(),Global.CollisionMapForet13,delta);
+		Global.updatePlayerMovement(gc.getInput(),Global.CollisionMapForet13,delta,sbg);
 		if (gc.getInput().isKeyPressed(Global.pause)) {
             sbg.enterState(101); // Passer à l'état 101 (menu de pause)
         }

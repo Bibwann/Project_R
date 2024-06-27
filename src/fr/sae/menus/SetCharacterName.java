@@ -15,14 +15,14 @@ public class SetCharacterName extends BasicGameState {
     private Color backgroundColor = new Color(0, 0, 0, 200);
     private int arrowPosition = 1;
 
-    private String[][] characters = { 
-        { " ", "A", "B", "C", "D", "E", "F", "G", "H", " " },
-        { "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R" },
-        { "S", "T", "U", "V", "W", "X", "Y", "Z", "a", "b" },
-        { "c", "d", "e", "f", "g", "h", "i", "j", "k", "l" },
-        { "m", "n", "o", "p", "q", "r", "s", "t", "u", "v" },
-        { " " ,"w", "x", "y", "z", "0", "1", "2", "3", " " },
-        { " ", " ", "4", "5", "6", "7", "8", "9", " ", " " }
+    private String[][] characters = {
+            {" ", "A", "B", "C", "D", "E", "F", "G", "H", " "},
+            {"I", "J", "K", "L", "M", "N", "O", "P", "Q", "R"},
+            {"S", "T", "U", "V", "W", "X", "Y", "Z", "a", "b"},
+            {"c", "d", "e", "f", "g", "h", "i", "j", "k", "l"},
+            {"m", "n", "o", "p", "q", "r", "s", "t", "u", "v"},
+            {" ", "w", "x", "y", "z", "0", "1", "2", "3", " "},
+            {" ", " ", "4", "5", "6", "7", "8", "9", " ", " "}
     };
     private StateBasedGame game;
 
@@ -32,7 +32,7 @@ public class SetCharacterName extends BasicGameState {
     @Override
     public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
         this.game = sbg;
-        Font awtFont = new Font("Verdana", Font.BOLD, 24); 
+        Font awtFont = new Font("Verdana", Font.BOLD, 24);
         font = new TrueTypeFont(awtFont, true);
     }
 
@@ -43,12 +43,12 @@ public class SetCharacterName extends BasicGameState {
 
         g.setColor(textColor);
         g.setFont(font);
-        g.drawString("Enter Character Name:", (Global.width/2)-200, 150); 
-        g.drawString(characterName, (Global.width/2)-200, 200); 
-        g.drawString(">", (Global.width/2)-230, 200); 
+        g.drawString("Enter Character Name:", (Global.width / 2) - 200, 150);
+        g.drawString(characterName, (Global.width / 2) - 200, 200);
+        g.drawString(">", (Global.width / 2) - 230, 200);
 
         int y = 300;
-        int spacing = 60; 
+        int spacing = 60;
 
         // Render the on-screen keyboard layout
         for (int i = 0; i < characters.length; i++) {
@@ -56,7 +56,7 @@ public class SetCharacterName extends BasicGameState {
 
             for (int j = 0; j < characters[i].length; j++) {
                 String character = characters[i][j];
-                int x = (gc.getWidth() - totalWidth) / 2 + j * spacing + spacing / 2; 
+                int x = (gc.getWidth() - totalWidth) / 2 + j * spacing + spacing / 2;
 
                 if (i * 10 + j == arrowPosition) {
                     g.setColor(Color.green);
@@ -69,9 +69,11 @@ public class SetCharacterName extends BasicGameState {
         }
 
         // Render instructions for navigation and character selection
-        String message = "Use the arrow keys to select a character and press SPACE to add it to your name.";
+        String message = "Use arrow keys to move, SPACE (interact key) to select a character, or type directly on keyboard. Press enter to validate.";
         int messageWidth = g.getFont().getWidth(message);
-        g.drawString(message, (gc.getWidth() - messageWidth) / 2, gc.getHeight() - 50);
+        int messageX = (gc.getWidth() - messageWidth) / 2; // Centre horizontalement
+        int messageY = gc.getHeight() - 30; // En bas de l'écran
+        g.drawString(message, messageX, messageY);
     }
 
     @Override

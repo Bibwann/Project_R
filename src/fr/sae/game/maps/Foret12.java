@@ -23,7 +23,6 @@ public class Foret12 extends BasicGameState {
 		
 	}
 
-	
 	@Override
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
 		Global.actualId = 22;
@@ -37,33 +36,31 @@ public class Foret12 extends BasicGameState {
         	e.getMessage();
         	System.out.print(e);
         }
-        this.Warp1.warp(Global.P1, sbg, 12);
-        
-       
+        this.Warp1.warp(Global.P1, sbg, 21);
+
 
 //--------------------------------------------------------------------------------------------------------------------------
 	//Temp	    
 
 	    //Affiche toutes les collisions de la map et du joueur
-	    if (true) {
+	    if (Global.AfficherToutesLesCollisions) {
 		    g.draw(Global.P1.getHitbox());
 		    
 		    Global.CollisionMapForet12.drawCollisions(g);
 		    this.Warp1.draw(g);
-		    
-		    
+		       
 	    	}
 //--------------------------------------------------------------------------------------------------------------------------
 	}
 
 	@Override
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
-		Global.updatePlayerMovement(gc.getInput(),Global.CollisionMapForet12,delta);
+		Global.updatePlayerMovement(gc.getInput(),Global.CollisionMapForet12,delta,sbg);
 		if (gc.getInput().isKeyPressed(Global.pause)) {
             sbg.enterState(101); // Passer à l'état 101 (menu de pause)
         }
 		Global.P1.AnimateWhileMoove();
-		
+
 	}
 
 	@Override

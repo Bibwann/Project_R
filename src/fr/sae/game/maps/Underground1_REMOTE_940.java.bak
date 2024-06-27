@@ -23,15 +23,14 @@ public class Underground1 extends BasicGameState {
 	@Override
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
 		this.Warp1= new Warp(1600, 100, 120, 30, 1640,1020);
-		this.Warp2= new Warp(390, 100, 60, 60, 150, 850);
-		
-		this.Warp3= new Warp(200, 1070, 120, 10, 1210, 180);
-		this.Warp4= new Warp(1000, 960, 60, 60, 1680, 320);
+        this.Warp2= new Warp(390, 100, 60, 60, 1100, 600);
+        this.Warp3= new Warp(200, 1070, 120, 10, 1210, 180);
+        this.Warp4= new Warp(1000, 960, 60, 60, 1680, 320);
 	}
 
 	@Override
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
-		Global.actualId = 24;
+		Global.actualId = 24; 
 		g.drawImage(new Image("data/maps/Map014.png").getScaledCopy(Global.width, Global.height), 0, 0);
         
         try {
@@ -43,9 +42,10 @@ public class Underground1 extends BasicGameState {
         	System.out.print(e);
         }
         this.Warp1.warp(Global.P1, sbg, 25);//HAUT
-        this.Warp2.warp(Global.P1, sbg, 14);//ECHELLE
+        this.Warp2.warp(Global.P1, sbg, 13);//ECHELLE
         this.Warp3.warp(Global.P1, sbg, 26);//BAS
         this.Warp4.warp(Global.P1, sbg, 12);//ESCALIER
+       
 
 //--------------------------------------------------------------------------------------------------------------------------
 	//Temp	    

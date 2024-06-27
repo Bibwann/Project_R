@@ -27,15 +27,16 @@ public abstract class Chateau1 extends BasicGameState {
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
 		
 		Global.actualId = 51;
-
 	}
 
 	@Override
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
 		Input input =gc.getInput();
 		
-		Global.updatePlayerMovement(input, Global.CollisionMapForet1,delta);
+		Global.updatePlayerMovement(input, Global.CollisionMapForet1,delta,sbg);
 		Global.P1.AnimateWhileMoove();
+		Global.P1.cannotRandomBattle();
+
 		if (gc.getInput().isKeyPressed(Global.pause)) {
             sbg.enterState(101); // Passer à l'état 101 (menu de pause)
         }
@@ -45,6 +46,5 @@ public abstract class Chateau1 extends BasicGameState {
 	public int getID() {
 		return 51;
 	}
-
 
 }

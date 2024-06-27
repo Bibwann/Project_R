@@ -18,6 +18,7 @@ import fr.sae.game.Warp;
 import fr.sae.menus.MainMenu;
 import fr.sae.menus.OptionMenu;
 import fr.sae.menus.SetCharacterName;
+import fr.sae.mobes.Boss;
 import fr.sae.mobes.Chaton;
 
 public class Foret1 extends BasicGameState{
@@ -196,7 +197,7 @@ public class Foret1 extends BasicGameState{
 	//Temp	     
 
 	    //Affiche toutes les collisions de la map et du joueur
-	    if (true) {
+	    if (Global.AfficherToutesLesCollisions) {
 		    g.draw(Global.P1.getHitbox());
 		    
 		    Global.CollisionMapForet1.drawCollisions(g);
@@ -218,13 +219,14 @@ public class Foret1 extends BasicGameState{
 		Input input =gc.getInput();
 		System.err.println(Global.Foret5Battle+" "+Global.Foret6Battle+" " + Global.Foret7Battle+" "+Global.Underground3Battle);
 		
-		Global.updatePlayerMovement(input, Global.CollisionMapForet1,delta);
+		Global.updatePlayerMovement(input, Global.CollisionMapForet1,delta,sbg);
 		Global.P1.AnimateWhileMoove();
+		Global.P1.cannotRandomBattle();
+		
 		if (gc.getInput().isKeyPressed(Global.pause)) {
             sbg.enterState(101); // Passer à l'état 101 (menu de pause)
         }
-		
-		
+
 		
 		//Structure obligatoire pour les dialogbox sinon ca marche po jsp pk
 		boolean i =input.isKeyPressed(Global.interract);

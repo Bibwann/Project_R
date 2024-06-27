@@ -23,7 +23,7 @@ public class Foret2 extends BasicGameState{
 	Warp Warp4;
 	Warp Warp5;
 	Warp Warp6;
-	//Warp Warp7;
+	Warp Warp7;
 	public Foret2(int stateID) {
 	}
 
@@ -37,8 +37,7 @@ public class Foret2 extends BasicGameState{
 		this.Warp4= new Warp(1720, 320, 60, 60, 1100, 950);//ESCALIER
 		this.Warp5= new Warp(980, 1070, 80, 10, 900, 40);//BAS
 		this.Warp6= new Warp(650, 1070, 75, 10, 670, 40);//BAS
-		//this.Warp7= new Warp(870, 0, 190, 10, 945, 1020);//haut
-
+		this.Warp7= new Warp(870, 0, 190, 10, 945, 1020);//haut
 	}
 
 	@Override
@@ -61,13 +60,13 @@ public class Foret2 extends BasicGameState{
         this.Warp4.warp(Global.P1, sbg, 24);
         this.Warp5.warp(Global.P1, sbg, 13);
         this.Warp6.warp(Global.P1, sbg, 13);
-        //this.Warp7.warp(Global.P1, sbg, 22);
+        this.Warp7.warp(Global.P1, sbg, 22);
 
 //--------------------------------------------------------------------------------------------------------------------------
 	//Temp	    
 
 	    //Affiche toutes les collisions de la map et du joueur
-	    if (Global.AfficherToutesLesCollisions) {
+	    if (true) {
 		    g.draw(Global.P1.getHitbox());
 		    
 		    Global.CollisionMapForet2.drawCollisions(g);
@@ -77,7 +76,7 @@ public class Foret2 extends BasicGameState{
 		    this.Warp4.draw(g);
 		    this.Warp5.draw(g);
 		    this.Warp6.draw(g);
-		    //this.Warp7.draw(g);
+		    this.Warp7.draw(g);
 	    	}
 //--------------------------------------------------------------------------------------------------------------------------
 	}
@@ -85,13 +84,11 @@ public class Foret2 extends BasicGameState{
 	@Override
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
 
-		Global.updatePlayerMovement(gc.getInput(),Global.CollisionMapForet2,delta,sbg);
+		Global.updatePlayerMovement(gc.getInput(),Global.CollisionMapForet2,delta);
 		if (gc.getInput().isKeyPressed(Global.pause)) {
             sbg.enterState(101); // Passer à l'état 101 (menu de pause)
         }
 		Global.P1.AnimateWhileMoove();
-		Global.P1.cannotRandomBattle();
-
 		
 //----------------------------------------------------------------------------------------------------------------------------
 	//Temp

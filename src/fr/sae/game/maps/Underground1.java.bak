@@ -27,11 +27,15 @@ public class Underground1 extends BasicGameState {
 		
 		this.Warp3= new Warp(200, 1070, 120, 10, 1210, 180);
 		this.Warp4= new Warp(1000, 960, 60, 60, 1680, 320);
+
 	}
 
 	@Override
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
+
 		Global.actualId = 24;
+
+
 		g.drawImage(new Image("data/maps/Map014.png").getScaledCopy(Global.width, Global.height), 0, 0);
         
         try {
@@ -46,6 +50,7 @@ public class Underground1 extends BasicGameState {
         this.Warp2.warp(Global.P1, sbg, 14);//ECHELLE
         this.Warp3.warp(Global.P1, sbg, 26);//BAS
         this.Warp4.warp(Global.P1, sbg, 12);//ESCALIER
+
 
 //--------------------------------------------------------------------------------------------------------------------------
 	//Temp	    
@@ -65,8 +70,12 @@ public class Underground1 extends BasicGameState {
 
 	@Override
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
+
+	
+
 		
 		Global.updatePlayerMovement(gc.getInput(),Global.CollisionMapUnderground1,delta,sbg);
+
 		if (gc.getInput().isKeyPressed(Global.pause)) {
             sbg.enterState(101); // Passer à l'état 101 (menu de pause)
         }

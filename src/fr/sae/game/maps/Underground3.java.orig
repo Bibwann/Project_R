@@ -19,6 +19,7 @@ public class Underground3 extends BasicGameState {
 	Warp Warp1;
 	Warp Warp2;
 	Warp Warp3;
+
 	DialogueBox dialogueBoxPot;
 	DialogueBox dialogueBoxGrille;
 	DialogueBox dialogueBoxPelle;
@@ -33,8 +34,10 @@ public class Underground3 extends BasicGameState {
 	@Override
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
 		this.Warp1= new Warp(1190, 120, 120, 10, 240, 1020);//HAUT
-        this.Warp2= new Warp(140, 130, 50, 40, 350, 240);//CORDE
-        this.Warp3= new Warp(990, 890, 70, 70, 550, 250);//ESCALIER
+
+		this.Warp2= new Warp(140, 130, 50, 40, 350, 240);//CORDE
+		this.Warp3= new Warp(990, 890, 70, 70, 550, 250);//ESCALIER
+
 		
 		//Obligatoire que tmpDialogbox1 aie une triggerzone hors map
 	    this.tmpDialogbox2.setTriggerZone(-1, -1, 0, 0);
@@ -253,6 +256,7 @@ public class Underground3 extends BasicGameState {
 		    this.Warp1.draw(g);
 		    this.Warp2.draw(g);
 		    this.Warp3.draw(g);
+
 	    	}
 //--------------------------------------------------------------------------------------------------------------------------
 	}

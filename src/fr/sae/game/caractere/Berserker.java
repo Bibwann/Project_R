@@ -20,22 +20,16 @@ public class Berserker extends Player {
         this.hpActual = 100;   // Current health points
         this.manaActual = 0;   // Current mana points
         this.className = "Berserker";  // Class name
-        this.inventory = new ArrayList<>(Arrays.asList(0, 1, 2));  // Initial inventory
+        
+        this.maxPotions = 5;
+        this.potions = 5;
+        this.healAmount = 25;
 
     }
     
     // Berserker's passive ability: increases damage based on missing health percentage
-    private int passif(int damage) {
-        // Berserker's passive ability: deals increased damage based on missing health percentage
-        return damage * (1 - (this.hpActual / this.hpMax));
-    }
-
-    public ArrayList<Integer> getInventory() {
-        return inventory;
-    }
-
-    public void setInventory(ArrayList<Integer> inventory) {
-        this.inventory = inventory;
+    public int passif(int damage) {
+        return (int)( damage * (1 - (this.hpActual / this.hpMax)));
     }
     
     // Attack method for the Berserker, applying the passive effect

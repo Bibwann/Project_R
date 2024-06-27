@@ -11,7 +11,13 @@ public abstract class Entity {
     protected int dmg;
     
     protected String name;
+    
     protected int level;
+    
+    protected int maxPotions;
+    protected int potions;
+    protected int healAmount;
+    
     protected Image sprite;
     protected Image Battlesprite;
 
@@ -47,10 +53,6 @@ public abstract class Entity {
         this.sprite = sprite;
     }
 
-    // Method to calculate damage considering spell damage and entity level
-    public int dmgMultipler(int spellDmg) {
-        return (spellDmg * (1 + (this.level)));
-    }
 
     // Method to check if the entity is dead
     public boolean isDead() {
@@ -61,6 +63,7 @@ public abstract class Entity {
     public void resetStats() {
         this.hpActual = this.hpMax;
         this.manaActual = this.manaMax;
+        this.potions = this.maxPotions;
     }
 
     // Method to apply damage to the entity
@@ -99,7 +102,7 @@ public abstract class Entity {
 
     // Getter and setter for damage
     public int getDmg() {
-        return dmg;
+        return this.passif(dmg);
     }
 
     public void setDmg(int dmg) {
@@ -121,11 +124,31 @@ public abstract class Entity {
     }
 
     // Method to heal the entity by 50 HP, ensuring it doesn't exceed max HP
-    public void healEntity() {
-        if (this.hpActual + 50 > this.hpMax) {
+    public void healEntity(int heal) {
+        if (this.hpActual + heal > this.hpMax) {
             this.hpActual = this.hpMax;
         } else {
-            this.hpActual += 50;
+            this.hpActual += heal;
         }
     }
+    
+    public int getPotions() {
+    	return this.potions;
+    }
+    public int getHealAmount() {
+    	return this.healAmount;
+    }
+    
+    public void removePotion() {
+    	this.potions --;
+    }
+    
+    public boolean hasPotions() {
+    	return this.potions > 0;
+    }
+    
+    public int passif(int dmg) {
+		return dmg;
+	}
+    
 }

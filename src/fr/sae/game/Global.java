@@ -1251,7 +1251,7 @@ public class Global {
 		        boolean isright = input.isKeyDown(right);
 		        boolean isup = input.isKeyDown(up);
 		        boolean isdown = input.isKeyDown(down);
-		        int chance = 4000000	;
+		        int chance = 400;
 		        if (isleft) {
 		        	InputHandler.keyPressed();
 		            if (!c.willCollideWithMap(Global.P1.getHitbox(),-3,0)) {
@@ -1704,7 +1704,6 @@ public class Global {
 	                contentBuilder.append(currentLine.trim());
 	            }
 	        }
-	        
 	        // Convert StringBuilder to String and return it
 	        return contentBuilder.toString();
 	    

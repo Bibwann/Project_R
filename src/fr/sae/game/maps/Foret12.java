@@ -38,15 +38,16 @@ public class Foret12 extends BasicGameState {
 	    this.dialogueBoxCBTFIN.setChoices(Arrays.asList("Se présenter","Partir"), choice1 -> {
             switch (choice1) {
 	            case 0:
-	        	    this.dialogueBoxCBTFIN.setTriggerZone(-1, -1, 0, 0);
-	        	    this.dialogueBoxCBTFIN = new DialogueBox(new String[] {
+    	    		this.tmpDialogbox2.setActiveTempDialogbox(true);
+
+	        	    this.tmpDialogbox2 = new DialogueBox(new String[] {
 	        				
 	        				 "Oh ! Tu es donc venu m'apporter l'objet du vieux mage ?\n"+"C'est parfait, donne-le moi s'il te plaît."
 	        	        });
 	        	    this.tmpDialogbox2.setChoices(Arrays.asList("Donner","Garder"), choice2 -> {
 	        	    	switch (choice2) {
 	        	    	case 0:
-	        	    		this.dialogueBoxCBTFIN = new DialogueBox(new String[] {
+	        	    		this.tmpDialogbox2 = new DialogueBox(new String[] {
 	    	        				"À l'aide de cet objet qui était une pelote de laine, nous allons pouvoir nous battre contre Le Chat qui a pris le contrôle de ce royaume..."
 		        	        });
 	        	    		this.tmpDialogbox2.setActiveTempDialogbox(false);
@@ -146,6 +147,9 @@ public class Foret12 extends BasicGameState {
 		dialogueBoxBranche.render(g);
 		dialogueBoxPanneau.render(g);
 		dialogueBoxCBTFIN.render(g);
+		
+		tmpDialogbox2.renderTempDialgbox(g);
+
         try {
 	    	Global.P1.Sprite(g);
 	    	Global.P1.getAnimation().stop();
@@ -169,7 +173,7 @@ public class Foret12 extends BasicGameState {
 		    this.dialogueBoxBranche.draw(g);
 		    this.dialogueBoxPanneau.draw(g);
 		    this.dialogueBoxCBTFIN.draw(g);
-		    this.tmpDialogbox2.renderTempDialgbox(g);
+		    this.tmpDialogbox2.draw(g);
 		    
 	    	}
 //--------------------------------------------------------------------------------------------------------------------------
@@ -178,7 +182,6 @@ public class Foret12 extends BasicGameState {
 	@Override
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
 		Global.updatePlayerMovement(gc.getInput(),Global.CollisionMapForet12,delta,sbg);
-		Global.updatePlayerMovement(gc.getInput(),Global.CollisionsMapVide,delta,sbg);
 		if (gc.getInput().isKeyPressed(Global.pause)) {
             sbg.enterState(101); // Passer à l'état 101 (menu de pause)
         }

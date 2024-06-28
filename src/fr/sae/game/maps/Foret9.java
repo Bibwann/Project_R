@@ -75,7 +75,6 @@ public class Foret9 extends BasicGameState {
 	@Override
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
 		Global.updatePlayerMovement(gc.getInput(),Global.CollisionMapForet9,delta,sbg);
-		Global.updatePlayerMovement(gc.getInput(),Global.CollisionsMapVide,delta,sbg);
 		Input input =gc.getInput();
 		
 		Global.updatePlayerMovement(input,Global.CollisionMapForet9,delta,sbg);

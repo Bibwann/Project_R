@@ -39,7 +39,7 @@ import org.w3c.dom.NodeList;
 public class Global {
 	
 	//Rien a foutre
-	public static boolean AfficherToutesLesCollisions=true;
+	public static boolean AfficherToutesLesCollisions=false;
 	 
 	//Objects de quetes
 	 
@@ -1321,11 +1321,11 @@ public class Global {
 	        // Boucle pour initialiser chaque mob avec un niveau et un nom aléatoire
 	        for (int i = 0; i < numberOfMobs; i++) {
 	            String name = "Chaton " + (i + 1);
-	            int level;
-	            if(Global.P1.getLevel() < 3) {
-	            	level = getRandomNumber(1,3);
-	            } else {	            	
-	            	level = getRandomNumber(Global.P1.getLevel()-1, Global.P1.getLevel() + 1);
+	            int level=1;
+	            if(Global.P1.getLevel()<3) {
+		            level = getRandomNumber(2,Global.P1.getLevel()-1);
+	            }else {
+		            level = getRandomNumber(1,3);
 	            }
 	            Global.mobs[i] = new Chaton(name, level); 
 	        }

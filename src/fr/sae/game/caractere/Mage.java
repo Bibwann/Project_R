@@ -11,7 +11,7 @@ public class Mage extends Player {
         // Initialize specific attributes for the Mage class
         this.hpMax = 80;       // Maximum health points
         this.manaMax = 100;    // Maximum mana points
-        this.dmg = 15;         // Base damage
+        this.dmg = 16;         // Base damage
         
         this.hpActual = 80;    // Current health points
         this.manaActual = 100; // Current mana points

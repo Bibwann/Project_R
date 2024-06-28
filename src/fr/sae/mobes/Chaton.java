@@ -12,9 +12,9 @@ public class Chaton extends Mobs {
         super(name, level, new Image(Global.egg2), new Image(Global.egg2));
 
         // Set specific attributes for Chaton
-        this.hpMax = (int) (40*(level*1.2)); // Maximum hit points
+        this.hpMax = (int) (35*(1+((level-1)*1.1))); // Maximum hit points
         this.manaMax = 0; // Maximum mana points (assuming cats don't use mana)
-        this.dmg = (int) (20*(level*1.2)); // Damage points
+        this.dmg = (int) (12*(1+((level-1)*1.05))); // Damage points
 
         this.hpActual = this.hpMax; // Current hit points initialized to maximum
         this.manaActual = 0; // Current mana points initialized (assuming not used)

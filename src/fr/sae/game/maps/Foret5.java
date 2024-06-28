@@ -43,7 +43,7 @@ public class Foret5 extends BasicGameState {
   		this.dialogueBoxGuts = new DialogueBox(new String[] {
   						"Attention !! \n"+"\n"+
   						"Vous vous dirigez vers la dangereuse Forêt Luminara mais vous semblez faible.\n"+
-  						"Vous devez renforcer votre cœur pour pouvoir avancer dans cette forêt.\n"+"\n"+
+  						"Vous devez renforcer votre coeur pour pouvoir avancer dans cette forêt.\n"+"\n"+
   						"Je ne souhaite pas voir de jeunes gens comme vous mourir..."
   						
   			});	
@@ -209,6 +209,7 @@ public class Foret5 extends BasicGameState {
 		Input input =gc.getInput();
 		
 		Global.updatePlayerMovement(gc.getInput(),Global.CollisionMapForet5,delta,sbg);
+		Global.updatePlayerMovement(gc.getInput(),Global.CollisionsMapVide,delta,sbg);
 		if (gc.getInput().isKeyPressed(Global.pause)) {
             sbg.enterState(101); // Passer à l'état 101 (menu de pause)
         }

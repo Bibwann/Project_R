@@ -27,6 +27,7 @@ public class Foret2 extends BasicGameState{
 	Warp Warp6;
 	//Warp Warp7;
 	private DialogueBox dialogueBoxBranche;
+	private DialogueBox dialogueBoxPanneau;
 	private DialogueBox tmpDialogbox1= new DialogueBox(new String[] {});
 	public Foret2(int stateID) {
 	}
@@ -42,10 +43,23 @@ public class Foret2 extends BasicGameState{
 		this.Warp5= new Warp(980, 1070, 80, 10, 900, 40);//BAS
 		this.Warp6= new Warp(650, 1070, 75, 10, 670, 40);//BAS
 		//this.Warp7= new Warp(870, 0, 190, 10, 945, 1020);//haut
+		
+		
+		this.dialogueBoxPanneau = new DialogueBox(new String[] {
+				"\n" +
+			    "  |  \n" +
+			    "  |         Château Ensoleillé\n" +
+			    "  |  \n"+
+			    "  V         Marchand  \n"+
+			    "\n"
+			});	
+		this.dialogueBoxPanneau.setTriggerZone(987,127,75,75);
+		
+		
 		this.dialogueBoxBranche = new DialogueBox(new String[] {
   				"Ceci est une branche"
   	        });
-  	    this.dialogueBoxBranche.setTriggerZone(120, 310, 80, 90);
+  	    this.dialogueBoxBranche.setTriggerZone(1380, 259, 80, 90);
   	    
   	    this.dialogueBoxBranche.setChoices(Arrays.asList("Taper la branche", "Ne rien faire"), choice1 -> {
               switch (choice1) {
@@ -104,6 +118,7 @@ public class Foret2 extends BasicGameState{
         this.Warp6.warp(Global.P1, sbg, 13);
         //this.Warp7.warp(Global.P1, sbg, 22);
         dialogueBoxBranche.render(g);
+        dialogueBoxPanneau.render(g);
 
 //--------------------------------------------------------------------------------------------------------------------------
 	//Temp	    
@@ -121,6 +136,7 @@ public class Foret2 extends BasicGameState{
 		    this.Warp6.draw(g);
 		    //this.Warp7.draw(g);
 		    this.dialogueBoxBranche.draw(g);
+		    this.dialogueBoxPanneau.draw(g);
 		    this.tmpDialogbox1.renderTempDialgbox(g);
 	    	}
 //--------------------------------------------------------------------------------------------------------------------------
@@ -138,6 +154,7 @@ public class Foret2 extends BasicGameState{
 		boolean i =input.isKeyPressed(Global.interract);
 		Global.P1.AnimateWhileMoove();
 		Global.P1.cannotRandomBattle();
+		this.dialogueBoxPanneau.dialogBox(i);
 		this.dialogueBoxBranche.dialogBox(i,gc.getInput());
 		this.tmpDialogbox1.updateTempDialgbox(i, gc);
 		

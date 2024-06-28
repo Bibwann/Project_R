@@ -37,7 +37,7 @@ public class Foret7 extends BasicGameState {
 		this.dialogueBoxCbt = new DialogueBox(new String[] {
 				"La gourmandise est un péché qui mène à la mort."
 	        });
-	    this.dialogueBoxCbt.setTriggerZone(0,630, 1000, 800);
+	    this.dialogueBoxCbt.setTriggerZone(0,630, 1000, 600);
 	    
 	    this.dialogueBoxCbt.setChoices(Arrays.asList("Continuer"), choice1 -> {
             switch (choice1) {
@@ -69,24 +69,24 @@ public class Foret7 extends BasicGameState {
      });
 	    if (Global.Chest1Map7) {
 	    this.dialogueBoxchest = new DialogueBox(new String[] {
-				"Vous obtenez : un vieux parchemin déchiré."+"\n"+"Le vieux parchemin déchiré est illisible..."
+				"Vous obtenez : un vieux parchemin déchiré.\n"+"\n"+"Le vieux parchemin déchiré est illisible..."
 			});	
-		this.dialogueBoxchest.setTriggerZone(800,800,70,40);
+		this.dialogueBoxchest.setTriggerZone(395,909,70,50);
 		Global.Chest1Map7=false;
 	    }
 	    
 		if (Global.Chest2Map7) {
 		this.dialogueBoxchest2 = new DialogueBox(new String[] {
-				"Vous obtenez : un vieux parchemin déchiré."+"\n"+"Le vieux parchemin déchiré est illisible..."
+				"Vous obtenez : une bague de sagesse.\n"+"\n"+"C'est beau, mais inutile..."
 			});	
-		this.dialogueBoxchest2.setTriggerZone(580,505,70,40);
+		this.dialogueBoxchest2.setTriggerZone(1584,508,70,60);
 		Global.Chest2Map7=false;
 		}
 		
 		this.dialogueBoxBranche = new DialogueBox(new String[] {
   				"Ceci est une branche"
   	        });
-  	    this.dialogueBoxBranche.setTriggerZone(120, 310, 80, 90);
+  	    this.dialogueBoxBranche.setTriggerZone(460, 505, 80, 90);
   	    
   	    this.dialogueBoxBranche.setChoices(Arrays.asList("Taper la branche", "Ne rien faire"), choice1 -> {
               switch (choice1) {
@@ -130,6 +130,7 @@ public class Foret7 extends BasicGameState {
 		
 		g.drawImage(new Image("data/maps/Map007.png").getScaledCopy(Global.width, Global.height), 0, 0);
         g.drawImage(new Image("data/chest/chest.png").getSubImage(0, 0, 48, 48),400, 900);
+        g.drawImage(new Image("data/chest/chest.png").getSubImage(0, 0, 48, 48),1584, 508);
 
         try {
 	    	Global.P1.Sprite(g);

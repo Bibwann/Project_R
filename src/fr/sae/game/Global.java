@@ -49,6 +49,9 @@ public class Global {
 	// COFFRE 
 	public static boolean Chest1Map7=true;
 	public static boolean Chest2Map7=true;
+	public static boolean Chest1Map4=true;
+	public static boolean Chest1Map8=true;
+
 	
 	
 	//Combats uniques
@@ -559,7 +562,7 @@ public class Global {
                         .transform(Transform.createRotateTransform((float) Math.toRadians(45), 260 , 75)));
 		
         //Tonneau de la sortie de la grotte
-		CollisionMapForet4.addCollidable(new Circle(630, 290, 30, 50));
+		CollisionMapForet4.addCollidable(new Rectangle(616, 282, 48, 48));
 
         //Tonneaux tout a droite
 		CollisionMapForet4.addCollidable(new Circle(1760, 100, 30, 50));
@@ -908,6 +911,7 @@ public class Global {
         
         //Coffre
         CollisionMapForet7.addCollidable(new Rectangle(405, 910, 38, 35));
+        CollisionMapForet7.addCollidable(new Rectangle(1584, 508, 48, 48));
 
 	}
 	public static void CollisionsMapForet8() {
@@ -977,7 +981,7 @@ public class Global {
         CollisionMapForet8.addCollidable(new Rectangle(1390, 260, 60, 50));
 
         //Sceau
-        CollisionMapForet8.addCollidable(new Circle(365, 795, 25, 50));
+        CollisionMapForet8.addCollidable(new Rectangle(363, 785, 48, 48));
 
         //Arbres dead
         CollisionMapForet8.addCollidable(new Rectangle(270, 645, 60, 120));
@@ -1244,7 +1248,7 @@ public class Global {
 		        boolean isright = input.isKeyDown(right);
 		        boolean isup = input.isKeyDown(up);
 		        boolean isdown = input.isKeyDown(down);
-		        int chance = 400	;
+		        int chance = 4000000	;
 		        if (isleft) {
 		        	InputHandler.keyPressed();
 		            if (!c.willCollideWithMap(Global.P1.getHitbox(),-3,0)) {

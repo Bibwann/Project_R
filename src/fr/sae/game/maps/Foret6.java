@@ -38,7 +38,7 @@ public class Foret6 extends BasicGameState {
 		this.Warp1= new Warp(860, 1070, 470, 10, 1100, 50);
 		this.Warp2= new Warp(330, 130, 60, 60, 150, 210);
 		
-		//Obligatoire que tmpDialogbox1 aie une triggerzone hors map
+		//Obligatoire que tmpDialogbox1 ai une triggerzone hors map
 	    this.tmpDialogbox2.setTriggerZone(-1, -1, 0, 0);
 	
 	    
@@ -91,7 +91,7 @@ public class Foret6 extends BasicGameState {
 	  			});	
 	  		this.dialogueBoxTombe4.setTriggerZone(535,570,60,10);
 	    
-		//Dialogbox Avec choix multiples
+		//Dialogbox Avec choix multiples puits
 	  		this.dialogueBoxPuits = new DialogueBox(new String[] {
 	                "Vous ne voyez pas le fond du puits."
 	            });
@@ -124,7 +124,7 @@ public class Foret6 extends BasicGameState {
 	    
 	    
 	    
-	  //Dialogbox Avec choix multiples
+	  //Dialogbox Avec choix multiples tonneau
 	  		this.dialogueBoxTonneau = new DialogueBox(new String[] {
 	  				"Le tonneau semble mal fermé"
 	  	        });
@@ -134,7 +134,7 @@ public class Foret6 extends BasicGameState {
 	              switch (choice1) {
 	  	            case 0:
 	  	            	this.tmpDialogbox2.setActiveTempDialogbox(true);
-	  	                this.tmpDialogbox2.setMessages(new String[] {"Il reste des graines de blé au fond du tonneau."+"/n"+"Vous obtenez : graines de blé"});
+	  	                this.tmpDialogbox2.setMessages(new String[] {"Il reste des graines de blé au fond du tonneau."+"\n"+"Vous obtenez : graines de blé"});
 	  	                //Ajoutez recursivement des choix ici de la meme maniere que moi
 	  	                this.tmpDialogbox2.setChoices(Arrays.asList(),null);
 	                      break;
@@ -148,7 +148,7 @@ public class Foret6 extends BasicGameState {
 	    
 	    
 	    
-	  //Dialogbox Avec choix multiples
+	  //Dialogbox Avec choix multiples sceau
 	  		this.dialogueBoxPot = new DialogueBox(new String[] {
 	  				"Il s'agit d'un sceau."
 	  	        });
@@ -215,7 +215,7 @@ public class Foret6 extends BasicGameState {
 	       });
 	    
 	    
-		//Dialogbox Avec choix multiples
+		//Dialogbox Avec choix multiples branche
 		this.dialogueBoxBranche = new DialogueBox(new String[] {
 				"Ceci est une branche"
 	        });
@@ -321,7 +321,7 @@ public class Foret6 extends BasicGameState {
 
 
 		
-		//Structure obligatoire pour les dialogbox sinon ca marche po jsp pk
+		//Structure obligatoire pour les dialogbox sinon ca marche pas
 		boolean i =input.isKeyPressed(Global.interract);
 	
 		

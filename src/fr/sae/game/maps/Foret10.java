@@ -172,7 +172,7 @@ public class Foret10 extends BasicGameState {
 		Global.P1.AnimateWhileMoove();
 		Global.P1.canRandomBattle();
 		Input input =gc.getInput();
-		Global.updatePlayerMovement(input,Global.CollisionMapForet10,delta,sbg);
+
 		boolean i =input.isKeyPressed(Global.interract);
 		this.dialogueBoxBranche.dialogBox(i,gc.getInput());
 		this.dialogueBoxEpouventail.dialogBox(i,gc.getInput());

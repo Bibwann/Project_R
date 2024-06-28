@@ -28,9 +28,7 @@ public class Foret12 extends BasicGameState {
 	@Override
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
 		this.Warp1= new Warp(200, 1070, 1500, 10, 945, 50);//BAS
-		
-		
-		
+				
 		this.dialogueBoxCBTFIN = new DialogueBox(new String[] {
 				"Bonjour jeunes aventuriers, qui êtes-vous ?"
 	        });
@@ -187,7 +185,7 @@ public class Foret12 extends BasicGameState {
         }
 		Global.P1.AnimateWhileMoove();
 		Input input =gc.getInput();
-		Global.updatePlayerMovement(input,Global.CollisionMapForet12,delta,sbg);
+
 		boolean i =input.isKeyPressed(Global.interract);
 		this.dialogueBoxPanneau.dialogBox(i);
 		this.dialogueBoxCBTFIN.dialogBox(i,gc.getInput());

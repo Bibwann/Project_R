@@ -110,7 +110,7 @@ public class Foret13 extends BasicGameState {
         }
 		Global.P1.AnimateWhileMoove();
 		Input input =gc.getInput();
-		Global.updatePlayerMovement(input,Global.CollisionMapForet6,delta,sbg);
+
 		boolean i =input.isKeyPressed(Global.interract);
 		this.dialogueBoxBranche.dialogBox(i,gc.getInput());
 		this.tmpDialogbox2.updateTempDialgbox(i, gc);

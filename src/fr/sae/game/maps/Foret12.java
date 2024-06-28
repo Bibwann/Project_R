@@ -33,50 +33,85 @@ public class Foret12 extends BasicGameState {
 				"Bonjour jeunes aventuriers, qui êtes-vous ?"
 	        });
 		this.dialogueBoxCBTFIN.setTriggerZone(926,373, 80, 30);
+		
+		
 	    this.dialogueBoxCBTFIN.setChoices(Arrays.asList("Se présenter","Partir"), choice1 -> {
             switch (choice1) {
 	            case 0:
-    	    		this.tmpDialogbox2.setActiveTempDialogbox(true);
-
-	        	    this.tmpDialogbox2 = new DialogueBox(new String[] {
-	        				
-	        				 "Oh ! Tu es donc venu m'apporter l'objet du vieux mage ?\n"+"C'est parfait, donne-le moi s'il te plaît."
-	        	        });
-	        	    this.tmpDialogbox2.setChoices(Arrays.asList("Donner","Garder"), choice2 -> {
+	            	this.dialogueBoxCBTFIN.setActiveTempDialogbox(true);
+	            	this.dialogueBoxCBTFIN.setMessages(new String[] {"Oh ! Tu es donc venu m'apporter l'objet du vieux mage ?\n"+"C'est parfait, donne-le moi s'il te plaît."});
+	            	this.dialogueBoxCBTFIN.setChoices(Arrays.asList("Donner","Garder"), choice2 -> {
 	        	    	switch (choice2) {
 	        	    	case 0:
-	        	    		this.tmpDialogbox2 = new DialogueBox(new String[] {
-	    	        				"À l'aide de cet objet qui était une pelote de laine, nous allons pouvoir nous battre contre Le Chat qui a pris le contrôle de ce royaume..."
-		        	        });
-	        	    		this.tmpDialogbox2.setActiveTempDialogbox(false);
-            				Global.Underground3Battle=false;
-
-                			Global.canMoovPlayer=false;
-                			Global.actualId=8;
-            				try {
-								Global.mobs[0]=Boss.getInstance();
-
-            					//Global.mobs[0]= Boss.getInstance();
-							} catch (SlickException e) {
-								e.printStackTrace();
-							}
-            	        	sbg.enterState(100);
-            	        	this.tmpDialogbox2.setChoices(Arrays.asList(),null);
+	        	    		this.dialogueBoxCBTFIN.setActiveTempDialogbox(true);
+	        	    		this.dialogueBoxCBTFIN.setMessages(new String[] {"À l'aide de cet objet qui était une pelote de laine, nous allons pouvoir nous battre contre Le Chat qui a pris le contrôle de ce royaume..."});
+	        	    		this.dialogueBoxCBTFIN.setChoices(Arrays.asList("Continuer"), choice3 -> {
+	    	        	    	switch (choice3) {
+	    	        	    	case 0:
+	    	        	    		this.dialogueBoxCBTFIN.setActiveTempDialogbox(true);
+	    	        	    		Global.Underground3Battle=false;
+	                    			Global.canMoovPlayer=false;
+	                    			Global.actualId=8;
+	                    			try {
+	    								Global.mobs[0]=Boss.getInstance();
+	    							} catch (SlickException e) {
+	    								e.printStackTrace();
+	    							}
+	                    			sbg.enterState(100);
+	    	        	    		this.dialogueBoxCBTFIN.setActiveTempDialogbox(false);
+	    	        	    		break;
+	    	        	    	   }      
+	    		                });
 	        	    		break;
-	        	    	
-	        	    	case 1:
 	        	    		
-	        	    		
-	        	    		this.tmpDialogbox2.setActiveTempDialogbox(false);
+	        	    	case 1:	
+	        	    		this.dialogueBoxCBTFIN.setActiveTempDialogbox(false);
 	    	            	break;
-	        	    }
-	        	    });
-	                break;
-	                
-	            case 1:
-	            	this.tmpDialogbox2.setActiveTempDialogbox(false);
+        	    	   }      
+	                });
 	            	break;
-
+	            case 1:
+    	    		this.dialogueBoxCBTFIN.setActiveTempDialogbox(false);
+	            	break;
+	            	
+//    	    		this.tmpDialogbox2.setActiveTempDialogbox(true);
+//
+//	        	    this.tmpDialogbox2 = new DialogueBox(new String[] {
+//	        				
+//	        				 "Oh ! Tu es donc venu m'apporter l'objet du vieux mage ?\n"+"C'est parfait, donne-le moi s'il te plaît."
+//	        	        });
+//	        	    this.dialogueBoxCBTFIN.setChoices(Arrays.asList("Donner","Garder"), choice2 -> {
+//	        	    	switch (choice2) {
+//	        	    	case 0:
+//	        	    		this.dialogueBoxCBTFIN = new DialogueBox(new String[] {
+//	    	        				"À l'aide de cet objet qui était une pelote de laine, nous allons pouvoir nous battre contre Le Chat qui a pris le contrôle de ce royaume..."
+//		        	        });
+//	        	    		this.dialogueBoxCBTFIN.setActiveTempDialogbox(false);
+//            				Global.Underground3Battle=false;
+//                			Global.canMoovPlayer=false;
+//                			Global.actualId=8;
+//            				try {
+//								Global.mobs[0]=Boss.getInstance();
+//
+//            					//Global.mobs[0]= Boss.getInstance();
+//							} catch (SlickException e) {
+//								e.printStackTrace();
+//							}
+//            	        	sbg.enterState(100);
+//            	        	break;
+//	        	    	
+//	        	    	case 1:
+//	        	    		
+//	        	    		
+//	        	    		this.dialogueBoxCBTFIN.setActiveTempDialogbox(false);
+//	    	            	break;
+//	        	    }
+//	        	    });
+//	                break;
+//	                
+//	            case 1:
+//	            	this.tmpDialogbox2.setActiveTempDialogbox(false);
+//	            	break;
             }       
      });
 		

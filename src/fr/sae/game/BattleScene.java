@@ -15,6 +15,7 @@ import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 import fr.sae.game.caractere.Entity;
 import fr.sae.game.caractere.Mobs;
+import fr.sae.mobes.Boss;
 
 public class BattleScene extends BasicGameState {
 
@@ -64,6 +65,10 @@ public class BattleScene extends BasicGameState {
             	}
             }
             this.aliveEnemyNames = new ArrayList<>(this.enemyNames); // Copie de enemyNames pour éviter la modification concurrente
+            
+            if (this.enemy[0] instanceof Boss) {
+            	Global.actualId = 8;
+            }
 
         }
     }
@@ -134,9 +139,12 @@ public class BattleScene extends BasicGameState {
     	        }	
     	        
     	        try {
-    	        	if(i<2) {
-    	        		this.enemy[i].BattleScene(g, Global.height / (this.enemy.length + 1) * ((i+1)%2) + 300);    	        		
-    	        	} else {
+    	        	if(this.enemy[i] instanceof Boss) {
+    	        		this.enemy[i].BattleScene(g, Global.height / 3);	
+    	        	} else if(i<2) {
+    	        		this.enemy[i].BattleScene(g, Global.height / (this.enemy.length + 1) * ((i+1)%2) + 300);
+    	        	}
+    	        	else {
     	        		this.enemy[i].BattleScene(g, Global.height / 3 + 75);
     	        	}
     	        }catch(Exception e) {
@@ -159,7 +167,7 @@ public class BattleScene extends BasicGameState {
     	
     	if(this.playedTurn && !this.entities.isEmpty() && !this.enemyNames.isEmpty()) {
 			if (isWin()) {
-				
+				System.out.println(Global.actualId);
 	    		Global.P1.resetStats();
 	    		Global.P2.resetStats();
 				

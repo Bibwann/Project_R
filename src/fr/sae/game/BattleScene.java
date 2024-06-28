@@ -888,8 +888,6 @@ public class BattleScene extends BasicGameState {
     			this.currentTurnIndex ++;
     		}
     	}
-
-    	
     }
     
     public void winBattle(StateBasedGame sbg) {

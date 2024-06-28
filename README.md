@@ -6,13 +6,15 @@ Welcome to our school project game! This game is developed by a team of five ded
 
 To play the game, please download it from the following link:
 
+[Download JDK](https://www.oracle.com/fr/java/technologies/downloads/#jdk22-windows)
 [Download Game](https://seashell-app-86ywg.ondigitalocean.app/game)
 
 ## 📦 Installation
 
-1. **Download the Game:** Click the link above to download the game archive.
-2. **Extract the Files:** Unzip the downloaded archive to a directory of your choice.
-3. **Launch the Game:** Use the provided shortcut or .bat file to start the game.
+1. **Download the jdk:** Click on the link and download the necessary jdk
+2. **Download the Game:** Click the link above to download the game archive.
+3. **Extract the Files:** Unzip the downloaded archive to a directory of your choice.
+4. **Launch the Game:** Use the provided shortcut or .bat file to start the game.
 
 ## 🎮 Gameplay
 

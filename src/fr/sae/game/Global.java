@@ -52,7 +52,8 @@ public class Global {
 	public static boolean Chest1Map4=true;
 	public static boolean Chest1Map8=true;
 
-	
+	//lvl10
+	public static boolean HaveHitLvl10=false;
 	
 	//Combats uniques
 	public static boolean Foret6Battle=true;
@@ -1063,7 +1064,9 @@ public class Global {
         CollisionMapForet10.addCollidable(new Circle(1850, 760, 60, 50));
         
         CollisionMapForet10.addCollidable(new Circle(1920, 690, 60, 50));
-
+        
+        //Fin Jeu
+        CollisionMapForet10.addCollidable(new Rectangle(1853, 508, 10, 180));
 	}
 	public static void CollisionsMapForet11() {
 		//Arbres random gauche

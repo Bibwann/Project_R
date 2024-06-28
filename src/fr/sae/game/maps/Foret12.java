@@ -32,21 +32,22 @@ public class Foret12 extends BasicGameState {
 		
 		
 		this.dialogueBoxCBTFIN = new DialogueBox(new String[] {
-				"bonjour, t qui ?"
+				"Bonjour jeunes aventuriers, qui êtes-vous ?"
 	        });
 		this.dialogueBoxCBTFIN.setTriggerZone(926,373, 80, 30);
-	    this.dialogueBoxCBTFIN.setChoices(Arrays.asList("parler","partir"), choice1 -> {
+	    this.dialogueBoxCBTFIN.setChoices(Arrays.asList("Se présenter","Partir"), choice1 -> {
             switch (choice1) {
 	            case 0:
 	        	    this.dialogueBoxCBTFIN.setTriggerZone(-1, -1, 0, 0);
 	        	    this.dialogueBoxCBTFIN = new DialogueBox(new String[] {
-	        				"donne objet"
+	        				
+	        				 "Oh ! Tu es donc venu m'apporter l'objet du vieux mage ?\n"+"C'est parfait, donne-le moi s'il te plaît."
 	        	        });
-	        	    this.tmpDialogbox2.setChoices(Arrays.asList("donner","garder"), choice2 -> {
+	        	    this.tmpDialogbox2.setChoices(Arrays.asList("Donner","Garder"), choice2 -> {
 	        	    	switch (choice2) {
 	        	    	case 0:
 	        	    		this.dialogueBoxCBTFIN = new DialogueBox(new String[] {
-	    	        				"donne"
+	    	        				"À l'aide de cet objet qui était une pelote de laine, nous allons pouvoir nous battre contre Le Chat qui a pris le contrôle de ce royaume..."
 		        	        });
 	        	    		this.tmpDialogbox2.setActiveTempDialogbox(false);
             				Global.Underground3Battle=false;

@@ -27,6 +27,8 @@ public class BattleScene extends BasicGameState {
     // Combat Variables 
     private int hit;
     private int confusedDebuf = 0;
+    private boolean finalScreen = false;
+    private boolean firstSet = false;
     private String enemyMessage;
     private List<String> enemyNames = new ArrayList<String>();
     private List<String> aliveEnemyNames = new ArrayList<String>();
@@ -75,8 +77,6 @@ public class BattleScene extends BasicGameState {
 
     @Override
     public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
-    	System.out.println(this.entities);
-    	System.out.println();
         g.drawImage(new Image("data/BattleScenes/Bottom.png").getScaledCopy(Global.width, Global.height), 0, 0);
         g.drawImage(new Image("data/BattleScenes/Foret.png").getScaledCopy(Global.width, Global.height), 0, 0);
         
@@ -85,33 +85,42 @@ public class BattleScene extends BasicGameState {
         this.tmpDialogbox1.renderTempDialgbox(g);
 
       // Drawing elements
-    	try {
-    	    int player1Y = Global.height / 3; 
-    	    Global.P1.BattleScene(g, player1Y);
-    	} catch(Exception e) {
-    	    System.out.println("Affichage des Hitbox prsk sprites ont buggé --> on est dans la classe Battle scene dans le render le 1er try pour P1");
-    	    System.out.println(e);
-    	    try {
-    	        Shape hitbox1 = Global.P1.getBattlehitbox();
-    	        g.draw(hitbox1);
-    	    } catch(Exception ex) {
-    	        throw new RuntimeException("Aucune hitbox trouvée pour le joueur 1", ex);
-    	    }
-    	}
+  
+    		try {
+        	    int player1Y = Global.height / 3; 
+        	    if(Global.P1.isDead()) {
+        	    	Global.P1.deadBattleScene(g, player1Y);
+        	    } else {
+        	    	Global.P1.aliveBattleScene(g, player1Y);
+        	    }
+        	} catch(Exception e) {
+        	    System.out.println("Affichage des Hitbox prsk sprites ont buggé --> on est dans la classe Battle scene dans le render le 1er try pour P1");
+        	    System.out.println(e);
+        	    try {
+        	        Shape hitbox1 = Global.P1.getBattlehitbox();
+        	        g.draw(hitbox1);
+        	    } catch(Exception ex) {
+        	        throw new RuntimeException("Aucune hitbox trouvée pour le joueur 1", ex);
+        	    }
+        	}
 
-    	try {
-    	    int player2Y = Global.height / 2 ; 
-    	    Global.P2.BattleScene(g, player2Y);
-    	} catch(Exception e) {
-    	    System.out.println("Affichage des Hitbox prsk sprites ont buggé --> on est dans la classe Battle scene dans le render le 1er try pour P2");
-    	    System.out.println(e);
-    	    try {
-    	        Shape hitbox2 = Global.P2.getBattlehitbox();
-    	        g.draw(hitbox2);
-    	    } catch(Exception ex) {
-    	        throw new RuntimeException("Aucune hitbox trouvée pour le joueur 2", ex);
-    	    }
-    	}
+        	try {
+        	    int player2Y = Global.height / 2 ;
+        	    if(Global.P2.isDead()) {
+        	    	Global.P2.deadBattleScene(g, player2Y);
+        	    } else {
+        	    	Global.P2.aliveBattleScene(g, player2Y);
+        	    }
+        	} catch(Exception e) {
+        	    System.out.println("Affichage des Hitbox prsk sprites ont buggé --> on est dans la classe Battle scene dans le render le 1er try pour P2");
+        	    System.out.println(e);
+        	    try {
+        	        Shape hitbox2 = Global.P2.getBattlehitbox();
+        	        g.draw(hitbox2);
+        	    } catch(Exception ex) {
+        	        throw new RuntimeException("Aucune hitbox trouvée pour le joueur 2", ex);
+        	    }
+        	}
     	
     	try {
     	    for (int i = 0; i < this.enemy.length; i++) {
@@ -148,48 +157,78 @@ public class BattleScene extends BasicGameState {
     	    }
     	}
     	
-    	if(this.isWin()) {    			
-    		winBattle(sbg);
-			this.tmpDialogbox1.setMessages(new String[] { "Vous avez gagné le combat ! Vous pouvez maintenant continuer votre aventure\n\n" +
-					"Vous avez gagné " + this.earnedXP + " points d\'XP !      " + "Vos personnages sont de niveau " + Global.P1.getLevel() + "\n\n" + 
-					Global.P1.getClassName() + "                                       " + Global.P2.getClassName() + "\n" +
-					"HP : " + Global.P1.getHpMax() + " hp                                      " + Global.P2.getHpMax() + " hp\n"+
-					"Dégats : " + Global.P1.getHpMax() + " dégats                              " + Global.P2.getHpMax() + " dégats\n"+
-					"Efficacité des potions : " + Global.P1.getHealAmount() + " hp                   " + Global.P2.getHealAmount() + " hp\n"});
-			
-			this.tmpDialogbox1.setChoices(Arrays.asList("Continuer"), choice -> {
-				switch (choice) {
+    	if(this.playedTurn && !this.entities.isEmpty() && !this.enemyNames.isEmpty()) {
+			if (isWin()) {
 				
-				case 0:
-					this.tmpDialogbox1.setActiveTempDialogbox(false);
-					break;
+	    		Global.P1.resetStats();
+	    		Global.P2.resetStats();
+				
+				for(int i=0; i < this.enemy.length; i++) {
+					if (this.enemy[i] != null) {    				
+						this.earnedXP = (int) (500 * (1.0 + this.enemy[i].getLevel()/10f));
+					}
 				}
 				
+				if(this.XPupdated == false) {    			
+	    			Global.P1.takeXp(this.earnedXP);
+	    			Global.P2.takeXp(this.earnedXP);
+	    			this.XPupdated = true;
+	    		}
 				
-			});
-			
-			for(int i=0; i < this.enemy.length; i++) {
-				if (this.enemy[i] != null) {    				
-					this.earnedXP = (int) (500 * (1.0 + this.enemy[i].getLevel()/10f));
+				this.tmpDialogbox1.setActiveTempDialogbox(true);
+				this.tmpDialogbox1.setMessages(new String[] { "Vous avez gagné le combat ! Vous pouvez maintenant continuer votre aventure\n\n" +
+						"Vous avez gagné " + this.earnedXP + " points d\'XP !      " + "Vos personnages sont de niveau " + Global.P1.getLevel() + "\n\n" + 
+						Global.P1.getClassName() + "                                       " + Global.P2.getClassName() + "\n" +
+						"HP : " + Global.P1.getHpMax() + " hp                                      " + Global.P2.getHpMax() + " hp\n"+
+						"Dégats : " + Global.P1.getDmg() + " dégats                              " + Global.P2.getDmg() + " dégats\n"+
+						"Efficacité des potions : " + Global.P1.getHealAmount() + " hp                   " + Global.P2.getHealAmount() + " hp\n"});
+				
+				this.tmpDialogbox1.setChoices(Arrays.asList("Continuer"), choice -> {
+					switch (choice) {
+					
+					case 0:
+						this.finalScreen = true;
+						break;
+					}
+					
+					
+				});
+				
+				if (this.finalScreen) {					
+					winBattle(sbg);
 				}
+				
+			} else if (isLost()) {
+				
+				this.tmpDialogbox1.setActiveTempDialogbox(true);
+				this.tmpDialogbox1.setMessages(new String[] { "Vous avez perdu le combat ! Votre aventure se termine ici\n\n" +
+						"Le monde ne pourra jamais se liberer du contrôle des chats !"});
+				
+				this.tmpDialogbox1.setChoices(Arrays.asList("Continuer"), choice -> {
+					switch (choice) {
+					
+					case 0:
+						this.finalScreen = true;
+						break;
+					}
+				
+					
+				});
+				
+				if(this.finalScreen) {					
+					looseBattle(sbg);
+				}
+			} else {
+				
+				turn(sbg, g);
 			}
-		} else if(Global.P1.isDead() && Global.P2.isDead()) {
-			looseBattle(sbg);
 		}
     }
 
     @Override
     public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
 		Input input =gc.getInput();
-		boolean boolInput =input.isKeyPressed(Global.interract);
-		
-    	Global.updatePlayerMovement(gc.getInput(),Global.CollisionMapForet2,delta,sbg);
-		Global.P1.AnimateWhileMoove();
-		
-		if(this.playedTurn && !this.entities.isEmpty() && !this.enemyNames.isEmpty()) {
-			turn(sbg);
-		}			
-		
+		boolean boolInput =input.isKeyPressed(Global.interract);		
 		this.tmpDialogbox1.updateTempDialgbox(boolInput, gc);    	 
     }
     
@@ -201,8 +240,12 @@ public class BattleScene extends BasicGameState {
     	}
     	return true;
     }
+    
+    public boolean isLost() {
+    	return Global.P1.isDead() && Global.P2.isDead();
+    }
 
-    public void turn(StateBasedGame sbg) {
+    public void turn(StateBasedGame sbg, Graphics g) {
 
     	this.playedTurn = false;
     	this.tmpDialogbox1.setActiveTempDialogbox(true);
@@ -239,6 +282,7 @@ public class BattleScene extends BasicGameState {
                 			if(this.enemy[0].isDead()) {
                 				this.deadEnemyNames.add(this.enemyNames.get(0));
 	    						this.aliveEnemyNames.remove(this.enemyNames.get(0));
+	    						this.enemy[0].setBattlesprite(null);
 
                 				this.tmpDialogbox1.setMessages(new String[] { this.enemyNames.get(0) + " a été vaincu !"});
                     			
@@ -275,6 +319,8 @@ public class BattleScene extends BasicGameState {
 	    					if(this.enemy[1].isDead()) {
 	    						this.deadEnemyNames.add(this.enemyNames.get(1));
 	    						this.aliveEnemyNames.remove(this.enemyNames.get(1));
+	    						this.enemy[1].setBattlesprite(null);
+	    						
                 				this.tmpDialogbox1.setMessages(new String[] { this.enemyNames.get(1) + " a été vaincu !"});
                     			
                     			this.tmpDialogbox1.setChoices(Arrays.asList("Continuer"), choice3 -> {
@@ -311,6 +357,7 @@ public class BattleScene extends BasicGameState {
                 			if(this.enemy[2].isDead()) {
                 				this.deadEnemyNames.add(this.enemyNames.get(2));
 	    						this.aliveEnemyNames.remove(this.enemyNames.get(2));
+	    						this.enemy[2].setBattlesprite(null);
 
                 				this.tmpDialogbox1.setMessages(new String[] { this.enemyNames.get(2) + " a été vaincu !"});
                     			
@@ -515,6 +562,7 @@ public class BattleScene extends BasicGameState {
                 			if(this.enemy[0].isDead()) {
                 				this.deadEnemyNames.add(this.enemyNames.get(0));
 	    						this.aliveEnemyNames.remove(this.enemyNames.get(0));
+	    						this.enemy[0].setBattlesprite(null);
 
                 				this.tmpDialogbox1.setMessages(new String[] { this.enemyNames.get(0) + " a été vaincu !"});
                     			
@@ -551,6 +599,7 @@ public class BattleScene extends BasicGameState {
 	    					if(this.enemy[1].isDead()) {
 	    						this.deadEnemyNames.add(this.enemyNames.get(1));
 	    						this.aliveEnemyNames.remove(this.enemyNames.get(1));
+	    						this.enemy[1].setBattlesprite(null);
 
                 				this.tmpDialogbox1.setMessages(new String[] { this.enemyNames.get(1) + " a été vaincu !"});
                     			
@@ -587,6 +636,7 @@ public class BattleScene extends BasicGameState {
             			if(this.enemy[2].isDead()) {
             				this.deadEnemyNames.add(this.enemyNames.get(2));
     						this.aliveEnemyNames.remove(this.enemyNames.get(2));
+    						this.enemy[2].setBattlesprite(null);
 
             				this.tmpDialogbox1.setMessages(new String[] { this.enemyNames.get(2) + " a été vaincu !"});
                 			
@@ -735,7 +785,7 @@ public class BattleScene extends BasicGameState {
         			break;
         		case 2: // Skip turn
         			
-        			if(this.confusedDebuf < 15) {
+        			if(this.confusedDebuf < 10) {
         				this.confusedDebuf += 5;
         			}
         			
@@ -830,7 +880,7 @@ public class BattleScene extends BasicGameState {
     	
     		// If mob of player is dead skip turn
     	} else {
-    		    		
+    		
     		this.playedTurn = true;
     		if(this.currentTurnIndex + 1 == this.entities.size()) {
     			this.currentTurnIndex = 0;
@@ -843,68 +893,41 @@ public class BattleScene extends BasicGameState {
     }
     
     public void winBattle(StateBasedGame sbg) {
-    		
-    		Global.mobs= new Mobs[3];  
-
-    		Global.canMoovPlayer=true;
-
-    		if(this.XPupdated == false) {    			
-    			Global.P1.takeXp(this.earnedXP);
-    			Global.P2.takeXp(this.earnedXP);
-    			this.XPupdated = true;
-    		}
-    		
-    		Global.P1.resetStats();
-    		Global.P2.resetStats();
-    		    		  
-    	    this.currentTurnIndex = 0;
-    	    this.playedTurn = true;
-    	    this.confusedDebuf = 0;
-    	    this.deadEnemyNames= new ArrayList<String>();
-    	    this.enemyNames = new ArrayList<String>();
-    	    this.aliveEnemyNames = new ArrayList<String>();
-    	    this.deadEnemyNames = new ArrayList<String>();
-			this.tmpDialogbox1.setActiveTempDialogbox(false);
-			this.entities = new ArrayList<>();
-    	    this.tmpDialogbox1= new DialogueBox(new String[] {});
-    	    this.XPupdated = false;
-			sbg.enterState(Global.actualId);		
+		Global.canMoovPlayer=true;    		    		  
+	    this.currentTurnIndex = 0;
+	    this.playedTurn = true;
+	    this.confusedDebuf = 0;
+	    this.deadEnemyNames= new ArrayList<String>();
+	    this.enemyNames = new ArrayList<String>();
+	    this.aliveEnemyNames = new ArrayList<String>();
+	    this.deadEnemyNames = new ArrayList<String>();
+		this.tmpDialogbox1.setActiveTempDialogbox(false);
+		this.entities = new ArrayList<>();
+	    this.tmpDialogbox1= new DialogueBox(new String[] {});
+	    this.XPupdated = false;
+	    this.finalScreen = false;
+	    Global.mobs= new Mobs[3];
+		sbg.enterState(Global.actualId);		
     }
     
     public void looseBattle(StateBasedGame sbg) {
-    	if (Global.P1.isDead() && Global.P2.isDead()) {
-    		Global.mobs= new Mobs[3];  
-
-    		Global.canMoovPlayer=true;
-            Global.P1.levelUp();
-            Global.P2.levelUp();
-
-    		Global.P1.resetStats();
-    		Global.P2.resetStats();
-    		    		  
-    	    this.currentTurnIndex = 0;
-    	    this.playedTurn = true;
-    	    this.confusedDebuf = 0;
-    	    this.deadEnemyNames= new ArrayList<String>();
-    	    this.enemyNames = new ArrayList<String>();
-    	    this.aliveEnemyNames = new ArrayList<String>();
-    	    this.deadEnemyNames = new ArrayList<String>();
-    	    
-    	    this.tmpDialogbox1.setMessages(new String[] { "Vous avez perdu le combat ! Tous vos personnages sont morts !"});
-			
-			this.tmpDialogbox1.setChoices(Arrays.asList("Continuer"), choice2 -> {
-				switch (choice2) {
-				
-				case 0:
-					this.tmpDialogbox1.setActiveTempDialogbox(false);
-					this.entities = new ArrayList<>();
-		    	    this.tmpDialogbox1= new DialogueBox(new String[] {});
-					sbg.enterState(7);
-					break;
-					}
-				
-				});
-    	}
+    	Global.P1.resetStats();
+    	Global.P2.resetStats();
+    	Global.canMoovPlayer=true;    		    		  
+	    this.currentTurnIndex = 0;
+	    this.playedTurn = true;
+	    this.confusedDebuf = 0;
+	    this.deadEnemyNames= new ArrayList<String>();
+	    this.enemyNames = new ArrayList<String>();
+	    this.aliveEnemyNames = new ArrayList<String>();
+	    this.deadEnemyNames = new ArrayList<String>();
+		this.tmpDialogbox1.setActiveTempDialogbox(false);
+		this.entities = new ArrayList<>();
+	    this.tmpDialogbox1= new DialogueBox(new String[] {});
+	    this.XPupdated = false;
+	    this.finalScreen = false;
+	    Global.mobs= new Mobs[3];
+		sbg.enterState(7);
     }
     
     public int getID() {

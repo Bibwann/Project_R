@@ -55,11 +55,27 @@ public abstract class Player extends Entity {
     
     // Method to level up the player
     public void levelUp() {
-        this.level += 1;        this.hpMax *= 1.2;
+        this.level += 1;        
+        this.hpMax *= 1.2;
         this.dmg *= 1.2;
         this.experienceBarrActu = 0;
-        this.experienceBarrLvlUp *= 1.1;
-        this.healAmount += 5;
+        this.experienceBarrLvlUp *= 1.2;
+        this.healAmount *= 1.2;
+    }
+    
+    public void loadLevel(int level) {
+    	for(int i = 0; i < level; i++) { 
+    		this.level += 1;   
+    		this.hpMax *= 1.2;
+    		this.dmg *= 1.2;
+    		this.experienceBarrActu = 0;
+    		this.experienceBarrLvlUp *= 1.2;
+    		this.healAmount *= 1.2;
+    		System.out.println(this.healAmount);
+    	}
+    	
+    	
+    	this.resetStats();
     }
 
     // Getter for current experience points
@@ -93,8 +109,13 @@ public abstract class Player extends Entity {
     }
     
     // Method to draw player sprite in battle scene
-    public void BattleScene(Graphics g, int posY) {
+    
+    public void aliveBattleScene(Graphics g, int posY) {
         g.drawImage(this.getBattleSprite(), Global.PlayerBattleDistance, posY);
+    }
+    
+    public void deadBattleScene(Graphics g, int posY) {
+    	g.drawImage(this.getBattleDeadSprite(), Global.PlayerBattleDistance, posY);
     }
 
     // Getter for battle hitbox
@@ -211,4 +232,8 @@ public abstract class Player extends Entity {
 		return nbLevelWin;
 	}
 	
+	
+	public Image getBattleDeadSprite() {
+		return this.Battlesprite.getSubImage(512-64, 320, 64, 64).getFlippedCopy(true, false).getScaledCopy(2.0f);
+	}
 }

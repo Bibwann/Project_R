@@ -20,6 +20,8 @@ public class Foret10 extends BasicGameState {
 	Warp Warp3;
 	DialogueBox dialogueBoxBranche;
 	DialogueBox dialogueBoxEpouventail;
+	DialogueBox dialogueBoxGarde;
+	DialogueBox dialogueBoxGarde2;
 	private DialogueBox tmpDialogbox2= new DialogueBox(new String[] {});
 	public Foret10(int stateID) {
 	}
@@ -30,6 +32,21 @@ public class Foret10 extends BasicGameState {
 		this.Warp2= new Warp(0, 740, 10, 200, 1860, 800);//GAUCHE
 		this.Warp3= new Warp(1910, 500, 10, 130, 50, 620);//DROITE
 		
+		this.dialogueBoxGarde = new DialogueBox(new String[] {
+					"Vous ne pouvez pas passer, vous devez d'abord être plus puissant pour poursuivre votre chemin. (niveau 10)\n"
+					+ "Battez-vous ou explorez les environs à la recherche de coffres."
+					
+		});	
+		this.dialogueBoxGarde.setTriggerZone(1833,508,20,130);
+
+		//Dialogbox sans choix garde foret
+
+		this.dialogueBoxGarde2 = new DialogueBox(new String[] {
+					"Puisse le sort vous être favorable."
+				    
+		});	
+		this.dialogueBoxGarde2.setTriggerZone(-1,-1,0,0);
+	
 		
 		this.dialogueBoxEpouventail = new DialogueBox(new String[] {
 				"L'épouvantail vous fixe étrangement..."
@@ -104,8 +121,13 @@ public class Foret10 extends BasicGameState {
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
 		Global.actualId = 20;
 		g.drawImage(new Image("data/maps/Map010.png").getScaledCopy(Global.width, Global.height), 0, 0);
+		g.drawImage(new Image("data/npc/Guts/GardeNoir3.png").getSubImage(0, 0, 48, 48),1833, 508);
 		dialogueBoxBranche.render(g);
 		dialogueBoxEpouventail.render(g);
+		dialogueBoxGarde.render(g);
+		dialogueBoxGarde2.render(g);
+
+		
         try {
 	    	Global.P1.Sprite(g);
 	    	Global.P1.getAnimation().stop();
@@ -133,6 +155,9 @@ public class Foret10 extends BasicGameState {
 		    this.Warp3.draw(g);
 		    this.dialogueBoxBranche.draw(g);
 		    this.dialogueBoxEpouventail.draw(g);
+		    this.dialogueBoxGarde.draw(g);
+		    this.dialogueBoxGarde2.draw(g);
+		    
 		    
 	    	}
 //--------------------------------------------------------------------------------------------------------------------------
@@ -152,9 +177,20 @@ public class Foret10 extends BasicGameState {
 		boolean i =input.isKeyPressed(Global.interract);
 		this.dialogueBoxBranche.dialogBox(i,gc.getInput());
 		this.dialogueBoxEpouventail.dialogBox(i,gc.getInput());
+		this.dialogueBoxGarde.dialogBox(i);
+		this.dialogueBoxGarde2.dialogBox(i);
+		
 		this.tmpDialogbox2.updateTempDialgbox(i, gc);
+	
+	
+	if ((Global.P1.getLevel() > 10)&& !Global.HaveHitLvl10){
+		Global.CollisionMapForet10.deletLastCollidable();
+		Global.HaveHitLvl10=true;
+		this.dialogueBoxGarde.setTriggerZone(-1, -1, 0, 0);
+		this.dialogueBoxGarde2.setTriggerZone(1833,508,20,130);
+		
 	}
-
+	}
 	@Override
 	public int getID() {
 		return 20;

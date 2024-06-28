@@ -91,11 +91,19 @@ private DialogueBox tmpDialogbox1= new DialogueBox(new String[] {});
   		this.dialogueBoxArbre5.setTriggerZone(531,874,60,30);
   		
 		if (Global.Chest1Map8) {
+			if (Global.P1!=null && Global.P2!=null) {
+				 Global.P1.levelUp();
+				 Global.P1.levelUp();
+				 Global.P2.levelUp();
+				 Global.P2.levelUp();
+			}
 		    this.dialogueBoxChest = new DialogueBox(new String[] {
-					"Vous obtenez : une potion de force.\n"+"\n"+"Votre force augmente de +2"
+					"Vous obtenez : une potion de force.\n"+"\n"+"Votre force augmente de +2 (+2 niveau)"
 				});	
+		   
 			this.dialogueBoxChest.setTriggerZone(335,760,80,70);
 			Global.Chest1Map8=false;
+			
 		    }
 		
 		this.dialogueBoxBranche = new DialogueBox(new String[] {

@@ -37,7 +37,7 @@ public class Foret7 extends BasicGameState {
 		this.dialogueBoxCbt = new DialogueBox(new String[] {
 				"La gourmandise est un péché qui mène à la mort."
 	        });
-	    this.dialogueBoxCbt.setTriggerZone(0,630, 1000, 600);
+	    this.dialogueBoxCbt.setTriggerZone(0,630, 1000, 240);
 	    
 	    this.dialogueBoxCbt.setChoices(Arrays.asList("Continuer"), choice1 -> {
             switch (choice1) {

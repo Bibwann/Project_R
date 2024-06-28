@@ -23,6 +23,9 @@ public class Underground3 extends BasicGameState {
 	DialogueBox dialogueBoxGrille;
 	DialogueBox dialogueBoxPelle;
 	DialogueBox dialogueBoxSquelette;
+	DialogueBox dialogueBoxStele;
+	DialogueBox dialogueBoxDragon;
+	DialogueBox dialogueBoxTombe;
 	
 	private DialogueBox tmpDialogbox2= new DialogueBox(new String[] {});
 	private DialogueBox dialgoboxLore;
@@ -36,12 +39,13 @@ public class Underground3 extends BasicGameState {
         this.Warp2= new Warp(140, 130, 50, 40, 350, 240);//CORDE
         this.Warp3= new Warp(990, 890, 70, 70, 550, 250);//ESCALIER
 		
+        
 		//Obligatoire que tmpDialogbox1 aie une triggerzone hors map
 	    this.tmpDialogbox2.setTriggerZone(-1, -1, 0, 0);
 	    
 	    //Lore
 	    this.dialgoboxLore = new DialogueBox(new String[] {
-	            "\n\n    Un chat vous attaque subitement !"
+	            "Un chat vous attaque subitement !"
 	        });
 	    
 	    this.dialgoboxLore.setChoices(Arrays.asList("Continuer"), choice1 -> {
@@ -73,12 +77,29 @@ public class Underground3 extends BasicGameState {
   
      });
      
+	   
+  		this.dialogueBoxStele = new DialogueBox(new String[] {
+  				"Les arbres sont nos amis"
+  					    
+  			});	
+  		this.dialogueBoxStele.setTriggerZone(1617,152,160,40);
+  		
+  		this.dialogueBoxDragon = new DialogueBox(new String[] {
+  				"Le dragon vous regarde droit dans les yeux...\n"+"Vous détournez le regard après quelques secondes."
+  					    
+  			});	
+  		this.dialogueBoxDragon.setTriggerZone(1677,861,80,40);
+  		
+  	
+  		this.dialogueBoxTombe = new DialogueBox(new String[] {
+  				"C'..t ... t..e pa.ti...ier ....our..n Nerox..u sa.. q....le clas....u ve.. jou.. ?"
+  					    
+  			});	
+  		this.dialogueBoxTombe.setTriggerZone(1332,487,60,40);
 	    
 	  //Dialogbox sans choix du panneau
   		this.dialogueBoxPelle = new DialogueBox(new String[] {
-  				"\n "+
-  					    "     \n" +
-  					    "         La pelle est trop loudre pour que vous la souleviez"
+  				"La pelle est trop lourde pour que vous puissiez la soulever."
   					    
   			});	
   		this.dialogueBoxPelle.setTriggerZone(120,780,60,60);
@@ -86,68 +107,27 @@ public class Underground3 extends BasicGameState {
   		
   	//Dialogbox sans choix du panneau
   		this.dialogueBoxSquelette = new DialogueBox(new String[] {
-  				"\n "+
-  					    "     \n" +
-  					    " Un squelette inanimé et plutot bien preservé malgrè son grand âge git sous vos    pieds "
+  				"Un étrange squelette gît sous vos pieds..."
   					    
   			});	
   		this.dialogueBoxSquelette.setTriggerZone(800,260,60,60);
 	    
 	  //Dialogbox Avec choix multiples
   		this.dialogueBoxGrille = new DialogueBox(new String[] {
-  			    "Dans l'obscurité de la piéce, vous dinstinguez difficilement derrière les barreaux un rat mangeant une graine de blé sur la gauche.\n"+"Après un certain temps, vous remarquez enfin une masse frèle assise contre le mur  de droite. "
+  			    "La pièce est sombre et vous ne distinguez rien derrière cette grille."
   	        });
   	    this.dialogueBoxGrille.setTriggerZone(395, 130, 465, 10);
   	    
-  	    this.dialogueBoxGrille.setChoices(Arrays.asList("Passer la main et toucher le rat", "Passer la main et toucher la silhouette à droite","Reculer"), choice1 -> {
+  	    this.dialogueBoxGrille.setChoices(Arrays.asList("Passer la main","Reculer"), choice1 -> {
               switch (choice1) {
   	            case 0:
   	            	this.tmpDialogbox2.setActiveTempDialogbox(true);
-  	                this.tmpDialogbox2.setMessages(new String[] {"\n"+"\n"+"Le rat s'enfuie en courant vers la droite...\n"+"Une main surgit alors de la silhouette et attrappe sauvagement le rat qui disparait de votre champs de vision."});
+  	                this.tmpDialogbox2.setMessages(new String[] {
+  	                		 "Vous dérangez un rat qui s'enfuit en courant."});
   	                //Ajoutez recursivement des choix ici de la meme maniere que moi
-  	                this.tmpDialogbox2.setChoices(Arrays.asList("Tendre la main vers la silhouette", "Partir"), choice2 -> {
-	                    switch (choice2) {
-
-	                        case 0:
-	                        	this.tmpDialogbox2.setActiveTempDialogbox(true);
-	                            this.tmpDialogbox2.setMessages(new String[] {"\n"+"\n"+"Alors que vous passez votre main entre 2 barreaux, un courant d'air frais travers  la pièce et fait glisser le voile qui cachait un simple squelette. "+ "\n"+ "Vous reconnaissez le cadavre d'un rat tout récent sur les ossements découverts" });
-	                            
-	                            //Permet de dire qu'il s'agissait du dernier choix
-	                            this.tmpDialogbox2.setChoices(Arrays.asList(),null);
-	                            break;
-
-	                        case 1:
-	                        	this.tmpDialogbox2.setActiveTempDialogbox(false);
-
-	                    }
-
-	                });
-  	              break;
+  	                this.tmpDialogbox2.setChoices(Arrays.asList(),null);
   	          case 1:
-	            	this.tmpDialogbox2.setActiveTempDialogbox(true);
-	                this.tmpDialogbox2.setMessages(new String[] {"\n"+"\n"+"     Vous touchez quelque chose de dur dans la pénombre, mais rien ne se passe"});
-	                //Ajoutez recursivement des choix ici de la meme maniere que moi
-	                this.tmpDialogbox2.setChoices(Arrays.asList("Tendre la main vers le rat", "Partir"), choice3 -> {
-	                    switch (choice3) {
-
-	                        case 0:
-	                        	this.tmpDialogbox2.setActiveTempDialogbox(true);
-	                            this.tmpDialogbox2.setMessages(new String[] {"\n"+"\n"+"    Alors que vous passez votre main entre 2 barreaux, le rat court au fond de la  pièce et s'enfuis par un trou dans le mur" });
-	                            
-	                            //Permet de dire qu'il s'agissait du dernier choix
-	                            this.tmpDialogbox2.setChoices(Arrays.asList(),null);
-	                            break;
-
-	                        case 1:
-	                        	this.tmpDialogbox2.setActiveTempDialogbox(false);
-
-	                    }
-	                    
-	                }); 
-	                
-	                break;
-  	                
-  	            case 2:
+	            	
   	            	this.tmpDialogbox2.setActiveTempDialogbox(false);
   	            	break;
 
@@ -156,9 +136,7 @@ public class Underground3 extends BasicGameState {
 
 	    //Dialogbox Avec choix multiples
   		this.dialogueBoxPot = new DialogueBox(new String[] {
-  				"\n "+
-  			    "     \n" +
-  			    "         Il semble se trouver quelque chose de gluant au fond du sceau"
+  				"Il semble y avoir quelque chose de gluant au fond du sceau."
   	        });
   	    this.dialogueBoxPot.setTriggerZone(790, 140, 80, 70);
   	    
@@ -167,14 +145,16 @@ public class Underground3 extends BasicGameState {
   	            case 0:
   	            	if(!Global.CoeurVaillant) {
 	  	            	this.tmpDialogbox2.setActiveTempDialogbox(true);
-	  	                this.tmpDialogbox2.setMessages(new String[] {"\n"+"\n"+"     Vous tenez un coeur froid dans votre main.\n"+ "\n"+"\n"+"     Etonnament ce coeur bat toujours faiblement."});
+	  	                this.tmpDialogbox2.setMessages(new String[] {"Vous tenez un coeur froid dans votre main.\n"  + 
+	  	                		"Étonnamment, ce cœur bat toujours faiblement."});
 	  	                //Ajoutez recursivement des choix ici de la meme maniere que moi
-	  	                this.tmpDialogbox2.setChoices(Arrays.asList("Ranger le coeur dans votre sac", "Deposer le coeur dans le sceau"), choice2 -> {
+	  	                this.tmpDialogbox2.setChoices(Arrays.asList("Ranger le coeur dans votre sac", "Déposer le coeur dans le sceau"), choice2 -> {
 		                    switch (choice2) {
 	
 		                        case 0:
 		                        	this.tmpDialogbox2.setActiveTempDialogbox(true);
-		                            this.tmpDialogbox2.setMessages(new String[] {"\n"+"\n"+"    Vous obtenez un coeur vaillant et vous sentez plus sûr de vous"});
+		                            this.tmpDialogbox2.setMessages(new String[] {"Vous obtenez : coeur vaillant.\n"
+		                            		+ "Vous débordez de confiance et semblez prêt à conquérir le monde."});
 		                            if (!Global.CoeurVaillant) {
 			                            Global.CollisionMapForet5.deletLastCollidable();
 		                            }
@@ -193,7 +173,7 @@ public class Underground3 extends BasicGameState {
 		                });
   	            	} else {
   	            		this.tmpDialogbox2.setActiveTempDialogbox(true);
-                        this.tmpDialogbox2.setMessages(new String[] {"\n"+"\n"+"    Ce sceau est vide"});
+                        this.tmpDialogbox2.setMessages(new String[] {"Ce sceau est vide"});
                 
                         //Permet de dire qu'il s'agissait du dernier choix
                         this.tmpDialogbox2.setChoices(Arrays.asList(),null);
@@ -218,6 +198,9 @@ public class Underground3 extends BasicGameState {
 		dialogueBoxGrille.render(g);
 		dialogueBoxPelle.render(g);
 		dialogueBoxSquelette.render(g);
+		dialogueBoxTombe.render(g);
+		dialogueBoxStele.render(g);
+		dialogueBoxDragon.render(g);
 		
 		if (Global.Underground3Battle) {
             this.dialgoboxLore.renderForceDialogbox(g);
@@ -249,6 +232,9 @@ public class Underground3 extends BasicGameState {
 		    this.dialogueBoxGrille.draw(g);
 		    this.dialogueBoxPelle.draw(g);
 		    this.dialogueBoxSquelette.draw(g);
+		    this.dialogueBoxTombe.draw(g);
+			this.dialogueBoxStele.draw(g);
+			this.dialogueBoxDragon.draw(g);
 		    
 		    this.Warp1.draw(g);
 		    this.Warp2.draw(g);
@@ -262,6 +248,7 @@ public class Underground3 extends BasicGameState {
 		Input input =gc.getInput();
 		
 		Global.updatePlayerMovement(gc.getInput(),Global.CollisionMapUnderground3,delta,sbg);
+		Global.updatePlayerMovement(gc.getInput(),Global.CollisionsMapVide,delta,sbg);
 		if (gc.getInput().isKeyPressed(Global.pause)) {
             sbg.enterState(101); // Passer à l'état 101 (menu de pause)
         }
@@ -277,6 +264,9 @@ public class Underground3 extends BasicGameState {
 		//Dialogbox sans input --> sans choix
         this.dialogueBoxPelle.dialogBox(i);
         this.dialogueBoxSquelette.dialogBox(i);
+        this.dialogueBoxDragon.dialogBox(i);
+        this.dialogueBoxTombe.dialogBox(i);
+        this.dialogueBoxStele.dialogBox(i);
         
 		this.dialogueBoxPot.dialogBox(i,gc.getInput());
 		this.dialogueBoxGrille.dialogBox(i,gc.getInput());

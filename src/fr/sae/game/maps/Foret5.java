@@ -41,10 +41,10 @@ public class Foret5 extends BasicGameState {
 	  //Dialogbox sans choix garde foret
 	    
   		this.dialogueBoxGuts = new DialogueBox(new String[] {
-  						"Attention !! \n"+
-  						"Vous vous dirigez vers la dangereuse Lorêt Luminara et vous n'êtes pas assez fort  pour que je vous laisse passer.\n"+
-  						"Revenez quand vous serez plus puissant."
-  					
+  						"Attention !! \n"+"\n"+
+  						"Vous vous dirigez vers la dangereuse Forêt Luminara mais vous semblez faible.\n"+
+  						"Vous devez renforcer votre coeur pour pouvoir avancer dans cette forêt.\n"+"\n"+
+  						"Je ne souhaite pas voir de jeunes gens comme vous mourir..."
   						
   			});	
   		this.dialogueBoxGuts.setTriggerZone(961,579,110,110);
@@ -52,7 +52,7 @@ public class Foret5 extends BasicGameState {
   		//Dialogbox sans choix garde foret
 	    
   		this.dialogueBoxGuts2 = new DialogueBox(new String[] {
-  						"Vous etez assez robuste pour aller deforailler des chats"
+  						"Puisse le sort vous être favorable."
   					    
   			});	
   		this.dialogueBoxGuts2.setTriggerZone(-1,-1,0,0);
@@ -60,9 +60,7 @@ public class Foret5 extends BasicGameState {
   		
 	  //Dialogbox Avec choix multiples
   		this.dialogueBoxArbre = new DialogueBox(new String[] {
-  				"\n "+
-  			    "     \n" +
-  			    "       Cet arbre ancien est solidement ancré dans le sol"
+  				"Cet arbre ancien est solidement ancré dans le sol"
   	        });
   	    this.dialogueBoxArbre.setTriggerZone(1070, 370, 120, 100);
   	    
@@ -71,7 +69,7 @@ public class Foret5 extends BasicGameState {
   	            case 0:
   	            	if (Global.Foret5Battle) {
 	  	            	this.tmpDialogbox2.setActiveTempDialogbox(true);
-	  	                this.tmpDialogbox2.setMessages(new String[] {"Alors que vous grimpez dans l'arbre, un chat sauvage surgit des branches supérieur et vous attaque !"});
+	  	                this.tmpDialogbox2.setMessages(new String[] {"Un chat sort des branches et vous attaque sauvagement !!"});
                     	this.tmpDialogbox2.setActiveTempDialogbox(false);
 
 	  	                Global.Foret5Battle=false;
@@ -118,9 +116,7 @@ public class Foret5 extends BasicGameState {
 	    
 	  //Dialogbox Avec choix multiples
 	  	this.dialogueBoxBranche = new DialogueBox(new String[] {
-	  				"\n "+
-	  			    "     \n" +
-	  			    "           Ceci est une branche"
+	  				"Ceci est une branche"
 	  	        });
 	  	    this.dialogueBoxBranche.setTriggerZone(120, 310, 80, 90);
 	  	    
@@ -128,7 +124,7 @@ public class Foret5 extends BasicGameState {
 	              switch (choice1) {
 	  	            case 0:
 	  	            	this.tmpDialogbox2.setActiveTempDialogbox(true);
-	  	                this.tmpDialogbox2.setMessages(new String[] {"\n"+"\n"+"           Aie !"});
+	  	                this.tmpDialogbox2.setMessages(new String[] {"Aie !"});
 	  	                //Ajoutez recursivement des choix ici de la meme maniere que moi
 
 	  	                this.tmpDialogbox2.setChoices(Arrays.asList("Retaper la branche", "Ne rien faire"), choice2 -> {
@@ -136,7 +132,7 @@ public class Foret5 extends BasicGameState {
 
 	  	                        case 0:
 	  	                        	this.tmpDialogbox2.setActiveTempDialogbox(true);
-	  	                            this.tmpDialogbox2.setMessages(new String[] {"\n"+"\n"+"           AIEEEE !!!!!"});
+	  	                            this.tmpDialogbox2.setMessages(new String[] {"AIEEEE !!!!!"});
 	  	                            
 	  	                            //Permet de dire qu'il s'agissait du dernier choix
 	  	                            this.tmpDialogbox2.setChoices(Arrays.asList(),null);
@@ -213,6 +209,7 @@ public class Foret5 extends BasicGameState {
 		Input input =gc.getInput();
 		
 		Global.updatePlayerMovement(gc.getInput(),Global.CollisionMapForet5,delta,sbg);
+		Global.updatePlayerMovement(gc.getInput(),Global.CollisionsMapVide,delta,sbg);
 		if (gc.getInput().isKeyPressed(Global.pause)) {
             sbg.enterState(101); // Passer à l'état 101 (menu de pause)
         }

@@ -38,7 +38,7 @@ public class Foret6 extends BasicGameState {
 		this.Warp1= new Warp(860, 1070, 470, 10, 1100, 50);
 		this.Warp2= new Warp(330, 130, 60, 60, 150, 210);
 		
-		//Obligatoire que tmpDialogbox1 aie une triggerzone hors map
+		//Obligatoire que tmpDialogbox1 ai une triggerzone hors map
 	    this.tmpDialogbox2.setTriggerZone(-1, -1, 0, 0);
 	
 	    
@@ -91,9 +91,9 @@ public class Foret6 extends BasicGameState {
 	  			});	
 	  		this.dialogueBoxTombe4.setTriggerZone(535,570,60,10);
 	    
-		//Dialogbox Avec choix multiples
+		//Dialogbox Avec choix multiples puits
 	  		this.dialogueBoxPuits = new DialogueBox(new String[] {
-	                "Vous ne voyez pas le fond du puits"
+	                "Vous ne voyez pas le fond du puits."
 	            });
 	        this.dialogueBoxPuits.setTriggerZone(1517, 370, 76, 90);
 
@@ -101,7 +101,7 @@ public class Foret6 extends BasicGameState {
 	            switch (choice1) {
 	                case 1:
 	                    this.tmpDialogbox2.setActiveTempDialogbox(true);
-	                    this.tmpDialogbox2.setMessages(new String[] {"Votre voie résonne mais cela semble peu profond"});
+	                    this.tmpDialogbox2.setMessages(new String[] {"Votre voix résonne. Ce puits est vide."});
 	                    //Ajoutez recursivement des choix ici de la meme maniere que moi
 	                    this.tmpDialogbox2.setChoices(Arrays.asList(),null);
 	                    break;
@@ -124,11 +124,9 @@ public class Foret6 extends BasicGameState {
 	    
 	    
 	    
-	  //Dialogbox Avec choix multiples
+	  //Dialogbox Avec choix multiples tonneau
 	  		this.dialogueBoxTonneau = new DialogueBox(new String[] {
-	  				"\n "+
-	  			    "     \n" +
-	  			    "           Le tonneau semble mal fermé"
+	  				"Le tonneau semble mal fermé"
 	  	        });
 	  	    this.dialogueBoxTonneau.setTriggerZone(400, 815, 60, 30);
 	  	    
@@ -136,7 +134,7 @@ public class Foret6 extends BasicGameState {
 	              switch (choice1) {
 	  	            case 0:
 	  	            	this.tmpDialogbox2.setActiveTempDialogbox(true);
-	  	                this.tmpDialogbox2.setMessages(new String[] {"\n"+"\n"+"  Il reste des graines de blés au fond du tonneau"});
+	  	                this.tmpDialogbox2.setMessages(new String[] {"Il reste des graines de blé au fond du tonneau."+"\n"+"Vous obtenez : graines de blé"});
 	  	                //Ajoutez recursivement des choix ici de la meme maniere que moi
 	  	                this.tmpDialogbox2.setChoices(Arrays.asList(),null);
 	                      break;
@@ -150,11 +148,9 @@ public class Foret6 extends BasicGameState {
 	    
 	    
 	    
-	  //Dialogbox Avec choix multiples
+	  //Dialogbox Avec choix multiples sceau
 	  		this.dialogueBoxPot = new DialogueBox(new String[] {
-	  				"\n "+
-	  			    "     \n" +
-	  			    "           Il s'agit d'un sceau"
+	  				"Il s'agit d'un sceau."
 	  	        });
 	  	    this.dialogueBoxPot.setTriggerZone(1320, 180, 76, 90);
 	  	    
@@ -165,9 +161,9 @@ public class Foret6 extends BasicGameState {
 	  	            
 	  	            		
 	  	            	this.tmpDialogbox2.setActiveTempDialogbox(true);
-	  	                this.tmpDialogbox2.setMessages(new String[] {"\n"+"\n"+"  Un chat se cache dans le sceau"});
+	  	                this.tmpDialogbox2.setMessages(new String[] {"Un chat se cache dans le sceau."});
 	  	                //Ajoutez recursivement des choix ici de la meme maniere que moi
-	  	                this.tmpDialogbox2.setChoices(Arrays.asList("Carresser le chat", "Partir"), choice2 -> {
+	  	                this.tmpDialogbox2.setChoices(Arrays.asList("Carresser le chat", "Fuir"), choice2 -> {
 		                    switch (choice2) {
 
 		                        case 0:
@@ -200,7 +196,7 @@ public class Foret6 extends BasicGameState {
 	  	                
 	  	            	}else {
 		  	            	this.tmpDialogbox2.setActiveTempDialogbox(true);
-		  	                this.tmpDialogbox2.setMessages(new String[] {"\n"+"\n"+"  Il y a un cadavre de chat ..."});
+		  	                this.tmpDialogbox2.setMessages(new String[] {"Il y a des traces de griffes dans le sceau, signe qu'un féroce combat a eu lieu ici."});
 		  	                //Ajoutez recursivement des choix ici de la meme maniere que moi
 		  	                this.tmpDialogbox2.setChoices(Arrays.asList(),null);
 	  	            	}
@@ -219,11 +215,9 @@ public class Foret6 extends BasicGameState {
 	       });
 	    
 	    
-		//Dialogbox Avec choix multiples
+		//Dialogbox Avec choix multiples branche
 		this.dialogueBoxBranche = new DialogueBox(new String[] {
-				"\n "+
-			    "     \n" +
-			    "           Ceci est une branche"
+				"Ceci est une branche"
 	        });
 	    this.dialogueBoxBranche.setTriggerZone(985, 690, 86, 80);
 	    
@@ -231,7 +225,7 @@ public class Foret6 extends BasicGameState {
             switch (choice1) {
 	            case 0:
 	            	this.tmpDialogbox2.setActiveTempDialogbox(true);
-	                this.tmpDialogbox2.setMessages(new String[] {"\n"+"\n"+"           Aie !"});
+	                this.tmpDialogbox2.setMessages(new String[] {"Aie !"});
 	                //Ajoutez recursivement des choix ici de la meme maniere que moi
 
 	                this.tmpDialogbox2.setChoices(Arrays.asList("Retaper la branche", "Ne rien faire"), choice2 -> {
@@ -239,7 +233,7 @@ public class Foret6 extends BasicGameState {
 
 	                        case 0:
 	                        	this.tmpDialogbox2.setActiveTempDialogbox(true);
-	                            this.tmpDialogbox2.setMessages(new String[] {"\n"+"\n"+"           AIEEEE !!!!!"});
+	                            this.tmpDialogbox2.setMessages(new String[] {"AIEEEE !!!!!"});
 	                            
 	                            //Permet de dire qu'il s'agissait du dernier choix
 	                            this.tmpDialogbox2.setChoices(Arrays.asList(),null);
@@ -327,7 +321,7 @@ public class Foret6 extends BasicGameState {
 
 
 		
-		//Structure obligatoire pour les dialogbox sinon ca marche po jsp pk
+		//Structure obligatoire pour les dialogbox sinon ca marche pas
 		boolean i =input.isKeyPressed(Global.interract);
 	
 		

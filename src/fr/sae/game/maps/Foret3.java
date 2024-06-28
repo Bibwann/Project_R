@@ -1,5 +1,7 @@
 package fr.sae.game.maps;
 
+import java.util.Arrays;
+
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
@@ -8,6 +10,7 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
+import fr.sae.game.DialogueBox;
 import fr.sae.game.Global;
 import fr.sae.game.Warp;
 
@@ -22,7 +25,8 @@ public class Foret3 extends BasicGameState {
 	Warp Warp8;
 	Warp Warp9;
 	Warp Warp10;
-	
+	private DialogueBox dialogueBoxBranche;
+	private DialogueBox tmpDialogbox1= new DialogueBox(new String[] {});
 	public Foret3(int stateID) {
 	}
 
@@ -40,6 +44,45 @@ public class Foret3 extends BasicGameState {
 		this.Warp9= new Warp(650, 0, 75, 10, 670, 1020);//H
 		this.Warp10= new Warp(130, 210, 65, 40, 1870, 200);//GROTTE
 		
+
+		this.dialogueBoxBranche = new DialogueBox(new String[] {
+  				"Ceci est une branche"
+  	        });
+  	    this.dialogueBoxBranche.setTriggerZone(1123, 629, 80, 90);
+  	    
+  	    this.dialogueBoxBranche.setChoices(Arrays.asList("Taper la branche", "Ne rien faire"), choice1 -> {
+              switch (choice1) {
+  	            case 0:
+  	            	this.tmpDialogbox1.setActiveTempDialogbox(true);
+  	                this.tmpDialogbox1.setMessages(new String[] {"Aie !"});
+  	                //Ajoutez recursivement des choix ici de la meme maniere que moi
+
+  	                this.tmpDialogbox1.setChoices(Arrays.asList("Retaper la branche", "Ne rien faire"), choice2 -> {
+  	                    switch (choice2) {
+
+  	                        case 0:
+  	                        	this.tmpDialogbox1.setActiveTempDialogbox(true);
+  	                            this.tmpDialogbox1.setMessages(new String[] {"AIEEEE !!!!!"});
+  	                            
+  	                            //Permet de dire qu'il s'agissait du dernier choix
+  	                            this.tmpDialogbox1.setChoices(Arrays.asList(),null);
+  	                            break;
+
+  	                        case 1:
+  	                        	this.tmpDialogbox1.setActiveTempDialogbox(false);
+  	                        	
+  	                    }
+  	                    
+  	                });
+  	                break;
+  	                
+  	                
+  	            case 1:
+  	            	this.tmpDialogbox1.setActiveTempDialogbox(false);
+  	            	break;
+
+              }       
+       });
 
 	}
 
@@ -69,6 +112,7 @@ public class Foret3 extends BasicGameState {
         this.Warp8.warp(Global.P1, sbg, 12);
         this.Warp9.warp(Global.P1, sbg, 12);
         this.Warp10.warp(Global.P1, sbg, 25);
+        dialogueBoxBranche.render(g);
         
 
 //--------------------------------------------------------------------------------------------------------------------------
@@ -89,6 +133,9 @@ public class Foret3 extends BasicGameState {
 		    this.Warp8.draw(g);
 		    this.Warp9.draw(g);
 		    this.Warp10.draw(g);
+		    this.dialogueBoxBranche.draw(g);
+		    this.tmpDialogbox1.renderTempDialgbox(g);
+
 	    	}
 //--------------------------------------------------------------------------------------------------------------------------
 	}
@@ -97,12 +144,17 @@ public class Foret3 extends BasicGameState {
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
 
 		Global.updatePlayerMovement(gc.getInput(),Global.CollisionMapForet3,delta,sbg);
+		Global.updatePlayerMovement(gc.getInput(),Global.CollisionsMapVide,delta,sbg);
+		
 		if (gc.getInput().isKeyPressed(Global.pause)) {
             sbg.enterState(101); // Passer à l'état 101 (menu de pause)
         }
+		Input input =gc.getInput();
+		boolean i =input.isKeyPressed(Global.interract);
 		Global.P1.AnimateWhileMoove();
 		Global.P1.canRandomBattle();
-
+		this.dialogueBoxBranche.dialogBox(i,gc.getInput());
+		this.tmpDialogbox1.updateTempDialgbox(i, gc);
 
 
 

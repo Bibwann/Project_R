@@ -1417,7 +1417,8 @@ public class Global {
 	            Element classep2LvlElement = (Element) classep2LvlList.item(0);
 	            classep2Lvl = Integer.parseInt(classep2LvlElement.getTextContent());
 	        }
-
+	        
+	        
 	        // Load Player1Name
 	        NodeList player1NameList = rootElement.getElementsByTagName("Player1Name");
 	        if (player1NameList.getLength() > 0) {
@@ -1426,6 +1427,7 @@ public class Global {
 	            Global.Player1Name = player1Name;
 	        }
 
+	        
 	        // Initialize P1 if not already initialized
 	        if (Global.P1 == null) {
 	            switch (Global.Player1Classe) {
@@ -1519,6 +1521,38 @@ public class Global {
 	            Element foret5BattleElement = (Element) foret5BattleList.item(0);
 	            boolean Foret5Battle = Boolean.parseBoolean(foret5BattleElement.getTextContent());
 	            Global.Foret5Battle = Foret5Battle;
+	        }
+	        
+	     // Load Chest1Map7
+	        NodeList chest1Map7List = rootElement.getElementsByTagName("Chest1Map7");
+	        if (chest1Map7List.getLength() > 0) {
+	            Element chest1Map7Element = (Element) chest1Map7List.item(0);
+	            boolean Chest1Map7 = Boolean.parseBoolean(chest1Map7Element.getTextContent());
+	            Global.Chest1Map7 = Chest1Map7;
+	        }
+
+	        // Load Chest2Map7
+	        NodeList chest2Map7List = rootElement.getElementsByTagName("Chest2Map7");
+	        if (chest2Map7List.getLength() > 0) {
+	            Element chest2Map7Element = (Element) chest2Map7List.item(0);
+	            boolean Chest2Map7 = Boolean.parseBoolean(chest2Map7Element.getTextContent());
+	            Global.Chest2Map7 = Chest2Map7;
+	        }
+
+	        // Load Chest1Map4
+	        NodeList chest1Map4List = rootElement.getElementsByTagName("Chest1Map4");
+	        if (chest1Map4List.getLength() > 0) {
+	            Element chest1Map4Element = (Element) chest1Map4List.item(0);
+	            boolean Chest1Map4 = Boolean.parseBoolean(chest1Map4Element.getTextContent());
+	            Global.Chest1Map4 = Chest1Map4;
+	        }
+
+	        // Load Chest1Map8
+	        NodeList chest1Map8List = rootElement.getElementsByTagName("Chest1Map8");
+	        if (chest1Map8List.getLength() > 0) {
+	            Element chest1Map8Element = (Element) chest1Map8List.item(0);
+	            boolean Chest1Map8 = Boolean.parseBoolean(chest1Map8Element.getTextContent());
+	            Global.Chest1Map8 = Chest1Map8;
 	        }
 
 	        // Example of setting battle hitbox and initiating animation
@@ -1619,6 +1653,26 @@ public class Global {
 	        foret5BattleElement.appendChild(doc.createTextNode(Boolean.toString(Global.Foret5Battle)));
 	        rootElement.appendChild(foret5BattleElement);
 
+	     // Save Chest1Map7
+	        Element chest1Map7Element = doc.createElement("Chest1Map7");
+	        chest1Map7Element.appendChild(doc.createTextNode(Boolean.toString(Global.Chest1Map7)));
+	        rootElement.appendChild(chest1Map7Element);
+
+	        // Save Chest2Map7
+	        Element chest2Map7Element = doc.createElement("Chest2Map7");
+	        chest2Map7Element.appendChild(doc.createTextNode(Boolean.toString(Global.Chest2Map7)));
+	        rootElement.appendChild(chest2Map7Element);
+
+	        // Save Chest1Map4
+	        Element chest1Map4Element = doc.createElement("Chest1Map4");
+	        chest1Map4Element.appendChild(doc.createTextNode(Boolean.toString(Global.Chest1Map4)));
+	        rootElement.appendChild(chest1Map4Element);
+
+	        // Save Chest1Map8
+	        Element chest1Map8Element = doc.createElement("Chest1Map8");
+	        chest1Map8Element.appendChild(doc.createTextNode(Boolean.toString(Global.Chest1Map8)));
+	        rootElement.appendChild(chest1Map8Element);
+	        
 	        // Write the content into XML file, overwriting existing content
 	        TransformerFactory transformerFactory = TransformerFactory.newInstance();
 	        Transformer transformer = transformerFactory.newTransformer();
